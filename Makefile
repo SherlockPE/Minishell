@@ -14,6 +14,8 @@ CC:=gcc
 
 CFLAGS:=-Wall -Wextra -Werror -O3
 
+LIBS:=-lreadline -Llib/libft -lft
+
 SRC:=minishell.c
 
 SRC_DIR:=src
@@ -31,7 +33,7 @@ LIBFT:=lib/libft/libft.a
 all: $(OBJ_DIR) $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJS) -Llib/libft -lft -o $@
+	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $@
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@

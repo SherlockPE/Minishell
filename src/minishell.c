@@ -14,8 +14,19 @@
 
 int main(void)
 {
-    printf("Hello minishell\n");
-    printf("Hello  <(º¬º)>\n");
-    printf("Aqui Ale y Fabri, YA ESTA EL MAKEFILE!!!!!\n");
-    return (EXIT_SUCCESS);
+	char *command;
+
+	while (1)
+	{
+		command = readline("minishell $> ");
+		if (!command)
+		{
+			rl_clear_history();
+			printf("Exiting minishell\n");
+			return (EXIT_SUCCESS);
+		}
+		printf("Has ecrito: %s\n", command);
+		free(command);
+	}
+	return (EXIT_SUCCESS);
 }
