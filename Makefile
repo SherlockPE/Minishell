@@ -3,39 +3,48 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+         #
+#    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 18:53:11 by albartol          #+#    #+#              #
-#    Updated: 2024/03/05 19:35:19 by albartol         ###   ########.fr        #
+#    Updated: 2024/03/08 15:38:19 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC=gcc
+CC:=gcc
 
 CFLAGS:=-Wall -Wextra -Werror -O3
 
-SRC=src/minishell.c
+SRC:=minishell.c
 
-OBJ=$(SRC:%.c=%.o)
+SRC_DIR:=src
 
-NAME=minishell
+OBJ_DIR:=obj
 
-LIBFT=lib/libft/libft.a
+SRCS:=$(SRC:%=$(SRC_DIR)/$(SRC))
 
-all: $(NAME)
+OBJS:=$(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-$(NAME): include/minishell.h $(OBJ) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJ) -Llib/libft -lft -o $@
+NAME:=minishell
 
-%.o: %.c
+LIBFT:=lib/libft/libft.a
+
+all: $(OBJ_DIR) $(NAME)
+
+$(NAME): $(OBJS) $(LIBFT)
+	$(CC) $(CFLAGS) $(OBJS) -Llib/libft -lft -o $@
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
 
 $(LIBFT):
 	$(MAKE) -C lib/libft
 
 clean:
 	$(MAKE) clean -C lib/libft
-	rm -f $(OBJ)
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	$(MAKE) fclean -C lib/libft

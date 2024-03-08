@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:58:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/05 19:17:59 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/08 15:41:02 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,6 @@ int main(void)
 {
     printf("Hello minishell\n");
     printf("Hello  <(º¬º)>\n");
+    printf("Aqui Ale y Fabri, YA ESTA EL MAKEFILE!!!!!\n");
     return (EXIT_SUCCESS);
 }
