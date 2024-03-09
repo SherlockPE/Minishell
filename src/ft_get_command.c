@@ -20,7 +20,7 @@ char	*ft_get_command(void)
 	input = readline("minishell $> ");
 	if (!input)
 		return (NULL);
-	command = ft_strtrim(input, " ");
+	command = ft_strtrim(input, " \n\t\v\f\r\b\a");
 	free(input);
 	if (*command)
 	{
