@@ -25,9 +25,9 @@
 // stat, lstat, fstat
 # include <sys/stat.h>
 // for read, wait3, wait4
-#include <sys/types.h>
+# include <sys/types.h>
 // for read
-#include <sys/uio.h>
+# include <sys/uio.h>
 // for open
 # include <fcntl.h>
 // for signal, sigaction, kill
@@ -37,9 +37,9 @@
 // for waitpid, wait, waitpid, wait3, wait4
 # include <sys/wait.h>
 // for wait3, wait4
-#include <sys/time.h>
+# include <sys/time.h>
 // for wait3, wait4
-#include <sys/resource.h>
+# include <sys/resource.h>
 // for readline, rl_on_new_line, rl_redisplay, add_history
 # include <readline/readline.h> /* rl_clear_history, rl_redisplay ? */
 // for readline, rl_on_new_line, rl_redisplay, add_history
@@ -54,5 +54,16 @@
 # include <curses.h>
 // for tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs
 # include <term.h>
+
+# include "../lib/libft/libft.h"
+
+// loops over getting input and executing a command
+void	ft_minishell_loop(void);
+
+// gets the input of the user with readline and removes whitespaces
+char	*ft_get_command(void);
+
+// executes a command
+void	ft_exec_command(char *command);
 
 #endif

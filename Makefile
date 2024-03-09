@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
+#    By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 18:53:11 by albartol          #+#    #+#              #
-#    Updated: 2024/03/08 15:38:19 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/03/09 12:38:19 by albartol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,13 +16,16 @@ CFLAGS:=-Wall -Wextra -Werror -O3
 
 LIBS:=-lreadline -Llib/libft -lft
 
-SRC:=minishell.c
+SRC:=minishell.c \
+	ft_minishell_loop.c \
+	ft_get_command.c \
+	ft_exec_command.c
 
 SRC_DIR:=src
 
 OBJ_DIR:=obj
 
-SRCS:=$(SRC:%=$(SRC_DIR)/$(SRC))
+SRCS:=$(SRC:%.c=$(SRC_DIR)/%.c)
 
 OBJS:=$(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 

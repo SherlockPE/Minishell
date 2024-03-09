@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
+/*   ft_minishell_loop.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/02 12:23:18 by albartol          #+#    #+#             */
-/*   Updated: 2023/11/22 17:33:22 by albartol         ###   ########.fr       */
+/*   Created: 2024/03/09 12:09:15 by albartol          #+#    #+#             */
+/*   Updated: 2024/03/09 12:14:02 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/minishell.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *to_add)
+void	ft_minishell_loop(void)
 {
-	t_list	*last;
+	char	*command;
 
-	last = *lst;
-	if (!*lst)
-		*lst = to_add;
-	else
+	while (1)
 	{
-		while (last && last->next)
-			last = last->next;
-		last->next = to_add;
+		command = ft_get_command();
+		if (!command)
+			break ;
+		if (*command)
+			ft_exec_command(command);
+		free(command);
 	}
+	rl_clear_history();
+	printf("Exiting minishell\n");
 }
