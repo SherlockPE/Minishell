@@ -54,8 +54,33 @@
 # include <curses.h>
 // for tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs
 # include <term.h>
+// for errno
+# include <errno.h>
 
 # include "../lib/libft/libft.h"
+
+//      colors for printing text in the terminal
+# define RED "\033[0;31m"
+# define GREEN "\033[0;32m"
+# define YELLOW "\033[0;33m"
+# define BLUE "\033[0;34m"
+# define MAGENTA "\033[0;35m"
+# define CYAN "\033[0;36m"
+# define WHITE "\033[1;97m"
+# define RESET "\033[0m"
+# define ORANGE "\033[38;5;208m"
+
+# define PROMPT "\033[1;31mminishell\033[1;97m:\033[1;34m"
+# define DELIMITATOR "\033[1;97m$ \033[0m"
+# define NON_PRINT " \n\t\v\f\r\b\a\e"
+
+typedef struct s_minishell
+{
+	char	*command;
+	char	*current_dir;
+	char	*old_dir;
+	
+}				t_minishell;
 
 // loops over getting input and executing a command
 void	ft_minishell_loop(void);
@@ -64,6 +89,15 @@ void	ft_minishell_loop(void);
 char	*ft_get_command(void);
 
 // executes a command
-void	ft_exec_command(char *command);
+void	ft_exec_command(const char *command);
+
+void	ft_pwd(void);
+void	ft_cd(const char *path);
+
+// prints the error indicated by errno
+void	ft_print_error(void);
+
+// returns 1 if the char pased is not printable
+int	ft_isnotprint(const char c);
 
 #endif

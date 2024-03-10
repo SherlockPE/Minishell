@@ -17,9 +17,13 @@ CFLAGS:=-Wall -Wextra -Werror -O3
 LIBS:=-lreadline -Llib/libft -lft
 
 SRC:=minishell.c \
+	ft_isnotprint.c \
+	ft_print_error.c \
 	ft_minishell_loop.c \
 	ft_get_command.c \
-	ft_exec_command.c
+	ft_exec_command.c \
+	ft_pwd.c \
+	ft_cd.c
 
 SRC_DIR:=src
 
