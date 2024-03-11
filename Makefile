@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
+#    By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 18:53:11 by albartol          #+#    #+#              #
-#    Updated: 2024/03/11 14:22:50 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/03/11 18:43:14 by albartol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,19 +18,20 @@ CFLAGS:=-Wall -Wextra -Werror -O3
 
 LIBS:=-lreadline -Llib/libft -lft
 
+INCLUDE:=-I include
+
 ifeq ($(UNAME), Darwin)
 	LIBS:=-Llib/libft -lft -L/Users/$(USER)/.brew/opt/readline/lib -lreadline
-	INCLUDE:=-I/Users/$(USER)/.brew/opt/readline/include
+	INCLUDE:=-I/Users/$(USER)/.brew/opt/readline/include -I include
 endif
 
 SRC:=minishell.c \
-	ft_isnotprint.c \
-	ft_print_error.c \
 	ft_minishell_loop.c \
 	ft_get_command.c \
 	ft_exec_command.c \
-	ft_pwd.c \
-	ft_cd.c
+	utils/ft_isnotprint.c \
+	built-ins/ft_pwd.c \
+	built-ins/ft_cd.c
 
 SRC_DIR:=src
 

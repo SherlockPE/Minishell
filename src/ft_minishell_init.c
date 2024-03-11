@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_error.c                                   :+:      :+:    :+:   */
+/*   ft_minishell_init.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/09 12:09:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/09 12:14:02 by albartol         ###   ########.fr       */
+/*   Created: 2024/03/11 18:25:49 by albartol          #+#    #+#             */
+/*   Updated: 2024/03/11 18:40:13 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include <minishell.h>
 
-void	ft_print_error(void)
+void	ft_minishell_init(t_shell *data, char **env)
 {
-	printf("%s\n", strerror(errno));
+	
 }

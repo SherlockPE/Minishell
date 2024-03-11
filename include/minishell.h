@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:58:51 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/05 20:10:00 by albartol         ###   ########.fr       */
+/*   Updated: 2024/03/11 18:49:52 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,28 +74,37 @@
 # define DELIMITATOR "\033[1;97m$ \033[0m"
 # define NON_PRINT " \n\t\v\f\r\b\a\e"
 
-typedef struct s_minishell
+typedef struct s_env t_env;
+typedef struct s_shell t_shell;
+
+struct s_env
 {
+	char	*name;
+	char	*value;
+	t_env	*next;
+};
+
+struct s_shell
+{
+	t_env	*env;
 	char	*command;
-	char	*current_dir;
-	char	*old_dir;
-	
-}				t_minishell;
+	short	exit_code;
+};
+
+// 
+void	ft_minishell_init(t_shell *data, char **env);
 
 // loops over getting input and executing a command
-void	ft_minishell_loop(void);
+void	ft_minishell_loop(t_shell *data);
 
 // gets the input of the user with readline and removes whitespaces
-char	*ft_get_command(void);
+char	*ft_get_command(t_shell *data);
 
 // executes a command
 void	ft_exec_command(const char *command);
 
 void	ft_pwd(void);
 void	ft_cd(const char *path);
-
-// prints the error indicated by errno
-void	ft_print_error(void);
 
 // returns 1 if the char pased is not printable
 int	ft_isnotprint(const char c);
