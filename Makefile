@@ -3,18 +3,25 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+         #
+#    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 18:53:11 by albartol          #+#    #+#              #
-#    Updated: 2024/03/09 12:38:19 by albartol         ###   ########.fr        #
+#    Updated: 2024/03/11 14:22:50 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+UNAME := $(shell uname)
 
 CC:=gcc
 
 CFLAGS:=-Wall -Wextra -Werror -O3
 
 LIBS:=-lreadline -Llib/libft -lft
+
+ifeq ($(UNAME), Darwin)
+	LIBS:=-Llib/libft -lft -L/Users/$(USER)/.brew/opt/readline/lib -lreadline
+	INCLUDE:=-I/Users/$(USER)/.brew/opt/readline/include
+endif
 
 SRC:=minishell.c \
 	ft_isnotprint.c \
@@ -40,10 +47,10 @@ LIBFT:=lib/libft/libft.a
 all: $(OBJ_DIR) $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $@
+	$(CC) $(CFLAGS) $(INCLUDE) $(OBJS) $(LIBS) -o $@
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
