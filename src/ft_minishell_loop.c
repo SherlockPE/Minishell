@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell_loop.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 12:09:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/09 12:14:02 by albartol         ###   ########.fr       */
+/*   Updated: 2024/03/11 15:35:19 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static void	ft_ctrl_c(int signal)
+static void	ft_signal(int signal)
 {
 	if (signal == SIGINT)
 	{
@@ -21,13 +21,21 @@ static void	ft_ctrl_c(int signal)
 		rl_replace_line("", 1);
 		rl_redisplay();
 	}
+	else if (signal == SIGQUIT)
+	{
+		rl_on_new_line();
+		rl_replace_line(rl_line_buffer, 0);
+		rl_redisplay();
+	}
 }
 
 void	ft_minishell_loop(void)
 {
 	char	*command;
 
-	if (signal(SIGINT, ft_ctrl_c) == SIG_ERR)
+	if (signal(SIGINT, ft_signal) == SIG_ERR)
+		ft_print_error();
+	if (signal(SIGQUIT, ft_signal) == SIG_ERR)
 		ft_print_error();
 	while (1)
 	{
