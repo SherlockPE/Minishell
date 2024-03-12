@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+         #
+#    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 18:53:11 by albartol          #+#    #+#              #
-#    Updated: 2024/03/12 16:00:29 by albartol         ###   ########.fr        #
+#    Updated: 2024/03/12 17:41:42 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,11 +34,14 @@ SOURCES :=	minishell.c \
 
 UTILS :=	utils/ft_isnotprint.c
 
+
 BUILTS :=	built-ins/ft_pwd.c \
 			built-ins/ft_cd.c \
 			built-ins/ft_env.c
 
-SRC := $(SOURCES) $(BUILTS) $(UTILS)
+PARSER :=	parser/ft_parser.c
+
+SRC := $(SOURCES) $(BUILTS) $(UTILS) $(PARSER)
 
 SRC_DIR := src
 
@@ -64,6 +67,7 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 	mkdir -p $(OBJ_DIR)/utils
 	mkdir -p $(OBJ_DIR)/built-ins
+	mkdir -p $(OBJ_DIR)/parser
 
 $(LIBFT):
 	$(MAKE) -C lib/libft

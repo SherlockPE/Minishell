@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_command.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 11:48:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/12 14:27:49 by albartol         ###   ########.fr       */
+/*   Updated: 2024/03/12 17:31:51 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,8 @@ static char	*ft_get_prompt(t_shell *data)
 	return (prompt);
 }
 
-char	*ft_get_command(t_shell *data)
+char	*ft_get_input(t_shell *data)
 {
-	char	*command;
 	char	*input;
 	char	*prompt;
 
@@ -49,14 +48,5 @@ char	*ft_get_command(t_shell *data)
 	free(prompt);
 	if (!input)
 		return (NULL);
-	command = ft_strtrim(input, NON_PRINT);
-	free(input);
-	if (!command)
-	{
-		perror(NULL);
-		exit(errno);
-	}
-	if (*command)
-		add_history(command);
-	return (command);
+	return (input);
 }

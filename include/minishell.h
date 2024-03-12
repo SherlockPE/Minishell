@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:58:51 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/12 16:02:06 by albartol         ###   ########.fr       */
+/*   Updated: 2024/03/12 17:32:13 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	ft_minishell_init(t_shell *data, char **env);
 void	ft_minishell_loop(t_shell *data);
 
 // gets the input of the user with readline and removes whitespaces
-char	*ft_get_command(t_shell *data);
+char	*ft_get_input(t_shell *data);
 
 // executes a command
 void	ft_exec_command(const char *command, t_shell *data);

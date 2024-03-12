@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell_loop.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 12:09:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/12 15:46:09 by albartol         ###   ########.fr       */
+/*   Updated: 2024/03/12 17:33:18 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	ft_signal(int signal)
 
 void	ft_minishell_loop(t_shell *data)
 {
-	char	*command;
+	char	*input;
 
 	if (signal(SIGINT, ft_signal) == SIG_ERR)
 		perror(NULL);
@@ -39,12 +39,12 @@ void	ft_minishell_loop(t_shell *data)
 		perror(NULL);
 	while (1)
 	{
-		command = ft_get_command(data);
-		if (!command)
+		input = ft_get_input(data);
+		if (!input)
 			break ;
-		if (*command)
-			ft_exec_command(command, data);
-		free(command);
+		if (*input)
+			ft_parser(data, input);
+		free(input);
 	}
 	rl_clear_history();
 	printf("Exiting minishell\n");
