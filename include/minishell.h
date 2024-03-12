@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:58:51 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/12 15:50:17 by albartol         ###   ########.fr       */
+/*   Updated: 2024/03/12 16:02:06 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ struct s_shell
 	short	exit_code;
 };
 
-// 
+// gets the env from where minishell is executed
 void	ft_minishell_init(t_shell *data, char **env);
 
 // loops over getting input and executing a command

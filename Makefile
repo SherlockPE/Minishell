@@ -6,47 +6,51 @@
 #    By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 18:53:11 by albartol          #+#    #+#              #
-#    Updated: 2024/03/12 15:42:33 by albartol         ###   ########.fr        #
+#    Updated: 2024/03/12 16:00:29 by albartol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 UNAME := $(shell uname)
 
-CC:=gcc
+CC := gcc
 
-# CFLAGS:=-Wall -Wextra -Werror -O3
-CFLAGS:=-Wall -Wextra
+# CFLAGS := -Wall -Wextra -Werror -O3
+CFLAGS := -Wall -Wextra
 
-LIBS:=-lreadline -Llib/libft -lft
+LIBS := -lreadline -Llib/libft -lft
 
-INCLUDE:=-I include
+INCLUDE := -I include
 
 ifeq ($(UNAME), Darwin)
-	LIBS:=-Llib/libft -lft -L/Users/$(USER)/.brew/opt/readline/lib -lreadline
-	INCLUDE:=-I/Users/$(USER)/.brew/opt/readline/include -I include
+	LIBS := -Llib/libft -lft -L/Users/$(USER)/.brew/opt/readline/lib -lreadline
+	INCLUDE := -I/Users/$(USER)/.brew/opt/readline/include -I include
 endif
 
-SRC:=minishell.c \
-	ft_minishell_init.c \
-	ft_minishell_loop.c \
-	ft_get_command.c \
-	ft_exec_command.c \
-	utils/ft_isnotprint.c \
-	built-ins/ft_pwd.c \
-	built-ins/ft_cd.c \
-	built-ins/ft_env.c
+SOURCES :=	minishell.c \
+			ft_minishell_init.c \
+			ft_minishell_loop.c \
+			ft_get_command.c \
+			ft_exec_command.c
 
-SRC_DIR:=src
+UTILS :=	utils/ft_isnotprint.c
 
-OBJ_DIR:=obj
+BUILTS :=	built-ins/ft_pwd.c \
+			built-ins/ft_cd.c \
+			built-ins/ft_env.c
 
-SRCS:=$(SRC:%.c=$(SRC_DIR)/%.c)
+SRC := $(SOURCES) $(BUILTS) $(UTILS)
 
-OBJS:=$(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+SRC_DIR := src
 
-NAME:=minishell
+OBJ_DIR := obj
 
-LIBFT:=lib/libft/libft.a
+SRCS := $(addprefix $(SRC_DIR)/, $(SRC))
+
+OBJS := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+
+NAME := minishell
+
+LIBFT := lib/libft/libft.a
 
 all: $(OBJ_DIR) $(NAME)
 
