@@ -6,11 +6,9 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 12:09:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/11 18:40:13 by albartol         ###   ########.fr       */
+/*   Updated: 2024/03/12 14:33:08 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <minishell.h>
 
 int	ft_isnotprint(const char c)
 {

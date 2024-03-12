@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:58:51 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/11 18:49:52 by albartol         ###   ########.fr       */
+/*   Updated: 2024/03/12 15:50:17 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,19 +74,18 @@
 # define DELIMITATOR "\033[1;97m$ \033[0m"
 # define NON_PRINT " \n\t\v\f\r\b\a\e"
 
-typedef struct s_env t_env;
-typedef struct s_shell t_shell;
+typedef struct s_env	t_env;
+typedef struct s_shell	t_shell;
 
 struct s_env
 {
 	char	*name;
 	char	*value;
-	t_env	*next;
 };
 
 struct s_shell
 {
-	t_env	*env;
+	t_list	*env;
 	char	*command;
 	short	exit_code;
 };
@@ -101,12 +100,14 @@ void	ft_minishell_loop(t_shell *data);
 char	*ft_get_command(t_shell *data);
 
 // executes a command
-void	ft_exec_command(const char *command);
+void	ft_exec_command(const char *command, t_shell *data);
 
+// built-ins
 void	ft_pwd(void);
 void	ft_cd(const char *path);
+void	ft_env(t_shell *data);
 
 // returns 1 if the char pased is not printable
-int	ft_isnotprint(const char c);
+int		ft_isnotprint(const char c);
 
 #endif

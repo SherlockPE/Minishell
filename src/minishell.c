@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:58:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/11 18:40:13 by albartol         ###   ########.fr       */
+/*   Updated: 2024/03/12 14:27:33 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	main(int argc, char **argv, char **env)
 {
 	t_shell	data;
-	
+
 	(void)argv;
 	if (argc > 1)
 		return (EXIT_SUCCESS);

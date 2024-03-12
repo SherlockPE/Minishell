@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 12:09:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/11 19:33:53 by albartol         ###   ########.fr       */
+/*   Updated: 2024/03/12 15:46:09 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_minishell_loop(t_shell *data)
 		if (!command)
 			break ;
 		if (*command)
-			ft_exec_command(command);
+			ft_exec_command(command, data);
 		free(command);
 	}
 	rl_clear_history();
