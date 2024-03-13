@@ -97,6 +97,12 @@ void	ft_exec_bin(t_shell *data, const char *command)
 	char	*current_dir;
 	char	*temp;
 
+	argv = ft_split(command, ' ');
+	if (!argv)
+	{
+		perror("malloc");
+		exit(EXIT_FAILURE);
+	}
 	if (*command == '.')
 	{
 		temp = ft_substr(command, 0, ft_strlenchr(command, ' '));
@@ -104,11 +110,17 @@ void	ft_exec_bin(t_shell *data, const char *command)
 		if (!current_dir)
 		{
 			free(temp);
+			free(argv);
 			return (perror(NULL));
 		}
 		bin_path = ft_strjoin(current_dir, temp + 1);
 		free(current_dir);
 		free(temp);
+		if (access(bin_path, X_OK) == 0)
+			printf("Tiene acceso\n");
+		else
+			printf("No tiene acceso\n");
+		
 	}
 	else
 		bin_path = ft_check_bin(data, argv[0]);
@@ -118,11 +130,10 @@ void	ft_exec_bin(t_shell *data, const char *command)
 		ft_free_array(argv);
 		return ;
 	}
-	argv = ft_split(command, ' ');
-	if (!argv)
+	if (*command == '.')
 	{
-		perror("malloc");
-		exit(EXIT_FAILURE);
+		free(argv[0]);
+		argv[0] = ft_strdup(bin_path);
 	}
 	envp = ft_get_env(data);
 	if (!envp)
