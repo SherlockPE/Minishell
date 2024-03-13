@@ -5,3 +5,4 @@
 *.a
 obj
 minishell
+*.txt

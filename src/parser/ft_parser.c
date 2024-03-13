@@ -65,7 +65,7 @@ char	*ft_trim_input(t_shell *data, char *input)
 }
 
 
-void    ft_parser(t_shell *data, char *input)
+void	ft_parser(t_shell *data, char *input)
 {
 	char	*command;
 
@@ -75,4 +75,5 @@ void    ft_parser(t_shell *data, char *input)
 		ft_exec_command(command, data);
 		add_history(command);
 	}
+	free(command);
 }

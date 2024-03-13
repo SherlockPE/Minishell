@@ -110,4 +110,9 @@ void	ft_env(t_shell *data);
 // returns 1 if the char pased is not printable
 int		ft_isnotprint(const char c);
 
+void	ft_parser(t_shell *data, char *input);
+void	ft_exec_bin(t_shell *data, const char *command);
+char	*ft_check_bin(t_shell *data, const char *command);
+void	ft_free_env(t_list *env);
+
 #endif

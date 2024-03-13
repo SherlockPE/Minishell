@@ -32,7 +32,8 @@ SOURCES :=	minishell.c \
 			ft_get_command.c \
 			ft_exec_command.c
 
-UTILS :=	utils/ft_isnotprint.c
+UTILS :=	utils/ft_isnotprint.c \
+			utils/ft_free_env.c
 
 
 BUILTS :=	built-ins/ft_pwd.c \
@@ -41,7 +42,10 @@ BUILTS :=	built-ins/ft_pwd.c \
 
 PARSER :=	parser/ft_parser.c
 
-SRC := $(SOURCES) $(BUILTS) $(UTILS) $(PARSER)
+EXECUTOR :=	executor/ft_check_bin.c \
+			executor/ft_exec_bin.c
+
+SRC := $(SOURCES) $(BUILTS) $(UTILS) $(PARSER) $(EXECUTOR)
 
 SRC_DIR := src
 
@@ -68,6 +72,7 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)/utils
 	mkdir -p $(OBJ_DIR)/built-ins
 	mkdir -p $(OBJ_DIR)/parser
+	mkdir -p $(OBJ_DIR)/executor
 
 $(LIBFT):
 	$(MAKE) -C lib/libft

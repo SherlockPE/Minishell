@@ -17,7 +17,7 @@ static void	ft_print_node(void *node)
 	t_env	*env;
 
 	env = (t_env *)node;
-	printf("%s=%s\n", env->name, env->value);
+	printf("%s%s\n", env->name, env->value);
 }
 
 void	ft_env(t_shell *data)
