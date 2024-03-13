@@ -120,7 +120,8 @@ void	ft_exec_bin(t_shell *data, const char *command)
 			printf("Tiene acceso\n");
 		else
 			printf("No tiene acceso\n");
-		
+		free(argv[0]);
+		argv[0] = ft_strdup(bin_path);
 	}
 	else
 		bin_path = ft_check_bin(data, argv[0]);
@@ -129,11 +130,6 @@ void	ft_exec_bin(t_shell *data, const char *command)
 		printf("%s : command not found\n", argv[0]);
 		ft_free_array(argv);
 		return ;
-	}
-	if (*command == '.')
-	{
-		free(argv[0]);
-		argv[0] = ft_strdup(bin_path);
 	}
 	envp = ft_get_env(data);
 	if (!envp)
