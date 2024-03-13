@@ -17,16 +17,14 @@ static char	*ft_get_env_value(char *name, t_list *env)
 	size_t	len_name;
 	size_t	len_env;
 	char	*env_name;
-	char	*env_value;
 
 	len_name = ft_strlen(name);
 	while (env)
 	{
 		env_name = ((t_env *)env->content)->name;
-		env_value = ((t_env *)env->content)->value;
 		len_env = ft_strlen(env_name) - 1;
 		if (len_name == len_env && !ft_strncmp(name, env_name, len_name))
-			return (env_value);
+			return (((t_env *)env->content)->value);
 		env = env->next;
 	}
 	return (NULL);
@@ -48,7 +46,7 @@ static char	*ft_get_path(char *path, const char *command)
 	str = ft_calloc(len + 1, 1);
 	if (!str)
 	{
-		perror(NULL);
+		perror("malloc");
 		exit (EXIT_FAILURE);
 	}
 	j = 0;
@@ -57,7 +55,6 @@ static char	*ft_get_path(char *path, const char *command)
 		str[j] = path[j];
 		j++;
 	}
-	path = path + i;
 	str[j] = '/';
 	i = 0;
 	while (++j < len)

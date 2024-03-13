@@ -69,12 +69,12 @@ void	ft_exec_bin(t_shell *data, const char *command)
 	char	*bin_path;
 	char	**argv;
 	char	**envp;
-	int		id;
+	pid_t	id;
 
 	argv = ft_split(command, ' ');
 	if (!argv)
 	{
-		perror(NULL);
+		perror("malloc");
 		exit(EXIT_FAILURE);
 	}
 	bin_path = ft_check_bin(data, argv[0]);
@@ -85,11 +85,11 @@ void	ft_exec_bin(t_shell *data, const char *command)
 		return ;
 	}
 	envp = ft_get_env(data);
-	if (!argv)
+	if (!envp)
 	{
 		ft_free_array(argv);
 		free(bin_path);
-		perror(NULL);
+		perror("malloc");
 		exit(EXIT_FAILURE);
 	}
 	id = fork();
@@ -99,7 +99,7 @@ void	ft_exec_bin(t_shell *data, const char *command)
 			perror(NULL);
 		exit(0);
 	}
-	waitpid(id, NULL, 0);
+	waitpid(-1, NULL, 0);
 	ft_free_array(argv);
 	ft_free_array(envp);
 	free(bin_path);
