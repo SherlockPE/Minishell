@@ -64,25 +64,65 @@ static char	**ft_get_env(t_shell *data)
 	return (envp);
 }
 
+static void	ft_child_signal(int signal)
+{
+	if (signal == SIGINT)
+	{
+		printf("\n");
+	}
+	else if (signal == SIGQUIT)
+	{
+		printf("\n");
+	}
+}
+
+static size_t	ft_strlenchr(const char *str, char c)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i] && str[i] != c)
+		i++;
+	if (str[i] == c)
+		return (i + 1);
+	return (0);
+}
+
 void	ft_exec_bin(t_shell *data, const char *command)
 {
 	char	*bin_path;
 	char	**argv;
 	char	**envp;
 	pid_t	id;
+	char	*current_dir;
+	char	*temp;
 
-	argv = ft_split(command, ' ');
-	if (!argv)
+	if (*command == '.')
 	{
-		perror("malloc");
-		exit(EXIT_FAILURE);
+		temp = ft_substr(command, 0, ft_strlenchr(command, ' '));
+		current_dir = getcwd(NULL, 0);
+		if (!current_dir)
+		{
+			free(temp);
+			return (perror(NULL));
+		}
+		bin_path = ft_strjoin(current_dir, temp + 1);
+		free(current_dir);
+		free(temp);
 	}
-	bin_path = ft_check_bin(data, argv[0]);
+	else
+		bin_path = ft_check_bin(data, argv[0]);
 	if (!bin_path)
 	{
 		printf("%s : command not found\n", argv[0]);
 		ft_free_array(argv);
 		return ;
+	}
+	argv = ft_split(command, ' ');
+	if (!argv)
+	{
+		perror("malloc");
+		exit(EXIT_FAILURE);
 	}
 	envp = ft_get_env(data);
 	if (!envp)
@@ -95,6 +135,7 @@ void	ft_exec_bin(t_shell *data, const char *command)
 	id = fork();
 	if (id == 0)
 	{
+		signal(SIGINT, ft_child_signal);
 		if (execve(bin_path, argv, envp) == -1)
 			perror(NULL);
 		exit(0);
