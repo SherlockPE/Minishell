@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:58:51 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/12 17:32:13 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/14 16:53:29 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,15 +104,19 @@ void	ft_exec_command(const char *command, t_shell *data);
 
 // built-ins
 void	ft_pwd(void);
-void	ft_cd(const char *path);
+void	ft_cd(t_shell *data, const char *path);
 void	ft_env(t_shell *data);
 
-// returns 1 if the char pased is not printable
+// utils
 int		ft_isnotprint(const char c);
+void	ft_free_env(t_list *env);
+size_t	ft_strlenchr(const char *str, char c);
+void	ft_free_array(char **array);
+char	*ft_get_env_value(char *name, t_list *env);
+void	ft_set_env_value(const char *name, const char *value, t_shell *data);
 
 void	ft_parser(t_shell *data, char *input);
 void	ft_exec_bin(t_shell *data, const char *command);
 char	*ft_check_bin(t_shell *data, const char *command);
-void	ft_free_env(t_list *env);
 
 #endif

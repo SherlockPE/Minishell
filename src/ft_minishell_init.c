@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:25:49 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/12 15:50:54 by albartol         ###   ########.fr       */
+/*   Updated: 2024/03/14 16:06:48 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ static void	ft_fill_node(t_env *env, char *data)
 	if (data[i] == '=')
 		i++;
 	env->name = ft_substr(data, 0, i);
-	env->value = ft_strdup(data + i);
+	if (!ft_strncmp("SHLVL=", env->name, 6))
+		env->value = ft_itoa(ft_atoi(data + i) + 1);
+	else
+		env->value = ft_strdup(data + i);
 	if (!env->name || !env->value)
 	{
 		perror("malloc");

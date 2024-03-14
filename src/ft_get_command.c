@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_command.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 11:48:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/14 14:13:44 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/14 16:59:19 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,19 +77,19 @@ char	*get_command(char *prompt)
 		if (!new_input)
 			return (NULL);
 		aux = input;
-		input = ft_strjoin(input, new_input);
-		free(aux);
-		if (!input)
-			return (NULL);
-		aux = input;
 		input = ft_strjoin(input, "\n");
 		free(aux);
 		if (!input)
 			return (NULL);
+		aux = input;
+		input = ft_strjoin(input, new_input);
+		free(aux);
+		if (!input)
+			return (NULL);
 	}
-	aux = input;
-	input = ft_strtrim(input, "\"\'");
-	free(aux);
+	// aux = input;
+	// input = ft_strtrim(input, "\"");
+	// free(aux);
 	return (input);
 }
 
@@ -99,7 +99,7 @@ char	*ft_get_input(t_shell *data)
 	char	*prompt;
 
 	prompt = ft_get_prompt(data);
-	input = readline(prompt);
+	input = get_command(prompt);
 	free(prompt);
 	if (!input)
 		return (NULL);

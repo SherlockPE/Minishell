@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exec_command.c                                  :+:      :+:    :+:   */
+/*   ft_strlenchr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/09 12:04:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/14 14:35:36 by albartol         ###   ########.fr       */
+/*   Created: 2024/03/14 14:59:21 by albartol          #+#    #+#             */
+/*   Updated: 2024/03/14 16:55:43 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-// needs parser and a command table
-void	ft_exec_command(const char *command, t_shell *data)
+size_t	ft_strlenchr(const char *str, char c)
 {
-	if (!ft_strncmp(command, "pwd", 3))
-		ft_pwd();
-	else if (!ft_strncmp(command, "cd", 2))
-		ft_cd(data, command + 2);
-	else if (!ft_strncmp(command, "env", 3))
-		ft_env(data);
-	else
-		ft_exec_bin(data, command);
+	size_t	i;
+
+	i = 0;
+	while (str[i] && str[i] != c)
+		i++;
+	if (str[i] == c)
+		return (i + 1);
+	return (0);
 }

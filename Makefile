@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
+#    By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 18:53:11 by albartol          #+#    #+#              #
-#    Updated: 2024/03/12 17:41:42 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/03/14 15:26:18 by albartol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,11 @@ SOURCES :=	minishell.c \
 			ft_exec_command.c
 
 UTILS :=	utils/ft_isnotprint.c \
-			utils/ft_free_env.c
+			utils/ft_free_env.c \
+			utils/ft_free_array.c \
+			utils/ft_strlenchr.c \
+			utils/ft_get_env_value.c \
+			utils/ft_set_env_value.c
 
 
 BUILTS :=	built-ins/ft_pwd.c \

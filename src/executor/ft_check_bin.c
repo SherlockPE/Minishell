@@ -3,32 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_bin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 12:54:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/14 14:10:35 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/14 15:04:42 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-static char	*ft_get_env_value(char *name, t_list *env)
-{
-	size_t	len_name;
-	size_t	len_env;
-	char	*env_name;
-
-	len_name = ft_strlen(name);
-	while (env)
-	{
-		env_name = ((t_env *)env->content)->name;
-		len_env = ft_strlen(env_name) - 1;
-		if (len_name == len_env && !ft_strncmp(name, env_name, len_name))
-			return (((t_env *)env->content)->value);
-		env = env->next;
-	}
-	return (NULL);
-}
 
 static char	*ft_get_path(char *path, const char *command)
 {
@@ -49,19 +31,13 @@ static char	*ft_get_path(char *path, const char *command)
 		perror("malloc");
 		exit(EXIT_FAILURE);
 	}
-	j = 0;
-	while (j < i)
-	{
+	j = -1;
+	while (++j < i)
 		str[j] = path[j];
-		j++;
-	}
 	str[j] = '/';
 	i = 0;
 	while (++j < len)
-	{
-		str[j] = command[i];
-		i++;
-	}
+		str[j] = command[i++];
 	return (str);
 }
 

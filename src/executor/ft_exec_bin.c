@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_bin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 12:47:11 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/14 14:11:31 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/14 17:00:08 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,35 +22,24 @@ static void	ft_print_array(char **a)
 	printf("----------\n");
 }
 
-static void	ft_free_array(char **array)
-{
-	int	i;
-
-	i = 0;
-	while (array[i])
-		free(array[i++]);
-	free(array);
-}
-
 static char	**ft_get_env(t_shell *data)
 {
-	int		len;
 	int		i;
 	char	**envp;
 	t_list	*env;
 	char	*env_name;
 	char	*env_value;
 
-	len = ft_lstsize(data->env);
-	envp = ft_calloc(len + 1, sizeof(char *));
+	i = ft_lstsize(data->env);
+	envp = ft_calloc(i + 1, sizeof(char *));
 	if (!envp)
 		return (NULL);
 	i = 0;
 	env = data->env;
-	while (i < len)
+	while (env)
 	{
-		env_name =  ((t_env *)env->content)->name;
-		env_value =  ((t_env *)env->content)->value;
+		env_name = ((t_env *)env->content)->name;
+		env_value = ((t_env *)env->content)->value;
 		envp[i] = ft_strjoin(env_name, env_value);
 		if (!envp[i])
 		{
@@ -76,26 +65,13 @@ static void	ft_child_signal(int signal)
 	}
 }
 
-static size_t	ft_strlenchr(const char *str, char c)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i] && str[i] != c)
-		i++;
-	if (str[i] == c)
-		return (i + 1);
-	return (0);
-}
-
 void	ft_exec_bin(t_shell *data, const char *command)
 {
 	char	*bin_path;
 	char	**argv;
 	char	**envp;
 	pid_t	id;
-	char	*current_dir;
-	char	*temp;
+	// char	*temp;
 
 	argv = ft_split(command, ' ');
 	if (!argv)
@@ -103,28 +79,21 @@ void	ft_exec_bin(t_shell *data, const char *command)
 		perror("malloc");
 		exit(EXIT_FAILURE);
 	}
-	if (*command == '.')
-	{
-		temp = ft_substr(command, 0, ft_strlenchr(command, ' '));
-		current_dir = getcwd(NULL, 0);
-		if (!current_dir)
-		{
-			free(temp);
-			free(argv);
-			return (perror(NULL));
-		}
-		bin_path = ft_strjoin(current_dir, temp + 1);
-		free(current_dir);
-		free(temp);
-		if (access(bin_path, X_OK) == 0)
-			printf("Tiene acceso\n");
-		else
-			printf("No tiene acceso\n");
-		free(argv[0]);
-		argv[0] = ft_strdup(bin_path);
-	}
-	else
-		bin_path = ft_check_bin(data, argv[0]);
+	// if (*command == '.' && *command + 1 == '/')
+	// {
+	// 	temp = ft_substr(command, 0, ft_strlenchr(command, ' '));
+	// 	bin_path = ft_strdup(temp);
+	// 	free(temp);
+	// 	if (access(bin_path, X_OK) == 0)
+	// 		printf("Tiene acceso\n");
+	// 	else
+	// 		printf("No tiene acceso\n");
+	// 	free(argv[0]);
+	// 	argv[0] = ft_strdup(bin_path + 2);
+	// }
+	// else
+	// 	bin_path = ft_check_bin(data, argv[0]);
+	bin_path = ft_check_bin(data, argv[0]);
 	if (!bin_path)
 	{
 		printf("%s : command not found\n", argv[0]);
