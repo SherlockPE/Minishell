@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_bin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 12:54:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/13 17:45:41 by albartol         ###   ########.fr       */
+/*   Updated: 2024/03/14 14:10:35 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static char	*ft_get_path(char *path, const char *command)
 	if (!str)
 	{
 		perror("malloc");
-		exit (EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
 	j = 0;
 	while (j < i)
@@ -67,7 +67,7 @@ static char	*ft_get_path(char *path, const char *command)
 
 static int	ft_len_path(char *path)
 {
-	int		len_path;
+	int	len_path;
 
 	len_path = 0;
 	while (*path)
@@ -78,7 +78,6 @@ static int	ft_len_path(char *path)
 	}
 	return (len_path);
 }
-
 
 static char	*ft_check_path(char *path, const char *command)
 {
@@ -107,7 +106,7 @@ static char	*ft_check_path(char *path, const char *command)
 
 char	*ft_check_bin(t_shell *data, const char *command)
 {
-	char *path;
+	char	*path;
 
 	path = ft_get_env_value("PATH", data->env);
 	return (ft_check_path(path, command));
