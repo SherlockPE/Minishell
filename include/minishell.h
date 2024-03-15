@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:58:51 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/15 15:10:18 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/15 16:02:58 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ struct s_shell
 {
 	t_list	*env;
 	char	*command;
+	char	*prompt;
 	short	exit_code;
 };
 
@@ -97,7 +98,7 @@ void	ft_minishell_init(t_shell *data, char **env);
 void	ft_minishell_loop(t_shell *data);
 
 // gets the input of the user with readline and removes whitespaces
-char	*ft_get_input(t_shell *data);
+void	ft_get_input(t_shell *data);
 
 // executes a command
 void	ft_exec_command(t_shell *data);
@@ -108,6 +109,9 @@ void	ft_cd(t_shell *data, const char *path);
 void	ft_env(t_shell *data);
 void	ft_echo(t_shell *data, const char *command);
 
+//Signals
+void	ft_handle_signals(void);
+
 // utils
 int		ft_isnotprint(const char c);
 void	ft_free_env(t_list *env);
@@ -115,7 +119,7 @@ size_t	ft_strlenchr(const char *str, char c);
 void	ft_free_array(char **array);
 char	*ft_get_env_value(char *name, t_list *env);
 void	ft_set_env_value(const char *name, const char *value, t_shell *data);
-char	*ft_get_prompt(t_shell *data);
+void	ft_update_prompt(t_shell *data);
 
 void	ft_parser(t_shell *data);
 void	ft_exec_bin(t_shell *data, const char *command);

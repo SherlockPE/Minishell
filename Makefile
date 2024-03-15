@@ -6,7 +6,7 @@
 #    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 18:53:11 by albartol          #+#    #+#              #
-#    Updated: 2024/03/15 14:54:32 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/03/15 17:11:59 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ UNAME := $(shell uname)
 CC := gcc
 
 # CFLAGS := -Wall -Wextra -Werror -O3
-CFLAGS := -Wall -Wextra
+CFLAGS := -Wall -Wextra -fsanitize=address -g3
 
 LIBS := -lreadline -Llib/libft -lft
 
@@ -37,9 +37,8 @@ UTILS :=	utils/ft_isnotprint.c \
 			utils/ft_free_array.c \
 			utils/ft_strlenchr.c \
 			utils/ft_get_env_value.c \
-			utils/ft_get_prompt.c \
+			utils/ft_update_prompt.c \
 			utils/ft_set_env_value.c
-
 
 BUILTS :=	built-ins/ft_pwd.c \
 			built-ins/ft_cd.c \
@@ -51,7 +50,9 @@ PARSER :=	parser/ft_parser.c
 EXECUTOR :=	executor/ft_check_bin.c \
 			executor/ft_exec_bin.c
 
-SRC := $(SOURCES) $(BUILTS) $(UTILS) $(PARSER) $(EXECUTOR)
+SIGNALS :=	signals/ft_handle_signals.c
+
+SRC := $(SOURCES) $(BUILTS) $(UTILS) $(PARSER) $(SIGNALS) $(EXECUTOR)
 
 SRC_DIR := src
 
@@ -78,6 +79,7 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)/utils
 	mkdir -p $(OBJ_DIR)/built-ins
 	mkdir -p $(OBJ_DIR)/parser
+	mkdir -p $(OBJ_DIR)/signals
 	mkdir -p $(OBJ_DIR)/executor
 
 $(LIBFT):

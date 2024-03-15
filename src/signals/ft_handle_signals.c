@@ -1,32 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_minishell_loop.c                                :+:      :+:    :+:   */
+/*   ft_handle_signals.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/09 12:09:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/15 17:10:46 by flopez-r         ###   ########.fr       */
+/*   Created: 2024/03/15 15:21:51 by flopez-r          #+#    #+#             */
+/*   Updated: 2024/03/15 15:22:57 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	ft_minishell_loop(t_shell *data)
+static void	ft_signal(int signal)
 {
-	ft_handle_signals();
-	while (1)
+	if (signal == SIGINT)
 	{
-		ft_get_input(data);
-		if (!data->command)
-			break ;
-		if (*data->command)
-			ft_parser(data);
-		ft_exec_command(data);
-		add_history(data->command);
-		free(data->command);
-		free(data->prompt);
+		printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 1);
+		rl_redisplay();
 	}
-	rl_clear_history();
-	printf("Exiting minishell\n");
+	else if (signal == SIGQUIT)
+	{
+		rl_on_new_line();
+		rl_replace_line(rl_line_buffer, 0);
+		rl_redisplay();
+	}
+}
+
+void	ft_handle_signals(void)
+{
+	if (signal(SIGINT, ft_signal) == SIG_ERR)
+		perror(NULL);
+	if (signal(SIGQUIT, ft_signal) == SIG_ERR)
+		perror(NULL);
 }
