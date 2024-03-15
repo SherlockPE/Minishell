@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:27:18 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/15 18:22:41 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/15 18:55:42 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,5 @@ void	ft_trim_input(t_shell *data)
 void	ft_parser(t_shell *data)
 {
 	ft_trim_input(data);
+	ft_quotes_input(data);
 }

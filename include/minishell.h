@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:58:51 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/15 17:19:05 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/15 19:51:39 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,10 @@ void	ft_set_env_value(const char *name, const char *value, t_shell *data);
 void	ft_update_prompt(t_shell *data);
 void	ft_exit_program(t_shell *data, char *message);
 
+//Parse
 void	ft_parser(t_shell *data);
+void	ft_quotes_input(t_shell *data);
+
 void	ft_exec_bin(t_shell *data, const char *command);
 char	*ft_check_bin(t_shell *data, const char *command);
 
