@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell_init.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:25:49 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/14 16:06:48 by albartol         ###   ########.fr       */
+/*   Updated: 2024/03/15 17:53:54 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,11 @@ void	ft_minishell_init(t_shell *data, char **env)
 	{
 		new_env = (t_env *)ft_calloc(1, sizeof(t_env));
 		if (!new_env)
-		{
-			perror("malloc");
-			exit(EXIT_FAILURE);
-		}
+			ft_exit_program(data, "malloc");
 		ft_fill_node(new_env, env[i]);
 		new_node = ft_lstnew(new_env);
 		if (!new_node)
-		{
-			perror("malloc");
-			exit(EXIT_FAILURE);
-		}
+			ft_exit_program(data, "malloc");
 		ft_lstadd_back(&data->env, new_node);
 		i++;
 	}

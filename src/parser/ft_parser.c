@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:27:18 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/15 15:11:01 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/15 18:22:41 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,8 @@ void	ft_trim_input(t_shell *data)
 	i = 0;
 	j = 0;
 	str = ft_calloc(ft_count_len(data->command) + 1, 1);
-	// ft_error_exit(data, str);
 	if (!str)
-	{
-		perror(NULL);
-		exit(errno);
-	}
+		ft_exit_program(data, NULL);
 	while (data->command[i])
 	{
 		if (data->command[i] != ' ')
@@ -58,10 +54,7 @@ void	ft_trim_input(t_shell *data)
 	str2 = ft_strtrim(str, " ");
 	free(str);
 	if (!str2)
-	{
-		perror(NULL);
-		exit(errno);
-	}
+		ft_exit_program(data, NULL);
 	aux = data->command;
 	data->command = str2;
 	free(aux);

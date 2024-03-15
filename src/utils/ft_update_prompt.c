@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 14:53:14 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/15 16:05:57 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/15 18:03:40 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,13 @@ void	ft_update_prompt(t_shell *data)
 
 	current_dir = getcwd(NULL, 0);
 	if (!current_dir)
-	{
-		perror(NULL);
-		exit(errno);
-	}
+		ft_exit_program(data, NULL);
 	text = ft_strjoin(PROMPT, current_dir);
 	free(current_dir);
 	if (!text)
-	{
-		perror(NULL);
-		exit(errno);
-	}
+		ft_exit_program(data, NULL);
 	data->prompt = ft_strjoin(text, DELIMITATOR);
 	free(text);
 	if (!data->prompt)
-	{
-		perror(NULL);
-		exit(errno);
-	}
+		ft_exit_program(data, NULL);
 }

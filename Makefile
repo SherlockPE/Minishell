@@ -6,7 +6,7 @@
 #    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 18:53:11 by albartol          #+#    #+#              #
-#    Updated: 2024/03/15 17:11:59 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/03/15 17:41:48 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,8 @@ UTILS :=	utils/ft_isnotprint.c \
 			utils/ft_strlenchr.c \
 			utils/ft_get_env_value.c \
 			utils/ft_update_prompt.c \
-			utils/ft_set_env_value.c
+			utils/ft_set_env_value.c \
+			utils/ft_exit_program.c
 
 BUILTS :=	built-ins/ft_pwd.c \
 			built-ins/ft_cd.c \
