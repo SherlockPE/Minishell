@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 12:09:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/14 16:59:46 by albartol         ###   ########.fr       */
+/*   Updated: 2024/03/14 18:15:13 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_cd(t_shell *data, const char *path)
 		path++;
 	if (*path == '-')
 		i = chdir(old_dir);
-	else if (*path == '~')
+	else if (*path == '~' || *path == 0)
 		i = chdir(getenv("HOME"));
 	else
 		i = chdir(path);
