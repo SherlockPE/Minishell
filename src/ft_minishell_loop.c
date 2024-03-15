@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 12:09:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/12 17:33:18 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/15 15:02:28 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,20 @@ static void	ft_signal(int signal)
 
 void	ft_minishell_loop(t_shell *data)
 {
-	char	*input;
-
 	if (signal(SIGINT, ft_signal) == SIG_ERR)
 		perror(NULL);
 	if (signal(SIGQUIT, ft_signal) == SIG_ERR)
 		perror(NULL);
 	while (1)
 	{
-		input = ft_get_input(data);
-		if (!input)
+		data->command = ft_get_input(data);
+		if (!data->command)
 			break ;
-		if (*input)
-			ft_parser(data, input);
-		free(input);
+		if (*data->command)
+			ft_parser(data);
+		ft_exec_command(data);
+		add_history(data->command);
+		free(data->command);
 	}
 	rl_clear_history();
 	printf("Exiting minishell\n");

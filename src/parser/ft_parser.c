@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:27:18 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/14 14:12:09 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/15 15:11:01 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ int	ft_count_len(char *input)
 	return (j);
 }
 
-char	*ft_trim_input(t_shell *data, char *input)
+void	ft_trim_input(t_shell *data)
 {
+	char	*aux;
 	char	*str;
 	char	*str2;
 	int		i;
@@ -39,17 +40,18 @@ char	*ft_trim_input(t_shell *data, char *input)
 
 	i = 0;
 	j = 0;
-	str = ft_calloc(ft_count_len(input) + 1, 1);
+	str = ft_calloc(ft_count_len(data->command) + 1, 1);
+	// ft_error_exit(data, str);
 	if (!str)
 	{
 		perror(NULL);
 		exit(errno);
 	}
-	while (input[i])
+	while (data->command[i])
 	{
-		if (input[i] != ' ')
-			str[j++] = input[i];
-		else if (i > 0 && input[i - 1] != ' ')
+		if (data->command[i] != ' ')
+			str[j++] = data->command[i];
+		else if (i > 0 && data->command[i - 1] != ' ')
 			str[j++] = ' ';
 		i++;
 	}
@@ -60,18 +62,12 @@ char	*ft_trim_input(t_shell *data, char *input)
 		perror(NULL);
 		exit(errno);
 	}
-	return (str2);
+	aux = data->command;
+	data->command = str2;
+	free(aux);
 }
 
-void	ft_parser(t_shell *data, char *input)
+void	ft_parser(t_shell *data)
 {
-	char	*command;
-
-	command = ft_trim_input(data, input);
-	if (*command)
-	{
-		ft_exec_command(command, data);
-		add_history(command);
-	}
-	free(command);
+	ft_trim_input(data);
 }

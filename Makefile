@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+         #
+#    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 18:53:11 by albartol          #+#    #+#              #
-#    Updated: 2024/03/14 15:26:18 by albartol         ###   ########.fr        #
+#    Updated: 2024/03/15 14:54:32 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,12 +37,14 @@ UTILS :=	utils/ft_isnotprint.c \
 			utils/ft_free_array.c \
 			utils/ft_strlenchr.c \
 			utils/ft_get_env_value.c \
+			utils/ft_get_prompt.c \
 			utils/ft_set_env_value.c
 
 
 BUILTS :=	built-ins/ft_pwd.c \
 			built-ins/ft_cd.c \
-			built-ins/ft_env.c
+			built-ins/ft_env.c \
+			built-ins/ft_echo.c
 
 PARSER :=	parser/ft_parser.c
 

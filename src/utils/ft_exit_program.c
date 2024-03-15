@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exec_command.c                                  :+:      :+:    :+:   */
+/*   ft_exit_program.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/09 12:04:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/15 15:02:09 by flopez-r         ###   ########.fr       */
+/*   Created: 2024/03/15 12:57:01 by flopez-r          #+#    #+#             */
+/*   Updated: 2024/03/15 13:02:15 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-// needs parser and a command table
-void	ft_exec_command(t_shell *data)
+void	ft_exit_program(t_shell *data, char *message)
 {
-	if (!ft_strncmp(data->command, "pwd", 3))
-		ft_pwd();
-	else if (!ft_strncmp(data->command, "cd", 2))
-		ft_cd(data, data->command + 2);
-	else if (!ft_strncmp(data->command, "env", 3))
-		ft_env(data);
-	// else if (!ft_strncmp(command, "echo", 4))
-	// 	ft_echo(data, command + 4);
-	else
-		ft_exec_bin(data, data->command);
+	ft_free_env(data->env);
+	perror(message);
+	exit(errno);
 }

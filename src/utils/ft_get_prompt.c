@@ -1,28 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exec_command.c                                  :+:      :+:    :+:   */
+/*   ft_get_prompt.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/09 12:04:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/15 15:02:09 by flopez-r         ###   ########.fr       */
+/*   Created: 2024/03/15 14:53:14 by flopez-r          #+#    #+#             */
+/*   Updated: 2024/03/15 14:55:06 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-// needs parser and a command table
-void	ft_exec_command(t_shell *data)
+char	*ft_get_prompt(t_shell *data)
 {
-	if (!ft_strncmp(data->command, "pwd", 3))
-		ft_pwd();
-	else if (!ft_strncmp(data->command, "cd", 2))
-		ft_cd(data, data->command + 2);
-	else if (!ft_strncmp(data->command, "env", 3))
-		ft_env(data);
-	// else if (!ft_strncmp(command, "echo", 4))
-	// 	ft_echo(data, command + 4);
-	else
-		ft_exec_bin(data, data->command);
+	char	*prompt;
+	char	*text;
+	char	*current_dir;
+
+	current_dir = getcwd(NULL, 0);
+	if (!current_dir)
+		perror(NULL);
+	text = ft_strjoin(PROMPT, current_dir);
+	free(current_dir);
+	if (!text)
+	{
+		perror(NULL);
+		exit(errno);
+	}
+	prompt = ft_strjoin(text, DELIMITATOR);
+	free(text);
+	if (!prompt)
+	{
+		perror(NULL);
+		exit(errno);
+	}
+	return (prompt);
 }
