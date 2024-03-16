@@ -22,5 +22,8 @@ static void	ft_print_node(void *node)
 
 void	ft_env(t_shell *data)
 {
-	ft_lstiter(data->env, ft_print_node);
+	if (data->argv[1])
+		printf("env: too many arguments\n");
+	else
+		ft_lstiter(data->env, ft_print_node);
 }

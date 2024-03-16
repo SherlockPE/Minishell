@@ -87,6 +87,7 @@ struct s_shell
 {
 	t_list	*env;
 	char	*command;
+	char	**argv;
 	char	*prompt;
 	short	exit_code;
 };
@@ -106,15 +107,18 @@ void	ft_get_input(t_shell *data);
 void	ft_exec_command(t_shell *data);
 
 /* ======== BUILT-INS ======== */
-void	ft_cd(t_shell *data, const char *path);
-void	ft_echo(t_shell *data, const char *command);
+void	ft_cd(t_shell *data);
+void	ft_echo(t_shell *data);
 void	ft_env(t_shell *data);
 void	ft_pwd(void);
+void	ft_export(t_shell *data);
+void	ft_unset(t_shell *data);
+void	ft_exit(t_shell *data);
 /* ========================== */
 
 /* ======== EXECUTOR ======== */
-void	ft_exec_bin(t_shell *data, const char *command);
-char	*ft_check_bin(t_shell *data, const char *command);
+void	ft_exec_bin(t_shell *data);
+char	*ft_check_bin(t_shell *data);
 /* ========================== */
 
 /* ======== PARSE ======== */
@@ -131,6 +135,11 @@ void	ft_handle_signals(void);
 //env
 char	*ft_get_env_value(char *name, t_list *env);
 void	ft_set_env_value(const char *name, const char *value, t_shell *data);
+
+//array
+int		array_len(char **array);
+size_t	array_char_len(char **array);
+char	*array_to_str(char **array, char spliter);
 
 //free
 void	free_input(t_shell *data);

@@ -20,9 +20,9 @@ void	ft_minishell_loop(t_shell *data)
 		ft_get_input(data);
 		if (!data->command)
 			break ;
+		ft_parser(data);
 		if (*data->command)
 		{
-			ft_parser(data);
 			ft_exec_command(data);
 			add_history(data->command);
 		}

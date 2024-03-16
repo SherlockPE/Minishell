@@ -65,21 +65,14 @@ static void	ft_child_signal(int signal)
 	}
 }
 
-void	ft_exec_bin(t_shell *data, const char *command)
+void	ft_exec_bin(t_shell *data)
 {
 	char	*bin_path;
-	char	**argv;
 	char	**envp;
 	pid_t	id;
 	int		wstatus;
 	// char	*temp;
 
-	argv = ft_split(command, ' ');
-	if (!argv)
-	{
-		perror("malloc");
-		exit(EXIT_FAILURE);
-	}
 	// if (*command == '.' && *command + 1 == '/')
 	// {
 	// 	temp = ft_substr(command, 0, ft_strlenchr(command, ' '));
@@ -94,34 +87,30 @@ void	ft_exec_bin(t_shell *data, const char *command)
 	// }
 	// else
 	// 	bin_path = ft_check_bin(data, argv[0]);
-	bin_path = ft_check_bin(data, argv[0]);
+	bin_path = ft_check_bin(data);
 	if (!bin_path)
 	{
-		printf("%s : command not found\n", argv[0]);
-		ft_free_array(argv);
+		printf("[%s] : command not found\n", data->argv[0]);
 		return ;
 	}
 	envp = ft_get_env(data);
 	if (!envp)
 	{
-		ft_free_array(argv);
 		free(bin_path);
-		perror("malloc");
-		exit(EXIT_FAILURE);
+		ft_exit_program(data, "malloc");
 	}
 	id = fork();
 	if (id == 0)
 	{
 		signal(SIGINT, ft_child_signal);
-		if (execve(bin_path, argv, envp) == -1)
+		if (execve(bin_path, data->argv, envp) == -1)
 			perror(NULL);
 		exit(0);
 	}
 	waitpid(-1, &wstatus, 0);
 	if (WIFEXITED(wstatus))
 		data->exit_code = WEXITSTATUS(wstatus);
-	printf("Exit code: %d\n", data->exit_code);
-	ft_free_array(argv);
+	// printf("Exit code: [%d]\n", data->exit_code);
 	ft_free_array(envp);
 	free(bin_path);
 }

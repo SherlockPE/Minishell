@@ -12,9 +12,9 @@
 
 #include <minishell.h>
 
-void	ft_exit_program(t_shell *data, char *message_reason)
+void	ft_exit_program(t_shell *data, char *message)
 {
 	free_program(data);
-	perror(message_reason);
+	perror(message);
 	exit(errno);
 }

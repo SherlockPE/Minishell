@@ -12,7 +12,7 @@
 
 #include <minishell.h>
 
-static char	*ft_get_path(char *path, const char *command)
+static char	*ft_get_path(char *path, t_shell *data)
 {
 	size_t	i;
 	size_t	j;
@@ -21,23 +21,20 @@ static char	*ft_get_path(char *path, const char *command)
 	char	*str;
 
 	i = 0;
-	len_com = ft_strlen(command);
+	len_com = ft_strlen(data->argv[0]);
 	while (path[i] && path[i] != ':')
 		i++;
 	len = len_com + i + 1;
-	str = ft_calloc(len + 1, 1);
+	str = ft_calloc(len + 1, sizeof(char));
 	if (!str)
-	{
-		perror("malloc");
-		exit(EXIT_FAILURE);
-	}
+		ft_exit_program(data, "malloc");
 	j = -1;
 	while (++j < i)
 		str[j] = path[j];
 	str[j] = '/';
 	i = 0;
 	while (++j < len)
-		str[j] = command[i++];
+		str[j] = data->argv[0][i++];
 	return (str);
 }
 
@@ -55,7 +52,7 @@ static int	ft_len_path(char *path)
 	return (len_path);
 }
 
-static char	*ft_check_path(char *path, const char *command)
+static char	*ft_check_path(char *path, t_shell *data)
 {
 	int		i;
 	int		len_path;
@@ -66,7 +63,7 @@ static char	*ft_check_path(char *path, const char *command)
 	str = 0;
 	while (i < len_path && *path)
 	{
-		str = ft_get_path(path, command);
+		str = ft_get_path(path, data);
 		if (access(str, X_OK) == 0)
 			break ;
 		free(str);
@@ -80,10 +77,10 @@ static char	*ft_check_path(char *path, const char *command)
 	return (str);
 }
 
-char	*ft_check_bin(t_shell *data, const char *command)
+char	*ft_check_bin(t_shell *data)
 {
 	char	*path;
 
 	path = ft_get_env_value("PATH", data->env);
-	return (ft_check_path(path, command));
+	return (ft_check_path(path, data));
 }

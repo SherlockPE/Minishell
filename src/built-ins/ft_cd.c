@@ -29,33 +29,36 @@ static void	ft_update_env(t_shell *data, const char *old_pwd)
 		ft_set_env_value("OLDPWD=", old_pwd, data);
 }
 
-void	ft_cd(t_shell *data, const char *path)
+void	ft_cd(t_shell *data)
 {
 	int			i;
 	char		*current_dir;
 	static char	*old_dir;
 
+	if (data->argv[1] && data->argv[2])
+	{
+		printf("cd: too many arguments\n");
+		return ;
+	}
 	current_dir = getcwd(NULL, 0);
 	if (!current_dir)
-		return (perror(NULL));
+		return (perror("cd"));
 	if (!old_dir)
 	{
 		old_dir = current_dir;
 		ft_set_env_value("OLDPWD=", old_dir, data);
 	}
-	while (*path && ft_isnotprint(*path))
-		path++;
-	if (*path == '-')
-		i = chdir(old_dir);
-	else if (*path == '~' || *path == 0)
+	if (!data->argv[1] || *(data->argv[1]) == '~')
 		i = chdir(getenv("HOME"));
+	else if (*(data->argv[1]) == '-')
+		i = chdir(old_dir);
 	else
-		i = chdir(path);
+		i = chdir(data->argv[1]);
 	if (i == -1)
 	{
 		if (old_dir != current_dir)
 			free(current_dir);
-		return (perror(NULL));
+		return (perror("cd"));
 	}
 	if (old_dir && old_dir != current_dir)
 		free(old_dir);

@@ -10,25 +10,48 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <minishell.h>
+#include <minishell.h>
 
-// void	ft_echo(t_shell *data, const char *command)
-// {
-// 	char	*print;
-// 	int		i;
+void	ft_echo(t_shell *data)
+{
+	if (!data->argv[1])
+		return ;
+	if (!ft_strncmp(data->argv[1], "-n", 2))
+	{
+		if (data->argv[2])
+			printf("%s", data->argv[2]);
+	}
+	else
+		printf("%s\n", data->argv[1]);
+}
 
-// 	i = 0;
-// 	print = ft_strtrim(command, " \"\t");
-// 	printf("The command is[%s]\n", print);
-// 	if (ft_strnstr(print, "-n", 2))
-// 	{
-// 		printf("The command is[%s]\n", print + 2);
-// 		if (*(print + 2) == ' ')
-// 			printf("%s", print + 3);
-// 		else
-// 			printf("%s\n", print);
-// 	}
-// 	else
-// 		printf("%s\n", print);
-// 	free(print);
-// }
+/* void	ft_echo(t_shell *data)
+{
+	int	i;
+
+	if (!data->argv[1])
+		return ;
+	i = 2;
+	if (!ft_strncmp(data->argv[1], "-n", 2))
+	{
+		while (data->argv[i])
+		{
+			printf("%s", data->argv[i]);
+			i++;
+			if (data->argv[i])
+				printf(" ");
+		}
+	}
+	else
+	{
+		while (data->argv[i])
+		{
+			printf("%s", data->argv[i]);
+			i++;
+			if (data->argv[i])
+				printf(" ");
+		}
+		printf("\n");
+	}
+}
+ */

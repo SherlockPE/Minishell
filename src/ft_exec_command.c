@@ -15,16 +15,20 @@
 // needs parser and a command table
 void	ft_exec_command(t_shell *data)
 {
-	if (!ft_strncmp(data->command, "pwd", 3))
+	if (!ft_strncmp(data->argv[0], "pwd", 4))
 		ft_pwd();
-	else if (!ft_strncmp(data->command, "cd", 2))
-		ft_cd(data, data->command + 2);
-	else if (!ft_strncmp(data->command, "env", 3))
+	else if (!ft_strncmp(data->argv[0], "cd", 3))
+		ft_cd(data);
+	else if (!ft_strncmp(data->argv[0], "env", 4))
 		ft_env(data);
-	else if (!ft_strncmp(data->command, "exit", 4))
-		ft_env(data);
-	// else if (!ft_strncmp(command, "echo", 4))
-	// 	ft_echo(data, command + 4);
+	else if (!ft_strncmp(data->argv[0], "exit", 5))
+		ft_exit(data);
+	else if (!ft_strncmp(data->argv[0], "echo", 5))
+		ft_echo(data);
+	// else if (!ft_strncmp(data->argv[0], "export", 7))
+	// 	ft_export(data);
+	// else if (!ft_strncmp(data->argv[0], "unset", 6))
+	// 	ft_unset(data);
 	else
-		ft_exec_bin(data, data->command);
+		ft_exec_bin(data);
 }

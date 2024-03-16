@@ -52,11 +52,16 @@ UTILS_FREE :=	free/free_input.c \
 UTILS_ENV :=	env/ft_get_env_value.c \
 				env/ft_set_env_value.c
 
+UTILS_ARR :=	array/array_len.c \
+				array/array_char_len.c \
+				array/array_to_str.c
+
 # BUILT-INS
 BUILTS :=	built-ins/ft_pwd.c \
 			built-ins/ft_cd.c \
 			built-ins/ft_env.c \
-			built-ins/ft_echo.c
+			built-ins/ft_echo.c \
+			built-ins/ft_exit.c
 
 # PARSER
 PARSER :=	parser/ft_parser.c \
@@ -70,7 +75,7 @@ EXECUTOR :=	executor/ft_check_bin.c \
 # SIGNALS
 SIGNALS :=	signals/ft_handle_signals.c
 
-ALL_UTILS := $(UTILITIES) $(UTILS_FREE) $(UTILS_ENV)
+ALL_UTILS := $(UTILITIES) $(UTILS_FREE) $(UTILS_ENV) $(UTILS_ARR)
 
 UTILS := $(addprefix $(UTILS_DIR)/, $(ALL_UTILS))
 
@@ -96,6 +101,7 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)/$(UTILS_DIR)
 	mkdir -p $(OBJ_DIR)/$(UTILS_DIR)/env
 	mkdir -p $(OBJ_DIR)/$(UTILS_DIR)/free
+	mkdir -p $(OBJ_DIR)/$(UTILS_DIR)/array
 	mkdir -p $(OBJ_DIR)/built-ins
 	mkdir -p $(OBJ_DIR)/parser
 	mkdir -p $(OBJ_DIR)/signals
