@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:58:51 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/16 12:05:49 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/16 12:16:44 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ char	*ft_check_bin(t_shell *data, const char *command);
 /* ======== PARSE ======== */
 void	ft_parser(t_shell *data);
 void	ft_quotes_input(t_shell *data);
+void	ft_trim_input(t_shell *data);
 /* ========================== */
 
 /* ======== SIGNALS ======== */

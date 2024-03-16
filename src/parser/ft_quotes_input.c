@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 18:54:54 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/15 19:51:35 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/16 12:22:24 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ft_quotes_input(t_shell *data)
 	len = count_len(data->command);
 	new_command = calloc(len + 1, 1);
 	if (!new_command)
-		return ;
+		ft_exit_program(data, "malloc");
 	new_command = ft_fill_new_command(new_command, data->command);
 	data->command = new_command;
 }

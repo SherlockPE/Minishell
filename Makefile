@@ -6,7 +6,7 @@
 #    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 18:53:11 by albartol          #+#    #+#              #
-#    Updated: 2024/03/16 11:58:59 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/03/16 12:17:34 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,8 @@ BUILTS :=	built-ins/ft_pwd.c \
 
 # PARSER
 PARSER :=	parser/ft_parser.c \
-			parser/ft_quotes_input.c
+			parser/ft_quotes_input.c \
+			parser/ft_trim_input.c
 
 # EXECUTOR
 EXECUTOR :=	executor/ft_check_bin.c \
