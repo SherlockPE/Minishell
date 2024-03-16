@@ -12,30 +12,29 @@
 
 #include <minishell.h>
 
-static void	ft_fill_node(t_env *env, char *data)
+static char	*get_content(char *env)
 {
-	int	i;
+	char	*new_env;
+	char	*num;
 
-	i = 0;
-	while (data[i] && data[i] != '=')
-		i++;
-	if (data[i] == '=')
-		i++;
-	env->name = ft_substr(data, 0, i);
-	if (!ft_strncmp("SHLVL=", env->name, 6))
-		env->value = ft_itoa(ft_atoi(data + i) + 1);
-	else
-		env->value = ft_strdup(data + i);
-	if (!env->name || !env->value)
+	if (!ft_strncmp("SHLVL=", env, 6))
 	{
-		perror("malloc");
-		exit(EXIT_FAILURE);
+		num = ft_itoa(ft_atoi(env + ft_strlenchr(env, '=')) + 1);
+		if (!num)
+			return (NULL);
+		new_env = ft_strjoin("SHLVL=", num);
+		free(num);
 	}
+	else
+		new_env = ft_strdup(env);
+	if (!new_env)
+		return (NULL);
+	return (new_env);
 }
 
 void	ft_minishell_init(t_shell *data, char **env)
 {
-	t_env	*new_env;
+	char	*new_env;
 	t_list	*new_node;
 	int		i;
 
@@ -47,13 +46,15 @@ void	ft_minishell_init(t_shell *data, char **env)
 	data->argv = 0;
 	while (env[i])
 	{
-		new_env = (t_env *)ft_calloc(1, sizeof(t_env));
+		new_env = get_content(env[i]);
 		if (!new_env)
 			ft_exit_program(data, "malloc");
-		ft_fill_node(new_env, env[i]);
 		new_node = ft_lstnew(new_env);
 		if (!new_node)
+		{
+			free(new_env);
 			ft_exit_program(data, "malloc");
+		}
 		ft_lstadd_back(&data->env, new_node);
 		i++;
 	}

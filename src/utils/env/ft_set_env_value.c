@@ -12,46 +12,39 @@
 
 #include <minishell.h>
 
-static void	ft_new_node(t_shell *data, t_env *env, const char *name, const char *value)
+static void	ft_change_value(t_shell *data, t_list *env, const char *content)
 {
-	env->name = ft_strdup(name);
-	env->value = ft_strdup(value);
-	if (!env->name || !env->value)
+	free(env->content);
+	env->content = ft_strdup(content);
+	if (!(char *)env->content)
 		ft_exit_program(data, "malloc");
 }
 
-static void	ft_change_value(t_shell *data, t_list *env, const char *value)
-{
-	free(((t_env *)env->content)->value);
-	((t_env *)env->content)->value = ft_strdup(value);
-	if (!((t_env *)env->content)->value)
-		ft_exit_program(data, "malloc");
-}
-
-void	ft_set_env_value(const char *name, const char *value, t_shell *data)
+void	ft_set_env_value(const char *content, t_shell *data)
 {
 	size_t	len_name;
 	size_t	len_env;
-	char	*env_name;
+	char	*temp;
 	t_list	*temp_node;
-	t_env	*new_env;
 
-	len_name = ft_strlen(name);
+	len_name = ft_strlenchr(content, '=');
 	temp_node = data->env;
 	while (temp_node)
 	{
-		env_name = ((t_env *)temp_node->content)->name;
-		len_env = ft_strlen(env_name);
-		if (len_name == len_env && !ft_strncmp(name, env_name, len_name))
-			return (ft_change_value(data, temp_node, value));
+		temp = (char *)temp_node->content;
+		len_env = ft_strlenchr(temp, '=');
+		if (len_name == len_env && !ft_strncmp(content, temp, len_name))
+			return (ft_change_value(data, temp_node, content));
 		temp_node = temp_node->next;
 	}
-	new_env = (t_env *)ft_calloc(1, sizeof(t_env));
-	if (!new_env)
+	temp = ft_strdup(content);
+	if (!temp)
 		ft_exit_program(data, "malloc");
-	ft_new_node(data, new_env, name, value);
-	temp_node = ft_lstnew(new_env);
+	temp_node = ft_lstnew(temp);
 	if (!temp_node)
+	{
+		free(temp);
 		ft_exit_program(data, "malloc");
+	}
 	ft_lstadd_back(&data->env, temp_node);
 }

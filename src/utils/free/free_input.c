@@ -15,9 +15,7 @@
 void	free_input(t_shell *data)
 {
 	free(data->command);
-	free(data->prompt);
 	ft_free_array(data->argv);
 	data->command = 0;
-	data->prompt = 0;
 	data->argv = 0;
 }

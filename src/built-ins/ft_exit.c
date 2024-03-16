@@ -12,13 +12,13 @@
 
 #include <minishell.h>
 
-static int invalid_argv(const char *num)
+static int	invalid_argv(const char *num)
 {
 	printf("exit: [%s]: numeric argument required\n", num);
 	return (0);
 }
 
-static int check_num(const char *num)
+static int	check_num(const char *num)
 {
 	int	i;
 
@@ -28,7 +28,7 @@ static int check_num(const char *num)
 		if (!ft_isdigit(num[i]) && !(num[i] == '-' || num[i] == '+'))
 			return (invalid_argv(num));
 		if (!ft_isdigit(num[i]) && ((num[i] == '-' || num[i] == '+')
-			&& !ft_isdigit(num[i + 1])))
+				&& !ft_isdigit(num[i + 1])))
 			return (invalid_argv(num));
 		if (!ft_isdigit(num[i]) && i > 0 && ft_isdigit(num[i - 1]))
 			return (invalid_argv(num));

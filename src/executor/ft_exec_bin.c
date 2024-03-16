@@ -27,8 +27,6 @@ static char	**ft_get_env(t_shell *data)
 	int		i;
 	char	**envp;
 	t_list	*env;
-	char	*env_name;
-	char	*env_value;
 
 	i = ft_lstsize(data->env);
 	envp = ft_calloc(i + 1, sizeof(char *));
@@ -38,14 +36,7 @@ static char	**ft_get_env(t_shell *data)
 	env = data->env;
 	while (env)
 	{
-		env_name = ((t_env *)env->content)->name;
-		env_value = ((t_env *)env->content)->value;
-		envp[i] = ft_strjoin(env_name, env_value);
-		if (!envp[i])
-		{
-			ft_free_array(envp);
-			return (NULL);
-		}
+		envp[i] = (char *)env->content;
 		i++;
 		env = env->next;
 	}
@@ -111,6 +102,6 @@ void	ft_exec_bin(t_shell *data)
 	if (WIFEXITED(wstatus))
 		data->exit_code = WEXITSTATUS(wstatus);
 	// printf("Exit code: [%d]\n", data->exit_code);
-	ft_free_array(envp);
+	free(envp);
 	free(bin_path);
 }

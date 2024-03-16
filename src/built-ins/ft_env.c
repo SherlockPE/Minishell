@@ -14,10 +14,10 @@
 
 static void	ft_print_node(void *node)
 {
-	t_env	*env;
+	char	*env;
 
-	env = (t_env *)node;
-	printf("%s%s\n", env->name, env->value);
+	env = (char *)node;
+	printf("%s\n", env);
 }
 
 void	ft_env(t_shell *data)

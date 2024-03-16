@@ -22,11 +22,11 @@ static void	ft_update_env(t_shell *data, const char *old_pwd)
 		return (perror(NULL));
 	temp = ft_get_env_value("PWD", data->env);
 	if (temp)
-		ft_set_env_value("PWD=", pwd, data);
+		ft_update_env_value("PWD=", pwd, data);
 	free(pwd);
 	temp = ft_get_env_value("OLDPWD", data->env);
 	if (temp)
-		ft_set_env_value("OLDPWD=", old_pwd, data);
+		ft_update_env_value("OLDPWD=", old_pwd, data);
 }
 
 void	ft_cd(t_shell *data)
@@ -46,7 +46,7 @@ void	ft_cd(t_shell *data)
 	if (!old_dir)
 	{
 		old_dir = current_dir;
-		ft_set_env_value("OLDPWD=", old_dir, data);
+		ft_update_env_value("OLDPWD=", old_dir, data);
 	}
 	if (!data->argv[1] || *(data->argv[1]) == '~')
 		i = chdir(getenv("HOME"));

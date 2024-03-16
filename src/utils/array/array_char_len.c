@@ -19,7 +19,7 @@ size_t	array_char_len(char **array)
 
 	i = 0;
 	len = 0;
-	while(array[i])
+	while (array[i])
 	{
 		len += ft_strlen(array[i]);
 		i++;

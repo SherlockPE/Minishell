@@ -41,16 +41,16 @@ SOURCES :=	minishell.c \
 # UTILS
 UTILITIES :=	ft_isnotprint.c \
 				ft_strlenchr.c \
-				ft_update_prompt.c \
+				ft_update_prompt.c
 
 UTILS_FREE :=	free/free_input.c \
 				free/free_program.c \
 				free/ft_exit_program.c \
-				free/ft_free_array.c \
-				free/ft_free_env.c \
+				free/ft_free_array.c
 
 UTILS_ENV :=	env/ft_get_env_value.c \
-				env/ft_set_env_value.c
+				env/ft_set_env_value.c \
+				env/ft_update_env_value.c
 
 UTILS_ARR :=	array/array_len.c \
 				array/array_char_len.c \

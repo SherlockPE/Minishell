@@ -23,10 +23,10 @@ char	*ft_get_env_value(char *name, t_list *env)
 	len_name = ft_strlen(name);
 	while (env)
 	{
-		env_name = ((t_env *)env->content)->name;
-		len_env = ft_strlen(env_name) - 1;
+		env_name = (char *)env->content;
+		len_env = ft_strlenchr(env_name, '=') - 1;
 		if (len_name == len_env && !ft_strncmp(name, env_name, len_name))
-			return (((t_env *)env->content)->value);
+			return ((char *)env->content + ft_strlenchr(env->content, '='));
 		env = env->next;
 	}
 	return (NULL);

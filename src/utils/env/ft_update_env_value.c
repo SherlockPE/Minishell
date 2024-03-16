@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_env.c                                      :+:      :+:    :+:   */
+/*   ft_update_env_value.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/13 17:47:11 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/13 17:49:41 by albartol         ###   ########.fr       */
+/*   Created: 2024/03/16 18:10:01 by albartol          #+#    #+#             */
+/*   Updated: 2024/03/16 18:20:10 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void	ft_free_node(void *data)
+void	ft_update_env_value(const char *name, const char *value, t_shell *data)
 {
-	t_env	*env;
+	char	*content;
 
-	env = (t_env *)data;
-	free(env->name);
-	free(env->value);
-	free(data);
-}
-
-void	ft_free_env(t_list *env)
-{
-	ft_lstclear(&env, ft_free_node);
+	content = ft_strjoin(name, value);
+	if (!content)
+		ft_exit_program(data, "malloc");
+	ft_set_env_value(content, data);
+	free(content);
 }

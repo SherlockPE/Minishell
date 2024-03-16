@@ -17,23 +17,21 @@ char	*array_to_str(char **array, char spliter)
 	char	*str;
 	char	split[2];
 	size_t	len;
-	int		splits;
 	int		i;
 
-	i = 0;
 	if (spliter)
 	{
 		split[0] = spliter;
 		split[1] = 0;
-		splits = array_len(array);
+		len = array_char_len(array) + array_len(array);
 	}
 	else
-		splits = 0;
-	len = array_char_len(array) + splits;
+		len = array_char_len(array);
 	str = (char *)ft_calloc(len + 1, sizeof(char));
 	if (!str)
 		return (NULL);
-	while(array[i])
+	i = 0;
+	while (array[i])
 	{
 		ft_strlcat(str, array[i], len + 1);
 		i++;

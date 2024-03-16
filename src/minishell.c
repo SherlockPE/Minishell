@@ -21,6 +21,6 @@ int	main(int argc, char **argv, char **env)
 		return (EXIT_SUCCESS);
 	ft_minishell_init(&data, env);
 	ft_minishell_loop(&data);
-	ft_free_env(data.env);
+	ft_lstclear(&data.env, free);
 	return (data.exit_code);
 }

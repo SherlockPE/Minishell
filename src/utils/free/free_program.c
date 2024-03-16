@@ -14,6 +14,6 @@
 
 void	free_program(t_shell *data)
 {
-	ft_free_env(data->env);
+	ft_lstclear(&data->env, free);
 	free_input(data);
 }

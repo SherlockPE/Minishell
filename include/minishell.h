@@ -77,12 +77,6 @@
 typedef struct s_env	t_env;
 typedef struct s_shell	t_shell;
 
-struct s_env
-{
-	char	*name;
-	char	*value;
-};
-
 struct s_shell
 {
 	t_list	*env;
@@ -91,7 +85,6 @@ struct s_shell
 	char	*prompt;
 	short	exit_code;
 };
-
 
 /* ======== MAIN ======== */
 // gets the env from where minishell is executed
@@ -134,7 +127,8 @@ void	ft_handle_signals(void);
 /* ======== UTILS ======== */
 //env
 char	*ft_get_env_value(char *name, t_list *env);
-void	ft_set_env_value(const char *name, const char *value, t_shell *data);
+void	ft_set_env_value(const char *content, t_shell *data);
+void	ft_update_env_value(const char *name, const char *value, t_shell *data);
 
 //array
 int		array_len(char **array);

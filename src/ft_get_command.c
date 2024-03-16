@@ -40,6 +40,7 @@ static void	get_command(t_shell *data)
 	char	*new_input;
 
 	data->command = readline(data->prompt); //this is a malloc!!!!! we need to protect this correctly
+	free(data->prompt);
 	if (!data->command)
 		return ;
 	while (!check_input(data->command))
