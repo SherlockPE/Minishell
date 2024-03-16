@@ -83,9 +83,6 @@ NAME := minishell
 
 LIBFT := lib/libft/libft.a
 
-print:
-	@echo $(UTILS)
-
 all: $(OBJ_DIR) $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)

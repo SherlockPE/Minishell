@@ -16,5 +16,5 @@ void	ft_parser(t_shell *data)
 {
 	ft_trim_input(data);
 	ft_quotes_input(data);
-	ft_redirections(data);
+	// ft_redirections(data);
 }
