@@ -12,24 +12,24 @@
 
 #include <minishell.h>
 
-static int	check_input(char *input)
+static char	check_quotes(char *input)
 {
-	int	i;
-	int	double_q;
-	int	simple_q;
+	int		i;
+	char	double_q;
+	char	simple_q;
 
 	i = 0;
 	double_q = 0;
 	simple_q = 0;
 	while (input[i])
 	{
-		if (input[i] == '\"')
-			double_q++;
-		if (input[i] == '\'')
-			simple_q++;
+		if (input[i] == '\"' && !simple_q)
+			double_q ^= 1;
+		else if (input[i] == '\'' && !double_q)
+			simple_q ^= 1;
 		i++;
 	}
-	if ((double_q % 2 == 0) && (simple_q % 2 == 0))
+	if (double_q || simple_q)
 		return (1);
 	return (0);
 }
@@ -39,25 +39,25 @@ static void	get_command(t_shell *data)
 	char	*aux;
 	char	*new_input;
 
-	data->command = readline(data->prompt); //this is a malloc!!!!! we need to protect this correctly
+	data->command = readline(data->prompt);
 	free(data->prompt);
 	if (!data->command)
 		return ;
-	while (!check_input(data->command))
+	while (check_quotes(data->command))
 	{
-		new_input = readline(">"); //this is a malloc!!!!! we need to protect this correctly
+		new_input = readline(">");
 		if (!new_input)
 			return ;
 		aux = data->command;
 		data->command = ft_strjoin(data->command, "\n");
 		free(aux);
 		if (!data->command)
-			return ;
+			ft_exit_program(data, "malloc");
 		aux = data->command;
 		data->command = ft_strjoin(data->command, new_input);
 		free(aux);
 		if (!data->command)
-			return ;
+			ft_exit_program(data, "malloc");
 	}
 }
 
@@ -65,6 +65,4 @@ void	ft_get_input(t_shell *data)
 {
 	ft_update_prompt(data);
 	get_command(data);
-	// if (*data->command)
-	// 	ft_parser(data);
 }

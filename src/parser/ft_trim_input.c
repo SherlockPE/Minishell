@@ -32,7 +32,6 @@ static int	ft_count_len(char *input)
 
 void	ft_trim_input(t_shell *data)
 {
-	char	*aux;
 	char	*str;
 	char	*str2;
 	int		i;
@@ -55,7 +54,6 @@ void	ft_trim_input(t_shell *data)
 	free(str);
 	if (!str2)
 		ft_exit_program(data, NULL);
-	aux = data->command;
+	free(data->command);
 	data->command = str2;
-	free(aux);
 }

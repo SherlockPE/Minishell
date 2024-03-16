@@ -12,16 +12,17 @@
 
 #include <minishell.h>
 
+// ft_pipes_input(data);
+// ft_trim_input(data);
+// ft_quotes_input(data);
+// ft_redirections(data);
 void	ft_parser(t_shell *data)
 {
 	data->argv = ft_split(data->command, ' ');
 	if (!data->argv)
-		ft_exit_program(data,"malloc");
+		ft_exit_program(data, "malloc");
 	free(data->command);
 	data->command = array_to_str(data->argv, ' ');
 	if (!data->command)
 		ft_exit_program(data, "malloc");
-	// ft_trim_input(data);
-	// ft_quotes_input(data);
-	// ft_redirections(data);
 }

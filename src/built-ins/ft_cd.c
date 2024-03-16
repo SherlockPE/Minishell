@@ -12,7 +12,7 @@
 
 #include <minishell.h>
 
-static void	ft_update_env(t_shell *data, const char *old_pwd)
+static void	update_env(t_shell *data, const char *old_pwd)
 {
 	char	*temp;
 	char	*pwd;
@@ -29,17 +29,26 @@ static void	ft_update_env(t_shell *data, const char *old_pwd)
 		ft_update_env_value("OLDPWD=", old_pwd, data);
 }
 
+static int	change_dir(const char *new_dir, const char *old_dir)
+{
+	int	i;
+
+	if (!new_dir || *(new_dir) == '~')
+		i = chdir(getenv("HOME"));
+	else if (*(new_dir) == '-')
+		i = chdir(old_dir);
+	else
+		i = chdir(new_dir);
+	return (i);
+}
+
 void	ft_cd(t_shell *data)
 {
-	int			i;
 	char		*current_dir;
 	static char	*old_dir;
 
 	if (data->argv[1] && data->argv[2])
-	{
-		printf("cd: too many arguments\n");
-		return ;
-	}
+		return ((void)printf("cd: too many arguments\n"));
 	current_dir = getcwd(NULL, 0);
 	if (!current_dir)
 		return (perror("cd"));
@@ -48,13 +57,7 @@ void	ft_cd(t_shell *data)
 		old_dir = current_dir;
 		ft_update_env_value("OLDPWD=", old_dir, data);
 	}
-	if (!data->argv[1] || *(data->argv[1]) == '~')
-		i = chdir(getenv("HOME"));
-	else if (*(data->argv[1]) == '-')
-		i = chdir(old_dir);
-	else
-		i = chdir(data->argv[1]);
-	if (i == -1)
+	if (change_dir(data->argv[1], old_dir) == -1)
 	{
 		if (old_dir != current_dir)
 			free(current_dir);
@@ -63,5 +66,5 @@ void	ft_cd(t_shell *data)
 	if (old_dir && old_dir != current_dir)
 		free(old_dir);
 	old_dir = current_dir;
-	ft_update_env(data, old_dir);
+	update_env(data, old_dir);
 }

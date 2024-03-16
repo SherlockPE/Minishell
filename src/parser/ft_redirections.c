@@ -14,5 +14,4 @@
 
 void	ft_redirections(t_shell *data)
 {
-	
 }
