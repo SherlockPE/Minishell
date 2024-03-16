@@ -12,7 +12,7 @@
 
 #include <minishell.h>
 
-int	check_input(char *input)
+static int	check_input(char *input)
 {
 	int	i;
 	int	double_q;
@@ -34,7 +34,7 @@ int	check_input(char *input)
 	return (0);
 }
 
-void	get_command(t_shell *data)
+static void	get_command(t_shell *data)
 {
 	char	*aux;
 	char	*new_input;

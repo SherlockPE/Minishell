@@ -71,6 +71,7 @@ void	ft_exec_bin(t_shell *data, const char *command)
 	char	**argv;
 	char	**envp;
 	pid_t	id;
+	int		wstatus;
 	// char	*temp;
 
 	argv = ft_split(command, ' ');
@@ -116,7 +117,10 @@ void	ft_exec_bin(t_shell *data, const char *command)
 			perror(NULL);
 		exit(0);
 	}
-	waitpid(-1, NULL, 0);
+	waitpid(-1, &wstatus, 0);
+	if (WIFEXITED(wstatus))
+		data->exit_code = WEXITSTATUS(wstatus);
+	printf("Exit code: %d\n", data->exit_code);
 	ft_free_array(argv);
 	ft_free_array(envp);
 	free(bin_path);

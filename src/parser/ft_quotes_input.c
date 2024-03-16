@@ -12,7 +12,7 @@
 
 #include <minishell.h>
 
-int	count_len(char *command)
+static int	count_len(char *command)
 {
 	int	i;
 	int	len;
@@ -28,7 +28,7 @@ int	count_len(char *command)
 	return (len);
 }
 
-char	*ft_fill_new_command(char *new_c, char *command)
+static char	*ft_fill_new_command(char *new_c, char *command)
 {
 	int		i;
 	int		j;

@@ -15,7 +15,8 @@ UNAME := $(shell uname)
 CC := gcc
 
 # CFLAGS := -Wall -Wextra -Werror -O3
-CFLAGS := -Wall -Wextra -fsanitize=address -g3
+# CFLAGS := -Wall -Wextra -fsanitize=address -g3
+CFLAGS := -Wall -Wextra
 
 LIBS := -lreadline -Llib/libft -lft
 

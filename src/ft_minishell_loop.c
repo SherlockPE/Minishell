@@ -21,9 +21,11 @@ void	ft_minishell_loop(t_shell *data)
 		if (!data->command)
 			break ;
 		if (*data->command)
+		{
 			ft_parser(data);
-		ft_exec_command(data);
-		add_history(data->command);
+			ft_exec_command(data);
+			add_history(data->command);
+		}
 		free_input(data);
 	}
 	rl_clear_history();

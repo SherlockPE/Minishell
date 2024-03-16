@@ -41,6 +41,9 @@ void	ft_minishell_init(t_shell *data, char **env)
 
 	i = 0;
 	data->env = 0;
+	data->exit_code = 0;
+	data->command = 0;
+	data->prompt = 0;
 	while (env[i])
 	{
 		new_env = (t_env *)ft_calloc(1, sizeof(t_env));
