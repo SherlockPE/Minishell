@@ -1,31 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_minishell_loop.c                                :+:      :+:    :+:   */
+/*   free_input.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/09 12:09:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/16 11:21:00 by flopez-r         ###   ########.fr       */
+/*   Created: 2024/03/16 11:43:18 by flopez-r          #+#    #+#             */
+/*   Updated: 2024/03/16 11:43:24 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	ft_minishell_loop(t_shell *data)
+void	free_input(t_shell *data)
 {
-	ft_handle_signals();
-	while (1)
-	{
-		ft_get_input(data);
-		if (!data->command)
-			break ;
-		if (*data->command)
-			ft_parser(data);
-		ft_exec_command(data);
-		add_history(data->command);
-		free_input(data);
-	}
-	rl_clear_history();
-	printf("Exiting minishell\n");
+	free(data->command);
+	free(data->prompt);
 }

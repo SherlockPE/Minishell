@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_env_value.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:03:06 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/14 15:03:21 by albartol         ###   ########.fr       */
+/*   Updated: 2024/03/16 12:07:38 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
+/* Function filters name in all of the env list and returns
+a pointer of the node */
 char	*ft_get_env_value(char *name, t_list *env)
 {
 	size_t	len_name;

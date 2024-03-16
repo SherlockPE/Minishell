@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:58:51 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/15 19:51:39 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/16 12:05:49 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ struct s_shell
 	short	exit_code;
 };
 
+
+/* ======== MAIN ======== */
 // gets the env from where minishell is executed
 void	ft_minishell_init(t_shell *data, char **env);
 
@@ -103,30 +105,42 @@ void	ft_get_input(t_shell *data);
 // executes a command
 void	ft_exec_command(t_shell *data);
 
-// built-ins
-void	ft_pwd(void);
+/* ======== BUILT-INS ======== */
 void	ft_cd(t_shell *data, const char *path);
-void	ft_env(t_shell *data);
 void	ft_echo(t_shell *data, const char *command);
+void	ft_env(t_shell *data);
+void	ft_pwd(void);
+/* ========================== */
 
-//Signals
-void	ft_handle_signals(void);
-
-// utils
-int		ft_isnotprint(const char c);
-void	ft_free_env(t_list *env);
-size_t	ft_strlenchr(const char *str, char c);
-void	ft_free_array(char **array);
-char	*ft_get_env_value(char *name, t_list *env);
-void	ft_set_env_value(const char *name, const char *value, t_shell *data);
-void	ft_update_prompt(t_shell *data);
-void	ft_exit_program(t_shell *data, char *message);
-
-//Parse
-void	ft_parser(t_shell *data);
-void	ft_quotes_input(t_shell *data);
-
+/* ======== EXECUTOR ======== */
 void	ft_exec_bin(t_shell *data, const char *command);
 char	*ft_check_bin(t_shell *data, const char *command);
+/* ========================== */
+
+/* ======== PARSE ======== */
+void	ft_parser(t_shell *data);
+void	ft_quotes_input(t_shell *data);
+/* ========================== */
+
+/* ======== SIGNALS ======== */
+void	ft_handle_signals(void);
+/* ========================== */
+
+/* ======== UTILS ======== */
+//env
+char	*ft_get_env_value(char *name, t_list *env);
+void	ft_set_env_value(const char *name, const char *value, t_shell *data);
+
+//free
+void	free_input(t_shell *data);
+void	free_program(t_shell *data);
+void	ft_exit_program(t_shell *data, char *message);
+void	ft_free_array(char **array);
+void	ft_free_env(t_list *env);
+
+void	ft_update_prompt(t_shell *data);
+int		ft_isnotprint(const char c);
+size_t	ft_strlenchr(const char *str, char c);
+/* ========================== */
 
 #endif
