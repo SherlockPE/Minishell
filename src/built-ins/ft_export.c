@@ -14,8 +14,8 @@
 
 void	ft_export(t_shell *data)
 {
-	char *name;
-	char *value;
-
-	
+	if (!data->argv[1])
+		return (ft_env(data));
+	if (ft_strchr(data->argv[1], '='))
+		ft_set_env_value(data->argv[1], data);
 }

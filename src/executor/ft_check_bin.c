@@ -82,5 +82,7 @@ char	*ft_check_bin(t_shell *data)
 	char	*path;
 
 	path = ft_get_env_value("PATH", data->env);
+	if (!path)
+		return (NULL);
 	return (ft_check_path(path, data));
 }

@@ -61,7 +61,9 @@ BUILTS :=	built-ins/ft_pwd.c \
 			built-ins/ft_cd.c \
 			built-ins/ft_env.c \
 			built-ins/ft_echo.c \
-			built-ins/ft_exit.c
+			built-ins/ft_exit.c \
+			built-ins/ft_export.c \
+			built-ins/ft_unset.c
 
 # PARSER
 PARSER :=	parser/ft_parser.c \

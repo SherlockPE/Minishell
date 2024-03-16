@@ -25,10 +25,10 @@ void	ft_exec_command(t_shell *data)
 		ft_exit(data);
 	else if (!ft_strncmp(data->argv[0], "echo", 5))
 		ft_echo(data);
-	// else if (!ft_strncmp(data->argv[0], "export", 7))
-	// 	ft_export(data);
-	// else if (!ft_strncmp(data->argv[0], "unset", 6))
-	// 	ft_unset(data);
+	else if (!ft_strncmp(data->argv[0], "export", 7))
+		ft_export(data);
+	else if (!ft_strncmp(data->argv[0], "unset", 6))
+		ft_unset(data);
 	else
 		ft_exec_bin(data);
 }
