@@ -41,7 +41,8 @@ SOURCES :=	minishell.c \
 # UTILS
 UTILITIES :=	ft_isnotprint.c \
 				ft_strlenchr.c \
-				ft_update_prompt.c
+				ft_update_prompt.c \
+				check_quotes.c
 
 UTILS_FREE :=	free/free_input.c \
 				free/free_program.c \
@@ -67,8 +68,10 @@ BUILTS :=	built-ins/ft_pwd.c \
 
 # PARSER
 PARSER :=	parser/ft_parser.c \
-			parser/ft_quotes_input.c \
-			parser/ft_trim_input.c
+			parser/ft_split_quotes.c \
+			parser/quotes.c \
+			parser/ft_trim_input.c \
+			parser/ft_validate_input.c
 
 # EXECUTOR
 EXECUTOR :=	executor/ft_check_bin.c \

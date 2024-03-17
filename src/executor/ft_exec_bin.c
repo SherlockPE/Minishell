@@ -57,7 +57,7 @@ static void	child_execve(t_shell *data, char *bin_path, char **envp)
 	if (id == 0)
 	{
 		signal(SIGINT, child_signal);
-		free_input(data);
+		free(data->command);
 		if (execve(bin_path, data->argv, envp) == -1)
 			perror(NULL);
 		free_program(data);

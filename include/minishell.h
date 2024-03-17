@@ -76,12 +76,30 @@
 
 typedef struct s_env	t_env;
 typedef struct s_shell	t_shell;
+typedef struct s_com	t_com;
+
+struct s_env
+{
+	char	*name;
+	char	*value;
+};
+
+struct s_com
+{
+	char	path;
+	char	**argv;
+	int		fd[2];
+};
 
 struct s_shell
 {
 	t_list	*env;
 	char	*command;
+	char	**pipes;
+	char	**redir;
 	char	**argv;
+	char	**envp;
+	t_com	*coms;
 	char	*prompt;
 	short	exit_code;
 };
@@ -118,6 +136,9 @@ char	*ft_check_bin(t_shell *data);
 void	ft_parser(t_shell *data);
 void	ft_quotes_input(t_shell *data);
 void	ft_trim_input(t_shell *data);
+short	ft_validate_input(t_shell *data);
+char	**ft_split_quotes(char *data, char c);
+short	quotes(char c);
 /* ========================== */
 
 /* ======== SIGNALS ======== */
@@ -145,6 +166,7 @@ void	ft_free_env(t_list *env);
 void	ft_update_prompt(t_shell *data);
 int		ft_isnotprint(const char c);
 size_t	ft_strlenchr(const char *str, char c);
+short	check_quotes(char *input);
 /* ========================== */
 
 #endif

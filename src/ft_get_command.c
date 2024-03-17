@@ -12,28 +12,6 @@
 
 #include <minishell.h>
 
-static char	check_quotes(char *input)
-{
-	int		i;
-	char	double_q;
-	char	simple_q;
-
-	i = 0;
-	double_q = 0;
-	simple_q = 0;
-	while (input[i])
-	{
-		if (input[i] == '\"' && !simple_q)
-			double_q ^= 1;
-		else if (input[i] == '\'' && !double_q)
-			simple_q ^= 1;
-		i++;
-	}
-	if (double_q || simple_q)
-		return (1);
-	return (0);
-}
-
 static void	get_command(t_shell *data)
 {
 	char	*aux;

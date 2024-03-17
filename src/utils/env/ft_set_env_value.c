@@ -12,7 +12,7 @@
 
 #include <minishell.h>
 
-static void	ft_change_value(t_shell *data, t_list *env, const char *content)
+static void	change_env_value(t_shell *data, t_list *env, const char *content)
 {
 	free(env->content);
 	env->content = ft_strdup(content);
@@ -34,7 +34,7 @@ void	ft_set_env_value(const char *content, t_shell *data)
 		temp = (char *)temp_node->content;
 		len_env = ft_strlenchr(temp, '=');
 		if (len_name == len_env && !ft_strncmp(content, temp, len_name))
-			return (ft_change_value(data, temp_node, content));
+			return (change_env_value(data, temp_node, content));
 		temp_node = temp_node->next;
 	}
 	temp = ft_strdup(content);

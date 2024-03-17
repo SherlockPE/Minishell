@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_minishell_loop.c                                :+:      :+:    :+:   */
+/*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/09 12:09:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/16 11:21:00 by flopez-r         ###   ########.fr       */
+/*   Created: 2024/03/17 20:58:05 by albartol          #+#    #+#             */
+/*   Updated: 2024/03/17 21:10:10 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	ft_minishell_loop(t_shell *data)
+short	quotes(char c)
 {
-	ft_handle_signals();
-	while (1)
-	{
-		ft_get_input(data);
-		if (!data->command)
-			break ;
-		ft_parser(data);
-		free_input(data);
-	}
-	rl_clear_history();
-	printf("Exiting minishell\n");
+	static short	double_q;
+	static short	simple_q;
+
+	if (c == '\"' && !simple_q)
+		double_q ^= 1;
+	else if (c == '\'' && !double_q)
+		simple_q ^= 1;
+	if (double_q || simple_q)
+		return (1);
+	return (0);
 }

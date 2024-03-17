@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_minishell_loop.c                                :+:      :+:    :+:   */
+/*   ft_validate_input.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/09 12:09:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/16 11:21:00 by flopez-r         ###   ########.fr       */
+/*   Created: 2024/03/17 20:09:15 by albartol          #+#    #+#             */
+/*   Updated: 2024/03/17 20:40:20 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	ft_minishell_loop(t_shell *data)
+short	ft_validate_input(t_shell *data)
 {
-	ft_handle_signals();
-	while (1)
+	int		i;
+	char	*com;
+
+	i = 0;
+	com = data->command;
+	while (com[i])
 	{
-		ft_get_input(data);
-		if (!data->command)
-			break ;
-		ft_parser(data);
-		free_input(data);
+		if (com[i] == '|' || com[i] == '&')
+		{
+			printf("syntax error: unexpected token '%c'\n", com[i]);
+			return (1);
+		}
+		i++;
 	}
-	rl_clear_history();
-	printf("Exiting minishell\n");
+	return (0);
 }

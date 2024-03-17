@@ -14,46 +14,47 @@
 
 static int	ft_count_len(char *input)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		len;
 
 	i = 0;
-	j = 0;
+	len = 0;
 	while (input[i])
 	{
-		if (input[i] != ' ')
-			j++;
-		else if (i > 0 && input[i - 1] != ' ')
-			j++;
+		if (quotes(input[i]))
+			len++;
+		else if (input[i] != ' ' || (i > 0 && input[i - 1] != ' '))
+			len++;
 		i++;
 	}
-	return (j);
+	return (len);
 }
 
 void	ft_trim_input(t_shell *data)
 {
 	char	*str;
-	char	*str2;
+	char	*com;
 	int		i;
 	int		j;
 
 	i = 0;
 	j = 0;
-	str = ft_calloc(ft_count_len(data->command) + 1, 1);
+	com = data->command;
+	str = ft_calloc(ft_count_len(com) + 1, 1);
 	if (!str)
-		ft_exit_program(data, NULL);
-	while (data->command[i])
+		ft_exit_program(data, "malloc");
+	while (com[i])
 	{
-		if (data->command[i] != ' ')
-			str[j++] = data->command[i];
-		else if (i > 0 && data->command[i - 1] != ' ')
-			str[j++] = ' ';
+		if (quotes(com[i]))
+			str[j++] = com[i];
+		else if (com[i] != ' ' || (i > 0 && com[i - 1] != ' '))
+			str[j++] = com[i];
 		i++;
 	}
-	str2 = ft_strtrim(str, " ");
+	com = ft_strtrim(str, " ");
 	free(str);
-	if (!str2)
-		ft_exit_program(data, NULL);
+	if (!com)
+		ft_exit_program(data, "malloc");
 	free(data->command);
-	data->command = str2;
+	data->command = com;
 }
