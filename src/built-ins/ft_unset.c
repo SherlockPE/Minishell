@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 13:09:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/18 12:34:22 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/18 17:42:27 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	search_and_remove_env(char *name, t_list *env, t_shell *data)
 
 void	ft_unset(t_shell *data)
 {
-	if (!data->argv[1])
+	if (!data->com->argv[1])
 		return ;
-	search_and_remove_env(data->argv[1], data->env, data);
+	search_and_remove_env(data->com->argv[1], data->env, data);
 }

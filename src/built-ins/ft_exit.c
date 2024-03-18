@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 13:09:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/16 13:40:13 by albartol         ###   ########.fr       */
+/*   Updated: 2024/03/18 17:41:18 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ static int	check_num(const char *num)
 
 void	ft_exit(t_shell *data)
 {
-	if (data->argv[1] && data->argv[2])
+	if (data->com->argv[1] && data->com->argv[2])
 		printf("exit: too many arguments\n");
 	else
 	{
-		if (data->argv[1] && check_num(data->argv[1]))
-			data->exit_code = ft_atoi(data->argv[1]);
+		if (data->com->argv[1] && check_num(data->com->argv[1]))
+			data->exit_code = ft_atoi(data->com->argv[1]);
 		free_program(data);
 		exit(data->exit_code);
 	}

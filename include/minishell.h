@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:58:51 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/16 12:16:44 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/18 17:32:10 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ struct s_env
 
 struct s_com
 {
-	char	path;
+	pid_t	pid;
 	char	**argv;
 	int		fd[2];
 };
@@ -96,10 +96,7 @@ struct s_shell
 	t_list	*env;
 	char	*command;
 	char	**pipes;
-	char	**redir;
-	char	**argv;
-	char	**envp;
-	t_com	*coms;
+	t_com	*com;
 	char	*prompt;
 	short	exit_code;
 };
@@ -136,8 +133,9 @@ char	*ft_check_bin(t_shell *data);
 void	ft_parser(t_shell *data);
 void	ft_quotes_input(t_shell *data);
 void	ft_trim_input(t_shell *data);
-short	ft_validate_input(t_shell *data);
-char	**ft_split_quotes(char *data, char c);
+short	ft_validate_input(char *com, char c);
+char	**ft_split_quotes(char *com, char c);
+char	**ft_split_pipes(char *com);
 short	quotes(char c);
 /* ========================== */
 

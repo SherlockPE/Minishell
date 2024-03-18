@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_bin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 12:47:11 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/18 14:45:58 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/18 17:50:11 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,24 +48,12 @@ static void	child_signal(int signal)
 
 static void	child_execve(t_shell *data, char *bin_path, char **envp)
 {
-	pid_t	id;
-	int		wstatus;
-
-	id = fork();
-	if (id == -1)
-		return (perror("fork"));
-	if (id == 0)
-	{
-		signal(SIGINT, child_signal);
-		// free(data->command);
-		if (execve(bin_path, data->argv, envp) == -1)
-			perror(NULL);
-		free_program(data);
-		exit(EXIT_FAILURE);
-	}
-	waitpid(id, &wstatus, 0);
-	if (WIFEXITED(wstatus))
-		data->exit_code = WEXITSTATUS(wstatus);
+	if (execve(bin_path, data->com->argv, envp) == -1)
+		perror("execve");
+	free_program(data);
+	free(envp);
+	free(bin_path);
+	exit(EXIT_FAILURE);
 }
 
 // char	*temp;
@@ -91,7 +79,11 @@ void	ft_exec_bin(t_shell *data)
 
 	bin_path = ft_check_bin(data);
 	if (!bin_path)
-		return ((void)printf("[%s] : command not found\n", data->argv[0]));
+	{
+		printf("[%s] : command not found\n", data->com->argv[0]);
+		free_program(data);
+		exit(EXIT_FAILURE);
+	}
 	envp = get_env(data);
 	if (!envp)
 	{
@@ -99,6 +91,4 @@ void	ft_exec_bin(t_shell *data)
 		ft_exit_program(data, "malloc");
 	}
 	child_execve(data, bin_path, envp);
-	free(envp);
-	free(bin_path);
 }

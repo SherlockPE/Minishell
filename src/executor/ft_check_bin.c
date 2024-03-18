@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 12:54:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/14 15:04:42 by albartol         ###   ########.fr       */
+/*   Updated: 2024/03/18 17:43:37 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static char	*ft_get_path(char *path, t_shell *data)
 	char	*str;
 
 	i = 0;
-	len_com = ft_strlen(data->argv[0]);
+	len_com = ft_strlen(data->com->argv[0]);
 	while (path[i] && path[i] != ':')
 		i++;
 	len = len_com + i + 1;
@@ -34,7 +34,7 @@ static char	*ft_get_path(char *path, t_shell *data)
 	str[j] = '/';
 	i = 0;
 	while (++j < len)
-		str[j] = data->argv[0][i++];
+		str[j] = data->com->argv[0][i++];
 	return (str);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 12:09:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/14 18:15:13 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/18 17:33:34 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_cd(t_shell *data)
 	char		*current_dir;
 	static char	*old_dir;
 
-	if (data->argv[1] && data->argv[2])
+	if (data->com->argv[1] && data->com->argv[2])
 		return ((void)printf("cd: too many arguments\n"));
 	current_dir = getcwd(NULL, 0);
 	if (!current_dir)
@@ -57,7 +57,7 @@ void	ft_cd(t_shell *data)
 		old_dir = current_dir;
 		ft_update_env_value("OLDPWD=", old_dir, data);
 	}
-	if (change_dir(data->argv[1], old_dir) == -1)
+	if (change_dir(data->com->argv[1], old_dir) == -1)
 	{
 		if (old_dir != current_dir)
 			free(current_dir);
