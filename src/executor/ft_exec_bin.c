@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_bin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 12:47:11 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/14 17:00:08 by albartol         ###   ########.fr       */
+/*   Updated: 2024/03/18 14:45:58 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	child_execve(t_shell *data, char *bin_path, char **envp)
 	if (id == 0)
 	{
 		signal(SIGINT, child_signal);
-		free(data->command);
+		// free(data->command);
 		if (execve(bin_path, data->argv, envp) == -1)
 			perror(NULL);
 		free_program(data);
