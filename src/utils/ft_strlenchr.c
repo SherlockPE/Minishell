@@ -21,5 +21,5 @@ size_t	ft_strlenchr(const char *str, char c)
 		i++;
 	if (str[i] == c)
 		return (i + 1);
-	return (0);
+	return (ft_strlen(str));
 }

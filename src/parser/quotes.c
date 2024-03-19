@@ -21,7 +21,5 @@ short	quotes(char c)
 		double_q ^= 1;
 	else if (c == '\'' && !double_q)
 		simple_q ^= 1;
-	if (double_q || simple_q)
-		return (1);
-	return (0);
+	return (double_q || simple_q);
 }

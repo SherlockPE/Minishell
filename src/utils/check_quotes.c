@@ -29,7 +29,5 @@ short	check_quotes(char *input)
 			simple_q ^= 1;
 		i++;
 	}
-	if (double_q || simple_q)
-		return (1);
-	return (0);
+	return (double_q || simple_q);
 }
