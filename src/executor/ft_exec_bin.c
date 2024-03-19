@@ -56,6 +56,30 @@ static void	child_execve(t_shell *data, char *bin_path, char **envp)
 	exit(EXIT_FAILURE);
 }
 
+static void	new_child_execve(t_shell *data, char *bin_path, char **envp)
+
+{
+	pid_t	id;
+	int		wstatus;
+
+	id = fork();
+	if (id == -1)
+		return (perror("fork"));
+	if (id == 0)
+	{
+		signal(SIGINT, child_signal);
+		if (execve(bin_path, data->com->argv, envp) == -1)
+			perror("execve");
+		free_program(data);
+		free(envp);
+		free(bin_path);
+		exit(EXIT_FAILURE);
+	}
+	waitpid(id, &wstatus, 0);
+	if (WIFEXITED(wstatus))
+		data->exit_code = WEXITSTATUS(wstatus);
+}
+
 // char	*temp;
 
 // if (*command == '.' && *command + 1 == '/')
@@ -79,16 +103,17 @@ void	ft_exec_bin(t_shell *data)
 
 	bin_path = ft_check_bin(data);
 	if (!bin_path)
-	{
-		printf("[%s] : command not found\n", data->com->argv[0]);
-		free_program(data);
-		exit(EXIT_FAILURE);
-	}
+		return((void)printf("[%s] : command not found\n", data->com->argv[0]));
 	envp = get_env(data);
 	if (!envp)
 	{
 		free(bin_path);
 		ft_exit_program(data, "malloc");
 	}
-	child_execve(data, bin_path, envp);
+	if (data->com->pid == 0)
+		child_execve(data, bin_path, envp);
+	else
+		new_child_execve(data, bin_path, envp);
+	free(envp);
+	free(bin_path);
 }

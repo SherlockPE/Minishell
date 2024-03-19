@@ -21,7 +21,7 @@ void	ft_minishell_loop(t_shell *data)
 		if (!data->command)
 			break ;
 		ft_parser(data);
-		free_input(data);
+		// free_input(data);
 	}
 	rl_clear_history();
 	printf("Exiting minishell\n");

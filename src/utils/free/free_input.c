@@ -22,4 +22,5 @@ void	free_input(t_shell *data)
 	data->command = 0;
 	// data->argv = 0;
 	data->pipes = 0;
+	data->com = 0;
 }

@@ -14,6 +14,19 @@
 
 // TODO: exit if pipe fails or not ?
 
+static void	ft_send_com(t_shell *data, char *com, t_com *com_struct)
+{
+	com = ft_strtrim(com, " ");
+	if (!com)
+		ft_exit_program(data, "malloc");
+	com_struct->argv = ft_split_quotes(com, ' ');
+	free(com);
+	if (!com_struct->argv)
+		ft_exit_program(data, "malloc");
+	data->com = com_struct;
+	ft_exec_command(data);
+}
+
 static void	child_process_pipe(t_shell *data, char *com)
 {
 	t_com 	child;
@@ -27,34 +40,32 @@ static void	child_process_pipe(t_shell *data, char *com)
 		return (perror("fork"));
 	if (child.pid == 0)
 	{
-		child.argv = ft_split_quotes(com, ' ');
-		if (!child.argv)
-			ft_exit_program(data, "malloc");
-		data->com = &child;
 		close(child.fd[0]);
 		i = dup2(child.fd[1], STDOUT_FILENO);
 		close(child.fd[1]);
 		if (i == -1)
 			ft_exit_program(data, "dup2");
-		ft_exec_command(data);
+		ft_send_com(data, com, &child);
+		free_program(data);
+		exit(EXIT_SUCCESS);
 	}
 	else
 	{
 		close(child.fd[1]);
 		i = dup2(child.fd[0], STDIN_FILENO);
 		close(child.fd[0]);
-		if (i == -1)
-			return (perror("dup2"));
 		waitpid(child.pid, &wstatus, 0);
 		if (WIFEXITED(wstatus))
 			data->exit_code = WEXITSTATUS(wstatus);
+		if (i == -1)
+			return (perror("dup2"));
 	}
 }
 
 
 static void	child_process(t_shell *data, char *com)
 {
-	t_com child;
+	t_com	child;
 	int		wstatus;
 
 	child.pid = fork();
@@ -62,11 +73,9 @@ static void	child_process(t_shell *data, char *com)
 		return (perror("fork"));
 	if (child.pid == 0)
 	{
-		child.argv = ft_split_quotes(com, ' ');
-		if (!child.argv)
-			ft_exit_program(data, "malloc");
-		data->com = &child;
-		ft_exec_command(data);
+		ft_send_com(data, com, &child);
+		free_program(data);
+		exit(EXIT_SUCCESS);
 	}
 	else
 	{
@@ -79,7 +88,14 @@ static void	child_process(t_shell *data, char *com)
 static void	ft_pipex(t_shell *data)
 {
 	int	i;
-
+	int old_stdin;
+	
+	old_stdin = dup(STDIN_FILENO);
+	if (old_stdin == -1)
+	{
+		free_input(data);
+		return (perror("dup"));
+	}
 	i = 0;
 	while (data->pipes[i + 1])
 	{
@@ -87,8 +103,21 @@ static void	ft_pipex(t_shell *data)
 		i++;
 	}
 	child_process(data, data->pipes[i]);
+	free_input(data);
+	i = dup2(old_stdin, STDIN_FILENO);
+	close(old_stdin);
+	if (i == -1)
+		perror("dup2");
 }
 
+static void	ft_exec_one(t_shell *data)
+{
+	t_com	parent;
+
+	parent.pid = 1;
+	ft_send_com(data, data->pipes[0], &parent);
+	free_input(data);
+}
 
 void	ft_parser(t_shell *data)
 {
@@ -117,5 +146,8 @@ void	ft_parser(t_shell *data)
 	// if (!data->command)
 	// 	ft_exit_program(data, "malloc");
 	//	ft_exec_command(data);
-	ft_pipex(data);
+	if (data->pipes[1])
+		ft_pipex(data);
+	else
+		ft_exec_one(data);
 }
