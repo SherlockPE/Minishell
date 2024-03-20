@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:58:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/12 14:27:33 by albartol         ###   ########.fr       */
+/*   Updated: 2024/03/20 17:06:56 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	main(int argc, char **argv, char **env)
 		return (EXIT_SUCCESS);
 	ft_minishell_init(&data, env);
 	ft_minishell_loop(&data);
-	ft_lstclear(&data.env, free);
+	// ft_lstclear(&data.env, free);
+	free_program(&data);
+	printf("Exiting minishell\n");
 	return (data.exit_code);
 }

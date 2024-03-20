@@ -6,7 +6,7 @@
 #    By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 18:53:11 by albartol          #+#    #+#              #
-#    Updated: 2024/03/18 16:19:43 by albartol         ###   ########.fr        #
+#    Updated: 2024/03/20 16:04:49 by albartol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CC := gcc
 # CFLAGS := -Wall -Wextra -Werror -O3
 # CFLAGS := -Wall -Wextra -fsanitize=address -g3
 # CFLAGS := -Wall -Wextra -ggdb
-CFLAGS := -Wall -Wextra
+CFLAGS := -Wall -Wextra -Werror
 
 LIBS := -lreadline -Llib/libft -lft
 

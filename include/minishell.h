@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:58:51 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/18 17:32:10 by albartol         ###   ########.fr       */
+/*   Updated: 2024/03/20 16:02:57 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ struct s_shell
 	char	**pipes;
 	t_com	*com;
 	char	*prompt;
-	short	exit_code;
+	char	exit_code;
 };
 
 /* ======== MAIN ======== */

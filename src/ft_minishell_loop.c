@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell_loop.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 12:09:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/16 11:21:00 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/20 17:06:15 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ void	ft_minishell_loop(t_shell *data)
 		ft_parser(data);
 		// free_input(data);
 	}
-	rl_clear_history();
-	printf("Exiting minishell\n");
+	// rl_clear_history();
+	// printf("Exiting minishell\n");
 }

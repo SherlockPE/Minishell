@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:27:18 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/18 18:00:32 by albartol         ###   ########.fr       */
+/*   Updated: 2024/03/20 16:47:29 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	ft_send_com(t_shell *data, char *com, t_com *com_struct)
 static void	child_process_pipe(t_shell *data, char *com)
 {
 	t_com 	child;
-	int		wstatus;
+	// int		wstatus;
 	int		i;
 
 	if (pipe(child.fd) == -1)
@@ -54,9 +54,9 @@ static void	child_process_pipe(t_shell *data, char *com)
 		close(child.fd[1]);
 		i = dup2(child.fd[0], STDIN_FILENO);
 		close(child.fd[0]);
-		waitpid(child.pid, &wstatus, 0);
-		if (WIFEXITED(wstatus))
-			data->exit_code = WEXITSTATUS(wstatus);
+		// waitpid(child.pid, &wstatus, 0);
+		// if (WIFEXITED(wstatus))
+		// 	data->exit_code = WEXITSTATUS(wstatus);
 		if (i == -1)
 			return (perror("dup2"));
 	}
@@ -66,7 +66,7 @@ static void	child_process_pipe(t_shell *data, char *com)
 static void	child_process(t_shell *data, char *com)
 {
 	t_com	child;
-	int		wstatus;
+	// int		wstatus;
 
 	child.pid = fork();
 	if (child.pid == -1)
@@ -77,18 +77,19 @@ static void	child_process(t_shell *data, char *com)
 		free_program(data);
 		exit(EXIT_SUCCESS);
 	}
-	else
-	{
-		waitpid(child.pid, &wstatus, 0);
-		if (WIFEXITED(wstatus))
-			data->exit_code = WEXITSTATUS(wstatus);
-	}
+	// else
+	// {
+	// 	waitpid(child.pid, &wstatus, 0);
+	// 	if (WIFEXITED(wstatus))
+	// 		data->exit_code = WEXITSTATUS(wstatus);
+	// }
 }
 
 static void	ft_pipex(t_shell *data)
 {
 	int	i;
 	int old_stdin;
+	int	wstatus;
 	
 	old_stdin = dup(STDIN_FILENO);
 	if (old_stdin == -1)
@@ -106,6 +107,11 @@ static void	ft_pipex(t_shell *data)
 	free_input(data);
 	i = dup2(old_stdin, STDIN_FILENO);
 	close(old_stdin);
+	while (waitpid(-1, &wstatus, 0) != -1 && errno != ECHILD)
+	{
+		if (WIFEXITED(wstatus))
+			data->exit_code = WEXITSTATUS(wstatus);
+	}
 	if (i == -1)
 		perror("dup2");
 }

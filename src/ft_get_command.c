@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_command.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 11:48:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/15 17:11:28 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/20 17:04:57 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,16 @@ static void	get_command(t_shell *data)
 	while (check_quotes(data->command))
 	{
 		aux = data->command;
-		data->command = ft_strjoin(data->command, "\n");
+		data->command = ft_charjoin(data->command, '\n');
 		free(aux);
 		if (!data->command)
 			ft_exit_program(data, "malloc");
-		new_input = readline(">");
+		new_input = readline("> ");
+		// (void)write(0, "> ", 2);
+		// new_input = get_next_line(0);
 		if (!new_input)
-			return ;
+			return ((void)printf("unexpected EOF while looking for \"\'\n"));
+		// printf("unexpected EOF while looking for matching `\"\'\n");
 		aux = data->command;
 		data->command = ft_strjoin(data->command, new_input);
 		free(aux);

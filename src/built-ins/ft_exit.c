@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 13:09:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/18 17:41:18 by albartol         ###   ########.fr       */
+/*   Updated: 2024/03/20 16:12:23 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	check_num(const char *num)
 	}
 	if (!ft_isdigit(num[i]))
 		return (invalid_argv(num));
-	if (i > 11 || (ft_atol(num) > INT_MAX || ft_atol(num) < INT_MIN))
+	if (i > 20 || (ft_atoll(num) > LONG_MAX || ft_atoll(num) < LONG_MIN))
 		return (invalid_argv(num));
 	return (1);
 }
@@ -47,8 +47,11 @@ void	ft_exit(t_shell *data)
 		printf("exit: too many arguments\n");
 	else
 	{
-		if (data->com->argv[1] && check_num(data->com->argv[1]))
-			data->exit_code = ft_atoi(data->com->argv[1]);
+		if (data->com->argv[1])
+		{
+			check_num(data->com->argv[1]);
+			data->exit_code = ft_atol(data->com->argv[1]);
+		}
 		free_program(data);
 		exit(data->exit_code);
 	}
