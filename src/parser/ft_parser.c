@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:27:18 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/18 18:00:32 by albartol         ###   ########.fr       */
+/*   Updated: 2024/03/20 10:39:06 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ void	ft_parser(t_shell *data)
 	// data->argv = ft_split_quotes(data->command, ' ');
 	// if (!data->argv)
 	// 	ft_exit_program(data, "malloc");
+	
 	data->pipes = ft_split_pipes(data->command);
 	if (!data->pipes)
 		ft_exit_program(data, "malloc");

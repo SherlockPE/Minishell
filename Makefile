@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+         #
+#    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 18:53:11 by albartol          #+#    #+#              #
-#    Updated: 2024/03/18 16:19:43 by albartol         ###   ########.fr        #
+#    Updated: 2024/03/20 10:31:56 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,9 @@ UNAME := $(shell uname)
 CC := gcc
 
 # CFLAGS := -Wall -Wextra -Werror -O3
-# CFLAGS := -Wall -Wextra -fsanitize=address -g3
+CFLAGS := -Wall -Wextra -fsanitize=address -g3
 # CFLAGS := -Wall -Wextra -ggdb
-CFLAGS := -Wall -Wextra
+# CFLAGS := -Wall -Wextra
 
 LIBS := -lreadline -Llib/libft -lft
 
