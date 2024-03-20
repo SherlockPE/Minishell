@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_bin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 12:47:11 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/18 17:50:11 by albartol         ###   ########.fr       */
+/*   Updated: 2024/03/20 20:52:39 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char	**get_env(t_shell *data)
 	return (envp);
 }
 
-static void	child_signal(int signal)
+ static void	child_signal(int signal)
 {
 	if (signal == SIGINT)
 	{
@@ -68,18 +68,50 @@ static void	new_child_execve(t_shell *data, char *bin_path, char **envp)
 	if (id == 0)
 	{
 		signal(SIGINT, child_signal);
+		signal(SIGQUIT, child_signal);
 		if (execve(bin_path, data->com->argv, envp) == -1)
 			perror("execve");
-		free_program(data);
+			free_program(data);
 		free(envp);
 		free(bin_path);
 		exit(EXIT_FAILURE);
 	}
+	signal(SIGINT, SIG_IGN); //SIG_IGN ignores the first parameter of the signal
 	waitpid(id, &wstatus, 0);
 	if (WIFEXITED(wstatus))
 		data->exit_code = WEXITSTATUS(wstatus);
 }
 
+// static void	new_child_execve(t_shell *data, char *bin_path, char **envp)
+
+// {
+// 	pid_t	id;
+// 	int		wstatus;
+
+// 	id = fork();
+// 	if (id == -1)
+// 		return (perror("fork"));
+// 	if (id == 0)
+// 	{
+// 		signal(SIGINT, child_signal);
+// 		signal(SIGQUIT, child_signal);
+// 		if (execve(bin_path, data->com->argv, envp) == -1)
+// 		{
+// 			free_program(data);
+// 			free(envp);
+// 			free(bin_path);
+// 			perror("execve");
+// 			exit(EXIT_FAILURE);
+// 		}
+// 		free_program(data);
+// 		free(envp);
+// 		free(bin_path);
+// 		exit(EXIT_SUCCESS);
+// 	}
+// 	waitpid(id, &wstatus, 0);
+// 	if (WIFEXITED(wstatus))
+// 		data->exit_code = WEXITSTATUS(wstatus);
+// }
 // char	*temp;
 
 // if (*command == '.' && *command + 1 == '/')
@@ -114,6 +146,9 @@ void	ft_exec_bin(t_shell *data)
 		child_execve(data, bin_path, envp);
 	else
 		new_child_execve(data, bin_path, envp);
+	// {
+	// 	printf("entre\n");
+	// }
 	free(envp);
 	free(bin_path);
 }
