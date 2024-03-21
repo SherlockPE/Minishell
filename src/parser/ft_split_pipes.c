@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 16:18:14 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/18 17:01:17 by albartol         ###   ########.fr       */
+/*   Updated: 2024/03/21 18:00:16 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static int	ft_splits(char *str)
 	splits = 1;
 	while (str[i])
 	{
-		if (!quotes(str[i]) && str[i] == '|' && str[i + 1] != '|' && 
-			(i > 0 && str[i - 1] != '|'))
+		if (!quotes(str[i]) && str[i] == '|' && str[i + 1] != '|'
+			&& (i > 0 && str[i - 1] != '|'))
 			splits++;
 		i++;
 	}
@@ -36,8 +36,8 @@ static int	ft_split_len(char const *str)
 	i = 0;
 	while (str[i])
 	{
-		if (!quotes(str[i]) && str[i] == '|' && str[i + 1] != '|' && 
-			(i > 0 && str[i - 1] != '|'))
+		if (!quotes(str[i]) && str[i] == '|' && str[i + 1] != '|'
+			&& (i > 0 && str[i - 1] != '|'))
 			return (i);
 		i++;
 	}
