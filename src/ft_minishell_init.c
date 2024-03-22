@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell_init.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:25:49 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/18 17:34:43 by albartol         ###   ########.fr       */
+/*   Updated: 2024/03/22 12:05:44 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	ft_minishell_init(t_shell *data, char **env)
 	data->prompt = 0;
 	data->com = 0;
 	data->pipes = 0;
+	data->redir = 0;
 	while (env[i])
 	{
 		new_env = get_content(env[i]);

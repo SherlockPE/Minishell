@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:27:18 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/20 16:47:29 by albartol         ###   ########.fr       */
+/*   Updated: 2024/03/22 12:55:57 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 
 static void	ft_send_com(t_shell *data, char *com, t_com *com_struct)
 {
+	int	fd;
+
 	com = ft_strtrim(com, " ");
 	if (!com)
 		ft_exit_program(data, "malloc");
@@ -24,7 +26,17 @@ static void	ft_send_com(t_shell *data, char *com, t_com *com_struct)
 	if (!com_struct->argv)
 		ft_exit_program(data, "malloc");
 	data->com = com_struct;
+	
+	if (data->redir >= 1)
+	{
+		fd = create_archive(data);
+		if (fd == -1)
+			return ((void)printf("Error creating fd\n"));
+		dup2(STDOUT_FILENO, fd);
+	}
 	ft_exec_command(data);
+	if (data->redir >= 1)
+		close(fd);
 }
 
 static void	child_process_pipe(t_shell *data, char *com)
@@ -127,7 +139,7 @@ static void	ft_exec_one(t_shell *data)
 
 void	ft_parser(t_shell *data)
 {
-	// int	i;
+	char **input;	
 
 	ft_trim_input(data);
 	if (ft_validate_input(data->command, '|') || 
@@ -135,25 +147,98 @@ void	ft_parser(t_shell *data)
 		return ;
 	if (*data->command)
 		add_history(data->command);
-	// data->argv = ft_split_quotes(data->command, ' ');
-	// if (!data->argv)
-	// 	ft_exit_program(data, "malloc");
-	data->pipes = ft_split_pipes(data->command);
-	if (!data->pipes)
-		ft_exit_program(data, "malloc");
-	// i = 0;
-	// while (data->pipes[i])
+	
+	
+	check_redirection(data);
+	if (data->redir == -1)
+	{
+		printf("syntax error near unexpected token `>'\n");
+		return (free_input(data));
+	}
+	else if (data->redir == 1)//IF THERE'S A '>'
+	{
+		input = ft_split(data->command, '>');
+		data->pipes = ft_split_pipes(input[0]);
+		if (!data->pipes)
+			ft_exit_program(data, "malloc");
+		data->archive_name = input[1];
+	}
+	// else if (data->redir == 1)//IF THERE'S A '>>'
 	// {
-	// 	if (ft_validate_input(data->pipes[i]))
-	// 		return ;
+	// 	input = ft_split(data->command, '>>');
+	// 	data->pipes = ft_split_pipes(input[0]);
+	// 	if (!data->pipes)
+	// 		ft_exit_program(data, "malloc");
+	// 	data->archive_name = input[1];
 	// }
-	// free(data->command);
-	// data->command = array_to_str(data->argv, ' ');
-	// if (!data->command)
-	// 	ft_exit_program(data, "malloc");
-	//	ft_exec_command(data);
+	else
+	{
+		//Split pipes
+		data->pipes = ft_split_pipes(data->command);
+		if (!data->pipes)
+			ft_exit_program(data, "malloc");
+	}
+
+	//print input
+	int i = 0;
+	while (data->pipes[i])
+	{
+		printf("[%s]\n", data->pipes[i]);
+		i++;
+	}
+	//print archive name
+	if (data->redir >= 1)
+		printf("Archive name[%s]\n", data->archive_name);
+	//exec
 	if (data->pipes[1])
 		ft_pipex(data);
 	else
 		ft_exec_one(data);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// data->argv = ft_split_quotes(data->command, ' ');
+// if (!data->argv)
+// 	ft_exit_program(data, "malloc");
+// i = 0;
+// while (data->pipes[i])
+// {
+// 	if (ft_validate_input(data->pipes[i]))
+// 		return ;
+// }
+// free(data->command);
+// data->command = array_to_str(data->argv, ' ');
+// if (!data->command)
+// 	ft_exit_program(data, "malloc");
+//	ft_exec_command(data);

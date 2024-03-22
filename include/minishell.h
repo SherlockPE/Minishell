@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:58:51 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/20 16:02:57 by albartol         ###   ########.fr       */
+/*   Updated: 2024/03/22 12:57:27 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,9 @@ struct s_com
 struct s_shell
 {
 	t_list	*env;
+	int		redir;
 	char	*command;
+	char	*archive_name;
 	char	**pipes;
 	t_com	*com;
 	char	*prompt;
@@ -137,6 +139,12 @@ short	ft_validate_input(char *com, char c);
 char	**ft_split_quotes(char *com, char c);
 char	**ft_split_pipes(char *com);
 short	quotes(char c);
+/* ========================== */
+
+
+/* ======== REDIRECTION ======== */
+void	check_redirection(t_shell *data);
+int		create_archive(t_shell *data);
 /* ========================== */
 
 /* ======== SIGNALS ======== */
