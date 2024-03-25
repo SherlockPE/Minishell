@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:58:51 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/22 12:57:27 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/25 17:36:59 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@
 typedef struct s_env	t_env;
 typedef struct s_shell	t_shell;
 typedef struct s_com	t_com;
+typedef struct s_redir	t_redir;
 
 struct s_env
 {
@@ -84,21 +85,32 @@ struct s_env
 	char	*value;
 };
 
+struct s_redir
+{
+	char	*com_argv;
+	short	type_redir;
+	char	*archive_name;
+	int		archive_fd;
+};
+
+
 struct s_com
 {
-	pid_t	pid;
+	char	*initial_command;
+	t_redir	*redirection;
 	char	**argv;
+	pid_t	pid;
 	int		fd[2];
 };
 
 struct s_shell
 {
 	t_list	*env;
-	int		redir;
-	char	*command;
-	char	*archive_name;
+	char	*input;
+
 	char	**pipes;
 	t_com	*com;
+
 	char	*prompt;
 	char	exit_code;
 };
