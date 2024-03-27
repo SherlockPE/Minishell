@@ -39,7 +39,7 @@ void	ft_trim_input(t_shell *data)
 
 	i = 0;
 	j = 0;
-	com = data->command;
+	com = data->input;
 	str = ft_calloc(ft_count_len(com) + 1, 1);
 	if (!str)
 		ft_exit_program(data, "malloc");
@@ -55,6 +55,6 @@ void	ft_trim_input(t_shell *data)
 	free(str);
 	if (!com)
 		ft_exit_program(data, "malloc");
-	free(data->command);
-	data->command = com;
+	free(data->input);
+	data->input = com;
 }

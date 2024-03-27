@@ -16,7 +16,7 @@
 /*	Function gets the input for user using the readline function.
 	The function will asking for more inputs with a \n
 	if the input its not okay*/
-static void	get_command(t_shell *data)
+/* static void	get_command(t_shell *data)
 {
 	char	*aux;
 	char	*new_input;
@@ -49,7 +49,7 @@ void	ft_get_input(t_shell *data)
 	ft_update_prompt(data);
 	get_command(data);
 }
-
+ */
 /* static short	parse_eof(char *eof)
 {
 	size_t			i;
@@ -116,3 +116,74 @@ static short	check_eof(char *input)
 			ft_exit_program(data, "malloc");
 	}
 } */
+
+/* static void	get_command(t_shell *data)
+{
+	char	*aux;
+	char	*new_input;
+
+	data->command = readline(data->prompt);
+	free(data->prompt);
+	if (!data->command)
+		return ;
+	while (check_quotes(data->command))
+	{
+		aux = data->command;
+		data->command = ft_charjoin(data->command, '\n');
+		free(aux);
+		if (!data->command)
+			ft_exit_program(data, "malloc");
+		new_input = readline("> ");
+		// (void)write(0, "> ", 2);
+		// new_input = get_next_line(0);
+		if (!new_input)
+			return ((void)printf("unexpected EOF while looking for \"\'\n"));
+		// printf("unexpected EOF while looking for matching `\"\'\n");
+		aux = data->command;
+		data->command = ft_strjoin(data->command, new_input);
+		free(aux);
+		if (!data->command)
+			ft_exit_program(data, "malloc");
+	}
+}
+ */
+
+void	new_input(t_shell *data)
+{
+	char	*aux;
+	char	*new_input;
+
+	while (check_quotes(data->input))
+	{
+		aux = data->input;
+		data->input = ft_charjoin(data->input, '\n');
+		free(aux);
+		if (!data->input)
+			ft_exit_program(data, "malloc");
+		new_input = readline("> ");
+		if (!new_input)
+		{
+			free_input(data);
+			data->input = ft_calloc(1, 1);
+			if (!data->input)
+				ft_exit_program(data, "malloc");
+			return ((void)printf("unexpected EOF while looking for \"\'\n"));
+		}
+		aux = data->input;
+		data->input = ft_strjoin(data->input, new_input);
+		free(aux);
+		if (!data->input)
+			ft_exit_program(data, "malloc");
+	}
+}
+
+void	ft_get_input(t_shell *data)
+{
+	ft_update_prompt(data);
+	data->input = readline(data->prompt);
+	free(data->prompt);
+	if (!data->input)
+		return ;
+	if (check_quotes(data->input))
+		new_input(data);
+}

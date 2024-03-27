@@ -88,29 +88,27 @@ struct s_env
 struct s_redir
 {
 	char	*com_argv;
-	short	type_redir;
-	char	*archive_name;
-	int		archive_fd;
+	char	*file_name;
+	int		fd;
+	int		type;
 };
-
 
 struct s_com
 {
-	char	*initial_command;
-	t_redir	*redirection;
+	char	*command;
+	t_redir	*redir;
 	char	**argv;
-	pid_t	pid;
 	int		fd[2];
+	pid_t	pid;
 };
 
 struct s_shell
 {
 	t_list	*env;
-	t_com	*com;
-
+	char	*prompt;
 	char	*input;
 	char	**pipes;
-	char	*prompt;
+	t_com	*com;
 	char	exit_code;
 };
 
@@ -167,6 +165,7 @@ void	ft_handle_signals(void);
 char	*ft_get_env_value(char *name, t_list *env);
 void	ft_set_env_value(const char *content, t_shell *data);
 void	ft_update_env_value(const char *name, const char *value, t_shell *data);
+void	ft_init_env(t_shell *data, char **env);
 
 //array
 int		array_len(char **array);
