@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:58:51 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/25 17:36:59 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/27 15:25:59 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,11 +106,10 @@ struct s_com
 struct s_shell
 {
 	t_list	*env;
-	char	*input;
-
-	char	**pipes;
 	t_com	*com;
 
+	char	*input;
+	char	**pipes;
 	char	*prompt;
 	char	exit_code;
 };
