@@ -6,7 +6,7 @@
 #    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 18:53:11 by albartol          #+#    #+#              #
-#    Updated: 2024/03/28 14:05:07 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/03/28 17:23:37 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,8 @@ BUILTS :=	built-ins/ft_pwd.c \
 			built-ins/ft_unset.c
 
 # PARSER
-PARSER :=	parser/ft_parser.c \
+PARSER :=	parser/ft_expansor.c \
+			parser/ft_parser.c \
 			parser/ft_split_quotes.c \
 			parser/ft_split_pipes.c \
 			parser/quotes.c \

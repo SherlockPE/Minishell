@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 11:38:28 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/21 17:56:24 by albartol         ###   ########.fr       */
+/*   Updated: 2024/03/28 18:03:11 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_echo(t_shell *data)
 	int	i;
 
 	if (!data->com->argv[1])
-		return ;
+		return ((void)printf("\n"));
 	i = 1;
 	if (!ft_strncmp(data->com->argv[1], "-n", 2))
 	{
