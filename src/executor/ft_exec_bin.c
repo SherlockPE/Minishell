@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_bin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 12:47:11 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/21 18:04:17 by albartol         ###   ########.fr       */
+/*   Updated: 2024/03/28 18:53:48 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,22 @@ void	ft_exec_bin(t_shell *data)
 
 	bin_path = ft_check_bin(data);
 	if (!bin_path)
-		return ((void)printf("[%s] : command not found\n", data->com->argv[0]));
+	{
+		if ((data->com->argv[0][0] == '.' && data->com->argv[0][1] == '/') 
+			|| data->com->argv[0][0] == '/')
+		{
+			bin_path = ft_strdup(data->com->argv[0]);
+			if (!bin_path)
+				ft_exit_program(data, "malloc");
+		}
+		else
+		{
+			ft_putstr_fd(data->com->argv[0], 2);	
+			ft_putstr_fd(" : command not found\n", 2);
+			return ;
+		}
+		// return ((void)printf("[%s] : command not found\n", data->com->argv[0]));
+	}
 	envp = get_env(data);
 	if (!envp)
 	{
@@ -141,7 +156,7 @@ void	ft_exec_bin(t_shell *data)
 	}
 	if (data->com->pid == 0)
 		child_execve(data, bin_path, envp);
-	else
+	else if (bin_path)
 		new_child_execve(data, bin_path, envp);
 	free(envp);
 	free(bin_path);

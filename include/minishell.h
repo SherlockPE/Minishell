@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:58:51 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/28 17:22:53 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/28 18:17:39 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,6 @@ char	**ft_split_quotes(char *com, char c);
 char	**ft_split_pipes(char *com);
 short	quotes(char c);
 /* ========================== */
-
 
 /* ======== REDIRECTION ======== */
 void	check_redirection(t_shell *data);
