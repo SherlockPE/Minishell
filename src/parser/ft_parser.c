@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:27:18 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/22 12:55:57 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/28 14:11:11 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 static void	ft_send_com(t_shell *data, char *com, t_com *com_struct)
 {
-	int	fd;
+	// int	fd;
 
 	com = ft_strtrim(com, " ");
 	if (!com)
@@ -27,16 +27,16 @@ static void	ft_send_com(t_shell *data, char *com, t_com *com_struct)
 		ft_exit_program(data, "malloc");
 	data->com = com_struct;
 	
-	if (data->redir >= 1)
-	{
-		fd = create_archive(data);
-		if (fd == -1)
-			return ((void)printf("Error creating fd\n"));
-		dup2(STDOUT_FILENO, fd);
-	}
+	// if (data->redir >= 1)
+	// {
+	// 	fd = create_archive(data);
+	// 	if (fd == -1)
+	// 		return ((void)printf("Error creating fd\n"));
+	// 	dup2(STDOUT_FILENO, fd);
+	// }
 	ft_exec_command(data);
-	if (data->redir >= 1)
-		close(fd);
+	// if (data->redir >= 1)
+	// 	close(fd);
 }
 
 static void	child_process_pipe(t_shell *data, char *com)
@@ -45,6 +45,7 @@ static void	child_process_pipe(t_shell *data, char *com)
 	// int		wstatus;
 	int		i;
 
+	child.redir = 0;
 	if (pipe(child.fd) == -1)
 		return (perror("pipe"));
 	child.pid = fork();
@@ -80,6 +81,7 @@ static void	child_process(t_shell *data, char *com)
 	t_com	child;
 	// int		wstatus;
 
+	child.redir = 0;
 	child.pid = fork();
 	if (child.pid == -1)
 		return (perror("fork"));
@@ -133,62 +135,63 @@ static void	ft_exec_one(t_shell *data)
 	t_com	parent;
 
 	parent.pid = 1;
+	parent.redir = 0;
 	ft_send_com(data, data->pipes[0], &parent);
 	free_input(data);
 }
 
 void	ft_parser(t_shell *data)
 {
-	char **input;	
+	// char **input;	
 
 	ft_trim_input(data);
-	if (ft_validate_input(data->command, '|') || 
-			ft_validate_input(data->command, '&'))
+	if (ft_validate_input(data->input, '|') || 
+			ft_validate_input(data->input, '&'))
 		return ;
-	if (*data->command)
-		add_history(data->command);
+	if (*data->input)
+		add_history(data->input);
 	
 	
-	check_redirection(data);
-	if (data->redir == -1)
-	{
-		printf("syntax error near unexpected token `>'\n");
-		return (free_input(data));
-	}
-	else if (data->redir == 1)//IF THERE'S A '>'
-	{
-		input = ft_split(data->command, '>');
-		data->pipes = ft_split_pipes(input[0]);
-		if (!data->pipes)
-			ft_exit_program(data, "malloc");
-		data->archive_name = input[1];
-	}
-	// else if (data->redir == 1)//IF THERE'S A '>>'
+	// check_redirection(data);
+	// if (data->redir == -1)
 	// {
-	// 	input = ft_split(data->command, '>>');
+	// 	printf("syntax error near unexpected token `>'\n");
+	// 	return (free_input(data));
+	// }
+	// else if (data->redir == 1)//IF THERE'S A '>'
+	// {
+	// 	input = ft_split(data->input, '>');
 	// 	data->pipes = ft_split_pipes(input[0]);
 	// 	if (!data->pipes)
 	// 		ft_exit_program(data, "malloc");
 	// 	data->archive_name = input[1];
 	// }
-	else
-	{
-		//Split pipes
-		data->pipes = ft_split_pipes(data->command);
-		if (!data->pipes)
-			ft_exit_program(data, "malloc");
-	}
+	// // else if (data->redir == 1)//IF THERE'S A '>>'
+	// // {
+	// // 	input = ft_split(data->input, '>>');
+	// // 	data->pipes = ft_split_pipes(input[0]);
+	// // 	if (!data->pipes)
+	// // 		ft_exit_program(data, "malloc");
+	// // 	data->archive_name = input[1];
+	// // }
+	// else
+	// {
+	// 	//Split pipes
+	// }
+	data->pipes = ft_split_pipes(data->input);
+	if (!data->pipes)
+		ft_exit_program(data, "malloc");
 
 	//print input
-	int i = 0;
-	while (data->pipes[i])
-	{
-		printf("[%s]\n", data->pipes[i]);
-		i++;
-	}
-	//print archive name
-	if (data->redir >= 1)
-		printf("Archive name[%s]\n", data->archive_name);
+	// int i = 0;
+	// while (data->pipes[i])
+	// {
+	// 	printf("[%s]\n", data->pipes[i]);
+	// 	i++;
+	// }
+	// //print archive name
+	// if (data->redir >= 1)
+	// 	printf("Archive name[%s]\n", data->archive_name);
 	//exec
 	if (data->pipes[1])
 		ft_pipex(data);

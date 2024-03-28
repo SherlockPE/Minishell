@@ -6,7 +6,7 @@
 #    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 18:53:11 by albartol          #+#    #+#              #
-#    Updated: 2024/03/22 12:57:01 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/03/28 14:05:07 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ UTILS_DIR	:= utils
 SOURCES :=	minishell.c \
 			ft_minishell_init.c \
 			ft_minishell_loop.c \
-			ft_get_command.c \
+			ft_get_input.c \
 			ft_exec_command.c
 
 # UTILS
@@ -52,6 +52,7 @@ UTILS_FREE :=	free/free_input.c \
 
 UTILS_ENV :=	env/ft_get_env_value.c \
 				env/ft_set_env_value.c \
+				env/ft_init_env.c \
 				env/ft_update_env_value.c
 
 UTILS_ARR :=	array/array_len.c \
