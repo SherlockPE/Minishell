@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:27:18 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/28 18:15:10 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/28 19:47:26 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,8 +140,11 @@ void	ft_parser(t_shell *data)
 	if (!data->pipes)
 		ft_exit_program(data, "malloc");
 
-	//Parser de los pipes
+	//Expansión de variables
 	ft_expansor(data);
+
+	//Expansión de variables
+	ft_check_redirection(data);
 
 	//Executor
 	if (data->pipes[1])
