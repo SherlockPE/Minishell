@@ -16,5 +16,6 @@ void	ft_exit_program(t_shell *data, char *message)
 {
 	free_program(data);
 	perror(message);
-	exit(errno);
+	exit(EXIT_FAILURE);
+	// exit(errno);
 }

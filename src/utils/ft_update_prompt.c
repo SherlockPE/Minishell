@@ -19,13 +19,13 @@ void	ft_update_prompt(t_shell *data)
 
 	current_dir = getcwd(NULL, 0);
 	if (!current_dir)
-		ft_exit_program(data, NULL);
+		ft_exit_program(data, "getcwd");
 	text = ft_strjoin(PROMPT, current_dir);
 	free(current_dir);
 	if (!text)
-		ft_exit_program(data, NULL);
+		ft_exit_program(data, "malloc");
 	data->prompt = ft_strjoin(text, DELIMITATOR);
 	free(text);
 	if (!data->prompt)
-		ft_exit_program(data, NULL);
+		ft_exit_program(data, "malloc");
 }
