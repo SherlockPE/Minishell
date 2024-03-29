@@ -12,7 +12,6 @@
 
 #include <minishell.h>
 
-
 /*	Function gets the input for user using the readline function.
 	The function will asking for more inputs with a \n
 	if the input its not okay*/
