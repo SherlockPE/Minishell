@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:58:51 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/29 14:04:34 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/29 17:36:21 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ struct s_env
 
 struct s_redir
 {
-	char	*com_argv;
+	char	**com_argv;
 	char	*file_name;
 	int		fd;
 	int		type;
@@ -158,7 +158,7 @@ short	quotes(char c);
 
 /* ======== REDIRECTION ======== */
 void	ft_check_redirection(t_shell *data);
-int		ft_create_archive(t_shell *data);
+void		ft_create_archive(t_shell *data);
 /* ========================== */
 
 /* ======== SIGNALS ======== */

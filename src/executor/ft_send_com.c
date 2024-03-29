@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 14:00:01 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/29 14:00:23 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/29 16:23:35 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,9 @@ void	ft_send_com(t_shell *data, char *com, t_com *com_struct)
 	if (!com_struct->argv)
 		ft_exit_program(data, "malloc");
 	data->com = com_struct;
+
+	//Check redirections
+	ft_check_redirection(data);
+
 	ft_exec_command(data);
 }
