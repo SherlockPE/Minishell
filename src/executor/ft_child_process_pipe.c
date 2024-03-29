@@ -14,9 +14,9 @@
 
 void	child_process_pipe(t_shell *data, char *com)
 {
-	t_com 	child;
-	// int		wstatus;
+	t_com	child;
 	int		i;
+	// int		wstatus;
 
 	child.redir = 0;
 	if (pipe(child.fd) == -1)

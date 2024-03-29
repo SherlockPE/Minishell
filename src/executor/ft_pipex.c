@@ -15,7 +15,7 @@
 void	ft_pipex(t_shell *data)
 {
 	int	i;
-	int old_stdin;
+	int	old_stdin;
 	int	wstatus;
 
 	old_stdin = dup(STDIN_FILENO);
@@ -26,10 +26,7 @@ void	ft_pipex(t_shell *data)
 	}
 	i = 0;
 	while (data->pipes[i + 1])
-	{
-		child_process_pipe(data, data->pipes[i]);
-		i++;
-	}
+		child_process_pipe(data, data->pipes[i++]);
 	child_process(data, data->pipes[i]);
 	free_input(data);
 	i = dup2(old_stdin, STDIN_FILENO);

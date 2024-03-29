@@ -158,7 +158,7 @@ short	quotes(char c);
 
 /* ======== REDIRECTION ======== */
 void	ft_check_redirection(t_shell *data);
-void		ft_create_archive(t_shell *data);
+void	ft_create_archive(t_shell *data);
 /* ========================== */
 
 /* ======== SIGNALS ======== */
