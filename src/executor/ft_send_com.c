@@ -1,40 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_redirection.c                             :+:      :+:    :+:   */
+/*   ft_send_com.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/22 10:12:50 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/29 14:09:08 by flopez-r         ###   ########.fr       */
+/*   Created: 2024/03/29 14:00:01 by flopez-r          #+#    #+#             */
+/*   Updated: 2024/03/29 14:00:23 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-// int	checker(char *command)
-// {
-	
-// }
-
-// //-1 does not found a '>'
-void	ft_check_redirection(t_shell *data)
+void	ft_send_com(t_shell *data, char *com, t_com *com_struct)
 {
-	int		i;
-	int		j;
-	// char	*pos;
-
-	i = 0;
-
-	while (data->pipes[i])
-	{
-		j = 0;
-		while (data->pipes[i][j])
-		{
-			if (data->pipes[i][j] == '>')
-				
-			j++;
-		}
-		i++;
-	}
+	com = ft_strtrim(com, " ");
+	if (!com)
+		ft_exit_program(data, "malloc");
+	com_struct->argv = ft_split_quotes(com, ' ');
+	free(com);
+	if (!com_struct->argv)
+		ft_exit_program(data, "malloc");
+	data->com = com_struct;
+	ft_exec_command(data);
 }

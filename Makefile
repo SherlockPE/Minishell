@@ -6,7 +6,7 @@
 #    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 18:53:11 by albartol          #+#    #+#              #
-#    Updated: 2024/03/28 17:23:37 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/03/29 14:08:43 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,12 +77,17 @@ PARSER :=	parser/ft_expansor.c \
 			parser/ft_trim_input.c \
 			parser/ft_validate_input.c
 
-REDIRECTION :=	redirection/check_redirection.c\
-				redirection/create_archive.c
+REDIRECTION :=	redirection/ft_check_redirection.c\
+				redirection/ft_create_archive.c
 
 # EXECUTOR
 EXECUTOR :=	executor/ft_check_bin.c \
-			executor/ft_exec_bin.c
+			executor/ft_child_process_pipe.c\
+			executor/ft_child_process.c\
+			executor/ft_exec_bin.c\
+			executor/ft_exec_one.c\
+			executor/ft_pipex.c\
+			executor/ft_send_com.c
 
 # SIGNALS
 SIGNALS :=	signals/ft_handle_signals.c

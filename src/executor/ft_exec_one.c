@@ -1,40 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_redirection.c                             :+:      :+:    :+:   */
+/*   ft_exec_one.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/22 10:12:50 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/29 14:09:08 by flopez-r         ###   ########.fr       */
+/*   Created: 2024/03/29 14:03:22 by flopez-r          #+#    #+#             */
+/*   Updated: 2024/03/29 14:03:34 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-// int	checker(char *command)
-// {
-	
-// }
-
-// //-1 does not found a '>'
-void	ft_check_redirection(t_shell *data)
+void	ft_exec_one(t_shell *data)
 {
-	int		i;
-	int		j;
-	// char	*pos;
+	t_com	parent;
 
-	i = 0;
-
-	while (data->pipes[i])
-	{
-		j = 0;
-		while (data->pipes[i][j])
-		{
-			if (data->pipes[i][j] == '>')
-				
-			j++;
-		}
-		i++;
-	}
+	parent.pid = 1;
+	parent.redir = 0;
+	ft_send_com(data, data->pipes[0], &parent);
+	free_input(data);
 }

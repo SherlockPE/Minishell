@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:58:51 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/28 19:47:47 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/29 14:04:34 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,8 +136,13 @@ void	ft_exit(t_shell *data);
 /* ========================== */
 
 /* ======== EXECUTOR ======== */
-void	ft_exec_bin(t_shell *data);
 char	*ft_check_bin(t_shell *data);
+void	child_process_pipe(t_shell *data, char *com);
+void	child_process(t_shell *data, char *com);
+void	ft_exec_bin(t_shell *data);
+void	ft_exec_one(t_shell *data);
+void	ft_pipex(t_shell *data);
+void	ft_send_com(t_shell *data, char *com, t_com *com_struct);
 /* ========================== */
 
 /* ======== PARSE ======== */
