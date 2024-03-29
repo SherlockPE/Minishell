@@ -13,19 +13,19 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include <fcntl.h>
-# include <limits.h>
-# include <stdarg.h>
+# include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <unistd.h>
+# include <limits.h>
+# include <stdarg.h>
+# include <fcntl.h>
 
 // parte 1
-int					ft_isalpha(int i);
-int					ft_isdigit(int i);
-int					ft_isalnum(int i);
-int					ft_isascii(int i);
-int					ft_isprint(int i);
+int					ft_isalpha(const int i);
+int					ft_isdigit(const int i);
+int					ft_isalnum(const int i);
+int					ft_isascii(const int i);
+int					ft_isprint(const int i);
 size_t				ft_strlen(const char *str);
 int					ft_atoi(const char *str);
 int					ft_toupper(int c);
@@ -48,12 +48,12 @@ char				*ft_strdup(const char *str);
 // parte 2
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
-int					ft_putchar_fd(char c, int fd);
-int					ft_putstr_fd(char *s, int fd);
-void				ft_putendl_fd(char *s, int fd);
-void				ft_putnbr_fd(int n, int fd);
+int					ft_putchar_fd(const char c, int fd);
+int					ft_putstr_fd(const char *s, int fd);
+void				ft_putendl_fd(const char *s, int fd);
+void				ft_putnbr_fd(const int n, int fd);
 char				*ft_strtrim(char const *s1, char const *set);
-char				*ft_itoa(int n);
+char				*ft_itoa(const int n);
 char				**ft_split(char const *s, char c);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
@@ -105,7 +105,7 @@ void				ft_merge_sort(int *list, int i, int *list_temp);
 
 // minitalk
 
-char				*ft_charjoin(char *str, char c);
+char				*ft_charjoin(const char *str, const char c);
 
 // new
 long				ft_atol(const char *str);

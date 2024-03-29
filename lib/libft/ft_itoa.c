@@ -32,7 +32,7 @@ static int	ft_count_itoa(long nbr)
 	return (i);
 }
 
-char	*ft_itoa(int n)
+char	*ft_itoa(const int n)
 {
 	long	nbr;
 	int		i;

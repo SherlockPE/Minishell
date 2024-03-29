@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-char	*ft_charjoin(char *str, char c)
+char	*ft_charjoin(const char *str, const char c)
 {
 	char	temp[2];
 	char	*aux;

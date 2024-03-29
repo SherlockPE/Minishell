@@ -48,7 +48,7 @@ void	ft_cd(t_shell *data)
 	static char	*old_dir;
 
 	if (data->com->argv[1] && data->com->argv[2])
-		return ((void)printf("cd: too many arguments\n"));
+		return ((void)ft_putstr_fd("cd: too many arguments\n", 2));
 	current_dir = getcwd(NULL, 0);
 	if (!current_dir)
 		return (perror("cd"));

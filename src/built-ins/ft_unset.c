@@ -12,7 +12,7 @@
 
 #include <minishell.h>
 
-static void	remove_env(char *name, size_t len_name, t_list *env, t_shell *data)
+static void	rm_env(const char *name, size_t len, t_list *env, t_shell *data)
 {
 	size_t	len_env;
 	t_list	*prev;
@@ -24,7 +24,7 @@ static void	remove_env(char *name, size_t len_name, t_list *env, t_shell *data)
 	{
 		env_name = (char *)env->content;
 		len_env = ft_strlenchr(env_name, '=') - 1;
-		if (len_name == len_env && !ft_strncmp(name, env_name, len_name))
+		if (len == len_env && !ft_strncmp(name, env_name, len))
 		{
 			if (first == 0)
 				data->env = env->next;
@@ -47,5 +47,5 @@ void	ft_unset(t_shell *data)
 	name = data->com->argv[1];
 	if (!name)
 		return ;
-	remove_env(name, ft_strlen(name), data->env, data);
+	rm_env(name, ft_strlen(name), data->env, data);
 }
