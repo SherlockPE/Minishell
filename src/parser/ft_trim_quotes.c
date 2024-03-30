@@ -12,61 +12,53 @@
 
 #include <minishell.h>
 
-static int	count_len(const char *str)
+static size_t	count_len(const char *str)
 {
-	int	i;
-	int	len;
-	int	len_quotes;
+	int		i;
+	int		num_quotes;
+	size_t	len;
 
 	i = 0;
-	len = 0;
-	len_quotes = 0;
+	len = ft_strlen(str);
+	num_quotes = 0;
 	while (str[i])
 	{
-		if (!quotes(str[i]))
-			len++;
-		else
-			len_quotes++;
+		if (quotes(str[i]))
+		{
+			num_quotes++;
+			i++;
+			while (quotes(str[i]))
+				i++;
+		}
 		i++;
-		if (!quotes(str[i]) && len_quotes)
-			len = len + len_quotes - 2;
 	}
-	return (len);
+	return (len - (num_quotes * 2));
 }
 
 static void	fill_new_str(char *new_str, const char *str)
 {
 	int	i;
 	int	j;
-	int	len_quotes;
 
 	i = 0;
 	j = 0;
-	len_quotes = 0;
 	while (str[i])
 	{
-		if (!quotes(str[i]))
-			new_str[j++] = str[i];
+		if (quotes(str[i]))
+		{
+			i++;
+			while (quotes(str[i]))
+				new_str[j++] = str[i++];
+			i++;
+		}
 		else
-		{
-			if (!len_quotes)
-				len_quotes = 1;
-			else
-				new_str[j++] = str[i];
-		}
-		i++;
-		if (!quotes(str[i]) && len_quotes)
-		{
-			j--;
-			new_str[j] = 0;
-			len_quotes = 0;
-		}
+			new_str[j++] = str[i++];
 	}
 }
 
 char	*ft_trim_quotes(const char *str)
 {
-	int		len;
+	size_t	len;
 	char	*new_str;
 
 	len = count_len(str);
