@@ -12,7 +12,7 @@
 
 #include <minishell.h>
 
-size_t	array_char_len(char **array)
+size_t	array_char_len(const char **array)
 {
 	size_t	len;
 	int		i;

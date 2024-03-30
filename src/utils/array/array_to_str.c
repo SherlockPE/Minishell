@@ -12,7 +12,7 @@
 
 #include <minishell.h>
 
-char	*array_to_str(char **array, char spliter)
+char	*array_to_str(const char **array, const char spliter)
 {
 	char	*str;
 	char	split[2];

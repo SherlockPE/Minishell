@@ -12,37 +12,37 @@
 
 #include <minishell.h>
 
-static int	ft_splits(char *input, char c)
+static int	ft_splits(const char *str, const char c)
 {
 	int		i;
 	int		splits;
 
 	i = 0;
 	splits = 1;
-	while (input[i])
+	while (str[i])
 	{
-		if (!quotes(input[i]) && input[i] == c)
+		if (!quotes(str[i]) && str[i] == c)
 			splits++;
 		i++;
 	}
 	return (splits);
 }
 
-static int	ft_split_len(char const *input, char c)
+static int	ft_split_len(const char *str, const char c)
 {
 	int		i;
 
 	i = 0;
-	while (input[i])
+	while (str[i])
 	{
-		if (!quotes(input[i]) && input[i] == c)
+		if (!quotes(str[i]) && str[i] == c)
 			return (i);
 		i++;
 	}
 	return (i);
 }
 
-char	**ft_split_quotes(char *com, char c)
+char	**ft_split_quotes(const char *str, const char c)
 {
 	char	**array;
 	int		i;
@@ -50,20 +50,20 @@ char	**ft_split_quotes(char *com, char c)
 	int		splits;
 
 	i = 0;
-	splits = ft_splits(com, c);
+	splits = ft_splits(str, c);
 	array = (char **)ft_calloc(splits + 1, sizeof(char *));
 	if (!array)
 		return (NULL);
 	while (i < splits)
 	{
-		len = ft_split_len(com, c);
-		array[i] = ft_substr(com, 0, len);
+		len = ft_split_len(str, c);
+		array[i] = ft_substr(str, 0, len);
 		if (!array[i])
 		{
 			ft_free_array(array);
 			return (NULL);
 		}
-		com += len + 1;
+		str += len + 1;
 		i++;
 	}
 	array[i] = 0;

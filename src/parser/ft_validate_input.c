@@ -12,7 +12,7 @@
 
 #include <minishell.h>
 
-short	ft_validate_input(char *com, char c)
+short	ft_validate_input(const char *com, const char c)
 {
 	int		i;
 

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int	array_len(char **array)
+int	array_len(const char **array)
 {
 	int	i;
 

@@ -12,7 +12,7 @@
 
 #include <minishell.h>
 
-static int	ft_count_len(char *input)
+static int	ft_count_len(const char *input)
 {
 	int		i;
 	int		len;

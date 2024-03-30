@@ -12,7 +12,7 @@
 
 #include <minishell.h>
 
-void	ft_exit_program(t_shell *data, char *message)
+void	ft_exit_program(t_shell *data, const char *message)
 {
 	free_program(data);
 	perror(message);

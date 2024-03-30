@@ -75,6 +75,7 @@ PARSER :=	parser/ft_expansor.c \
 			parser/ft_split_pipes.c \
 			parser/quotes.c \
 			parser/ft_trim_input.c \
+			parser/ft_trim_quotes.c \
 			parser/ft_validate_input.c
 
 REDIRECTION :=	redirection/ft_check_redirection.c\

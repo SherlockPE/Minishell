@@ -20,14 +20,13 @@
 // //-1 does not found a '>'
 void	ft_check_redirection(t_shell *data)
 {
-	int		i;
+	// int		i;
 	// int		j;
 	// char	*pos;
 
-	i = 0;
+	// i = 0;
 	if (ft_strchr((const char *)data->com, '>'))
 		ft_create_archive(data);
-
 	// while (data->pipes[i])
 	// {
 	// 	j = 0;

@@ -12,7 +12,7 @@
 
 #include <minishell.h>
 
-static int	ft_splits(char *str)
+static int	ft_splits(const char *str)
 {
 	int		i;
 	int		splits;
@@ -29,7 +29,7 @@ static int	ft_splits(char *str)
 	return (splits);
 }
 
-static int	ft_split_len(char const *str)
+static int	ft_split_len(const char *str)
 {
 	int		i;
 
@@ -44,7 +44,7 @@ static int	ft_split_len(char const *str)
 	return (i);
 }
 
-char	**ft_split_pipes(char *com)
+char	**ft_split_pipes(const char *str)
 {
 	char	**array;
 	int		i;
@@ -52,20 +52,20 @@ char	**ft_split_pipes(char *com)
 	int		splits;
 
 	i = 0;
-	splits = ft_splits(com);
+	splits = ft_splits(str);
 	array = (char **)ft_calloc(splits + 1, sizeof(char *));
 	if (!array)
 		return (NULL);
 	while (i < splits)
 	{
-		len = ft_split_len(com);
-		array[i] = ft_substr(com, 0, len);
+		len = ft_split_len(str);
+		array[i] = ft_substr(str, 0, len);
 		if (!array[i])
 		{
 			ft_free_array(array);
 			return (NULL);
 		}
-		com += len + 1;
+		str += len + 1;
 		i++;
 	}
 	array[i] = 0;

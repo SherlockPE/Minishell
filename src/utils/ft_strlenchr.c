@@ -12,7 +12,7 @@
 
 #include <minishell.h>
 
-size_t	ft_strlenchr(const char *str, char c)
+size_t	ft_strlenchr(const char *str, const char c)
 {
 	size_t	i;
 

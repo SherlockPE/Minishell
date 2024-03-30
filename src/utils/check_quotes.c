@@ -12,7 +12,7 @@
 
 #include <minishell.h>
 
-short	check_quotes(char *input)
+short	check_quotes(const char *input)
 {
 	int		i;
 	short	double_q;

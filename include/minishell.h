@@ -74,6 +74,8 @@
 # define DELIMITATOR "\033[1;97m$ \033[0m"
 # define NON_PRINT " \n\t\v\f\r\b\a\e"
 
+# define FILE_PERM 0644
+
 typedef struct s_env	t_env;
 typedef struct s_shell	t_shell;
 typedef struct s_com	t_com;
@@ -150,10 +152,11 @@ void	ft_expansor(t_shell *data);
 void	ft_parser(t_shell *data);
 void	ft_quotes_input(t_shell *data);
 void	ft_trim_input(t_shell *data);
-short	ft_validate_input(char *com, char c);
-char	**ft_split_quotes(char *com, char c);
-char	**ft_split_pipes(char *com);
-short	quotes(char c);
+short	ft_validate_input(const char *com, const char c);
+char	**ft_split_quotes(const char *com, const char c);
+char	**ft_split_pipes(const char *com);
+short	quotes(const char c);
+char	*ft_trim_quotes(const char *str);
 /* ========================== */
 
 /* ======== REDIRECTION ======== */
@@ -167,27 +170,27 @@ void	ft_handle_signals(void);
 
 /* ======== UTILS ======== */
 //env
-char	*ft_get_env_value(char *name, t_list *env);
+char	*ft_get_env_value(const char *name, t_list *env);
 void	ft_set_env_value(const char *content, t_shell *data);
 void	ft_update_env_value(const char *name, const char *value, t_shell *data);
 void	ft_init_env(t_shell *data, char **env);
 
 //array
-int		array_len(char **array);
-size_t	array_char_len(char **array);
-char	*array_to_str(char **array, char spliter);
+int		array_len(const char **array);
+size_t	array_char_len(const char **array);
+char	*array_to_str(const char **array, const char spliter);
 
 //free
 void	free_input(t_shell *data);
 void	free_program(t_shell *data);
-void	ft_exit_program(t_shell *data, char *message);
+void	ft_exit_program(t_shell *data, const char *message);
 void	ft_free_array(char **array);
 void	ft_free_env(t_list *env);
 
 void	ft_update_prompt(t_shell *data);
 int		ft_isnotprint(const char c);
-size_t	ft_strlenchr(const char *str, char c);
-short	check_quotes(char *input);
+size_t	ft_strlenchr(const char *str, const char c);
+short	check_quotes(const char *input);
 /* ========================== */
 
 #endif

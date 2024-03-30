@@ -12,7 +12,7 @@
 
 #include <minishell.h>
 
-static int	count_len(char *str)
+static int	count_len(const char *str)
 {
 	int	i;
 	int	len;
@@ -34,7 +34,7 @@ static int	count_len(char *str)
 	return (len);
 }
 
-static void	fill_new_str(char *new_str, char *str)
+static void	fill_new_str(char *new_str, const char *str)
 {
 	int	i;
 	int	j;
@@ -58,12 +58,13 @@ static void	fill_new_str(char *new_str, char *str)
 		if (!quotes(str[i]) && len_quotes)
 		{
 			j--;
+			new_str[j] = 0;
 			len_quotes = 0;
 		}
 	}
 }
 
-char	*ft_trim_quotes(char *str)
+char	*ft_trim_quotes(const char *str)
 {
 	int		len;
 	char	*new_str;

@@ -12,7 +12,7 @@
 
 #include <minishell.h>
 
-static short	simple_quotes(char c)
+static short	simple_quotes(const char c)
 {
 	static short	simple_q;
 
@@ -21,7 +21,7 @@ static short	simple_quotes(char c)
 	return (simple_q);
 }
 
-int	find_name_len(char *str)
+int	find_name_len(const char *str)
 {
 	int	i;
 

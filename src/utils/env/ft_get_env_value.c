@@ -14,7 +14,7 @@
 
 /* Function filters name in all of the env list and returns
 a pointer of the node */
-char	*ft_get_env_value(char *name, t_list *env)
+char	*ft_get_env_value(const char *name, t_list *env)
 {
 	size_t	len_name;
 	size_t	len_env;

@@ -12,7 +12,7 @@
 
 #include <minishell.h>
 
-short	quotes(char c)
+short	quotes(const char c)
 {
 	static short	double_q;
 	static short	simple_q;
