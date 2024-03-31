@@ -19,7 +19,7 @@ static char	**get_env(t_shell *data)
 	t_list	*env;
 
 	i = ft_lstsize(data->env);
-	envp = ft_calloc(i + 1, sizeof(char *));
+	envp = (char **)ft_calloc(i + 1, sizeof(char *));
 	if (!envp)
 		return (NULL);
 	i = 0;
@@ -101,8 +101,8 @@ void	ft_exec_bin(t_shell *data)
 		bin_path = ft_check_bin(data);
 		if (!bin_path)
 		{
-			ft_putstr_fd(data->com->argv[0], 2);
-			ft_putstr_fd(" : command not found\n", 2);
+			ft_putstr_fd(data->com->argv[0], STDERR);
+			ft_putstr_fd(" : command not found\n", STDERR);
 			return ;
 		}
 	}

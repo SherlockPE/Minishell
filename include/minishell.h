@@ -75,6 +75,7 @@
 # define NON_PRINT " \n\t\v\f\r\b\a\e"
 
 # define FILE_PERM 0644
+# define STDERR STDERR_FILENO
 
 typedef struct s_env	t_env;
 typedef struct s_shell	t_shell;

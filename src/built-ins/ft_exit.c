@@ -14,9 +14,9 @@
 
 static int	invalid_argv(const char *num)
 {
-	ft_putstr_fd("exit: [", 2);
-	ft_putstr_fd(num, 2);
-	ft_putstr_fd("]: numeric argument required\n", 2);
+	ft_putstr_fd("exit: [", STDERR);
+	ft_putstr_fd(num, STDERR);
+	ft_putstr_fd("]: numeric argument required\n", STDERR);
 	// printf("exit: [%s]: numeric argument required\n", num);
 	return (0);
 }
@@ -47,7 +47,7 @@ static int	check_num(const char *num)
 void	ft_exit(t_shell *data)
 {
 	if (data->com->argv[1] && data->com->argv[2])
-		ft_putstr_fd("exit: too many arguments\n", 2);
+		ft_putstr_fd("exit: too many arguments\n", STDERR);
 	else
 	{
 		if (data->com->argv[1])

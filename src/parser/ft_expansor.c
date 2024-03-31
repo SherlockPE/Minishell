@@ -52,7 +52,7 @@ void	expand(t_shell *data, int i, int j)
 	expand = ft_get_env_value(name, data->env);
 	free(name);
 	final_size = ft_strlen(data->pipes[i]) - name_len + ft_strlen(expand);
-	new = ft_calloc(final_size + 1, sizeof(char));
+	new = (char *)ft_calloc(final_size + 1, sizeof(char));
 	if (!new)
 		ft_exit_program(data, "malloc");
 	ft_strlcat(new, data->pipes[i], j + 1);

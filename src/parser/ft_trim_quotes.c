@@ -62,7 +62,7 @@ char	*ft_trim_quotes(const char *str)
 	char	*new_str;
 
 	len = count_len(str);
-	new_str = ft_calloc(len + 1, sizeof(char));
+	new_str = (char *)ft_calloc(len + 1, sizeof(char));
 	if (!new_str)
 		return (NULL);
 	fill_new_str(new_str, str);

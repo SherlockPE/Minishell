@@ -147,7 +147,24 @@ static short	check_eof(char *input)
 }
  */
 
-void	new_input(t_shell *data)
+static char	*get_input(t_shell *data)
+{
+	char	*new_input;
+
+	new_input = readline("> ");
+	if (!new_input)
+	{
+		free_input(data);
+		data->input = (char *)ft_calloc(1, sizeof(char));
+		if (!data->input)
+			ft_exit_program(data, "malloc");
+		ft_putstr_fd("unexpected EOF while looking for \"\'\n", STDERR);
+		return (NULL);
+	}
+	return (new_input);
+}
+
+static void	get_new_input(t_shell *data)
 {
 	char	*aux;
 	char	*new_input;
@@ -159,18 +176,13 @@ void	new_input(t_shell *data)
 		free(aux);
 		if (!data->input)
 			ft_exit_program(data, "malloc");
-		new_input = readline("> ");
+		new_input = get_input(data);
 		if (!new_input)
-		{
-			free_input(data);
-			data->input = ft_calloc(1, 1);
-			if (!data->input)
-				ft_exit_program(data, "malloc");
-			return ((void)printf("unexpected EOF while looking for \"\'\n"));
-		}
+			return ;
 		aux = data->input;
 		data->input = ft_strjoin(data->input, new_input);
 		free(aux);
+		free(new_input);
 		if (!data->input)
 			ft_exit_program(data, "malloc");
 	}
@@ -184,5 +196,5 @@ void	ft_get_input(t_shell *data)
 	if (!data->input)
 		return ;
 	if (check_quotes(data->input))
-		new_input(data);
+		get_new_input(data);
 }

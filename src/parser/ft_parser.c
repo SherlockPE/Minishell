@@ -17,7 +17,7 @@ void	ft_parser(t_shell *data)
 	ft_trim_input(data);
 	if (ft_validate_input(data->input, '|') || 
 			ft_validate_input(data->input, '&'))
-		return ;
+			return (free_input(data));
 	if (*data->input)
 		add_history(data->input);
 	data->pipes = ft_split_pipes(data->input);

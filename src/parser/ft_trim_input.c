@@ -40,7 +40,7 @@ void	ft_trim_input(t_shell *data)
 	i = 0;
 	j = 0;
 	com = data->input;
-	str = ft_calloc(ft_count_len(com) + 1, 1);
+	str = (char *)ft_calloc(ft_count_len(com) + 1, sizeof(char));
 	if (!str)
 		ft_exit_program(data, "malloc");
 	while (com[i])

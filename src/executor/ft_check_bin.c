@@ -25,7 +25,7 @@ static char	*ft_get_path(char *path, t_shell *data)
 	while (path[i] && path[i] != ':')
 		i++;
 	len = len_com + i + 1;
-	str = ft_calloc(len + 1, sizeof(char));
+	str = (char *)ft_calloc(len + 1, sizeof(char));
 	if (!str)
 		ft_exit_program(data, "malloc");
 	j = -1;
