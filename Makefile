@@ -6,7 +6,7 @@
 #    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 18:53:11 by albartol          #+#    #+#              #
-#    Updated: 2024/04/01 15:39:05 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/04/01 16:14:02 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ UTILITIES :=	ft_isnotprint.c \
 
 UTILS_FREE :=	free/free_input.c \
 				free/free_program.c \
+				free/free_redir_struct.c \
 				free/ft_exit_program.c \
 				free/ft_free_array.c
 

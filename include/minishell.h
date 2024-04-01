@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:58:51 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/01 15:28:08 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/01 16:13:25 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,6 +185,7 @@ char	*array_to_str(const char **array, const char spliter);
 //free
 void	free_input(t_shell *data);
 void	free_program(t_shell *data);
+void	free_redir_struct(t_redir *red);
 void	ft_exit_program(t_shell *data, const char *message);
 void	ft_free_array(char **array);
 void	ft_free_env(t_list *env);
