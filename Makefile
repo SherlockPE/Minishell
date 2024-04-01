@@ -6,7 +6,7 @@
 #    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 18:53:11 by albartol          #+#    #+#              #
-#    Updated: 2024/03/29 14:08:43 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/04/01 15:39:05 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,8 @@ UTILS_ENV :=	env/ft_get_env_value.c \
 
 UTILS_ARR :=	array/array_len.c \
 				array/array_char_len.c \
-				array/array_to_str.c
+				array/array_to_str.c\
+				array/ft_split_all.c
 
 # BUILT-INS
 BUILTS :=	built-ins/ft_pwd.c \

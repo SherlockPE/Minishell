@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_program.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:41:30 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/20 17:07:30 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/01 15:52:04 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,3 +18,4 @@ void	free_program(t_shell *data)
 	free_input(data);
 	rl_clear_history();
 }
+ 

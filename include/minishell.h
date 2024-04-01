@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:58:51 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/29 17:36:21 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/01 15:28:08 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ char	*ft_trim_quotes(const char *str);
 
 /* ======== REDIRECTION ======== */
 void	ft_check_redirection(t_shell *data);
-void	ft_create_archive(t_shell *data);
+void	ft_create_archive(t_shell *data, int i);
 /* ========================== */
 
 /* ======== SIGNALS ======== */
@@ -177,6 +177,7 @@ void	ft_update_env_value(const char *name, const char *value, t_shell *data);
 void	ft_init_env(t_shell *data, char **env);
 
 //array
+char	**ft_split_all(char *string, char *set);
 int		array_len(const char **array);
 size_t	array_char_len(const char **array);
 char	*array_to_str(const char **array, const char spliter);
