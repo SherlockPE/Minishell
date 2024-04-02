@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:58:51 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/01 16:13:25 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/02 15:55:24 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@
 # define FILE_PERM 0644
 # define STDERR STDERR_FILENO
 
+typedef unsigned char	t_exit;
 typedef struct s_env	t_env;
 typedef struct s_shell	t_shell;
 typedef struct s_com	t_com;
@@ -99,7 +100,6 @@ struct s_redir
 struct s_com
 {
 	char	*command;
-	t_redir	*redir;
 	char	**argv;
 	int		fd[2];
 	pid_t	pid;
@@ -112,7 +112,7 @@ struct s_shell
 	char	*input;
 	char	**pipes;
 	t_com	*com;
-	char	exit_code;
+	t_exit	exit_code;
 };
 
 /* ======== MAIN ======== */
@@ -162,7 +162,7 @@ char	*ft_trim_quotes(const char *str);
 
 /* ======== REDIRECTION ======== */
 void	ft_check_redirection(t_shell *data);
-void	ft_create_archive(t_shell *data, int i);
+void	ft_create_archive(t_shell *data);
 /* ========================== */
 
 /* ======== SIGNALS ======== */

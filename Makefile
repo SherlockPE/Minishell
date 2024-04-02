@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
+#    By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 18:53:11 by albartol          #+#    #+#              #
-#    Updated: 2024/04/01 16:14:02 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/04/02 13:44:29 by albartol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,8 +80,8 @@ PARSER :=	parser/ft_expansor.c \
 			parser/ft_trim_quotes.c \
 			parser/ft_validate_input.c
 
-REDIRECTION :=	redirection/ft_check_redirection.c\
-				redirection/ft_create_archive.c
+# REDIRECTION :=	redirection/ft_check_redirection.c\
+# 				redirection/ft_create_archive.c
 
 # EXECUTOR
 EXECUTOR :=	executor/ft_check_bin.c \

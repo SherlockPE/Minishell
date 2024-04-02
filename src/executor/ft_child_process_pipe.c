@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_child_process_pipe.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 13:59:06 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/29 13:59:30 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/02 15:32:30 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	child_process_pipe(t_shell *data, char *com)
 	int		i;
 	// int		wstatus;
 
-	child.redir = 0;
 	if (pipe(child.fd) == -1)
 		return (perror("pipe"));
 	child.pid = fork();

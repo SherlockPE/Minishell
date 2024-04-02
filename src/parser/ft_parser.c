@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:27:18 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/01 12:30:48 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/02 15:30:34 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,7 @@ void	ft_parser(t_shell *data)
 	data->pipes = ft_split_pipes(data->input);
 	if (!data->pipes)
 		ft_exit_program(data, "malloc");
-
-	//Expansión de variables
 	ft_expansor(data);
-
-	//Redirecciones
-	ft_check_redirection(data);
-
-	//Executor
 	if (data->pipes[1])
 		ft_pipex(data);
 	else

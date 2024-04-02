@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_child_process.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 14:01:22 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/29 14:01:33 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/02 15:32:22 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	child_process(t_shell *data, char *com)
 	t_com	child;
 	// int		wstatus;
 
-	child.redir = 0;
 	child.pid = fork();
 	if (child.pid == -1)
 		return (perror("fork"));

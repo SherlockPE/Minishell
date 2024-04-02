@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expansor.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 15:02:01 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/28 18:06:25 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/02 15:07:13 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,51 +21,74 @@ static short	simple_quotes(const char c)
 	return (simple_q);
 }
 
-int	find_name_len(const char *str)
+static int	find_name_len(const char *str)
 {
 	int	i;
 
-	i = 0;
+	i = 1;
 	while (str[i])
 	{
-		if (str[i] == ' ' || str[i] == '\"' || str[i] == '\'' || str[i] == '\n')
+		if (str[i] == '\"' || str[i] == '\'' || str[i] == '$'
+			 || ft_isnotprint(str[i]))
 			return (i);
 		i++;
 	}
 	return (i);
 }
 
-void	expand(t_shell *data, int i, int j)
+static void	expand_exit_code(t_shell *data, int i, int j)
 {
 	int		final_size;
-	int		name_len;
-	char	*new;
-	char	*name;
+	char	*temp;
 	char	*expand;
 
-	name_len = find_name_len(&data->pipes[i][j]);
-	if (!name_len)
-		return ;
-	name = ft_substr(data->pipes[i], j + 1, name_len - 1);
-	if (!name)
+	expand = ft_itoa(data->exit_code);
+	if (!expand)
 		ft_exit_program(data, "malloc");
-	expand = ft_get_env_value(name, data->env);
-	free(name);
-	final_size = ft_strlen(data->pipes[i]) - name_len + ft_strlen(expand);
-	new = (char *)ft_calloc(final_size + 1, sizeof(char));
-	if (!new)
+	final_size = ft_strlen(data->pipes[i]) - 2 + ft_strlen(expand);
+	temp = (char *)ft_calloc(final_size + 1, sizeof(char));
+	if (!temp)
 		ft_exit_program(data, "malloc");
-	ft_strlcat(new, data->pipes[i], j + 1);
-	ft_strlcat(new, expand, final_size + 1);
-	ft_strlcat(new, data->pipes[i] + j + name_len, final_size + 1);
+	ft_strlcat(temp, data->pipes[i], j + 1);
+	ft_strlcat(temp, expand, final_size + 1);
+	free(expand);
+	ft_strlcat(temp, data->pipes[i] + j + 2, final_size + 1);
 	free(data->pipes[i]);
-	data->pipes[i] = new;
+	data->pipes[i] = temp;
+}
+
+static void	expand(t_shell *data, int i, int j, int name_len)
+{
+	int		final_size;
+	char	*temp;
+	char	*expand;
+
+	if (data->pipes[i][j + 1] == '?')
+		expand_exit_code(data, i, j);
+	else
+	{
+		temp = ft_substr(data->pipes[i], j + 1, name_len - 1);
+		if (!temp)
+			ft_exit_program(data, "malloc");
+		expand = ft_get_env_value(temp, data->env);
+		free(temp);
+		final_size = ft_strlen(data->pipes[i]) - name_len + ft_strlen(expand);
+		temp = (char *)ft_calloc(final_size + 1, sizeof(char));
+		if (!temp)
+			ft_exit_program(data, "malloc");
+		ft_strlcat(temp, data->pipes[i], j + 1);
+		ft_strlcat(temp, expand, final_size + 1);
+		ft_strlcat(temp, data->pipes[i] + j + name_len, final_size + 1);
+		free(data->pipes[i]);
+		data->pipes[i] = temp;
+	}
 }
 
 void	ft_expansor(t_shell *data)
 {
 	int	i;
 	int	j;
+	int	name_len;
 
 	i = 0;
 	while (data->pipes[i])
@@ -74,7 +97,11 @@ void	ft_expansor(t_shell *data)
 		while (data->pipes[i][j])
 		{
 			if (!simple_quotes(data->pipes[i][j]) && data->pipes[i][j] == '$')
-				expand(data, i, j);
+			{
+				name_len = find_name_len(&data->pipes[i][j]);
+				if (name_len > 1)
+					expand(data, i, j, name_len);
+			}
 			j++;
 		}
 		i++;

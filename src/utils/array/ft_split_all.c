@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_all.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 14:48:13 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/01 15:19:33 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/02 13:50:46 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	ft_count_words(char *string, char *set)
+static int	ft_count_words(char *string, char *set)
 {
 	int	i;
 	int	cant_words;
@@ -33,7 +33,7 @@ int	ft_count_words(char *string, char *set)
 	return (cant_words);
 }
 
-char	**ft_fill_box(char *string, char *set, char **result)
+static char	**ft_fill_box(char *string, char *set, char **result)
 {
 	int	i;
 	int	pos;
