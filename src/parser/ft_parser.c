@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:27:18 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/02 15:30:34 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/02 16:59:03 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	ft_parser(t_shell *data)
 {
 	ft_trim_input(data);
-	if (ft_validate_input(data->input, '|') || 
-			ft_validate_input(data->input, '&'))
-			return (free_input(data));
+	if (ft_val_input(data->input, '|') || ft_val_input(data->input, '&')
+		 || ft_val_input(data->input, '<') || ft_val_input(data->input, '>'))
+		return (free_input(data));
 	if (*data->input)
 		add_history(data->input);
 	data->pipes = ft_split_pipes(data->input);

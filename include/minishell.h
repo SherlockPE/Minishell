@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:58:51 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/02 15:55:24 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/02 20:17:43 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,11 @@ struct s_env
 
 struct s_redir
 {
-	char	**com_argv;
+	char	*com;
 	char	*file_name;
-	int		fd;
+	int		old_stdin;
+	int		old_stdout;
+	int		success;
 	int		type;
 };
 
@@ -153,7 +155,7 @@ void	ft_expansor(t_shell *data);
 void	ft_parser(t_shell *data);
 void	ft_quotes_input(t_shell *data);
 void	ft_trim_input(t_shell *data);
-short	ft_validate_input(const char *com, const char c);
+short	ft_val_input(const char *com, const char c);
 char	**ft_split_quotes(const char *com, const char c);
 char	**ft_split_pipes(const char *com);
 short	quotes(const char c);
@@ -161,8 +163,8 @@ char	*ft_trim_quotes(const char *str);
 /* ========================== */
 
 /* ======== REDIRECTION ======== */
-void	ft_check_redirection(t_shell *data);
-void	ft_create_archive(t_shell *data);
+int		ft_check_redirection(t_shell *data, t_redir *red);
+void	ft_create_archive(t_shell *data, t_redir *red);
 /* ========================== */
 
 /* ======== SIGNALS ======== */

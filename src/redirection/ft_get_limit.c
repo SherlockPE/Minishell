@@ -1,20 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_input.c                                     :+:      :+:    :+:   */
+/*   ft_get_limit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/09 11:48:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/02 18:14:12 by flopez-r         ###   ########.fr       */
+/*   Created: 2024/03/16 12:20:18 by flopez-r          #+#    #+#             */
+/*   Updated: 2024/04/02 18:24:23 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-/*	Function gets the input for user using the readline function.
-	The function will asking for more inputs with a \n
-	if the input its not okay */
+	
 static char	*get_input(t_shell *data)
 {
 	char	*new_input;
@@ -32,7 +29,7 @@ static char	*get_input(t_shell *data)
 	return (new_input);
 }
 
-static void	get_new_input(t_shell *data)
+void	ft_get_limit(t_shell *data)
 {
 	char	*aux;
 	char	*new_input;
@@ -54,15 +51,4 @@ static void	get_new_input(t_shell *data)
 		if (!data->input)
 			ft_exit_program(data, "malloc");
 	}
-}
-
-void	ft_get_input(t_shell *data)
-{
-	ft_update_prompt(data);
-	data->input = readline(data->prompt);
-	free(data->prompt);
-	if (!data->input)
-		return ;
-	if (check_quotes(data->input))
-		get_new_input(data);
 }

@@ -6,99 +6,96 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 11:13:15 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/01 17:25:44 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/02 20:11:03 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void	get_redirection_type(t_shell *data, int pos, t_redir *red)
+static int	file_dup(t_redir *red, int fd)
 {
-	int		i;
-	int		type;
-	char	*command;
-	
-	i = 0;
-	type = 0;
-	command = data->pipes[pos];
-	while (command[i])
+	int	fileno;
+	int	i;
+
+	fileno = 0;
+	if (red->type == 1 || red->type == 2)
+		fileno = STDOUT_FILENO;
+	else if (red->type == 3)
+		fileno = STDIN_FILENO;
+	if (!fileno)
 	{
-		if (command[i] == '>')
-			type++;
-		i++;
+		close(fd);
+		return (1);
 	}
-	// if (type >= 3)
-	// {
-	// 	// imprimir syntax error y también no ejecutar nada
-	// 	printf("syntax error near unexpected token `>'\n");
-	// 	type = 0;
-	// 	// return (free_input(data));
-	// }
-	red->type = type;
-	// char	*aux;
-	// com->redir->type = 1;
-	
-	// aux = com->redir->com_argv[i];
-	// com->redir->com_argv[i] = ft_strtrim(com->redir->com_argv[i], " ");
-	// free(aux);
+	i = dup2(fd, fileno);
+	if (i == -1)
+	{
+		close(fd);
+		perror("dup2");
+		return (0);
+	}
+	// close(fd);
+	return (1);
 }
 
-static int	file_open(t_redir *red, int i)
+static int	file_open(t_redir *red)
 {
 	int	fd;
 
 	fd = 0;
 	if (red->type == 1)
-		fd = open(red->com_argv[i], O_WRONLY | O_CREAT | O_APPEND, FILE_PERM);
+		fd = open(red->file_name, O_WRONLY | O_CREAT | O_APPEND, FILE_PERM);
 	else if (red->type == 2)
-		fd = open(red->com_argv[i], O_WRONLY | O_CREAT | O_TRUNC, FILE_PERM);
+		fd = open(red->file_name, O_WRONLY | O_CREAT | O_TRUNC, FILE_PERM);
 	else if (red->type == 3)
-		fd = open(red->com_argv[i], O_RDONLY, FILE_PERM);
-	return (fd);
+		fd = open(red->file_name, O_RDONLY, FILE_PERM);
+	free(red->file_name);
+	if (fd == -1)
+	{
+		perror("open");
+		return (0);
+	}
+	return (file_dup(red, fd));
 }
 
-static void	get_fd(t_redir *red)
+static void	get_archive_name(t_shell *data, t_redir *red)
 {
-	int	i;
-	// int	i;
-	
-	i = 1;
-	while (red->com_argv[i + 1])
+	int		i;
+	int		j;
+
+	i = 0;
+	red->file_name = 0;
+	while (red->com[i] == ' ')
+		i++;
+	j = i;
+	while (red->com[i])
 	{
-		red->fd = file_open(red, i);
-		if (red->fd == -1)
-			return ; //<-------Ale, aquí Fabri. Hay que hacer que si pasa esto ya no trate de ejecutar el comando en ft_exec_command o antes de que este se llame
-		close(red->fd);
+		if (!quotes(red->com[i]) && ft_strchr(" <>", red->com[i]))
+		{
+			red->file_name = ft_substr(red->com, j, i - j);
+			if (!red->file_name)
+				ft_exit_program(data, "malloc");
+			return ;
+		}
 		i++;
 	}
-	red->fd = file_open(red, i);
-	if (red->fd == -1)
-		return ; //<-------Ale, aquí Fabri. Hay que hacer que si pasa esto ya no trate de ejecutar el comando en ft_exec_command o antes de que este se llame
+	red->file_name = ft_substr(red->com, j, i - j);
+	if (!red->file_name)
+		ft_exit_program(data, "malloc");
 }
 
-static void	get_archive_names(t_shell *data, int i, t_redir *red)
+void	ft_create_archive(t_shell *data, t_redir *red)
 {
-	char	*aux;
-
-	//Get redirection type and save it in the actual redir->type
-	get_redirection_type(data, i, red);
-	red->com_argv = ft_split_all(data->pipes[i], "> ");
-	if (!red->com_argv)
-		ft_exit_program(data, "malloc");
-	
-	//Actualize the real command
-	aux = data->pipes[i];
-	data->pipes[i] = ft_strdup(red->com_argv[0]);
-	if (!data->pipes[i])
-		ft_exit_program(data, "malloc");
-	free(aux);	
-}
-
-void	ft_create_archive(t_shell *data, int i)
-{
-	t_redir	red;
-
-	get_archive_names(data, i, &red);
-	get_fd(&red);
-	// red.fd = file_open(&red);
+	if (red->type == 1 || red->type == 4)
+		red->com += 2;
+	else if (red->type == 2)
+		red->com += 1;
+	get_archive_name(data, red);
+	if (!red->file_name)
+	{
+		ft_putstr_fd("redir: syntax error near unexpected token\n", STDERR);
+		red->success = 0;
+		return ;
+	}
+	red->success = file_open(red);
 }

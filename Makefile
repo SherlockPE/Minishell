@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+         #
+#    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 18:53:11 by albartol          #+#    #+#              #
-#    Updated: 2024/04/02 13:44:29 by albartol         ###   ########.fr        #
+#    Updated: 2024/04/02 18:54:55 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,8 +36,7 @@ UTILS_DIR	:= utils
 SOURCES :=	minishell.c \
 			ft_minishell_init.c \
 			ft_minishell_loop.c \
-			ft_get_input.c \
-			ft_exec_command.c
+			ft_get_input.c
 
 # UTILS
 UTILITIES :=	ft_isnotprint.c \
@@ -47,7 +46,6 @@ UTILITIES :=	ft_isnotprint.c \
 
 UTILS_FREE :=	free/free_input.c \
 				free/free_program.c \
-				free/free_redir_struct.c \
 				free/ft_exit_program.c \
 				free/ft_free_array.c
 
@@ -58,7 +56,7 @@ UTILS_ENV :=	env/ft_get_env_value.c \
 
 UTILS_ARR :=	array/array_len.c \
 				array/array_char_len.c \
-				array/array_to_str.c\
+				array/array_to_str.c \
 				array/ft_split_all.c
 
 # BUILT-INS
@@ -78,18 +76,20 @@ PARSER :=	parser/ft_expansor.c \
 			parser/quotes.c \
 			parser/ft_trim_input.c \
 			parser/ft_trim_quotes.c \
-			parser/ft_validate_input.c
+			parser/ft_val_input.c
 
-# REDIRECTION :=	redirection/ft_check_redirection.c\
-# 				redirection/ft_create_archive.c
+REDIRECTION :=	redirection/ft_check_redirection.c \
+				redirection/ft_create_archive.c \
+				redirection/ft_get_limit.c
 
 # EXECUTOR
 EXECUTOR :=	executor/ft_check_bin.c \
-			executor/ft_child_process_pipe.c\
-			executor/ft_child_process.c\
-			executor/ft_exec_bin.c\
-			executor/ft_exec_one.c\
-			executor/ft_pipex.c\
+			executor/ft_child_process_pipe.c \
+			executor/ft_child_process.c \
+			executor/ft_exec_bin.c \
+			executor/ft_exec_command.c \
+			executor/ft_exec_one.c \
+			executor/ft_pipex.c \
 			executor/ft_send_com.c
 
 # SIGNALS

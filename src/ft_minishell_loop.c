@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 12:09:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/28 14:51:46 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/02 16:14:28 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ void	ft_minishell_loop(t_shell *data)
 		if (!data->input)
 			break ;
 		ft_parser(data);
+		// if (data->pipes[1])
+		// 	ft_pipex(data);
+		// else
+		// 	ft_exec_one(data);
 		// free_input(data);
 	}
 	// rl_clear_history();

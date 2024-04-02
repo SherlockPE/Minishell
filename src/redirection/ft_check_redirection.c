@@ -6,33 +6,38 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:12:50 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/01 16:55:45 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/02 20:17:16 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-// int	checker(char *command)
-// {
-
-// }
-
-// //-1 does not found a '>'
-void	ft_check_redirection(t_shell *data)
+int	ft_check_redirection(t_shell *data, t_redir *r)
 {
-	int	i;
+	int		i;
 
 	i = 0;
-	while (data->pipes[i])
+	while (data->com->command[i])
 	{
-		// printf("Command: [%s]\n", data->pipes[i]);
-		if (ft_strchr((const char *)data->pipes[i], '>'))
-		{
-			// printf("Redirection founded\n");
-			ft_create_archive(data, i);
-			// printf("exit_redirection\n");
-			// printf("Command After: [%s]\n", data->pipes[i]);
-		}
+		r->type = 0;
+		r->success = 1;
+		r->com = data->com->command;
+		if (!quotes(r->com[i]) && r->com[i] == '>' && r->com[i + 1] == '>')
+			r->type = 1;
+		else if (!quotes(r->com[i]) && r->com[i] == '>')
+			r->type = 2;
+		else if (!quotes(r->com[i]) && r->com[i] == '<' && r->com[i + 1] == '<')
+			r->type = 4;
+		else if (!quotes(r->com[i]) && r->com[i] == '>')
+			r->type = 3;
+		r->com = &data->com->command[i];
+		if (r->type > 0 && r->type < 4)
+			ft_create_archive(data, &r);
+		// else if (r->type == 4)
+		// 	ft_get_limit(data, &r); // <--- Falta implemementar esto
+		if (!r->success)
+			return (1);
 		i++;
 	}
+	return (0);
 }
