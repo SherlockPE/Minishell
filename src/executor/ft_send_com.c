@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_send_com.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 14:00:01 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/03 11:58:17 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/03 16:21:56 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	rm_quotes(t_shell *data)
 }
 
 //Function saves the stdout and the stdin in a backup
-void	save_fd(t_shell *data, t_redir *red)
+/* void	save_fd(t_shell *data, t_redir *red)
 {
 	if (pipe(red->old_fds) == -1)
 		ft_exit_program(data, "pipe");
@@ -56,6 +56,26 @@ void	restore_fd(t_shell *data, t_redir *red)
 		return (ft_exit_program(data, "dup2 : red.old_stdin"));
 	close(red->old_fds[STDOUT_FILENO]);
 	close(red->old_fds[STDIN_FILENO]);
+} */
+
+static void	save_fd(t_shell *data, t_redir *red)
+{
+	red->old_stdin = dup(STDIN_FILENO);
+	if (red->old_stdin == -1)
+		ft_exit_program(data, "dup");
+	red->old_stdout = dup(STDOUT_FILENO);
+	if (red->old_stdout == -1)
+		ft_exit_program(data, "dup");
+}
+
+static void	restore_fd(t_shell *data, t_redir *red)
+{
+	if (dup2(red->old_stdout, STDOUT_FILENO) == -1)
+		return (ft_exit_program(data, "dup2 : red.old_stdout"));
+	if (dup2(red->old_stdin, STDIN_FILENO) == -1)
+		return (ft_exit_program(data, "dup2 : red.old_stdin"));
+	close(red->old_stdout);
+	close(red->old_stdin);
 }
 
 void	ft_send_com(t_shell *data, char *com, t_com *com_struct)

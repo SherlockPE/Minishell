@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:58:51 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/03 11:59:42 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/03 16:13:05 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,8 @@ struct s_redir
 {
 	char	*com;
 	char	*file_name;
-	int		old_fds[2];
+	int		old_stdout;
+	int		old_stdin;
 	int		success;
 	int		type;
 };
