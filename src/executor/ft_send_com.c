@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 14:00:01 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/02 20:24:28 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/03 11:58:17 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,27 @@ static void	rm_quotes(t_shell *data)
 	}
 }
 
-static void	rm_quotes(t_shell *data, t_redir *red)
+//Function saves the stdout and the stdin in a backup
+void	save_fd(t_shell *data, t_redir *red)
 {
-	red->old_stdin = dup(STDIN_FILENO);
-	if (red->old_stdin == -1)
-	{
-		free_input(data);
-		return (perror("dup"));
-	}
-	red->old_stdout = dup(STDOUT_FILENO);
-	if (red->old_stdout == -1)
-	{
-		free_input(data);
-		return (perror("dup"));
-	}
+	if (pipe(red->old_fds) == -1)
+		ft_exit_program(data, "pipe");
+	red->old_fds[STDIN_FILENO] = dup(STDIN_FILENO);
+	if (red->old_fds[STDIN_FILENO] == -1)
+		ft_exit_program(data, "dup");
+	red->old_fds[STDOUT_FILENO] = dup(STDOUT_FILENO);
+	if (red->old_fds[STDOUT_FILENO] == -1)
+		ft_exit_program(data, "dup");
+}
+
+void	restore_fd(t_shell *data, t_redir *red)
+{
+	if (dup2(red->old_fds[STDOUT_FILENO] , STDOUT_FILENO) == -1)
+		return (ft_exit_program(data, "dup2 : red.old_stdout"));
+	if (dup2(red->old_fds[STDIN_FILENO] , STDIN_FILENO) == -1)
+		return (ft_exit_program(data, "dup2 : red.old_stdin"));
+	close(red->old_fds[STDOUT_FILENO]);
+	close(red->old_fds[STDIN_FILENO]);
 }
 
 void	ft_send_com(t_shell *data, char *com, t_com *com_struct)
@@ -61,6 +68,7 @@ void	ft_send_com(t_shell *data, char *com, t_com *com_struct)
 	com_struct->argv = 0;
 	com_struct->command = com;
 	data->com = com_struct;
+	save_fd(data, &red);
 	if (ft_check_redirection(data, &red))
 	{
 		free(data->com->command);
@@ -73,10 +81,5 @@ void	ft_send_com(t_shell *data, char *com, t_com *com_struct)
 		ft_exit_program(data, "malloc");
 	rm_quotes(data);
 	ft_exec_command(data);
-	red.old_stdin = dup2(red.old_stdin, STDIN_FILENO);
-	red.old_stdout = dup2(red.old_stdout, STDOUT_FILENO);
-	if (!red.old_stdin)
-		perror("dup2 : red.old_stdin");
-	if (!red.old_stdout)
-		perror("dup2 : red.old_stdout");
+	restore_fd(data, &red);
 }

@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 11:13:15 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/02 20:11:03 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/03 12:23:51 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static int	file_dup(t_redir *red, int fd)
 {
 	int	fileno;
-	int	i;
 
 	fileno = 0;
 	if (red->type == 1 || red->type == 2)
@@ -27,10 +26,11 @@ static int	file_dup(t_redir *red, int fd)
 		close(fd);
 		return (1);
 	}
-	i = dup2(fd, fileno);
-	if (i == -1)
+	if (dup2(fd, fileno) == -1)
 	{
+		
 		close(fd);
+		// ft_exit_program(data, "dup2");
 		perror("dup2");
 		return (0);
 	}
@@ -84,6 +84,25 @@ static void	get_archive_name(t_shell *data, t_redir *red)
 		ft_exit_program(data, "malloc");
 }
 
+// void	ft_reload_command(t_shell *data)
+// {
+// 	int		i;
+// 	char	*new;
+
+// 	i = 0;
+// 	new = data->com->command;
+// 	while (data->com->command[i])
+// 	{
+// 		if (data->com->command[i] == '>')
+// 		{
+// 			new = ft_substr(data->com->command, 0, i);
+// 			break ;
+// 		}
+// 		i++;
+// 	}
+// 	data->com->command = new;
+// }
+
 void	ft_create_archive(t_shell *data, t_redir *red)
 {
 	if (red->type == 1 || red->type == 4)
@@ -98,4 +117,5 @@ void	ft_create_archive(t_shell *data, t_redir *red)
 		return ;
 	}
 	red->success = file_open(red);
+	// ft_reload_command(data);
 }
