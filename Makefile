@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
+#    By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 18:53:11 by albartol          #+#    #+#              #
-#    Updated: 2024/04/02 18:54:55 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/04/06 22:28:34 by fabriciolop      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,7 +80,9 @@ PARSER :=	parser/ft_expansor.c \
 
 REDIRECTION :=	redirection/ft_check_redirection.c \
 				redirection/ft_create_archive.c \
-				redirection/ft_get_limit.c
+				redirection/ft_get_archive_name.c \
+				redirection/ft_get_limit.c \
+				redirection/ft_trim_archive_name.c
 
 # EXECUTOR
 EXECUTOR :=	executor/ft_check_bin.c \

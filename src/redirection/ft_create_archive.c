@@ -6,7 +6,7 @@
 /*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 11:13:15 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/06 22:17:35 by fabriciolop      ###   ########.fr       */
+/*   Updated: 2024/04/06 22:23:30 by fabriciolop      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,24 +50,24 @@ static int	file_open(t_redir *red)
 	return (file_dup(red, fd));
 }
 
-static void	trim_archive_name(t_shell *data, t_redir *red, int i)
-{
-	char	*temp;
+// void	trim_archive_name(t_shell *data, t_redir *red, int i)
+// {
+// 	char	*temp;
 
-	temp = ft_substr(red->com, 0, i);
-	if (!temp)
-	{
-		free(data->com->command);
-		ft_exit_program(data, "malloc");
-	}
-	red->file_name = ft_trim_quotes(temp);
-	free(temp);
-	if (!red->file_name)
-	{
-		free(data->com->command);
-		ft_exit_program(data, "malloc");
-	}
-}
+// 	temp = ft_substr(red->com, 0, i);
+// 	if (!temp)
+// 	{
+// 		free(data->com->command);
+// 		ft_exit_program(data, "malloc");
+// 	}
+// 	red->file_name = ft_trim_quotes(temp);
+// 	free(temp);
+// 	if (!red->file_name)
+// 	{
+// 		free(data->com->command);
+// 		ft_exit_program(data, "malloc");
+// 	}
+// }
 
 void	ft_create_archive(t_shell *data, t_redir *red)
 {

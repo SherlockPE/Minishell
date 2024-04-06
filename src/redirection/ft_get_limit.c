@@ -6,7 +6,7 @@
 /*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:20:18 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/06 22:11:47 by fabriciolop      ###   ########.fr       */
+/*   Updated: 2024/04/06 22:40:05 by fabriciolop      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	ft_get_limit(t_shell *data, t_redir *red)
 
 	limit = NULL;
 	ft_get_archive_name(data, red);
+	// printf("valor de new input: [%s]\n", red->file_name);
 	// get_limit(data, limit);
 	while (check_quotes(data->input))
 	{
@@ -52,6 +53,11 @@ void	ft_get_limit(t_shell *data, t_redir *red)
 		new_input = get_input(data, red);
 		if (!new_input)
 			return ;
+		if (!ft_strncmp(new_input, red->file_name, ft_strlen(red->file_name)))
+		{
+			printf("coincidencia!\n");
+			return ;
+		}
 	}
 }
 
