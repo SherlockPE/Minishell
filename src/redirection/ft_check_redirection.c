@@ -36,32 +36,57 @@ static void	reload_command(t_shell *data)
 	}
 }
 
+static void	redir_type_output(t_shell *data, t_redir *red, int *i)
+{
+	if (red->com[*i + 1] == '>')
+	{
+		(*i)++;
+		red->type = 1;
+	}
+	else
+		red->type = 2;
+	red->com = &data->com->command[*i + 1];
+	while (*red->com == ' ')
+		red->com++;
+	ft_create_archive(data, red);
+}
+
+static void	redir_type_input(t_shell *data, t_redir *red, int *i)
+{
+	if (red->com[*i + 1] == '<')
+	{
+		(*i)++;
+		red->com = &data->com->command[*i + 1];
+		while (*red->com == ' ')
+			red->com++;
+		// ft_get_limit(data, red);
+	}
+	else
+	{
+		red->type = 3;
+		red->com = &data->com->command[*i + 1];
+		while (*red->com == ' ')
+			red->com++;
+		ft_create_archive(data, red);
+	}
+}
+
 /* Function check's the redirection type, creates
 and archive and changes the stdin or stdout  */
-int	ft_check_redirection(t_shell *data, t_redir *r)
+int	ft_check_redirection(t_shell *data, t_redir *red)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (data->com->command[i])
 	{
-		r->type = 0;
-		r->success = 1;
-		r->com = data->com->command;
-		if (!quotes(r->com[i]) && r->com[i] == '>' && r->com[i + 1] == '>')
-			r->type = 1;
-		else if (!quotes(r->com[i]) && r->com[i] == '>')
-			r->type = 2;
-		else if (!quotes(r->com[i]) && r->com[i] == '<' && r->com[i + 1] == '<')
-			r->type = 4;
-		else if (!quotes(r->com[i]) && r->com[i] == '<')
-			r->type = 3;
-		r->com = &data->com->command[i];
-		if (r->type > 0 && r->type < 4)
-			ft_create_archive(data, r);
-		// else if (r->type == 4)
-		// 	ft_get_limit(data, &r); // <--- Falta implemementar esto
-		if (!r->success)
+		red->success = 1;
+		red->com = data->com->command;
+		if (!quotes(red->com[i]) && red->com[i] == '>')
+			redir_type_output(data, red, &i);
+		else if (!quotes(red->com[i]) && red->com[i] == '<')
+			redir_type_input(data, red, &i);
+		if (!red->success)
 			return (1);
 		i++;
 	}

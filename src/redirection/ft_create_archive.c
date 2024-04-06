@@ -43,7 +43,6 @@ static int	file_open(t_redir *red)
 	int	fd;
 
 	fd = 0;
-	printf("Name: [%s] - Type: %d\n", red->file_name,red->type);
 	if (red->type == 1)
 		fd = open(red->file_name, O_WRONLY | O_APPEND | O_CREAT, FILE_PERM);
 	else if (red->type == 2)
@@ -59,6 +58,25 @@ static int	file_open(t_redir *red)
 	return (file_dup(red, fd));
 }
 
+static void	trim_archive_name(t_shell *data, t_redir *red, int i)
+{
+	char	*temp;
+
+	temp = ft_substr(red->com, 0, i);
+	if (!temp)
+	{
+		free(data->com->command);
+		ft_exit_program(data, "malloc");
+	}
+	red->file_name = ft_trim_quotes(temp);
+	free(temp);
+	if (!red->file_name)
+	{
+		free(data->com->command);
+		ft_exit_program(data, "malloc");
+	}
+}
+
 static void	get_archive_name(t_shell *data, t_redir *red)
 {
 	int		i;
@@ -68,38 +86,22 @@ static void	get_archive_name(t_shell *data, t_redir *red)
 	{
 		if (!quotes(red->com[i]) && ft_strchr(" <>", red->com[i]))
 		{
-			red->file_name = ft_substr(red->com, 0, i);
-			if (!red->file_name)
-			{
-				free(data->com->command);
-				ft_exit_program(data, "malloc");
-			}
+			trim_archive_name(data, red, i);
 			return ;
 		}
 		i++;
 	}
-	red->file_name = ft_substr(red->com, 0, i);
-	if (!red->file_name)
-	{
-		free(data->com->command);
-		ft_exit_program(data, "malloc");
-	}
+	trim_archive_name(data, red, i);
 }
 
 void	ft_create_archive(t_shell *data, t_redir *red)
 {
-	if (red->type == 1)
-		red->com += 2;
-	else if (red->type == 2 || red->type == 3)
-		red->com += 1;
-	while (*red->com == ' ')
-		red->com++;
 	get_archive_name(data, red);
-	if (!red->file_name)
-	{
-		ft_putstr_fd("redir: syntax error near unexpected token\n", STDERR);
-		red->success = 0;
-		return ;
-	}
+	// if (!red->file_name)
+	// {
+	// 	ft_putstr_fd("redir: syntax error near unexpected token\n", STDERR);
+	// 	red->success = 0;
+	// 	return ;
+	// }
 	red->success = file_open(red);
 }

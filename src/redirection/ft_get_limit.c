@@ -12,7 +12,7 @@
 
 #include <minishell.h>
 	
-static char	*get_input(t_shell *data)
+static char	*get_input(t_shell *data, t_redir *red)
 {
 	char	*new_input;
 
@@ -24,12 +24,13 @@ static char	*get_input(t_shell *data)
 		if (!data->input)
 			ft_exit_program(data, "malloc");
 		ft_putstr_fd("unexpected EOF while looking for \"\'\n", STDERR);
+		red->success = 0;
 		return (NULL);
 	}
 	return (new_input);
 }
 
-void	ft_get_limit(t_shell *data)
+void	ft_get_limit(t_shell *data, t_redir *red)
 {
 	char	*aux;
 	char	*new_input;
@@ -41,7 +42,7 @@ void	ft_get_limit(t_shell *data)
 		free(aux);
 		if (!data->input)
 			ft_exit_program(data, "malloc");
-		new_input = get_input(data);
+		new_input = get_input(data, red);
 		if (!new_input)
 			return ;
 		aux = data->input;
