@@ -6,7 +6,7 @@
 /*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:58:51 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/06 21:25:56 by fabriciolop      ###   ########.fr       */
+/*   Updated: 2024/04/06 22:12:06 by fabriciolop      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,7 @@ char	*ft_trim_quotes(const char *str);
 int		ft_check_redirection(t_shell *data, t_redir *red);
 void	ft_create_archive(t_shell *data, t_redir *red);
 void	ft_get_limit(t_shell *data, t_redir *red);
+void	ft_get_archive_name(t_shell *data, t_redir *red);
 /* ========================== */
 
 /* ======== SIGNALS ======== */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_create_archive.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 11:13:15 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/03 16:48:32 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/06 22:17:35 by fabriciolop      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,26 +69,9 @@ static void	trim_archive_name(t_shell *data, t_redir *red, int i)
 	}
 }
 
-static void	get_archive_name(t_shell *data, t_redir *red)
-{
-	int		i;
-
-	i = 0;
-	while (red->com[i])
-	{
-		if (!quotes(red->com[i]) && ft_strchr(" <>", red->com[i]))
-		{
-			trim_archive_name(data, red, i);
-			return ;
-		}
-		i++;
-	}
-	trim_archive_name(data, red, i);
-}
-
 void	ft_create_archive(t_shell *data, t_redir *red)
 {
-	get_archive_name(data, red);
+	ft_get_archive_name(data, red);
 	// if (!red->file_name)
 	// {
 	// 	ft_putstr_fd("redir: syntax error near unexpected token\n", STDERR);
