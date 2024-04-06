@@ -21,12 +21,6 @@ static void	ft_signal(int signal)
 		rl_replace_line("", 1);
 		rl_redisplay();
 	}
-	// else if (signal == SIGQUIT)
-	// {
-	// 	rl_on_new_line();
-	// 	// rl_replace_line(rl_line_buffer, 0);
-	// 	rl_redisplay();
-	// }
 }
 
 void	ft_handle_signals(void)
@@ -35,6 +29,4 @@ void	ft_handle_signals(void)
 		perror("signal");
 	if (signal(SIGQUIT, SIG_IGN) == SIG_ERR)
 		perror("signal");
-	// if (signal(SIGQUIT, ft_signal) == SIG_ERR)
-	// 	perror("signal");
 }

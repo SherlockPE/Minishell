@@ -169,7 +169,6 @@ int		ft_check_redirection(t_shell *data, t_redir *red);
 void	ft_create_archive(t_shell *data, t_redir *red);
 void	ft_get_limit(t_shell *data, t_redir *red);
 void	ft_get_archive_name(t_shell *data, t_redir *red);
-void	ft_trim_archive_name(t_shell *data, t_redir *red, int i);
 /* ========================== */
 
 /* ======== SIGNALS ======== */
@@ -184,7 +183,6 @@ void	ft_update_env_value(const char *name, const char *value, t_shell *data);
 void	ft_init_env(t_shell *data, char **env);
 
 //array
-char	**ft_split_all(char *string, char *set);
 int		array_len(const char **array);
 size_t	array_char_len(const char **array);
 char	*array_to_str(const char **array, const char spliter);

@@ -36,28 +36,6 @@ static void	rm_quotes(t_shell *data)
 }
 
 //Function saves the stdout and the stdin in a backup
-/* void	save_fd(t_shell *data, t_redir *red)
-{
-	if (pipe(red->old_fds) == -1)
-		ft_exit_program(data, "pipe");
-	red->old_fds[STDIN_FILENO] = dup(STDIN_FILENO);
-	if (red->old_fds[STDIN_FILENO] == -1)
-		ft_exit_program(data, "dup");
-	red->old_fds[STDOUT_FILENO] = dup(STDOUT_FILENO);
-	if (red->old_fds[STDOUT_FILENO] == -1)
-		ft_exit_program(data, "dup");
-}
-
-void	restore_fd(t_shell *data, t_redir *red)
-{
-	if (dup2(red->old_fds[STDOUT_FILENO] , STDOUT_FILENO) == -1)
-		return (ft_exit_program(data, "dup2 : red.old_stdout"));
-	if (dup2(red->old_fds[STDIN_FILENO] , STDIN_FILENO) == -1)
-		return (ft_exit_program(data, "dup2 : red.old_stdin"));
-	close(red->old_fds[STDOUT_FILENO]);
-	close(red->old_fds[STDIN_FILENO]);
-} */
-
 static void	save_fd(t_shell *data, t_redir *red)
 {
 	red->old_stdin = dup(STDIN_FILENO);
@@ -93,6 +71,7 @@ void	ft_send_com(t_shell *data, char *com, t_com *com_struct)
 	{
 		free(data->com->command);
 		data->com = 0;
+		restore_fd(data, &red);
 		return ;
 	}
 	data->com->argv = ft_split_quotes(data->com->command, ' ');

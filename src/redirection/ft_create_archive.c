@@ -50,33 +50,8 @@ static int	file_open(t_redir *red)
 	return (file_dup(red, fd));
 }
 
-// void	trim_archive_name(t_shell *data, t_redir *red, int i)
-// {
-// 	char	*temp;
-
-// 	temp = ft_substr(red->com, 0, i);
-// 	if (!temp)
-// 	{
-// 		free(data->com->command);
-// 		ft_exit_program(data, "malloc");
-// 	}
-// 	red->file_name = ft_trim_quotes(temp);
-// 	free(temp);
-// 	if (!red->file_name)
-// 	{
-// 		free(data->com->command);
-// 		ft_exit_program(data, "malloc");
-// 	}
-// }
-
 void	ft_create_archive(t_shell *data, t_redir *red)
 {
 	ft_get_archive_name(data, red);
-	// if (!red->file_name)
-	// {
-	// 	ft_putstr_fd("redir: syntax error near unexpected token\n", STDERR);
-	// 	red->success = 0;
-	// 	return ;
-	// }
 	red->success = file_open(red);
 }

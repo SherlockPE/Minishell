@@ -56,8 +56,7 @@ UTILS_ENV :=	env/ft_get_env_value.c \
 
 UTILS_ARR :=	array/array_len.c \
 				array/array_char_len.c \
-				array/array_to_str.c \
-				array/ft_split_all.c
+				array/array_to_str.c
 
 # BUILT-INS
 BUILTS :=	built-ins/ft_pwd.c \
@@ -81,8 +80,7 @@ PARSER :=	parser/ft_expansor.c \
 REDIRECTION :=	redirection/ft_check_redirection.c \
 				redirection/ft_create_archive.c \
 				redirection/ft_get_archive_name.c \
-				redirection/ft_get_limit.c \
-				redirection/ft_trim_archive_name.c
+				redirection/ft_get_limit.c
 
 # EXECUTOR
 EXECUTOR :=	executor/ft_check_bin.c \

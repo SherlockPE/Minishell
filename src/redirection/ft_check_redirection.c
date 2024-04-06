@@ -59,7 +59,6 @@ static void	redir_type_input(t_shell *data, t_redir *red, int *i)
 		red->com = &data->com->command[*i + 1];
 		while (*red->com == ' ')
 			red->com++;
-		// ft_get_limit(data, red);
 		ft_get_limit(data, red);
 	}
 	else
