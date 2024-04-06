@@ -16,16 +16,9 @@ static int	file_dup(t_redir *red, int fd)
 {
 	int	fileno;
 
-	fileno = 0;
-	if (red->type == 1 || red->type == 2)
-		fileno = STDOUT_FILENO;
-	else if (red->type == 3)
+	fileno = STDOUT_FILENO;
+	if (red->type == 3)
 		fileno = STDIN_FILENO;
-	if (!fileno)
-	{
-		close(fd);
-		return (1);
-	}
 	if (dup2(fd, fileno) == -1)
 	{
 		
@@ -42,12 +35,11 @@ static int	file_open(t_redir *red)
 {
 	int	fd;
 
-	fd = 0;
 	if (red->type == 1)
 		fd = open(red->file_name, O_WRONLY | O_APPEND | O_CREAT, FILE_PERM);
 	else if (red->type == 2)
 		fd = open(red->file_name, O_WRONLY | O_TRUNC | O_CREAT, FILE_PERM);
-	else if (red->type == 3)
+	else
 		fd = open(red->file_name, O_RDONLY, FILE_PERM);
 	free(red->file_name);
 	if (fd == -1)
