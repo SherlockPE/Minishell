@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:58:51 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/03 16:13:05 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/06 21:25:56 by fabriciolop      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,8 @@ struct s_shell
 	char	**pipes;
 	t_com	*com;
 	t_exit	exit_code;
+
+	int		father;
 };
 
 /* ======== MAIN ======== */
@@ -165,6 +167,7 @@ char	*ft_trim_quotes(const char *str);
 /* ======== REDIRECTION ======== */
 int		ft_check_redirection(t_shell *data, t_redir *red);
 void	ft_create_archive(t_shell *data, t_redir *red);
+void	ft_get_limit(t_shell *data, t_redir *red);
 /* ========================== */
 
 /* ======== SIGNALS ======== */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_redirection.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:12:50 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/03 16:43:05 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/06 20:42:44 by fabriciolop      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static void	redir_type_input(t_shell *data, t_redir *red, int *i)
 		while (*red->com == ' ')
 			red->com++;
 		// ft_get_limit(data, red);
+		ft_get_limit(data, red);
 	}
 	else
 	{
