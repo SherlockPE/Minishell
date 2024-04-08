@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_limit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:20:18 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/07 13:10:02 by fabriciolop      ###   ########.fr       */
+/*   Updated: 2024/04/08 10:12:58 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,33 +44,28 @@ static int	check_input(char *new_input, char *limit)
 	return (1);
 }
 
-static void	new_stdin(char *final_str)
+static void	new_stdin(t_shell *data, char *final_str)
 {
 	int	fd;
 
 	fd = open(".here_doc", O_WRONLY | O_TRUNC | O_CREAT, FILE_PERM);
 	if (fd == -1)
-	{
-		perror("open");
-		return ;
-	}
+		return perror("open");
 	ft_putstr_fd(final_str, fd);
 	close(fd);
 	free(final_str);
 	fd = open(".here_doc", O_RDONLY, FILE_PERM);
 	if (fd == -1)
-	{
-		perror("open");
-		return ;
-	}
-	if (dup2(fd, STDIN_FILENO))
+		return perror("open");
+	if (dup2(fd, STDIN_FILENO) == -1)
 	{
 		close(fd);
-		// ft_exit_program(data, "dup2");
-		perror("dup2");
+		ft_exit_program(data, "dup2");
 		return ;
 	}
 	close(fd);
+	if (unlink(".here_doc") == -1)
+		perror("unlink");
 }
 
 void	ft_get_limit(t_shell *data, t_redir *red)
@@ -107,5 +102,5 @@ void	ft_get_limit(t_shell *data, t_redir *red)
 	}
 	free(red->file_name);
 	free(new_input);
-	new_stdin(final_str);
+	new_stdin(data, final_str);
 }
