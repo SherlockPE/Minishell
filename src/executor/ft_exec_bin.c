@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_bin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 12:47:11 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/28 18:53:48 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/09 16:10:24 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ static void	new_child_execve(t_shell *data, char *bin_path, char **envp)
 		free(bin_path);
 		exit(EXIT_FAILURE);
 	}
+	if (signal(SIGINT	, SIG_IGN) == SIG_ERR)
+		perror("signal");
 	waitpid(id, &wstatus, 0);
 	if (WIFEXITED(wstatus))
 		data->exit_code = WEXITSTATUS(wstatus);

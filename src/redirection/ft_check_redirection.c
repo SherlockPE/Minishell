@@ -3,14 +3,61 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_redirection.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:12:50 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/06 20:42:44 by fabriciolop      ###   ########.fr       */
+/*   Updated: 2024/04/09 18:09:42 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+static char	*reload_last_command(t_shell *data)
+{
+	int		i;
+	char	*temp;
+
+	temp = data->com->command;
+	i = 0;
+	while (temp[i] && ft_strchr("<> ", temp[i])) 
+		i++;
+	while (temp[i])
+	{
+		if (!quotes(temp[i]) && ft_strchr(" <>", temp[i]))
+			break ;
+		i++;
+	}
+	while (temp[i] == ' ')
+		i++;
+	return (ft_substr(data->com->command, i, ft_strlen(&temp[i])));
+}
+
+static char	*reload_front_command(t_shell *data, int pos)
+{
+	int		i;
+	int		len;
+	char	*temp;
+	char	*rel_com;
+
+	temp = data->com->command;
+	i = pos;
+	len = pos;
+	while (temp[i] && ft_strchr("<> ", temp[i]))
+		i++;
+	while (temp[i])
+	{
+		if (!quotes(temp[i]) && ft_strchr(" <>", temp[i]))
+			break ;
+		i++;
+	}
+	len += ft_strlen(&temp[i]);
+	rel_com = ft_calloc(len + 1, sizeof(char));
+	if (!rel_com)
+		return (NULL);
+	ft_strlcpy(rel_com, temp, pos);
+	ft_strlcat(rel_com, &temp[i], len);
+	return (rel_com);
+}
 
 static void	reload_command(t_shell *data)
 {
@@ -23,9 +70,10 @@ static void	reload_command(t_shell *data)
 	{
 		if (!quotes(temp[i]) && ft_strchr("<>", temp[i]))
 		{
-			if (i > 0 && temp[i - 1] == ' ')
-				i--;
-			temp = ft_substr(data->com->command, 0, i);
+			if (i == 0)
+				temp = reload_last_command(data);
+			else
+				temp = reload_front_command(data, i);
 			free(data->com->command);
 			if (!temp)
 				ft_exit_program(data, "malloc");
@@ -49,6 +97,8 @@ static void	redir_type_output(t_shell *data, t_redir *red, int *i)
 	while (*red->com == ' ')
 		red->com++;
 	ft_create_archive(data, red);
+	reload_command(data);
+	*i = -1;
 }
 
 static void	redir_type_input(t_shell *data, t_redir *red, int *i)
@@ -69,6 +119,8 @@ static void	redir_type_input(t_shell *data, t_redir *red, int *i)
 			red->com++;
 		ft_create_archive(data, red);
 	}
+	reload_command(data);
+	*i = -1;
 }
 
 /* Function check's the redirection type, creates
@@ -78,9 +130,9 @@ int	ft_check_redirection(t_shell *data, t_redir *red)
 	int	i;
 
 	i = 0;
+	red->success = 1;
 	while (data->com->command[i])
 	{
-		red->success = 1;
 		red->com = data->com->command;
 		if (!quotes(red->com[i]) && red->com[i] == '>')
 			redir_type_output(data, red, &i);
@@ -89,7 +141,7 @@ int	ft_check_redirection(t_shell *data, t_redir *red)
 		if (!red->success)
 			return (1);
 		i++;
+		// reload_command(data);
 	}
-	reload_command(data);
 	return (0);
 }

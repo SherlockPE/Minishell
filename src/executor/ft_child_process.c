@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 14:01:22 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/02 15:32:22 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/09 16:10:01 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	child_process(t_shell *data, char *com)
 		free_program(data);
 		exit(EXIT_SUCCESS);
 	}
+	if (signal(SIGINT, SIG_IGN) == SIG_ERR)
+		perror("signal");
 	// else
 	// {
 	// 	waitpid(child.pid, &wstatus, 0);

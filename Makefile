@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+         #
+#    By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 18:53:11 by albartol          #+#    #+#              #
-#    Updated: 2024/04/06 22:28:34 by fabriciolop      ###   ########.fr        #
+#    Updated: 2024/04/09 14:49:05 by albartol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,9 @@ UNAME := $(shell uname)
 CC := gcc
 
 # CFLAGS := -Wall -Wextra -Werror -O3
-# CFLAGS := -Wall -Wextra -fsanitize=address -g3
+CFLAGS := -Wall -Wextra -fsanitize=address -g3
 # CFLAGS := -Wall -Wextra -ggdb
-CFLAGS := -Wall -Wextra -Werror -g3
+# CFLAGS := -Wall -Wextra -Werror -g3
 
 LIBS := -lreadline -Llib/libft -lft
 
@@ -92,14 +92,12 @@ EXECUTOR :=	executor/ft_check_bin.c \
 			executor/ft_pipex.c \
 			executor/ft_send_com.c
 
-# SIGNALS
-SIGNALS :=	signals/ft_handle_signals.c
 
 ALL_UTILS := $(UTILITIES) $(UTILS_FREE) $(UTILS_ENV) $(UTILS_ARR)
 
 UTILS := $(addprefix $(UTILS_DIR)/, $(ALL_UTILS))
 
-SRC := $(SOURCES) $(BUILTS) $(UTILS) $(PARSER) $(SIGNALS) $(EXECUTOR) $(REDIRECTION)
+SRC := $(SOURCES) $(BUILTS) $(UTILS) $(PARSER) $(EXECUTOR) $(REDIRECTION)
 SRCS := $(addprefix $(SRC_DIR)/, $(SRC))
 
 OBJS := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
@@ -125,7 +123,6 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)/built-ins
 	mkdir -p $(OBJ_DIR)/parser
 	mkdir -p $(OBJ_DIR)/redirection
-	mkdir -p $(OBJ_DIR)/signals
 	mkdir -p $(OBJ_DIR)/executor
 
 $(LIBFT):

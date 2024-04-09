@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 14:00:01 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/03 16:21:56 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/09 17:46:57 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void	ft_send_com(t_shell *data, char *com, t_com *com_struct)
 		restore_fd(data, &red);
 		return ;
 	}
+	if (!data->com->command[0])
+		return (restore_fd(data, &red));
 	data->com->argv = ft_split_quotes(data->com->command, ' ');
 	free(data->com->command);
 	if (!data->com->argv)

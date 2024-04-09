@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:58:51 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/06 22:25:00 by fabriciolop      ###   ########.fr       */
+/*   Updated: 2024/04/09 16:00:13 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,6 @@ struct s_shell
 	char	**pipes;
 	t_com	*com;
 	t_exit	exit_code;
-
-	int		father;
 };
 
 /* ======== MAIN ======== */
@@ -155,9 +153,8 @@ void	ft_send_com(t_shell *data, char *com, t_com *com_struct);
 /* ======== PARSE ======== */
 void	ft_expansor(t_shell *data);
 void	ft_parser(t_shell *data);
-void	ft_quotes_input(t_shell *data);
 void	ft_trim_input(t_shell *data);
-short	ft_val_input(const char *com, const char c);
+short	ft_val_input(const char *com, const char c, const char b);
 char	**ft_split_quotes(const char *com, const char c);
 char	**ft_split_pipes(const char *com);
 short	quotes(const char c);
@@ -169,10 +166,6 @@ int		ft_check_redirection(t_shell *data, t_redir *red);
 void	ft_create_archive(t_shell *data, t_redir *red);
 void	ft_get_limit(t_shell *data, t_redir *red);
 void	ft_get_archive_name(t_shell *data, t_redir *red);
-/* ========================== */
-
-/* ======== SIGNALS ======== */
-void	ft_handle_signals(void);
 /* ========================== */
 
 /* ======== UTILS ======== */

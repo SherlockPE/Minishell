@@ -3,21 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell_loop.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 12:09:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/02 16:14:28 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/09 16:08:22 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
+static void	ft_signal(int signal)
+{
+	if (signal == SIGINT)
+	{
+		printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 1);
+		rl_redisplay();
+	}
+}
+
 void	ft_minishell_loop(t_shell *data)
 {
-	ft_handle_signals();
+	if (signal(SIGQUIT, SIG_IGN) == SIG_ERR)
+		perror("signal");
 	while (1)
 	{
+		if (signal(SIGINT, ft_signal) == SIG_ERR)
+			perror("signal");
 		ft_get_input(data);
+		// if (signal(SIGINT, SIG_IGN) == SIG_ERR)
+		// 	perror("signal");
 		if (!data->input)
 			break ;
 		ft_parser(data);
