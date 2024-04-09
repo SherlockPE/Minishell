@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 13:59:06 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/09 16:09:48 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/09 19:46:32 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	child_process_pipe(t_shell *data, char *com)
 		return (perror("fork"));
 	if (child.pid == 0)
 	{
+		if (signal(SIGQUIT, SIG_DFL) == SIG_ERR)
+			perror("signal");
 		close(child.fd[0]);
 		i = dup2(child.fd[1], STDOUT_FILENO);
 		close(child.fd[1]);

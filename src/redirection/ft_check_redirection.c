@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:12:50 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/09 18:09:42 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/09 20:15:12 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,10 +134,13 @@ int	ft_check_redirection(t_shell *data, t_redir *red)
 	while (data->com->command[i])
 	{
 		red->com = data->com->command;
-		if (!quotes(red->com[i]) && red->com[i] == '>')
-			redir_type_output(data, red, &i);
-		else if (!quotes(red->com[i]) && red->com[i] == '<')
-			redir_type_input(data, red, &i);
+		if (!quotes(red->com[i]))
+		{			
+			if (red->com[i] == '>')
+				redir_type_output(data, red, &i);
+			else if (red->com[i] == '<')
+				redir_type_input(data, red, &i);
+		}
 		if (!red->success)
 			return (1);
 		i++;

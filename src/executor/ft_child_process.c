@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 14:01:22 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/09 16:10:01 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/09 19:47:56 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	child_process(t_shell *data, char *com)
 		return (perror("fork"));
 	if (child.pid == 0)
 	{
+		if (signal(SIGQUIT, SIG_DFL) == SIG_ERR)
+			perror("signal");
 		ft_send_com(data, com, &child);
 		free_program(data);
 		exit(EXIT_SUCCESS);

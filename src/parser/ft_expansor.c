@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 15:02:01 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/02 15:07:13 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/09 20:32:06 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,10 @@ void	ft_expansor(t_shell *data)
 			{
 				name_len = find_name_len(&data->pipes[i][j]);
 				if (name_len > 1)
+				{
 					expand(data, i, j, name_len);
+					j = -1;
+				}
 			}
 			j++;
 		}

@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 20:09:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/09 17:07:49 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/09 20:16:54 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,20 @@ short	ft_val_input(const char *com, const char c, const char b)
 	i = 0;
 	while (com[i])
 	{
-		if (!quotes(com[i]) && (com[i] == c && com[i + 1] == c
-			&& (i > 0 && com[i - 1] == c) && (com[i + 1] == b || 
-			(i > 0 && com[i - 1] == b))))
+		if (!quotes(com[i]))
 		{
-			printf("syntax error: unexpected token %c\n", c);
-			return (1);
-		}
-		if (!quotes(com[i]) && (com[i] == b && com[i + 1] == b
-			&& (i > 0 && com[i - 1] == b) && (com[i + 1] == c || 
-			(i > 0 && com[i - 1] == c))))
-		{
-			printf("syntax error: unexpected token %c\n", c);
-			return (1);
+			if (com[i] == c && com[i + 1] == c && (i > 0 && com[i - 1] == c) 
+				&& (com[i + 1] == b || (i > 0 && com[i - 1] == b)))
+			{
+				printf("syntax error: unexpected token %c\n", c);
+				return (1);
+			}
+			if (com[i] == b && com[i + 1] == b && (i > 0 && com[i - 1] == b) 
+				&& (com[i + 1] == c || (i > 0 && com[i - 1] == c)))
+			{
+				printf("syntax error: unexpected token %c\n", c);
+				return (1);
+			}
 		}
 		i++;
 	}

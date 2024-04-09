@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 12:47:11 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/09 16:10:24 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/09 19:48:21 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ static void	new_child_execve(t_shell *data, char *bin_path, char **envp)
 		return (perror("fork"));
 	if (id == 0)
 	{
+		if (signal(SIGQUIT, SIG_DFL) == SIG_ERR)
+			perror("signal");
 		if (execve(bin_path, data->com->argv, envp) == -1)
 			perror("execve");
 		free_program(data);
@@ -62,7 +64,7 @@ static void	new_child_execve(t_shell *data, char *bin_path, char **envp)
 		free(bin_path);
 		exit(EXIT_FAILURE);
 	}
-	if (signal(SIGINT	, SIG_IGN) == SIG_ERR)
+	if (signal(SIGINT, SIG_IGN) == SIG_ERR)
 		perror("signal");
 	waitpid(id, &wstatus, 0);
 	if (WIFEXITED(wstatus))

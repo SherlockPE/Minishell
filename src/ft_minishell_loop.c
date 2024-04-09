@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 12:09:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/09 16:08:22 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/09 19:54:44 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	ft_minishell_loop(t_shell *data)
 		if (!data->input)
 			break ;
 		ft_parser(data);
+		// rl_replace_line("", 1);
 		// if (data->pipes[1])
 		// 	ft_pipex(data);
 		// else
