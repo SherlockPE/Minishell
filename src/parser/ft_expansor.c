@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 15:02:01 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/09 20:32:06 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/10 15:10:50 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ static int	find_name_len(const char *str)
 	i = 1;
 	while (str[i])
 	{
-		if (str[i] == '\"' || str[i] == '\'' || str[i] == '$'
-			 || ft_isnotprint(str[i]))
+		if (!ft_isalpha(str[i]) && str[i] != '_')
 			return (i);
 		i++;
 	}

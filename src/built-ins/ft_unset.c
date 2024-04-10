@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 13:09:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/18 17:42:27 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/10 15:25:47 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,28 @@ static void	rm_env(const char *name, size_t len, t_list *env, t_shell *data)
 
 void	ft_unset(t_shell *data)
 {
+	int		i;
+	int		j;
 	char	*name;
 
-	name = data->com->argv[1];
-	if (!name)
-		return ;
-	rm_env(name, ft_strlen(name), data->env, data);
+	i = 0;
+	while (data->com->argv[i])
+	{
+		j = 0;
+		name = data->com->argv[i];
+		while (name[j])
+		{
+			if (!ft_isalnum(name[j]) && name[j] != '_')
+			{
+				ft_putstr_fd("unset: \'", STDERR);
+				ft_putstr_fd(name, STDERR);
+				ft_putstr_fd("\': is not a valid identifier\n", STDERR);
+				break ;
+			}
+			j++;
+		}
+		if ((j > 0 && !name[j]) || ft_isalnum(name[j]) || name[j] == '_')
+			rm_env(name, ft_strlen(name), data->env, data);
+		i++;
+	}
 }
