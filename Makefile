@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+         #
+#    By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 18:53:11 by albartol          #+#    #+#              #
-#    Updated: 2024/04/09 14:49:05 by albartol         ###   ########.fr        #
+#    Updated: 2024/04/12 00:04:00 by fabriciolop      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,6 +82,9 @@ REDIRECTION :=	redirection/ft_check_redirection.c \
 				redirection/ft_get_archive_name.c \
 				redirection/ft_get_limit.c
 
+# SIGNALS
+SIGNALS := signals/ft_save_config.c
+
 # EXECUTOR
 EXECUTOR :=	executor/ft_check_bin.c \
 			executor/ft_child_process_pipe.c \
@@ -97,7 +100,7 @@ ALL_UTILS := $(UTILITIES) $(UTILS_FREE) $(UTILS_ENV) $(UTILS_ARR)
 
 UTILS := $(addprefix $(UTILS_DIR)/, $(ALL_UTILS))
 
-SRC := $(SOURCES) $(BUILTS) $(UTILS) $(PARSER) $(EXECUTOR) $(REDIRECTION)
+SRC := $(SOURCES) $(BUILTS) $(UTILS) $(PARSER) $(EXECUTOR) $(REDIRECTION) $(SIGNALS)
 SRCS := $(addprefix $(SRC_DIR)/, $(SRC))
 
 OBJS := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
@@ -123,6 +126,7 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)/built-ins
 	mkdir -p $(OBJ_DIR)/parser
 	mkdir -p $(OBJ_DIR)/redirection
+	mkdir -p $(OBJ_DIR)/signals
 	mkdir -p $(OBJ_DIR)/executor
 
 $(LIBFT):

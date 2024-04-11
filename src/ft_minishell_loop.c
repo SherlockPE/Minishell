@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell_loop.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 12:09:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/09 19:54:44 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/11 23:52:17 by fabriciolop      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	ft_minishell_loop(t_shell *data)
 {
 	if (signal(SIGQUIT, SIG_IGN) == SIG_ERR)
 		perror("signal");
+	ft_save_config(data);
 	while (1)
 	{
 		if (signal(SIGINT, ft_signal) == SIG_ERR)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:58:51 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/09 16:00:13 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/12 00:00:42 by fabriciolop      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct s_env	t_env;
 typedef struct s_shell	t_shell;
 typedef struct s_com	t_com;
 typedef struct s_redir	t_redir;
+typedef struct termios	t_conf;
 
 struct s_env
 {
@@ -116,6 +117,7 @@ struct s_shell
 	char	**pipes;
 	t_com	*com;
 	t_exit	exit_code;
+	t_conf	init_conf;
 };
 
 /* ======== MAIN ======== */
@@ -149,6 +151,10 @@ void	ft_exec_bin(t_shell *data);
 void	ft_exec_one(t_shell *data);
 void	ft_pipex(t_shell *data);
 void	ft_send_com(t_shell *data, char *com, t_com *com_struct);
+/* ========================== */
+
+/* ======== EXECUTOR ======== */
+void	ft_save_config(t_shell *data);
 /* ========================== */
 
 /* ======== PARSE ======== */
