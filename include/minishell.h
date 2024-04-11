@@ -76,6 +76,7 @@
 
 # define FILE_PERM 0644
 # define STDERR STDERR_FILENO
+# define HERE_DOC ".$&Z_-@"
 
 typedef unsigned char	t_exit;
 typedef struct s_env	t_env;

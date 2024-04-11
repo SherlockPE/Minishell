@@ -19,7 +19,7 @@ static void	update_env(t_shell *data, const char *old_pwd)
 
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
-		return (perror(NULL));
+		return (perror("cd: getcwd"));
 	temp = ft_get_env_value("PWD", data->env);
 	if (temp)
 		ft_update_env_value("PWD=", pwd, data);
@@ -31,10 +31,19 @@ static void	update_env(t_shell *data, const char *old_pwd)
 
 static int	change_dir(const char *new_dir, const char *old_dir)
 {
-	int	i;
+	int		i;
+	char	*temp;
 
 	if (!new_dir || *(new_dir) == '~')
-		i = chdir(getenv("HOME"));
+	{
+		temp = getenv("HOME");
+		if (!temp)
+		{
+			ft_putstr_fd("cd: HOME not set\n", STDERR);
+			return (-1);
+		}
+		i = chdir(temp);
+	}
 	else if (*(new_dir) == '-')
 		i = chdir(old_dir);
 	else
@@ -51,7 +60,7 @@ void	ft_cd(t_shell *data)
 		return ((void)ft_putstr_fd("cd: too many arguments\n", STDERR));
 	current_dir = getcwd(NULL, 0);
 	if (!current_dir)
-		return (perror("cd"));
+		return (perror("cd: getcwd"));
 	if (!old_dir)
 	{
 		old_dir = current_dir;
@@ -61,7 +70,7 @@ void	ft_cd(t_shell *data)
 	{
 		if (old_dir != current_dir)
 			free(current_dir);
-		return (perror("cd"));
+		return (perror("cd: chdir"));
 	}
 	if (old_dir && old_dir != current_dir)
 		free(old_dir);

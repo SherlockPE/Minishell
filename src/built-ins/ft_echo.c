@@ -12,19 +12,6 @@
 
 #include <minishell.h>
 
-/* void	ft_echo(t_shell *data)
-{
-	if (!data->com->argv[1])
-		return ;
-	if (!ft_strncmp(data->com->argv[1], "-n", 2))
-	{
-		if (data->com->argv[2])
-			printf("%s", data->com->argv[2]);
-	}
-	else
-		printf("%s\n", data->com->argv[1]);
-} */
-
 void	ft_echo(t_shell *data)
 {
 	int	i;
@@ -37,19 +24,19 @@ void	ft_echo(t_shell *data)
 		i = 2;
 		while (data->com->argv[i])
 		{
-			printf("%s", data->com->argv[i]);
+			ft_putstr_fd(data->com->argv[i], STDOUT_FILENO);
 			i++;
 			if (data->com->argv[i])
-				printf(" ");
+				ft_putchar_fd(' ', STDOUT_FILENO);
 		}
 		return ;
 	}
 	while (data->com->argv[i])
 	{
-		printf("%s", data->com->argv[i]);
+		ft_putstr_fd(data->com->argv[i], STDOUT_FILENO);
 		i++;
 		if (data->com->argv[i])
-			printf(" ");
+			ft_putchar_fd(' ', STDOUT_FILENO);
 	}
-	printf("\n");
+	ft_putchar_fd('\n', STDOUT_FILENO);
 }

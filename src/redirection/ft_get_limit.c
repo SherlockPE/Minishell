@@ -48,13 +48,13 @@ static void	new_stdin(t_shell *data, char *final_str)
 {
 	int	fd;
 
-	fd = open(".here_doc", O_WRONLY | O_TRUNC | O_CREAT, FILE_PERM);
+	fd = open(HERE_DOC, O_WRONLY | O_TRUNC | O_CREAT, FILE_PERM);
 	if (fd == -1)
 		return perror("open");
 	ft_putstr_fd(final_str, fd);
 	close(fd);
 	free(final_str);
-	fd = open(".here_doc", O_RDONLY, FILE_PERM);
+	fd = open(HERE_DOC, O_RDONLY, FILE_PERM);
 	if (fd == -1)
 		return perror("open");
 	if (dup2(fd, STDIN_FILENO) == -1)
@@ -64,7 +64,7 @@ static void	new_stdin(t_shell *data, char *final_str)
 		return ;
 	}
 	close(fd);
-	if (unlink(".here_doc") == -1)
+	if (unlink(HERE_DOC) == -1)
 		perror("unlink");
 }
 
