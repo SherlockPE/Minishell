@@ -6,7 +6,7 @@
 /*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:58:51 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/12 00:00:42 by fabriciolop      ###   ########.fr       */
+/*   Updated: 2024/04/12 00:32:07 by fabriciolop      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,8 @@ void	ft_pipex(t_shell *data);
 void	ft_send_com(t_shell *data, char *com, t_com *com_struct);
 /* ========================== */
 
-/* ======== EXECUTOR ======== */
+/* ======== SIGNALS ======== */
+void	ft_handle_signals(void);
 void	ft_save_config(t_shell *data);
 /* ========================== */
 

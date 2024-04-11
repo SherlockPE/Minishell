@@ -6,7 +6,7 @@
 /*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:25:49 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/12 00:23:54 by fabriciolop      ###   ########.fr       */
+/*   Updated: 2024/04/12 00:27:44 by fabriciolop      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,6 @@ static void	print_title(void)
 	printf("╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚════╝╚════╝\n");
 	printf(RESET"\n");
 }
-
-// static void	print_title(void)
-// {
-// 	printf(CYAN);
-// 	printf("\n ____ ____ ____ ____ ____ ____ ____ ____ ____ \n");
-// 	printf("||M |||i |||n |||i |||s |||h |||e |||l |||l ||\n");
-// 	printf("||__|||__|||__|||__|||__|||__|||__|||__|||__||\n");
-// 	printf("|/__\\|/__\\|/__\\|/__\\|/__\\|/__\\|/__\\|/__\\|/__\\|\n\n");
-// 	printf(RESET);
-// }
 
 void	ft_minishell_init(t_shell *data, char **env)
 {

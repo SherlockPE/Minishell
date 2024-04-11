@@ -6,7 +6,7 @@
 #    By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 18:53:11 by albartol          #+#    #+#              #
-#    Updated: 2024/04/12 00:04:00 by fabriciolop      ###   ########.fr        #
+#    Updated: 2024/04/12 00:31:08 by fabriciolop      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,7 +83,8 @@ REDIRECTION :=	redirection/ft_check_redirection.c \
 				redirection/ft_get_limit.c
 
 # SIGNALS
-SIGNALS := signals/ft_save_config.c
+SIGNALS :=	signals/ft_save_config.c \
+			signals/ft_handle_signals.c
 
 # EXECUTOR
 EXECUTOR :=	executor/ft_check_bin.c \
