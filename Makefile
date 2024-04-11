@@ -6,7 +6,7 @@
 #    By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 18:53:11 by albartol          #+#    #+#              #
-#    Updated: 2024/04/12 00:31:08 by fabriciolop      ###   ########.fr        #
+#    Updated: 2024/04/12 01:09:06 by fabriciolop      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,8 @@ SOURCES :=	minishell.c \
 UTILITIES :=	ft_isnotprint.c \
 				ft_strlenchr.c \
 				ft_update_prompt.c \
-				check_quotes.c
+				check_quotes.c \
+				ft_exit_funct.c
 
 UTILS_FREE :=	free/free_input.c \
 				free/free_program.c \

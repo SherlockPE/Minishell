@@ -6,7 +6,7 @@
 /*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:58:51 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/12 00:32:07 by fabriciolop      ###   ########.fr       */
+/*   Updated: 2024/04/12 01:12:13 by fabriciolop      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ void	ft_minishell_init(t_shell *data, char **env);
 void	ft_minishell_loop(t_shell *data);
 
 // gets the input of the user with readline and removes whitespaces
-void	ft_get_input(t_shell *data);
+int		ft_get_input(t_shell *data);
 
 // executes a command
 void	ft_exec_command(t_shell *data);
@@ -196,7 +196,8 @@ void	ft_exit_program(t_shell *data, const char *message);
 void	ft_free_array(char **array);
 void	ft_free_env(t_list *env);
 
-void	ft_update_prompt(t_shell *data);
+int		ft_exit_funct(char *message, int exit);
+int		ft_update_prompt(t_shell *data);
 int		ft_isnotprint(const char c);
 size_t	ft_strlenchr(const char *str, const char c);
 short	check_quotes(const char *input);
