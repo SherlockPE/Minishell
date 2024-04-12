@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:15:36 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/16 12:16:34 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/12 12:50:58 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	ft_count_len(const char *input)
 	return (len);
 }
 
-void	ft_trim_input(t_shell *data)
+int	ft_trim_input(t_shell *data)
 {
 	char	*str;
 	char	*com;
@@ -42,7 +42,7 @@ void	ft_trim_input(t_shell *data)
 	com = data->input;
 	str = (char *)ft_calloc(ft_count_len(com) + 1, sizeof(char));
 	if (!str)
-		ft_exit_program(data, "malloc");
+		return (ft_exit_funct("malloc", EXIT_FAILURE));
 	while (com[i])
 	{
 		if (quotes(com[i]))
@@ -54,7 +54,8 @@ void	ft_trim_input(t_shell *data)
 	com = ft_strtrim(str, " ");
 	free(str);
 	if (!com)
-		ft_exit_program(data, "malloc");
+		return (ft_exit_funct("malloc", EXIT_FAILURE));
 	free(data->input);
 	data->input = com;
+	return (EXIT_SUCCESS);
 }
