@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:58:51 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/12 01:12:13 by fabriciolop      ###   ########.fr       */
+/*   Updated: 2024/04/12 09:33:10 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@
 # define FILE_PERM 0644
 # define STDERR STDERR_FILENO
 # define HERE_DOC ".$&Z_-@"
+# define EXIT_PROGRAM 42
 
 typedef unsigned char	t_exit;
 typedef struct s_env	t_env;

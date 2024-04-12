@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell_loop.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 12:09:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/12 01:13:30 by fabriciolop      ###   ########.fr       */
+/*   Updated: 2024/04/12 09:33:58 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,19 @@
 
 void	ft_minishell_loop(t_shell *data)
 {
+	int	manage_exit;
+
 	ft_save_config(data);
 	while (1)
 	{
 		ft_handle_signals();
-		if (ft_get_input(data) == EXIT_FAILURE);
+		manage_exit = ft_get_input(data);
+		if (manage_exit == EXIT_FAILURE)
 			continue ;
+		else if (manage_exit == EXIT_PROGRAM)
+			break;
 		if (!data->input)
 			break ;
 		ft_parser(data);
 	}
-	// printf("Exiting minishell\n");
 }

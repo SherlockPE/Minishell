@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_input.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 11:48:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/12 01:25:02 by fabriciolop      ###   ########.fr       */
+/*   Updated: 2024/04/12 09:31:44 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static char	*get_input(t_shell *data)
 		free_input(data);
 		data->input = (char *)ft_calloc(1, sizeof(char));
 		if (!data->input)
-			return ((char *)ft_exit_funct("malloc", 0));
+			perror("malloc");
 		return (NULL);
 	}
 	return (new_input);
@@ -43,16 +43,16 @@ static int	get_new_input(t_shell *data)
 		data->input = ft_charjoin(data->input, '\n');
 		free(aux);
 		if (!data->input)
-			ft_exit_funct("malloc", EXIT_FAILURE);
+			return (ft_exit_funct("malloc", EXIT_FAILURE));
 		new_input = get_input(data);
 		if (!new_input)
-			return ;
+			return (EXIT_FAILURE);
 		aux = data->input;
 		data->input = ft_strjoin(data->input, new_input);
 		free(aux);
 		free(new_input);
 		if (!data->input)
-			ft_exit_program(data, "malloc");
+			return (ft_exit_funct("malloc", EXIT_FAILURE));
 	}
 	return (EXIT_SUCCESS);
 }
@@ -64,7 +64,7 @@ int	ft_get_input(t_shell *data)
 	data->input = readline(data->prompt);
 	free(data->prompt);
 	if (!data->input)
-		return (ft_exit_funct("readline", EXIT_FAILURE));
+		return (EXIT_PROGRAM);
 	if (check_quotes(data->input))
 	{
 		if (get_new_input(data) == EXIT_FAILURE)
