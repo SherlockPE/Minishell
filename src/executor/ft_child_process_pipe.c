@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_child_process_pipe.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 13:59:06 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/09 19:46:32 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/12 12:27:24 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	child_process_pipe(t_shell *data, char *com)
+int	child_process_pipe(t_shell *data, char *com)
 {
 	t_com	child;
 	int		i;
 	// int		wstatus;
 
 	if (pipe(child.fd) == -1)
-		return (perror("pipe"));
+		return (ft_exit_funct("pipe", EXIT_FAILURE));
 	child.pid = fork();
 	if (child.pid == -1)
-		return (perror("fork"));
+		return (ft_exit_funct("fork", EXIT_FAILURE));
 	if (child.pid == 0)
 	{
 		if (signal(SIGQUIT, SIG_DFL) == SIG_ERR)
@@ -47,6 +47,7 @@ void	child_process_pipe(t_shell *data, char *com)
 		// if (WIFEXITED(wstatus))
 		// 	data->exit_code = WEXITSTATUS(wstatus);
 		if (i == -1)
-			return (perror("dup2"));
+			return (ft_exit_funct("dup2", EXIT_FAILURE));
 	}
+	return (EXIT_SUCCESS);
 }

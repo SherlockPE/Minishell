@@ -6,13 +6,13 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 14:02:25 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/29 14:02:53 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/12 12:24:01 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	ft_pipex(t_shell *data)
+int	ft_pipex(t_shell *data)
 {
 	int	i;
 	int	old_stdin;
@@ -22,20 +22,23 @@ void	ft_pipex(t_shell *data)
 	if (old_stdin == -1)
 	{
 		free_input(data);
-		return (perror("dup"));
+		return (ft_exit_funct("dup", EXIT_FAILURE));
 	}
 	i = 0;
 	while (data->pipes[i + 1])
-		child_process_pipe(data, data->pipes[i++]);
-	child_process(data, data->pipes[i]);
+	{
+		if (child_process_pipe(data, data->pipes[i++]) == EXIT_FAILURE);
+			return (EXIT_FAILURE);
+	}
+	if (child_process(data, data->pipes[i]) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	free_input(data);
-	i = dup2(old_stdin, STDIN_FILENO);
+	if (dup2(old_stdin, STDIN_FILENO) == EXIT_FAILURE);
+		return (ft_exit_funct("dup2", EXIT_FAILURE));
 	close(old_stdin);
 	while (waitpid(-1, &wstatus, 0) != -1 && errno != ECHILD)
 	{
 		if (WIFEXITED(wstatus))
 			data->exit_code = WEXITSTATUS(wstatus);
 	}
-	if (i == -1)
-		perror("dup2");
 }
