@@ -3,31 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:27:18 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/09 16:07:29 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/12 09:49:26 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	ft_parser(t_shell *data)
+int	ft_parser(t_shell *data)
 {
 	ft_trim_input(data);
 	if (ft_val_input(data->input, '|', '&') 
 		|| ft_val_input(data->input, '<', '>'))
-		return (free_input(data));
+	{
+		free_input(data);
+		return (EXIT_FAILURE);
+	}
 	if (*data->input)
 		add_history(data->input);
 	data->pipes = ft_split_pipes(data->input);
 	if (!data->pipes)
-		ft_exit_program(data, "malloc");
-	ft_expansor(data);
+		return (ft_exit_funct("malloc", EXIT_FAILURE));
+	if (ft_expansor(data) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	if (data->pipes[1])
 		ft_pipex(data);
 	else
 		ft_exec_one(data);
+	return (EXIT_SUCCESS);
 }
 
 

@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:58:51 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/12 09:33:10 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/12 09:44:08 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,8 +160,8 @@ void	ft_save_config(t_shell *data);
 /* ========================== */
 
 /* ======== PARSE ======== */
-void	ft_expansor(t_shell *data);
-void	ft_parser(t_shell *data);
+int		ft_expansor(t_shell *data);
+int		ft_parser(t_shell *data);
 void	ft_trim_input(t_shell *data);
 short	ft_val_input(const char *com, const char c, const char b);
 char	**ft_split_quotes(const char *com, const char c);

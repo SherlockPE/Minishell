@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 12:09:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/12 09:33:58 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/12 09:41:58 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,12 @@ void	ft_minishell_loop(t_shell *data)
 		ft_handle_signals();
 		manage_exit = ft_get_input(data);
 		if (manage_exit == EXIT_FAILURE)
-			continue ;
+			continue ; 
 		else if (manage_exit == EXIT_PROGRAM)
 			break;
 		if (!data->input)
 			break ;
-		ft_parser(data);
+		if (ft_parser(data) == EXIT_FAILURE)
+			continue;
 	}
 }
