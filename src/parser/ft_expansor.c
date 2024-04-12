@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 15:02:01 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/12 15:18:15 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/12 16:59:23 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static int	find_name_len(const char *str)
 	int	i;
 
 	i = 1;
+	if (str[i] == '?')
+		return (2);
 	while (str[i])
 	{
 		if (!ft_isalpha(str[i]) && str[i] != '_')

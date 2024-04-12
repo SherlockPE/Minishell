@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:20:18 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/08 10:12:58 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/12 17:12:39 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,24 +44,32 @@ static int	check_input(char *new_input, char *limit)
 	return (1);
 }
 
-static void	new_stdin(t_shell *data, char *final_str)
+static void	new_stdin(t_shell *data, char *final_str, t_redir *red)
 {
 	int	fd;
 
 	fd = open(HERE_DOC, O_WRONLY | O_TRUNC | O_CREAT, FILE_PERM);
 	if (fd == -1)
-		return perror("open");
+	{
+		red->success = 0;
+		free(final_str);
+		return (perror("open"));
+	}
 	ft_putstr_fd(final_str, fd);
 	close(fd);
 	free(final_str);
 	fd = open(HERE_DOC, O_RDONLY, FILE_PERM);
 	if (fd == -1)
-		return perror("open");
+	{
+		red->success = 0;
+		return (perror("open"));
+	}
 	if (dup2(fd, STDIN_FILENO) == -1)
 	{
+		red->success = 0;
 		close(fd);
-		ft_exit_program(data, "dup2");
-		return ;
+		// ft_exit_program(data, "dup2");
+		return (perror("dup2"));
 	}
 	close(fd);
 	if (unlink(HERE_DOC) == -1)
@@ -102,5 +110,5 @@ void	ft_get_limit(t_shell *data, t_redir *red)
 	}
 	free(red->file_name);
 	free(new_input);
-	new_stdin(data, final_str);
+	new_stdin(data, final_str, red);
 }

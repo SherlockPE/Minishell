@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:58:51 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/12 12:50:16 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/12 17:44:23 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@
 
 # define FILE_PERM 0644
 # define STDERR STDERR_FILENO
-# define HERE_DOC ".$&Z_-@"
+# define HERE_DOC "/tmp/.$&Z_-@"
 # define EXIT_PROGRAM 42
 
 typedef unsigned char	t_exit;
