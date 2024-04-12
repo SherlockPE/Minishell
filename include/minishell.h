@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:58:51 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/12 12:30:03 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/12 12:41:21 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ int		child_process(t_shell *data, char *com);
 void	ft_exec_bin(t_shell *data);
 void	ft_exec_one(t_shell *data);
 int		ft_pipex(t_shell *data);
-int		ft_send_com(t_shell *data, char *com, t_com *com_struct);
+void	ft_send_com(t_shell *data, char *com, t_com *com_struct);
 /* ========================== */
 
 /* ======== SIGNALS ======== */

@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 15:02:01 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/12 09:51:19 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/12 12:40:21 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,4 +111,5 @@ int	ft_expansor(t_shell *data)
 		}
 		i++;
 	}
+	return (EXIT_SUCCESS);
 }

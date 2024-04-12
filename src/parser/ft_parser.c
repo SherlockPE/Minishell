@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:27:18 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/12 09:59:15 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/12 12:40:50 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	ft_parser(t_shell *data)
 {
 	int	manage_exit;
 
+	manage_exit = 7;
 	ft_trim_input(data);
 	if (ft_val_input(data->input, '|', '&') 
 		|| ft_val_input(data->input, '<', '>'))
