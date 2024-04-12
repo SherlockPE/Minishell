@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_bin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 12:54:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/18 17:43:37 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/12 19:51:11 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	ft_len_path(char *path)
 {
 	int	len_path;
 
-	len_path = 0;
+	len_path = 1;
 	while (*path)
 	{
 		if (*path == ':')
@@ -64,7 +64,7 @@ static char	*ft_check_path(char *path, t_shell *data)
 	while (i < len_path && *path)
 	{
 		str = ft_get_path(path, data);
-		if (access(str, X_OK) == 0)
+		if (access(str, F_OK) == 0)
 			break ;
 		free(str);
 		str = 0;
