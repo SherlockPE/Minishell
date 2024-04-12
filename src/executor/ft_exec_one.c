@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_one.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 14:03:22 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/02 15:31:52 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/12 15:26:58 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,7 @@ void	ft_exec_one(t_shell *data)
 
 	parent.pid = 1;
 	ft_send_com(data, data->pipes[0], &parent);
-	free_input(data);
+	// free_input(data);
+	if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &data->init_conf) == -1)
+		perror("tcsetattr");
 }

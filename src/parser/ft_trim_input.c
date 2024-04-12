@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:15:36 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/12 12:50:58 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/12 14:27:07 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,9 @@ int	ft_trim_input(t_shell *data)
 			str[j++] = com[i];
 		i++;
 	}
-	com = ft_strtrim(str, " ");
-	free(str);
-	if (!com)
-		return (ft_exit_funct("malloc", EXIT_FAILURE));
+	if (j > 0 && str[j - 1] == ' ')
+		str[j - 1] = 0;
 	free(data->input);
-	data->input = com;
+	data->input = str;
 	return (EXIT_SUCCESS);
 }

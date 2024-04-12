@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 11:48:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/12 09:31:44 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/12 14:13:13 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,7 @@ static char	*get_input(t_shell *data)
 	if (!new_input)
 	{
 		ft_putstr_fd("unexpected EOF while looking for \"\'\n", STDERR);
-		free_input(data);
-		data->input = (char *)ft_calloc(1, sizeof(char));
-		if (!data->input)
-			perror("malloc");
+		// free_input(data);
 		return (NULL);
 	}
 	return (new_input);

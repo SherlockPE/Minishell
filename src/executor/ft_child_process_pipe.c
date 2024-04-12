@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 13:59:06 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/12 12:27:24 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/12 14:39:50 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	child_process_pipe(t_shell *data, char *com)
 {
 	t_com	child;
 	int		i;
-	// int		wstatus;
 
 	if (pipe(child.fd) == -1)
 		return (ft_exit_funct("pipe", EXIT_FAILURE));
@@ -38,14 +37,9 @@ int	child_process_pipe(t_shell *data, char *com)
 	}
 	else
 	{
-		if (signal(SIGINT, SIG_IGN) == SIG_ERR)
-			perror("signal");
 		close(child.fd[1]);
 		i = dup2(child.fd[0], STDIN_FILENO);
 		close(child.fd[0]);
-		// waitpid(child.pid, &wstatus, 0);
-		// if (WIFEXITED(wstatus))
-		// 	data->exit_code = WEXITSTATUS(wstatus);
 		if (i == -1)
 			return (ft_exit_funct("dup2", EXIT_FAILURE));
 	}

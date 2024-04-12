@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:27:18 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/12 12:56:08 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/12 14:21:20 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ int	ft_parser(t_shell *data)
 		return (EXIT_FAILURE);
 	if (ft_val_input(data->input, '|', '&') 
 		|| ft_val_input(data->input, '<', '>'))
-	{
-		free_input(data);
 		return (EXIT_FAILURE);
-	}
+	// {
+		// free_input(data);
+	// }
 	if (*data->input)
 		add_history(data->input);
 	data->pipes = ft_split_pipes(data->input);

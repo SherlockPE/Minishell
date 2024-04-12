@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 12:09:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/18 17:33:34 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/12 15:15:37 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ static void	update_env(t_shell *data, const char *old_pwd)
 		ft_update_env_value("OLDPWD=", old_pwd, data);
 }
 
-static int	change_dir(const char *new_dir, const char *old_dir)
+static int	change_dir(const char *new_dir, const char *old_dir, t_list *env)
 {
 	int		i;
 	char	*temp;
 
-	if (!new_dir || *(new_dir) == '~')
+	if (!new_dir)
 	{
-		temp = getenv("HOME");
+		temp = ft_get_env_value("HOME", env);
 		if (!temp)
 		{
 			ft_putstr_fd("cd: HOME not set\n", STDERR);
@@ -48,6 +48,8 @@ static int	change_dir(const char *new_dir, const char *old_dir)
 		i = chdir(old_dir);
 	else
 		i = chdir(new_dir);
+	if (i == -1)
+		perror("cd: chdir");
 	return (i);
 }
 
@@ -66,11 +68,11 @@ void	ft_cd(t_shell *data)
 		old_dir = current_dir;
 		ft_update_env_value("OLDPWD=", old_dir, data);
 	}
-	if (change_dir(data->com->argv[1], old_dir) == -1)
+	if (change_dir(data->com->argv[1], old_dir, data->env) == -1)
 	{
 		if (old_dir != current_dir)
 			free(current_dir);
-		return (perror("cd: chdir"));
+		return ;
 	}
 	if (old_dir && old_dir != current_dir)
 		free(old_dir);

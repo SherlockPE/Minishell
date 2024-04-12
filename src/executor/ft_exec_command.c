@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_command.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 12:04:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/12 00:01:59 by fabriciolop      ###   ########.fr       */
+/*   Updated: 2024/04/12 15:26:09 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,4 @@ void	ft_exec_command(t_shell *data)
 		ft_unset(data);
 	else
 		ft_exec_bin(data);
-	if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &data->init_conf) == -1)
-		perror("tcsetattr");
 }

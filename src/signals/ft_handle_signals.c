@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_handle_signals.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 15:21:51 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/06 22:37:31 by fabriciolop      ###   ########.fr       */
+/*   Updated: 2024/04/12 14:17:35 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,5 @@ static void	ft_signal(int signal)
 void	ft_handle_signals(void)
 {
 	if (signal(SIGINT, ft_signal) == SIG_ERR)
-		perror("signal");
-	if (signal(SIGQUIT, SIG_IGN) == SIG_ERR)
 		perror("signal");
 }

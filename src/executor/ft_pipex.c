@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 14:02:25 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/12 12:41:41 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/12 14:40:43 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,21 @@ int	ft_pipex(t_shell *data)
 
 	old_stdin = dup(STDIN_FILENO);
 	if (old_stdin == -1)
-	{
-		free_input(data);
 		return (ft_exit_funct("dup", EXIT_FAILURE));
-	}
+	// {
+		// free_input(data);
+	// }
 	i = 0;
 	while (data->pipes[i + 1])
 	{
-		if (child_process_pipe(data, data->pipes[i++]) == EXIT_FAILURE)
-			return (EXIT_FAILURE);
+		child_process_pipe(data, data->pipes[i++]);
 	}
-	if (child_process(data, data->pipes[i]) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	free_input(data);
+	child_process(data, data->pipes[i]);
+	if (signal(SIGINT, SIG_IGN) == SIG_ERR)
+		perror("signal");
+	// free_input(data);
 	if (dup2(old_stdin, STDIN_FILENO) == EXIT_FAILURE)
-		return (ft_exit_funct("dup2", EXIT_FAILURE));
+		perror("dup2");
 	close(old_stdin);
 	while (waitpid(-1, &wstatus, 0) != -1 && errno != ECHILD)
 	{

@@ -6,39 +6,26 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 12:09:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/12 09:41:58 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/12 14:19:08 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-// static void	ft_signal(int signal)
-// {
-// 	if (signal == SIGINT)
-// 	{
-// 		printf("\n");
-// 		rl_on_new_line();
-// 		rl_replace_line("", 1);
-// 		rl_redisplay();
-// 	}
-// }
-
 void	ft_minishell_loop(t_shell *data)
 {
 	int	manage_exit;
 
-	ft_save_config(data);
 	while (1)
 	{
+		free_input(data);
 		ft_handle_signals();
 		manage_exit = ft_get_input(data);
 		if (manage_exit == EXIT_FAILURE)
-			continue ; 
+			continue ;
 		else if (manage_exit == EXIT_PROGRAM)
-			break;
-		if (!data->input)
 			break ;
 		if (ft_parser(data) == EXIT_FAILURE)
-			continue;
+			continue ;
 	}
 }
