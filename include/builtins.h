@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_input.c                                       :+:      :+:    :+:   */
+/*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/16 11:43:18 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/13 19:22:19 by albartol         ###   ########.fr       */
+/*   Created: 2024/04/13 18:02:42 by albartol          #+#    #+#             */
+/*   Updated: 2024/04/13 18:08:59 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#ifndef BUILTINS_H
+# define BUILTINS_H
 
-void	free_input(t_shell *data)
-{
-	int	i;
+# include "minishell.h"
 
-	i = 0;
-	free(data->input);
-	while (data->com && data->com[i])
-	{
-		free(data->com[i].com);
-		ft_free_array(data->com->argv);
-		free(data->com[i].input.com);
-		free(data->com[i].input.file_name);
-		free(data->com[i].output.com);
-		free(data->com[i].output.file_name);
-	}
-	free(data->com);
-	data->input = 0;
-	data->com = 0;
-}
+void	ft_echo(t_shell *data);
+void	ft_cd(t_shell *data);
+void	ft_pwd(void);
+void	ft_export(t_shell *data);
+void	ft_unset(t_shell *data);
+void	ft_env(t_shell *data);
+void	ft_exit(t_shell *data);
+
+#endif

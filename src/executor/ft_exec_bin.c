@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 12:47:11 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/09 19:48:21 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/13 18:53:55 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,22 +93,12 @@ void	ft_exec_bin(t_shell *data)
 {
 	char	*bin_path;
 
-	if ((data->com->argv[0][0] == '.' && data->com->argv[0][1] == '/')
-		|| data->com->argv[0][0] == '/')
+	bin_path = ft_check_bin(data);
+	if (!bin_path)
 	{
 		bin_path = ft_strdup(data->com->argv[0]);
 		if (!bin_path)
 			ft_exit_program(data, "malloc");
-	}
-	else
-	{
-		bin_path = ft_check_bin(data);
-		if (!bin_path)
-		{
-			ft_putstr_fd(data->com->argv[0], STDERR);
-			ft_putstr_fd(" : command not found\n", STDERR);
-			return ;
-		}
 	}
 	execute(data, bin_path);
 }

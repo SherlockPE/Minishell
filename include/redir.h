@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_input.c                                       :+:      :+:    :+:   */
+/*   redir.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/16 11:43:18 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/13 19:22:19 by albartol         ###   ########.fr       */
+/*   Created: 2024/04/13 18:13:55 by albartol          #+#    #+#             */
+/*   Updated: 2024/04/13 18:15:28 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#ifndef REDIR_H
+# define REDIR_H
 
-void	free_input(t_shell *data)
-{
-	int	i;
+# include "minishell.h"
 
-	i = 0;
-	free(data->input);
-	while (data->com && data->com[i])
-	{
-		free(data->com[i].com);
-		ft_free_array(data->com->argv);
-		free(data->com[i].input.com);
-		free(data->com[i].input.file_name);
-		free(data->com[i].output.com);
-		free(data->com[i].output.file_name);
-	}
-	free(data->com);
-	data->input = 0;
-	data->com = 0;
-}
+int		ft_check_redirection(t_shell *data, t_redir *red);
+void	ft_create_archive(t_shell *data, t_redir *red);
+void	ft_get_limit(t_shell *data, t_redir *red);
+void	ft_get_archive_name(t_shell *data, t_redir *red);
+
+#endif

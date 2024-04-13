@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_input.c                                       :+:      :+:    :+:   */
+/*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/16 11:43:18 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/13 19:22:19 by albartol         ###   ########.fr       */
+/*   Created: 2024/04/13 18:11:06 by albartol          #+#    #+#             */
+/*   Updated: 2024/04/13 18:14:31 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#ifndef PARSER_H
+# define PARSER_H
 
-void	free_input(t_shell *data)
-{
-	int	i;
+# include "minishell.h"
 
-	i = 0;
-	free(data->input);
-	while (data->com && data->com[i])
-	{
-		free(data->com[i].com);
-		ft_free_array(data->com->argv);
-		free(data->com[i].input.com);
-		free(data->com[i].input.file_name);
-		free(data->com[i].output.com);
-		free(data->com[i].output.file_name);
-	}
-	free(data->com);
-	data->input = 0;
-	data->com = 0;
-}
+int		ft_parser(t_shell *data);
+int		ft_trim_input(t_shell *data);
+int		ft_val_input(const char *com, const char c, const char b);
+char	**ft_split_pipes(const char *com);
+char	**ft_split_quotes(const char *com, const char c);
+int		ft_expansor(t_shell *data);
+char	*ft_trim_quotes(const char *str);
+int 	quotes(const char c);
+
+#endif

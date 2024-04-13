@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_input.c                                       :+:      :+:    :+:   */
+/*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/16 11:43:18 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/13 19:22:19 by albartol         ###   ########.fr       */
+/*   Created: 2024/04/13 18:06:22 by albartol          #+#    #+#             */
+/*   Updated: 2024/04/13 18:08:20 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#ifndef EXECUTOR_H
+# define EXECUTOR_H
 
-void	free_input(t_shell *data)
-{
-	int	i;
+# include "minishell.h"
 
-	i = 0;
-	free(data->input);
-	while (data->com && data->com[i])
-	{
-		free(data->com[i].com);
-		ft_free_array(data->com->argv);
-		free(data->com[i].input.com);
-		free(data->com[i].input.file_name);
-		free(data->com[i].output.com);
-		free(data->com[i].output.file_name);
-	}
-	free(data->com);
-	data->input = 0;
-	data->com = 0;
-}
+int		ft_pipex(t_shell *data);
+void	ft_exec_one(t_shell *data);
+int		child_process_pipe(t_shell *data, char *com);
+int		child_process(t_shell *data, char *com);
+void	ft_send_com(t_shell *data, char *com, t_com *com_struct);
+void	ft_exec_command(t_shell *data);
+void	ft_exec_bin(t_shell *data);
+char	*ft_check_bin(t_shell *data);
+
+#endif
