@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 18:16:12 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/13 18:18:39 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/15 14:52:52 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_exit_program(t_shell *data, const char *message);
 void	ft_free_array(char **array);
 
 int		ft_exit_funct(char *message, int exit);
-int		ft_update_prompt(t_shell *data);
+char	*ft_update_prompt(void);
 int		ft_isnotprint(const char c);
 size_t	ft_strlenchr(const char *str, const char c);
 short	check_quotes(const char *input);

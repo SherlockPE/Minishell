@@ -3,30 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   ft_update_prompt.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 14:53:14 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/12 01:10:01 by fabriciolop      ###   ########.fr       */
+/*   Updated: 2024/04/15 14:52:59 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	ft_update_prompt(t_shell *data)
+char	*ft_update_prompt(void)
 {
-	char	*text;
+	char	*temp;
 	char	*current_dir;
+	char	*prompt;
 
 	current_dir = getcwd(NULL, 0);
 	if (!current_dir)
-		return (ft_exit_funct("malloc", EXIT_FAILURE));
-	text = ft_strjoin(PROMPT, current_dir);
+	{
+		perror("getcwd");
+		return (NULL);
+	}
+	temp = ft_strjoin(PROMPT, current_dir);
 	free(current_dir);
-	if (!text)
-		return (ft_exit_funct("malloc", EXIT_FAILURE));
-	data->prompt = ft_strjoin(text, DELIMITATOR);
-	free(text);
-	if (!data->prompt)
-		return (ft_exit_funct("malloc", EXIT_FAILURE));
-	return (EXIT_SUCCESS);
+	if (!temp)
+	{
+		perror("malloc");
+		return (NULL);
+	}
+	prompt = ft_strjoin(temp, DELIMITATOR);
+	free(temp);
+	if (!prompt)
+	{
+		perror("malloc");
+		return (NULL);
+	}
+	return (prompt);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_input.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 11:48:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/12 14:13:13 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/15 15:14:19 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*	Function gets the input for user using the readline function.
 	The function will asking for more inputs with a \n
 	if the input its not okay */
-static char	*get_input(t_shell *data)
+static char	*get_input(void)
 {
 	char	*new_input;
 
@@ -23,48 +23,66 @@ static char	*get_input(t_shell *data)
 	if (!new_input)
 	{
 		ft_putstr_fd("unexpected EOF while looking for \"\'\n", STDERR);
-		// free_input(data);
 		return (NULL);
 	}
 	return (new_input);
 }
 
-static int	get_new_input(t_shell *data)
+static char	*get_new_input_fail(void)
+{
+	perror("malloc");
+	return (NULL);
+}
+
+static char	*get_new_input(char *old_input)
 {
 	char	*aux;
+	char	*input;
 	char	*new_input;
 
-	while (check_quotes(data->input))
+	input = ft_charjoin(old_input, '\n');
+	if (!input)
+		return (get_new_input_fail());
+	while (check_quotes(input))
 	{
-		aux = data->input;
-		data->input = ft_charjoin(data->input, '\n');
-		free(aux);
-		if (!data->input)
-			return (ft_exit_funct("malloc", EXIT_FAILURE));
-		new_input = get_input(data);
+		new_input = get_input();
 		if (!new_input)
-			return (EXIT_FAILURE);
-		aux = data->input;
-		data->input = ft_strjoin(data->input, new_input);
+			return (NULL);
+		aux = input;
+		input = ft_strjoin(input, new_input);
 		free(aux);
 		free(new_input);
-		if (!data->input)
-			return (ft_exit_funct("malloc", EXIT_FAILURE));
+		if (!input)
+			return (get_new_input_fail());
+		aux = input;
+		input = ft_charjoin(input, '\n');
+		free(aux);
+		if (!input)
+			return (get_new_input_fail());
 	}
 	return (EXIT_SUCCESS);
 }
 
 int	ft_get_input(t_shell *data)
 {
-	if (ft_update_prompt(data) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	data->input = readline(data->prompt);
-	free(data->prompt);
+	char *temp;
+
+	temp = ft_update_prompt();
+	if (!temp)
+		data->input = readline("-> minishell $ ");
+	else
+	{
+		data->input = readline(temp);
+		free(temp);
+	}
 	if (!data->input)
 		return (EXIT_PROGRAM);
 	if (check_quotes(data->input))
 	{
-		if (get_new_input(data) == EXIT_FAILURE)
+		temp = data->input;
+		data->input = get_new_input(data->input);
+		free(temp);
+		if (!data->input)
 			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);

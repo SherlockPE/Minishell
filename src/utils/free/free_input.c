@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:43:18 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/13 19:22:19 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/15 14:45:51 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	free_input(t_shell *data)
 
 	i = 0;
 	free(data->input);
-	while (data->com && data->com[i])
+	// while (data->com && data->com[i].com)
+	while (i < data->com_len)
 	{
 		free(data->com[i].com);
 		ft_free_array(data->com->argv);

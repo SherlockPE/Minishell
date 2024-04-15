@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 17:55:30 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/13 18:57:41 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/15 14:46:22 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ struct s_shell
 	t_list	*env;
 	char	*input;
 	t_pipe	*com;
+	int		com_len;
 	t_conf	conf;
 	t_exit	exit_code;
 };
