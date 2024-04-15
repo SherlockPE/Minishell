@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 11:48:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/15 15:14:19 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/15 15:56:58 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static char	*get_new_input(char *old_input)
 	{
 		new_input = get_input();
 		if (!new_input)
-			return (NULL);
+			return (input);
 		aux = input;
 		input = ft_strjoin(input, new_input);
 		free(aux);

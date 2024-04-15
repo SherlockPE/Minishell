@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+         #
+#    By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 18:53:11 by albartol          #+#    #+#              #
-#    Updated: 2024/04/12 01:09:06 by fabriciolop      ###   ########.fr        #
+#    Updated: 2024/04/15 15:48:47 by albartol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,14 +69,16 @@ BUILTS :=	built-ins/ft_pwd.c \
 			built-ins/ft_unset.c
 
 # PARSER
-PARSER :=	parser/ft_expansor.c \
-			parser/ft_parser.c \
-			parser/ft_split_quotes.c \
-			parser/ft_split_pipes.c \
-			parser/quotes.c \
-			parser/ft_trim_input.c \
+PARSER :=	parser/ft_parser.c \
+			parser/ft_expansor.c \
+			parser/ft_validate_input.c \
+			parser/ft_div_com.c \
 			parser/ft_trim_quotes.c \
-			parser/ft_val_input.c
+			parser/quotes.c
+# 			parser/ft_split_quotes.c
+# 			parser/ft_split_pipes.c
+# 			parser/ft_trim_input.c
+# 			parser/ft_val_input.c
 
 REDIRECTION :=	redirection/ft_check_redirection.c \
 				redirection/ft_create_archive.c \
@@ -84,8 +86,7 @@ REDIRECTION :=	redirection/ft_check_redirection.c \
 				redirection/ft_get_limit.c
 
 # SIGNALS
-SIGNALS :=	signals/ft_save_config.c \
-			signals/ft_handle_signals.c
+SIGNALS :=	signals/ft_handle_signals.c
 
 # EXECUTOR
 EXECUTOR :=	executor/ft_check_bin.c \

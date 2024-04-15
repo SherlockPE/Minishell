@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_minishell_loop.c                                :+:      :+:    :+:   */
+/*   ft_validate_input.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/09 12:09:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/15 15:33:47 by albartol         ###   ########.fr       */
+/*   Created: 2024/04/15 15:43:21 by albartol          #+#    #+#             */
+/*   Updated: 2024/04/15 16:08:36 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	ft_minishell_loop(t_shell *data)
+int	ft_validate_input(const char *input)
 {
-	int	manage_exit;
-
-	while (1)
+	if (check_quotes(input))
 	{
-		free_input(data);
-		ft_handle_signals();
-		manage_exit = ft_get_input(data);
-		if (manage_exit == EXIT_FAILURE)
-			continue ;
-		else if (manage_exit == EXIT_PROGRAM)
-			break ;
-		if (data->input && *data->input)
-			add_history(data->input);
-		ft_parser(data);
+		ft_putstr_fd("syntax_error: unexpected end of file\n", STDERR);
+		return (1);
 	}
+	if (check_pipes(input))
+		return (1);
+	if (check_forbidden(input))
+		return (1);
+	return (0);
 }
