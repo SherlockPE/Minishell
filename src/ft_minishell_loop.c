@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 12:09:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/15 15:33:47 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/15 20:22:01 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ void	ft_minishell_loop(t_shell *data)
 		else if (manage_exit == EXIT_PROGRAM)
 			break ;
 		if (data->input && *data->input)
+		{
 			add_history(data->input);
-		ft_parser(data);
+			ft_parser(data);
+		}
 	}
 }

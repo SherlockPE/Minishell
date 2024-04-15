@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:58:51 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/13 18:23:20 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/15 20:24:50 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@
 
 # include "../lib/libft/libft.h"
 # include "struct.h"
-# include "builtins.h"
-# include "executor.h"
-# include "parser.h"
-# include "redir.h"
 # include "utils.h"
+# include "parser.h"
+// # include "redir.h"
+// # include "executor.h"
+// # include "builtins.h"
 
 // gets the env from where minishell is executed
 void	ft_minishell_init(t_shell *data, char **env);
