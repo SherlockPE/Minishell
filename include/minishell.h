@@ -61,9 +61,9 @@
 # include "struct.h"
 # include "utils.h"
 # include "parser.h"
-// # include "redir.h"
-// # include "executor.h"
-// # include "builtins.h"
+# include "redir.h"
+# include "executor.h"
+# include "builtins.h"
 
 // gets the env from where minishell is executed
 void	ft_minishell_init(t_shell *data, char **env);

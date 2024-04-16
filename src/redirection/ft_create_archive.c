@@ -40,7 +40,7 @@ static int	file_open(t_redir *red)
 	else if (red->type == 2)
 		fd = open(red->file_name, O_WRONLY | O_TRUNC | O_CREAT, FILE_PERM);
 	else
-		fd = open(red->file_name, O_RDONLY, FILE_PERM);
+		fd = open(red->file_name, O_RDONLY);
 	free(red->file_name);
 	if (fd == -1)
 	{

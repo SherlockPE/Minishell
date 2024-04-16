@@ -36,6 +36,7 @@ void	ft_minishell_init(t_shell *data, char **env)
 	data->input = 0;
 	data->com = 0;
 	data->com_len = 0;
+	data->child = 0;
 	data->exit_code = 0;
 	ft_init_env(data, env);
 	save_term_config(data);

@@ -53,12 +53,12 @@ static int	change_dir(const char *new_dir, const char *old_dir, t_list *env)
 	return (i);
 }
 
-void	ft_cd(t_shell *data)
+void	ft_cd(char **argv, t_shell *data)
 {
 	char		*current_dir;
 	static char	*old_dir;
 
-	if (data->com->argv[1] && data->com->argv[2])
+	if (argv[1] && argv[2])
 		return ((void)ft_putstr_fd("cd: too many arguments\n", STDERR));
 	current_dir = getcwd(NULL, 0);
 	if (!current_dir)
@@ -68,7 +68,7 @@ void	ft_cd(t_shell *data)
 		old_dir = current_dir;
 		ft_update_env_value("OLDPWD=", old_dir, data);
 	}
-	if (change_dir(data->com->argv[1], old_dir, data->env) == -1)
+	if (change_dir(argv[1], old_dir, data->env) == -1)
 	{
 		if (old_dir != current_dir)
 			free(current_dir);

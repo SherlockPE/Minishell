@@ -21,7 +21,7 @@ void	free_input(t_shell *data)
 	while (i < data->com_len)
 	{
 		free(data->com[i].com);
-		ft_free_array(data->com->argv);
+		ft_free_array(data->com[i].argv);
 		free(data->com[i].input.com);
 		free(data->com[i].input.file_name);
 		free(data->com[i].output.com);
@@ -31,4 +31,5 @@ void	free_input(t_shell *data)
 	free(data->com);
 	data->input = 0;
 	data->com = 0;
+	data->com_len = 0;
 }

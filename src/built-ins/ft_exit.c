@@ -44,16 +44,16 @@ static int	check_num(const char *num)
 	return (1);
 }
 
-void	ft_exit(t_shell *data)
+void	ft_exit(char **argv, t_shell *data)
 {
-	if (data->com->argv[1] && data->com->argv[2])
+	if (argv[1] && argv[2])
 		ft_putstr_fd("exit: too many arguments\n", STDERR);
 	else
 	{
-		if (data->com->argv[1])
+		if (argv[1])
 		{
-			check_num(data->com->argv[1]);
-			data->exit_code = ft_atol(data->com->argv[1]);
+			check_num(argv[1]);
+			data->exit_code = ft_atol(argv[1]);
 		}
 		free_program(data);
 		exit(data->exit_code);

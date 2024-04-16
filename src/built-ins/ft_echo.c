@@ -12,31 +12,30 @@
 
 #include <minishell.h>
 
-void	ft_echo(t_shell *data)
+static void	print_argv(char **argv, int i)
+{
+	while (argv[i])
+	{
+		ft_putstr_fd(argv[i], STDOUT_FILENO);
+		i++;
+		if (argv[i])
+			ft_putchar_fd(' ', STDOUT_FILENO);
+	}
+}
+
+void	ft_echo(char **argv)
 {
 	int	i;
 
-	if (!data->com->argv[1])
-		return ((void)printf("\n"));
+	if (!argv[1])
+		return ((void)ft_putchar_fd('\n', STDOUT_FILENO));
 	i = 1;
-	if (!ft_strncmp(data->com->argv[1], "-n", 2))
+	if (!ft_strncmp(argv[1], "-n", 2))
 	{
 		i = 2;
-		while (data->com->argv[i])
-		{
-			ft_putstr_fd(data->com->argv[i], STDOUT_FILENO);
-			i++;
-			if (data->com->argv[i])
-				ft_putchar_fd(' ', STDOUT_FILENO);
-		}
+		print_argv(argv, i);
 		return ;
 	}
-	while (data->com->argv[i])
-	{
-		ft_putstr_fd(data->com->argv[i], STDOUT_FILENO);
-		i++;
-		if (data->com->argv[i])
-			ft_putchar_fd(' ', STDOUT_FILENO);
-	}
+	print_argv(argv, i);
 	ft_putchar_fd('\n', STDOUT_FILENO);
 }

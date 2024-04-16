@@ -12,19 +12,25 @@
 
 #include <minishell.h>
 
-int	child_process(t_shell *data, char *com)
+int	child_process(t_shell *data, t_pipe *com)
 {
-	t_com	child;
+	char	**argv;
 
-	child.pid = fork();
-	if (child.pid == -1)
+	com->pid = fork();
+	if (com->pid == -1)
 		return (ft_exit_funct("fork", EXIT_FAILURE));
-	if (child.pid == 0)
+	if (com->pid == 0)
 	{
 		if (signal(SIGQUIT, SIG_DFL) == SIG_ERR)
 			perror("signal");
-		ft_send_com(data, com, &child);
-		free_program(data);
+		data->child = 1;
+		argv = ft_rm_quotes(com->argv);
+		if (!argv)
+			ft_exit_program(data, "malloc");
+		ft_change_fd(com, data);
+		free_input(data);
+		ft_exec_command(argv, data);
+		ft_lstclear(&data->env, free);
 		exit(EXIT_SUCCESS);
 	}
 	return (EXIT_SUCCESS);

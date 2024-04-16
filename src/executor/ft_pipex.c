@@ -12,7 +12,7 @@
 
 #include <minishell.h>
 
-int	ft_pipex(t_shell *data)
+void	ft_pipex(t_shell *data)
 {
 	int	i;
 	int	old_stdin;
@@ -20,20 +20,14 @@ int	ft_pipex(t_shell *data)
 
 	old_stdin = dup(STDIN_FILENO);
 	if (old_stdin == -1)
-		return (ft_exit_funct("dup", EXIT_FAILURE));
-	// {
-		// free_input(data);
-	// }
+		return (perror("pipex: dup"));
 	i = 0;
-	while (data->pipes[i + 1])
-	{
-		child_process_pipe(data, data->pipes[i++]);
-	}
-	child_process(data, data->pipes[i]);
-	if (signal(SIGINT, SIG_IGN) == SIG_ERR)
+	while (i < data->com_len)
+		child_process_pipe(data, &data->com[i++]);
+	child_process(data, &data->com[i]);
+	if (signal(SIGINT, SIG_IGN) == SIG_ERR) // use kill?
 		perror("signal");
-	// free_input(data);
-	if (dup2(old_stdin, STDIN_FILENO) == EXIT_FAILURE)
+	if (dup2(old_stdin, STDIN_FILENO) == -1)
 		perror("dup2");
 	close(old_stdin);
 	while (waitpid(-1, &wstatus, 0) != -1 && errno != ECHILD)
@@ -41,5 +35,4 @@ int	ft_pipex(t_shell *data)
 		if (WIFEXITED(wstatus))
 			data->exit_code = WEXITSTATUS(wstatus);
 	}
-	return (EXIT_SUCCESS);
 }

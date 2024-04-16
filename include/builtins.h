@@ -13,14 +13,14 @@
 #ifndef BUILTINS_H
 # define BUILTINS_H
 
-# include "minishell.h"
+# include "struct.h"
 
-void	ft_echo(t_shell *data);
-void	ft_cd(t_shell *data);
+void	ft_echo(char **argv);
+void	ft_cd(char **argv, t_shell *data);
 void	ft_pwd(void);
-void	ft_export(t_shell *data);
-void	ft_unset(t_shell *data);
-void	ft_env(t_shell *data);
-void	ft_exit(t_shell *data);
+void	ft_export(char **argv, t_shell *data);
+void	ft_unset(char **argv, t_shell *data);
+void	ft_env(char **argv, t_shell *data);
+void	ft_exit(char **argv, t_shell *data);
 
 #endif

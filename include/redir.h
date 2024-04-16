@@ -13,7 +13,7 @@
 #ifndef REDIR_H
 # define REDIR_H
 
-# include "minishell.h"
+# include "struct.h"
 
 int		ft_check_redirection(t_shell *data, t_redir *red);
 void	ft_create_archive(t_shell *data, t_redir *red);

@@ -12,36 +12,56 @@
 
 #include <minishell.h>
 
-int	child_process_pipe(t_shell *data, char *com)
+static void	child_init(t_pipe *com, t_shell *data)
 {
-	t_com	child;
+	int	i;
+
+	if (signal(SIGQUIT, SIG_DFL) == SIG_ERR)
+	{
+		close(com->fd[0]);
+		close(com->fd[1]);
+		ft_exit_program(data, "signal");
+	}
+	close(com->fd[0]);
+	i = dup2(com->fd[1], STDOUT_FILENO);
+	close(com->fd[1]);
+	if (i == -1)
+		ft_exit_program(data, "dup2");
+	data->child = 1;
+}
+
+static void	child_exec(t_pipe *com, t_shell *data)
+{
+	char	**argv;
+
+	argv = ft_rm_quotes(com->argv);
+	if (!argv)
+		ft_exit_program(data, "malloc");
+	ft_change_fd(com, data);
+	free_input(data);
+	ft_exec_command(argv, data);
+	ft_lstclear(&data->env, free);
+}
+
+int	child_process_pipe(t_shell *data, t_pipe *com)
+{
 	int		i;
 
-	if (pipe(child.fd) == -1)
+	if (pipe(com->fd) == -1)
 		return (ft_exit_funct("pipe", EXIT_FAILURE));
-	child.pid = fork();
-	if (child.pid == -1)
+	com->pid = fork();
+	if (com->pid == -1)
 		return (ft_exit_funct("fork", EXIT_FAILURE));
-	if (child.pid == 0)
+	if (com->pid == 0)
 	{
-		if (signal(SIGQUIT, SIG_DFL) == SIG_ERR)
-			perror("signal");
-		close(child.fd[0]);
-		i = dup2(child.fd[1], STDOUT_FILENO);
-		close(child.fd[1]);
-		if (i == -1)
-			ft_exit_program(data, "dup2");
-		ft_send_com(data, com, &child);
-		free_program(data);
+		child_init(com, data);
+		child_exec(com, data);
 		exit(EXIT_SUCCESS);
 	}
-	else
-	{
-		close(child.fd[1]);
-		i = dup2(child.fd[0], STDIN_FILENO);
-		close(child.fd[0]);
-		if (i == -1)
-			return (ft_exit_funct("dup2", EXIT_FAILURE));
-	}
+	close(com->fd[1]);
+	i = dup2(com->fd[0], STDIN_FILENO);
+	close(com->fd[0]);
+	if (i == -1)
+		return (ft_exit_funct("dup2", EXIT_FAILURE));
 	return (EXIT_SUCCESS);
 }

@@ -40,17 +40,17 @@ static void	rm_env(const char *name, size_t len, t_list *env, t_shell *data)
 	}
 }
 
-void	ft_unset(t_shell *data)
+void	ft_unset(char **argv, t_shell *data)
 {
 	int		i;
 	int		j;
 	char	*name;
 
 	i = 0;
-	while (data->com->argv[i])
+	while (argv[i])
 	{
 		j = 0;
-		name = data->com->argv[i];
+		name = argv[i];
 		while (name[j])
 		{
 			if (!ft_isalnum(name[j]) && name[j] != '_')

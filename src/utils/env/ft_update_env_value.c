@@ -12,13 +12,17 @@
 
 #include <minishell.h>
 
-void	ft_update_env_value(const char *name, const char *value, t_shell *data)
+int	ft_update_env_value(const char *name, const char *value, t_shell *data)
 {
 	char	*content;
 
 	content = ft_strjoin(name, value);
 	if (!content)
-		ft_exit_program(data, "malloc");
+	{
+		perror("couldn't update the env: malloc");
+		return (1);
+	}
 	ft_set_env_value(content, data);
 	free(content);
+	return (0);
 }

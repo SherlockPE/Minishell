@@ -12,7 +12,7 @@
 
 #include <minishell.h>
 
-static char	*ft_get_path(char *path, t_shell *data)
+static char	*ft_get_path(char *path, char *bin)
 {
 	size_t	i;
 	size_t	j;
@@ -21,20 +21,23 @@ static char	*ft_get_path(char *path, t_shell *data)
 	char	*str;
 
 	i = 0;
-	len_com = ft_strlen(data->com->argv[0]);
+	len_com = ft_strlen(bin);
 	while (path[i] && path[i] != ':')
 		i++;
 	len = len_com + i + 1;
 	str = (char *)ft_calloc(len + 1, sizeof(char));
 	if (!str)
-		ft_exit_program(data, "malloc");
+	{
+		perror("malloc");
+		return (NULL);
+	}
 	j = -1;
 	while (++j < i)
 		str[j] = path[j];
 	str[j] = '/';
 	i = 0;
 	while (++j < len)
-		str[j] = data->com->argv[0][i++];
+		str[j] = bin[i++];
 	return (str);
 }
 
@@ -52,7 +55,7 @@ static int	ft_len_path(char *path)
 	return (len_path);
 }
 
-static char	*ft_check_path(char *path, t_shell *data)
+static char	*ft_check_path(char *path, char *bin)
 {
 	int		i;
 	int		len_path;
@@ -63,7 +66,9 @@ static char	*ft_check_path(char *path, t_shell *data)
 	str = 0;
 	while (i < len_path && *path)
 	{
-		str = ft_get_path(path, data);
+		str = ft_get_path(path, bin);
+		if (!str)
+			return (NULL);
 		if (access(str, F_OK) == 0)
 			break ;
 		free(str);
@@ -77,12 +82,14 @@ static char	*ft_check_path(char *path, t_shell *data)
 	return (str);
 }
 
-char	*ft_check_bin(t_shell *data)
+char	*ft_check_bin(char *bin, char *path)
 {
-	char	*path;
+	char	*bin_path;
 
-	path = ft_get_env_value("PATH", data->env);
-	if (!path)
+	if (!path || !bin)
 		return (NULL);
-	return (ft_check_path(path, data));
+	bin_path = ft_check_path(path, bin);
+	if (!bin_path)
+		return (NULL);
+	return (bin_path);
 }

@@ -13,7 +13,8 @@
 #ifndef STRUCT_H
 # define STRUCT_H
 
-# include "minishell.h"
+# include "../lib/libft/libft.h"
+# include <term.h>
 
 // colors for printing text in the terminal
 # define RED "\033[0;31m"
@@ -34,10 +35,10 @@
 # define STDERR STDERR_FILENO
 
 # define FILE_PERM 0644
-# define CREATE 1 
-# define APPEND 2 
-# define INPUT 3 
-# define HERE_DOC 4 
+# define TRUNC 1
+# define APPEND 2
+# define INPUT 3
+# define HERE_DOC 4
 # define HERE_DOC_PATH "/tmp/."
 
 # define EXIT_PROGRAM 42
@@ -72,6 +73,7 @@ struct s_shell
 	char	*input;
 	t_pipe	*com;
 	int		com_len;
+	int		child;
 	t_conf	conf;
 	t_exit	exit_code;
 };

@@ -12,23 +12,22 @@
 
 #include <minishell.h>
 
-// needs parser and a command table
-void	ft_exec_command(t_shell *data)
+void	ft_exec_command(char **argv, t_shell *data)
 {
-	if (!ft_strncmp(data->com->argv[0], "pwd", 4))
+	if (!ft_strncmp(argv[0], "pwd", 4))
 		ft_pwd();
-	else if (!ft_strncmp(data->com->argv[0], "cd", 3))
-		ft_cd(data);
-	else if (!ft_strncmp(data->com->argv[0], "env", 4))
-		ft_env(data);
-	else if (!ft_strncmp(data->com->argv[0], "exit", 5))
-		ft_exit(data);
-	else if (!ft_strncmp(data->com->argv[0], "echo", 5))
-		ft_echo(data);
-	else if (!ft_strncmp(data->com->argv[0], "export", 7))
-		ft_export(data);
-	else if (!ft_strncmp(data->com->argv[0], "unset", 6))
-		ft_unset(data);
+	else if (!ft_strncmp(argv[0], "cd", 3))
+		ft_cd(argv, data);
+	else if (!ft_strncmp(argv[0], "env", 4))
+		ft_env(argv, data);
+	else if (!ft_strncmp(argv[0], "exit", 5))
+		ft_exit(argv, data);
+	else if (!ft_strncmp(argv[0], "echo", 5))
+		ft_echo(argv);
+	else if (!ft_strncmp(argv[0], "export", 7))
+		ft_export(argv, data);
+	else if (!ft_strncmp(argv[0], "unset", 6))
+		ft_unset(argv, data);
 	else
-		ft_exec_bin(data);
+		ft_exec_bin(argv, data);
 }

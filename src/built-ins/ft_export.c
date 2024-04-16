@@ -39,16 +39,16 @@ static void	export_val(const char *value, t_shell *data)
 		ft_set_env_value(value, data);
 }
 
-void	ft_export(t_shell *data)
+void	ft_export(char **argv, t_shell *data)
 {
 	int	i;
 
 	if (!data->com->argv[1])
-		return (ft_env(data));
+		return (ft_env(argv, data));
 	i = 1;
 	while (data->com->argv[i])
 	{
-		export_val(data->com->argv[i], data);
+		export_val(argv[i], data);
 		i++;
 	}
 }

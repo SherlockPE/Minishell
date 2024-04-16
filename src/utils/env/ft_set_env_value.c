@@ -12,20 +12,27 @@
 
 #include <minishell.h>
 
-static void	change_env_value(t_shell *data, t_list *env, const char *content)
+static int	change_env_value(t_shell *data, t_list *env, const char *content)
 {
+	char	*temp;
+
+	temp = ft_strdup(content);
+	if (!temp)
+	{
+		perror("couldn't change the env: malloc");
+		return (2);
+	}	
 	free(env->content);
-	env->content = ft_strdup(content);
-	if (!(char *)env->content)
-		ft_exit_program(data, "malloc");
+	env->content = temp;
+	return (1);
 }
 
-void	ft_set_env_value(const char *content, t_shell *data)
+static int	check_env_value(t_shell *data, const char *content)
 {
 	size_t	len_name;
 	size_t	len_env;
-	char	*temp;
 	t_list	*temp_node;
+	char	*temp;
 
 	len_name = ft_strlenchr(content, '=');
 	temp_node = data->env;
@@ -37,14 +44,33 @@ void	ft_set_env_value(const char *content, t_shell *data)
 			return (change_env_value(data, temp_node, content));
 		temp_node = temp_node->next;
 	}
+	return (0);
+}
+
+int	ft_set_env_value(const char *content, t_shell *data)
+{
+	char	*temp;
+	t_list	*temp_node;
+	int		result;
+
+	result = check_env_value(data, content);
+	if (result <= 1)
+		return (0);
+	else if (result == 2)
+		return (1);
 	temp = ft_strdup(content);
 	if (!temp)
-		ft_exit_program(data, "malloc");
+	{
+		perror("couldn't set the env: malloc");
+		return (1);
+	}	
 	temp_node = ft_lstnew(temp);
 	if (!temp_node)
 	{
 		free(temp);
-		ft_exit_program(data, "malloc");
+		perror("couldn't set the env: malloc");
+		return (1);
 	}
 	ft_lstadd_back(&data->env, temp_node);
+	return (0);
 }

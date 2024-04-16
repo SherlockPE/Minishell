@@ -13,7 +13,7 @@
 #ifndef PARSER_H
 # define PARSER_H
 
-# include "minishell.h"
+# include "struct.h"
 
 void	ft_parser(t_shell *data);
 int     ft_validate_input(const char *input);
@@ -23,6 +23,7 @@ t_pipe	*ft_div_com(char *input);
 // char	**ft_split_pipes(const char *com);
 // char	**ft_split_quotes(const char *com, const char c);
 int		ft_expansor(t_shell *data);
+char	**ft_rm_quotes(const char **argv);
 char	*ft_trim_quotes(const char *str);
 short 	quotes(const char c);
 
