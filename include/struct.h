@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 17:55:30 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/15 14:46:22 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/17 14:21:03 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ typedef struct s_redir	t_redir;
 
 struct s_redir
 {
-	char	*com;
 	char	*file_name;
 	int		type;
 	int		success;

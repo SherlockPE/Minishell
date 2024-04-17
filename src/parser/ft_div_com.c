@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 15:39:05 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/15 19:32:59 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/17 14:20:09 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@
     data->com  (t_pipe *)
     data->com_len need to be initialized here
  */
-t_pipe	*ft_div_com(char *input)
+t_pipe	*ft_div_com(char *input, int *com_len)
 {
-	
+    t_pipe *pipes;
+    *com_len = len;
+	return (pipes);
 }

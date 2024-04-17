@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 11:43:18 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/15 19:26:53 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/17 14:29:38 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,7 @@ void	free_input(t_shell *data)
 	{
 		free(data->com[i].com);
 		ft_free_array(data->com[i].argv);
-		free(data->com[i].input.com);
 		free(data->com[i].input.file_name);
-		free(data->com[i].output.com);
 		free(data->com[i].output.file_name);
 		i++;
 	}
