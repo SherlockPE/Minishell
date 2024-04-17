@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redir.h                                            :+:      :+:    :+:   */
+/*   ft_unlink_here_doc.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/13 18:13:55 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/17 19:27:27 by albartol         ###   ########.fr       */
+/*   Created: 2024/04/17 19:17:04 by albartol          #+#    #+#             */
+/*   Updated: 2024/04/17 19:27:12 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef REDIR_H
-# define REDIR_H
+#include <minishell.h>
 
-# include "struct.h"
+void	ft_unlink_here_doc(t_shell *data)
+{
+	int	i;
 
-int		ft_check_redirection(t_shell *data);
-int	    ft_create_archive(t_redir *red, const char  *com, t_shell *data);
-int 	ft_here_doc(t_redir *red, const char  *com);
-char	*ft_get_archive_name(const char *com, t_shell *data);
-int	    reload_command(t_pipe *pipe);
-void	ft_unlink_here_doc(t_shell *data);
-
-#endif
+	i = 0;
+	while (i < data->com_len)
+	{
+		if (data->com[i].input.type == HERE_DOC)
+			unlink(data->com[i].input.file_name);
+		i++;
+	}
+}

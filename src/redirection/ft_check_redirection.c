@@ -6,29 +6,30 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:12:50 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/17 17:02:40 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/17 19:06:44 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static int	redir_output(t_shell *data, t_pipe *pipe, char  *com, int *i)
+static int	redir_output(t_shell *data, t_pipe *pipe, const char  *com, int *i)
 {
 	t_redir *red;
 	
 	red = &pipe->output;
 	if (com[*i + 1] == '>')
 	{
-		com = com + 3;
 		red->type = APPEND;
+		com = com + 3;
 	}
 	else
 	{
-		com = com + 2;
 		red->type = TRUNC;
+		com = com + 2;
 	}
 	while (com == ' ')
 		com++;
+	free(red->file_name);
 	if (ft_create_archive(red, com, data))
 		return (EXIT_FAILURE);
 	if (reload_command(pipe))
@@ -37,17 +38,21 @@ static int	redir_output(t_shell *data, t_pipe *pipe, char  *com, int *i)
 	return (EXIT_SUCCESS);
 }
 
-static int	redir_input(t_shell *data, t_pipe *pipe, char  *com, int *i)
+static int	redir_input(t_shell *data, t_pipe *pipe, const char  *com, int *i)
 {
 	t_redir *red;
 	
 	red = &pipe->input;
+	if (red->type == HERE_DOC)
+		unlink(red->file_name);
+	free(red->file_name);
 	if (com[*i + 1] == '<')
 	{
+		red->type = HERE_DOC;
 		com = com + 3;
 		while (*com == ' ')
 			com++;
-		if (ft_get_limit(red, com))
+		if (ft_here_doc(red, com))
 			return (EXIT_FAILURE);
 	}
 	else

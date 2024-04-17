@@ -6,7 +6,7 @@
 #    By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 18:53:11 by albartol          #+#    #+#              #
-#    Updated: 2024/04/17 16:59:02 by albartol         ###   ########.fr        #
+#    Updated: 2024/04/17 19:27:44 by albartol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,7 +84,8 @@ PARSER :=	parser/ft_parser.c \
 REDIRECTION :=	redirection/ft_check_redirection.c \
 				redirection/ft_create_archive.c \
 				redirection/ft_get_archive_name.c \
-				redirection/ft_get_limit.c \
+				redirection/ft_here_doc.c \
+				redirection/ft_unlink_here_doc.c \
 				redirection/reload_command.c
 
 # EXECUTOR
