@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 13:59:06 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/12 14:39:50 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/17 18:35:47 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	child_exec(t_pipe *com, t_shell *data)
 {
 	char	**argv;
 
-	argv = ft_rm_quotes(com->argv);
+	argv = ft_rm_quotes((const char **)com->argv);
 	if (!argv)
 		ft_exit_program(data, "malloc");
 	ft_change_fd(com, data);

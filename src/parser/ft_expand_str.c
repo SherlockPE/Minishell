@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expand_str.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 15:02:01 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/17 16:31:58 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/17 18:29:12 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	find_name_len(const char *str)
 	return (i);
 }
 
-static char	*expand_exit_code(char *str, int i, t_shell *data)
+static char	*expand_exit_code(const char *str, int i, t_shell *data)
 {
 	int		final_size;
 	char	*new_str;
@@ -64,7 +64,7 @@ static char	*expand_exit_code(char *str, int i, t_shell *data)
 	return (new_str);
 }
 
-static char	*expand(char *str, int i, int name_len, t_shell *data)
+static char	*expand(const char *str, int i, int name_len, t_shell *data)
 {
 	int		final_size;
 	char	*new_str;
@@ -112,5 +112,5 @@ char	*ft_expand_str(const char *str, t_shell *data)
 		}
 		i++;
 	}
-	return (str);
+	return ((char *)str);
 }

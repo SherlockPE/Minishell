@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_one.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 14:03:22 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/17 19:59:18 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/17 20:35:45 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	ft_exec_one(t_shell *data)
 	char	**argv;
 	int		fd[2];
 
-	argv = ft_rm_quotes(data->com->argv);
+	argv = ft_rm_quotes((const char **)data->com->argv);
 	if (!argv)
 	{
 		perror("malloc");

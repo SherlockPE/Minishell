@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+         #
+#    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 18:53:11 by albartol          #+#    #+#              #
-#    Updated: 2024/04/17 19:27:44 by albartol         ###   ########.fr        #
+#    Updated: 2024/04/17 20:38:08 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,9 +95,7 @@ EXECUTOR :=	executor/ft_check_bin.c \
 			executor/ft_exec_bin.c \
 			executor/ft_exec_command.c \
 			executor/ft_exec_one.c \
-			executor/ft_pipex.c \
-			executor/ft_send_com.c
-
+			executor/ft_pipex.c
 
 ALL_UTILS := $(UTILITIES) $(UTILS_FREE) $(UTILS_ENV) $(UTILS_ARR)
 

@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 14:01:22 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/12 14:40:22 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/17 18:33:39 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	child_process(t_shell *data, t_pipe *com)
 		if (signal(SIGQUIT, SIG_DFL) == SIG_ERR)
 			perror("signal");
 		data->child = 1;
-		argv = ft_rm_quotes(com->argv);
+		argv = ft_rm_quotes((const char **)com->argv);
 		if (!argv)
 			ft_exit_program(data, "malloc");
 		ft_change_fd(com, data);
