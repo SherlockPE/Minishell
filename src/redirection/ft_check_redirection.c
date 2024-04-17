@@ -6,16 +6,16 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:12:50 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/17 19:06:44 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/17 20:05:20 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static int	redir_output(t_shell *data, t_pipe *pipe, const char  *com, int *i)
+static int	redir_output(t_shell *data, t_pipe *pipe, const char *com, int *i)
 {
-	t_redir *red;
-	
+	t_redir	*red;
+
 	red = &pipe->output;
 	if (com[*i + 1] == '>')
 	{
@@ -38,14 +38,19 @@ static int	redir_output(t_shell *data, t_pipe *pipe, const char  *com, int *i)
 	return (EXIT_SUCCESS);
 }
 
-static int	redir_input(t_shell *data, t_pipe *pipe, const char  *com, int *i)
+static void	check_old_redir(t_redir *red)
 {
-	t_redir *red;
-	
-	red = &pipe->input;
 	if (red->type == HERE_DOC)
 		unlink(red->file_name);
 	free(red->file_name);
+}
+
+static int	redir_input(t_shell *data, t_pipe *pipe, const char *com, int *i)
+{
+	t_redir	*red;
+
+	red = &pipe->input;
+	check_old_redir(red);
 	if (com[*i + 1] == '<')
 	{
 		red->type = HERE_DOC;
@@ -74,13 +79,13 @@ static int	find_redir(t_shell *data, int i)
 	t_pipe	*pipe;
 	int		j;
 	int		sucess;
-	
+
 	pipe = &data->com[i];
 	j = 0;
 	while (pipe->com[j])
 	{
 		if (!quotes(pipe->com[j]))
-		{			
+		{
 			if (pipe->com[j] == '>')
 				sucess = redir_output(data, pipe, pipe->com, &j);
 			else if (pipe->com[j] == '<')

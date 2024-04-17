@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 18:13:55 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/17 19:27:27 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/17 20:13:04 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 # include "struct.h"
 
 int		ft_check_redirection(t_shell *data);
-int	    ft_create_archive(t_redir *red, const char  *com, t_shell *data);
-int 	ft_here_doc(t_redir *red, const char  *com);
+int		ft_create_archive(t_redir *red, const char *com, t_shell *data);
+int		ft_here_doc(t_redir *red, const char *com);
 char	*ft_get_archive_name(const char *com, t_shell *data);
-int	    reload_command(t_pipe *pipe);
+int		reload_command(t_pipe *pipe);
 void	ft_unlink_here_doc(t_shell *data);
 
 #endif

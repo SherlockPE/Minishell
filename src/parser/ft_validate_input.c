@@ -6,15 +6,15 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 15:43:21 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/15 21:32:04 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/17 20:06:57 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static int syntax_error(const char *message)
+static int	syntax_error(const char *message)
 {
-	char *print;
+	char	*print;
 
 	print = ft_strjoin("syntax_error: ", message);
 	if (!print)
@@ -24,21 +24,21 @@ static int syntax_error(const char *message)
 	return (1);
 }
 
-static int check_last(const char *input, const char *set)
+static int	check_last(const char *input, const char *set)
 {
-	size_t len;
+	size_t	len;
 
 	len = ft_strlen(input);
 	if (len > 0)
 		len--;
-	while ( len > 0 && input[len] == ' ')
+	while (len > 0 && input[len] == ' ')
 		len--;
 	if (ft_strchr(set, input[len]))
 		return (syntax_error("unexpected end of file\n"));
 	return (0);
 }
 
-static int check_pipes(const char *input)
+static int	check_pipes(const char *input)
 {
 	int	i;
 	int	pipe;
@@ -67,7 +67,7 @@ static int check_pipes(const char *input)
 	return (check_last(input, "|"));
 }
 
-static int check_redir(const char *input)
+static int	check_redir(const char *input)
 {
 	int	i;
 	int	redir;

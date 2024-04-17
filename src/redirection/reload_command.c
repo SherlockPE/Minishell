@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 16:57:53 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/17 16:58:22 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/17 20:01:25 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static char	*reload_last_command(const char *com)
 	int		i;
 
 	i = 0;
-	while (com[i] && ft_strchr("<> ", com[i])) 
+	while (com[i] && ft_strchr("<> ", com[i]))
 		i++;
 	while (com[i])
 	{

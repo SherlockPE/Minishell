@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 17:07:56 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/17 19:15:34 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/17 20:01:54 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	create_tmp_file_name(t_redir *red)
 	}
 	i = read(fd, buff, 8);
 	close(fd);
-	if (i = -1)
+	if (i == -1)
 	{
 		perror("read");
 		return (EXIT_FAILURE);
@@ -57,7 +57,7 @@ static char	*get_limit(const char *com)
 {
 	char	*limit;
 	int		i;
-	
+
 	while (com[i])
 	{
 		if (!quotes(com[i]) && ft_strchr(" <>", com[i]))
@@ -110,7 +110,7 @@ int	ft_here_doc(t_redir *red, const char *com)
 	if (create_tmp_file_name(red))
 		return (EXIT_FAILURE);
 	fd = open(red->file_name, O_WRONLY | O_CREAT | O_TRUNC, FILE_PERM);
-	if (fd = -1)
+	if (fd == -1)
 		return (EXIT_FAILURE);
 	limit = get_limit(com);
 	if (!limit)
