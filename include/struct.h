@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 17:55:30 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/17 14:21:03 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/17 16:43:45 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ struct s_redir
 {
 	char	*file_name;
 	int		type;
-	int		success;
 };
 
 struct s_pipe

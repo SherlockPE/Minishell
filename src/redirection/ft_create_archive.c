@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_create_archive.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 11:13:15 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/06 22:23:30 by fabriciolop      ###   ########.fr       */
+/*   Updated: 2024/04/17 16:41:52 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,25 @@ static int	file_open(t_redir *red)
 {
 	int	fd;
 
-	if (red->type == 1)
+	if (red->type == APPEND)
 		fd = open(red->file_name, O_WRONLY | O_APPEND | O_CREAT, FILE_PERM);
-	else if (red->type == 2)
+	else if (red->type == TRUNC)
 		fd = open(red->file_name, O_WRONLY | O_TRUNC | O_CREAT, FILE_PERM);
 	else
 		fd = open(red->file_name, O_RDONLY);
-	free(red->file_name);
 	if (fd == -1)
 	{
 		perror("open");
-		return (0);
+		return (1);
 	}
-	return (file_dup(red, fd));
+	close(fd);
+	return (0);
 }
 
-void	ft_create_archive(t_shell *data, t_redir *red)
+int	ft_create_archive(t_redir *red, char  *com, t_shell *data)
 {
-	ft_get_archive_name(data, red);
-	red->success = file_open(red);
+	red->file_name = ft_get_archive_name(com, data);
+	if (!red->file_name)
+		return (1);
+	return (file_open(red));
 }

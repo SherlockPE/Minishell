@@ -6,7 +6,7 @@
 #    By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 18:53:11 by albartol          #+#    #+#              #
-#    Updated: 2024/04/15 20:28:51 by albartol         ###   ########.fr        #
+#    Updated: 2024/04/17 16:59:02 by albartol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,14 +69,12 @@ BUILTS :=	built-ins/ft_pwd.c \
 			built-ins/ft_unset.c
 
 # PARSER
-# PARSER :=	parser/ft_parser.c \
-# 			 parser/ft_expansor.c \
-# 			parser/ft_validate_input.c \
-# 			parser/ft_div_com.c \
-# 			parser/ft_trim_quotes.c \
-# 			parser/quotes.c
 PARSER :=	parser/ft_parser.c \
+			parser/ft_expansor.c \
+			parser/ft_expand_str.c \
 			parser/ft_validate_input.c \
+			parser/ft_div_com.c \
+			parser/ft_trim_quotes.c \
 			parser/quotes.c
 # 			parser/ft_split_quotes.c
 # 			parser/ft_split_pipes.c
@@ -86,7 +84,8 @@ PARSER :=	parser/ft_parser.c \
 REDIRECTION :=	redirection/ft_check_redirection.c \
 				redirection/ft_create_archive.c \
 				redirection/ft_get_archive_name.c \
-				redirection/ft_get_limit.c
+				redirection/ft_get_limit.c \
+				redirection/reload_command.c
 
 # EXECUTOR
 EXECUTOR :=	executor/ft_check_bin.c \
@@ -103,8 +102,7 @@ ALL_UTILS := $(UTILITIES) $(UTILS_FREE) $(UTILS_ENV) $(UTILS_ARR)
 
 UTILS := $(addprefix $(UTILS_DIR)/, $(ALL_UTILS))
 
-# SRC := $(SOURCES) $(BUILTS) $(UTILS) $(PARSER) $(EXECUTOR) $(REDIRECTION) $(SIGNALS)
-SRC := $(SOURCES) $(UTILS) $(PARSER)
+SRC := $(SOURCES) $(BUILTS) $(UTILS) $(PARSER) $(EXECUTOR) $(REDIRECTION) $(SIGNALS)
 SRCS := $(addprefix $(SRC_DIR)/, $(SRC))
 
 OBJS := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
