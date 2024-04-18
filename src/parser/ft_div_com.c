@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 15:39:05 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/18 14:22:34 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/18 15:38:07 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static char	**get_commands(const char *input)
 
 static void	init_redir(t_redir *redirection)
 {
-	redirection->file_name = NULL;
+	redirection->file_name = 0;
 	redirection->type = 0;	
 }
 
@@ -43,9 +43,10 @@ static void	fill_commands(char **commands, t_pipe *pipes)
 	i = 0;
 	while (commands[i])
 	{
-		init_redir(&pipes->input);
-		init_redir(&pipes->output);
+		init_redir(&pipes[i].input);
+		init_redir(&pipes[i].output);
 		pipes[i].com = commands[i];
+		pipes[i].argv = 0;
 		i++;
 	}
 }

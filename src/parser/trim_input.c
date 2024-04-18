@@ -6,26 +6,26 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:45:54 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/18 14:29:23 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/18 15:35:19 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	get_len(const char *result)
+int	get_len(const char *input)
 {
 	int	i;
 	int	len;
 
 	i = 0;
-	len = ft_strlen(result);
-	while (result[i])
+	len = ft_strlen(input);
+	while (input[i])
 	{
-		if (!quotes(result[i]) && result[i] == '|')
+		if (!quotes(input[i]) && input[i] == '|')
 		{
-			if (i > 0 && result[i - 1] == ' ')
+			if (i > 0 && input[i - 1] == ' ')
 				len--;
-			if (result[i + 1] == ' ')
+			if (input[i + 1] == ' ')
 				len--;
 		}
 		i++;
@@ -48,14 +48,14 @@ static char	*rm_pipe_spaces(const char *input)
 	while (input[i])
 	{
 		result[j] = input[i];
-		if (!quotes(result[i]) && result[i] == '|')
+		if (!quotes(input[i]) && input[i] == '|')
 		{
-			if (i > 0 && result[i - 1] == ' ')
+			if (i > 0 && input[i - 1] == ' ')
 			{
 				j--;
 				result[j] = input[i];
 			}
-			if (result[i + 1] == ' ')
+			if (input[i + 1] == ' ')
 				i++;
 		}
 		i++;
