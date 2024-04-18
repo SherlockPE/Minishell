@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_redirection.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:12:50 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/17 20:05:20 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/18 14:29:39 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	redir_output(t_shell *data, t_pipe *pipe, const char *com, int *i)
 		red->type = TRUNC;
 		com = com + 2;
 	}
-	while (com == ' ')
+	while (*com == ' ')
 		com++;
 	free(red->file_name);
 	if (ft_create_archive(red, com, data))
@@ -72,6 +72,7 @@ static int	redir_input(t_shell *data, t_pipe *pipe, const char *com, int *i)
 	if (reload_command(pipe))
 		return (EXIT_FAILURE);
 	*i = -1;
+	return (EXIT_SUCCESS);
 }
 
 static int	find_redir(t_shell *data, int i)

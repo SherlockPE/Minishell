@@ -6,7 +6,7 @@
 #    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 18:53:11 by albartol          #+#    #+#              #
-#    Updated: 2024/04/17 20:38:08 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/04/18 14:35:41 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,8 @@ UTILITIES :=	ft_isnotprint.c \
 				ft_strlenchr.c \
 				ft_update_prompt.c \
 				check_quotes.c \
-				ft_handle_signals.c
+				ft_handle_signals.c \
+				ft_exit_funct.c
 
 UTILS_FREE :=	free/free_input.c \
 				free/free_program.c \
@@ -75,10 +76,12 @@ PARSER :=	parser/ft_parser.c \
 			parser/ft_validate_input.c \
 			parser/ft_div_com.c \
 			parser/ft_trim_quotes.c \
-			parser/quotes.c
-# 			parser/ft_split_quotes.c
+			parser/ft_rm_quotes.c \
+			parser/quotes.c \
+			parser/ft_trim_input.c \
+			parser/ft_split_quotes.c \
+			parser/trim_input.c
 # 			parser/ft_split_pipes.c
-# 			parser/ft_trim_input.c
 # 			parser/ft_val_input.c
 
 REDIRECTION :=	redirection/ft_check_redirection.c \
@@ -89,7 +92,8 @@ REDIRECTION :=	redirection/ft_check_redirection.c \
 				redirection/reload_command.c
 
 # EXECUTOR
-EXECUTOR :=	executor/ft_check_bin.c \
+EXECUTOR :=	executor/ft_change_fd.c \
+			executor/ft_check_bin.c \
 			executor/ft_child_process_pipe.c \
 			executor/ft_child_process.c \
 			executor/ft_exec_bin.c \

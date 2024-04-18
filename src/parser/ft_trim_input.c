@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:15:36 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/12 14:27:07 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/18 13:41:11 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,30 +30,26 @@ static int	ft_count_len(const char *input)
 	return (len);
 }
 
-int	ft_trim_input(t_shell *data)
+char	*ft_trim_input(const char *input) 
 {
 	char	*str;
-	char	*com;
 	int		i;
 	int		j;
 
 	i = 0;
 	j = 0;
-	com = data->input;
-	str = (char *)ft_calloc(ft_count_len(com) + 1, sizeof(char));
+	str = (char *)ft_calloc(ft_count_len(input) + 1, sizeof(char));
 	if (!str)
-		return (ft_exit_funct("malloc", EXIT_FAILURE));
-	while (com[i])
+		return (NULL);
+	while (input[i])
 	{
-		if (quotes(com[i]))
-			str[j++] = com[i];
-		else if (com[i] != ' ' || (i > 0 && com[i - 1] != ' '))
-			str[j++] = com[i];
+		if (quotes(input[i]))
+			str[j++] = input[i];
+		else if (input[i] != ' ' || (i > 0 && input[i - 1] != ' '))
+			str[j++] = input[i];
 		i++;
 	}
 	if (j > 0 && str[j - 1] == ' ')
 		str[j - 1] = 0;
-	free(data->input);
-	data->input = str;
-	return (EXIT_SUCCESS);
+	return (str);
 }

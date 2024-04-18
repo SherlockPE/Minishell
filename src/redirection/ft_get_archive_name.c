@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_archive_name.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 22:05:36 by fabriciolop       #+#    #+#             */
-/*   Updated: 2024/04/17 16:42:59 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/18 14:31:38 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-char	*trim_archive_name(char *com, int i, t_shell *data)
+static char	*trim_archive_name(const char *com, int i, t_shell *data)
 {
 	char	*aux;
 	char	*temp;
@@ -29,9 +29,10 @@ char	*trim_archive_name(char *com, int i, t_shell *data)
 	free(temp);
 	if (!file_name)
 		return (NULL);
+	return (file_name);
 }
 
-char	*ft_get_archive_name(char *com, t_shell *data)
+char	*ft_get_archive_name(const char *com, t_shell *data)
 {
 	int		i;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_here_doc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 17:07:56 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/17 20:01:54 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/18 14:33:14 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	create_tmp_file_name(t_redir *red)
 {
 	char	*buff[8];
 	int		fd;
-	size_t	i;
+	ssize_t	i;
 
 	buff[7] = 0;
 	fd = open("/dev/random", O_RDONLY);
@@ -44,7 +44,7 @@ static int	create_tmp_file_name(t_redir *red)
 		perror("read");
 		return (EXIT_FAILURE);
 	}
-	red->file_name = ft_strjoin("/tmp/.", buff);
+	red->file_name = ft_strjoin("/tmp/.", (const char *)buff);
 	if (!red->file_name)
 	{
 		perror("malloc");
@@ -58,6 +58,7 @@ static char	*get_limit(const char *com)
 	char	*limit;
 	int		i;
 
+	i = 0;
 	while (com[i])
 	{
 		if (!quotes(com[i]) && ft_strchr(" <>", com[i]))
@@ -103,8 +104,6 @@ static int	fill_here_doc(t_redir *red, const char *limit, int fd)
 int	ft_here_doc(t_redir *red, const char *com)
 {
 	char	*limit;
-	char	*new_input;
-	char	*temp_str;
 	int		fd;
 
 	if (create_tmp_file_name(red))
