@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reload_command.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 16:57:53 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/17 20:01:25 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/18 19:50:51 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static char	*reload_last_command(const char *com)
 	int		i;
 
 	i = 0;
-	while (com[i] && ft_strchr("<> ", com[i]))
+	while (com[i] && !quotes(com[i]) && ft_strchr("<> ", com[i]))
 		i++;
 	while (com[i])
 	{
@@ -37,7 +37,7 @@ static char	*reload_front_command(const char *com, int pos)
 	char	*rel_com;
 
 	i = pos;
-	while (com[i] && ft_strchr("<> ", com[i]))
+	while (com[i] && !quotes(com[i]) && ft_strchr("<> ", com[i]))
 		i++;
 	while (com[i])
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 18:58:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/13 19:23:43 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/18 19:33:01 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ int	main(int argc, char **argv, char **env)
 	ft_minishell_init(&data, env);
 	ft_minishell_loop(&data);
 	free_program(&data);
-	ft_putstr_fd("Exiting minishell\n", STDOUT);
+	// ft_putstr_fd("Exiting minishell\n", STDOUT);
 	return (data.exit_code);
 }

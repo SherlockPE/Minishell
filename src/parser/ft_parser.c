@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:27:18 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/18 18:27:53 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/18 19:58:54 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_parser(t_shell *data)
 {
-	if (ft_validate_input(data->input))
-		return ;
+	// if (ft_validate_input(data->input))
+	// 	return ;
 	data->com = ft_div_com(data->input, &data->com_len);
 	if (!data->com)
 	{

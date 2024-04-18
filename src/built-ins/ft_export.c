@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 13:10:51 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/10 15:31:21 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/18 20:05:47 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ void	ft_export(char **argv, t_shell *data)
 {
 	int	i;
 
-	if (!data->com->argv[1])
+	if (!argv[1])
 		return (ft_env(argv, data));
 	i = 1;
-	while (data->com->argv[i])
+	while (argv[i])
 	{
 		export_val(argv[i], data);
 		i++;

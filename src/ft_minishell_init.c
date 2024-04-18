@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell_init.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:25:49 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/15 14:47:47 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/18 19:32:54 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,5 @@ void	ft_minishell_init(t_shell *data, char **env)
 	save_term_config(data);
 	if (signal(SIGQUIT, SIG_IGN) == SIG_ERR)
 		perror("signal");
-	print_title();
+	// print_title();
 }

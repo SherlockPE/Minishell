@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_validate_input.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 15:43:21 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/17 20:06:57 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/18 19:33:51 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static int	check_redir(const char *input)
 		if (!quotes(input[i]) && ft_strchr("<>", input[i]))
 		{
 			redir ^= 1;
-			printf("--> [%i]\n", redir);
+			// printf("--> [%i]\n", redir);
 			i++;
 			if (input[i] == input[i - 1])
 				i++;
