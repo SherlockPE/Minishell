@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_rm_quotes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 16:34:22 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/17 20:07:44 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/18 21:29:19 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ char	**ft_rm_quotes(const char **argv)
 	new_argv = ft_calloc(len + 1, sizeof(char *));
 	if (!new_argv)
 		return (NULL);
+	// while (argv[i])
+	// {
+	// 	printf("argv %d --> [%s]\n", i, argv[i]);
+	// 	i++; 
+	// }
+	i = 0;
 	while (argv[i])
 	{
 		if (ft_strchr(argv[i], '\"') || ft_strchr(argv[i], '\''))

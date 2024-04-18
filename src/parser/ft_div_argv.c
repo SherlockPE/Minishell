@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/15 15:39:05 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/18 18:27:07 by flopez-r         ###   ########.fr       */
+/*   Created: 2024/04/18 20:45:28 by flopez-r          #+#    #+#             */
+/*   Updated: 2024/04/18 21:28:52 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	ft_div_argv(t_shell *data)
 	int	i;
 
 	i = 0;
+	// printf("#value of data.com.com [%s]\n", data->com->com);
 	while (i < data->com_len)
 	{
 		data->com[i].argv = ft_split_quotes(data->com[i].com, ' ');
@@ -24,5 +25,15 @@ int	ft_div_argv(t_shell *data)
 			return (ft_exit_funct("malloc", EXIT_FAILURE));
 		i++;
 	}
+	
+	// char **temp;
+	// i = 0;
+
+	// temp = data->com->argv;
+	// while (temp[i])
+	// {
+	// 	printf("ARGV ->> [%s]\n", temp[i]);
+	// 	i++;
+	// }
 	return (EXIT_SUCCESS);
 }

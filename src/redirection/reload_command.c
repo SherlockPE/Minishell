@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 16:57:53 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/18 19:50:51 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/18 20:30:41 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static char	*reload_last_command(const char *com)
 	}
 	while (com[i] == ' ')
 		i++;
-	return (ft_substr(com, i, ft_strlen(&com[i])));
+	return (ft_substr(com, i, ft_strlen(com)));
 }
 
 static char	*reload_front_command(const char *com, int pos)
@@ -49,8 +49,8 @@ static char	*reload_front_command(const char *com, int pos)
 	rel_com = ft_calloc(len + 1, sizeof(char));
 	if (!rel_com)
 		return (NULL);
-	ft_strlcpy(rel_com, com, pos);
-	ft_strlcat(rel_com, &com[i], len);
+	ft_strlcpy(rel_com, com, pos + 1);
+	ft_strlcat(rel_com, &com[i], len + 1);
 	return (rel_com);
 }
 

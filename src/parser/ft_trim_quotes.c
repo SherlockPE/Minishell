@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_trim_quotes.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 14:54:54 by albartol          #+#    #+#             */
-/*   Updated: 2024/03/29 15:22:24 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/18 21:06:27 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,21 @@ static size_t	count_len(const char *str)
 	int		num_quotes;
 	size_t	len;
 
+	if (!str)
+		return (0);
 	i = 0;
 	len = ft_strlen(str);
 	num_quotes = 0;
 	while (str[i])
 	{
-		if (quotes(str[i]))
+		if (str[i] && quotes(str[i]))
 		{
 			num_quotes++;
 			i++;
-			while (quotes(str[i]))
+			while (str[i] && quotes(str[i]))
 				i++;
+			if (!str[i])
+				break;
 		}
 		i++;
 	}
@@ -47,7 +51,7 @@ static void	fill_new_str(char *new_str, const char *str)
 		if (quotes(str[i]))
 		{
 			i++;
-			while (quotes(str[i]))
+			while (str[i] && quotes(str[i]))
 				new_str[j++] = str[i++];
 			i++;
 		}
