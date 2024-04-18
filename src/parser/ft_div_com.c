@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 15:39:05 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/18 15:38:07 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/18 18:12:54 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,5 @@ t_pipe	*ft_div_com(const char *input, int *com_len)
 	fill_commands(commands, pipes);
 	*com_len = len;
 	free(commands);
-
-	int i = 0;
-	while (i < len)
-	{
-		printf("Content [%s]\n", pipes[i].com);
-		i++;
-	}
 	return (pipes);
 }

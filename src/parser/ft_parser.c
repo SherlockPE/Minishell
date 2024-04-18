@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:27:18 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/18 14:38:48 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/18 16:31:28 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	ft_parser(t_shell *data)
 		perror("malloc");
 		return ;
 	}
+	if (ft_check_redirection(data))
+		return ;
 	// if (ft_expansor(data))
 	// 	return ;
 	// if (data->com_len > 1)

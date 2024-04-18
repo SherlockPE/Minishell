@@ -6,7 +6,7 @@
 #    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 18:53:11 by albartol          #+#    #+#              #
-#    Updated: 2024/04/18 14:35:41 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/04/18 17:08:59 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,6 +88,7 @@ REDIRECTION :=	redirection/ft_check_redirection.c \
 				redirection/ft_create_archive.c \
 				redirection/ft_get_archive_name.c \
 				redirection/ft_here_doc.c \
+				redirection/create_tmp_file_name.c \
 				redirection/ft_unlink_here_doc.c \
 				redirection/reload_command.c
 

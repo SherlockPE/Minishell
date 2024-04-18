@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_create_archive.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 11:13:15 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/17 20:02:21 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/18 18:13:50 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,7 @@ int	ft_create_archive(t_redir *red, const char *com, t_shell *data)
 	red->file_name = ft_get_archive_name(com, data);
 	if (!red->file_name)
 		return (1);
+/* 	ft_putstr_fd(red->file_name, 2);
+	ft_putstr_fd("\n", 2); */
 	return (file_open(red));
 }

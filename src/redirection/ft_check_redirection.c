@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:12:50 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/18 14:29:39 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/18 16:55:07 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ static int	redir_output(t_shell *data, t_pipe *pipe, const char *com, int *i)
 	if (com[*i + 1] == '>')
 	{
 		red->type = APPEND;
-		com = com + 3;
+		com = &com[*i + 2];
 	}
 	else
 	{
 		red->type = TRUNC;
-		com = com + 2;
+		com = &com[*i + 1];
 	}
 	while (*com == ' ')
 		com++;
@@ -54,7 +54,7 @@ static int	redir_input(t_shell *data, t_pipe *pipe, const char *com, int *i)
 	if (com[*i + 1] == '<')
 	{
 		red->type = HERE_DOC;
-		com = com + 3;
+		com = &com[*i + 2];
 		while (*com == ' ')
 			com++;
 		if (ft_here_doc(red, com))
@@ -63,7 +63,7 @@ static int	redir_input(t_shell *data, t_pipe *pipe, const char *com, int *i)
 	else
 	{
 		red->type = INPUT;
-		com = com + 2;
+		com = &com[*i + 1];
 		while (*com == ' ')
 			com++;
 		if (ft_create_archive(red, com, data))
@@ -83,6 +83,7 @@ static int	find_redir(t_shell *data, int i)
 
 	pipe = &data->com[i];
 	j = 0;
+	sucess = 0;
 	while (pipe->com[j])
 	{
 		if (!quotes(pipe->com[j]))
@@ -110,6 +111,7 @@ int	ft_check_redirection(t_shell *data)
 	{
 		if (find_redir(data, i))
 			return (EXIT_FAILURE);
+		i++;
 	}
 	return (EXIT_SUCCESS);
 }

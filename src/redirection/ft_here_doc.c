@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 17:07:56 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/18 14:33:14 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/18 18:16:25 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,35 +22,6 @@ static int	check_input(const char *new_input, const char *limit)
 	if (ft_strncmp(new_input, limit, input_len))
 		return (0);
 	return (1);
-}
-
-static int	create_tmp_file_name(t_redir *red)
-{
-	char	*buff[8];
-	int		fd;
-	ssize_t	i;
-
-	buff[7] = 0;
-	fd = open("/dev/random", O_RDONLY);
-	if (fd == -1)
-	{
-		perror("open");
-		return (EXIT_FAILURE);
-	}
-	i = read(fd, buff, 8);
-	close(fd);
-	if (i == -1)
-	{
-		perror("read");
-		return (EXIT_FAILURE);
-	}
-	red->file_name = ft_strjoin("/tmp/.", (const char *)buff);
-	if (!red->file_name)
-	{
-		perror("malloc");
-		return (EXIT_FAILURE);
-	}
-	return (EXIT_SUCCESS);
 }
 
 static char	*get_limit(const char *com)
@@ -110,7 +81,7 @@ int	ft_here_doc(t_redir *red, const char *com)
 		return (EXIT_FAILURE);
 	fd = open(red->file_name, O_WRONLY | O_CREAT | O_TRUNC, FILE_PERM);
 	if (fd == -1)
-		return (EXIT_FAILURE);
+		return (ft_exit_funct("open", EXIT_FAILURE));
 	limit = get_limit(com);
 	if (!limit)
 	{

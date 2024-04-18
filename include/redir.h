@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 18:13:55 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/17 20:13:04 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/18 17:08:41 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 int		ft_check_redirection(t_shell *data);
 int		ft_create_archive(t_redir *red, const char *com, t_shell *data);
 int		ft_here_doc(t_redir *red, const char *com);
+int	    create_tmp_file_name(t_redir *red);
 char	*ft_get_archive_name(const char *com, t_shell *data);
 int		reload_command(t_pipe *pipe);
 void	ft_unlink_here_doc(t_shell *data);
