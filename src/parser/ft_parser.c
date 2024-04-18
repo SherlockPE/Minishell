@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 17:27:18 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/18 16:31:28 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/18 18:27:53 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,14 @@ void	ft_parser(t_shell *data)
 	}
 	if (ft_check_redirection(data))
 		return ;
-	// if (ft_expansor(data))
-	// 	return ;
-	// if (data->com_len > 1)
-	// 	ft_pipex(data);
-	// else
-	// 	ft_exec_one(data);
+	if (ft_expansor(data))
+		return ;
+	if (ft_div_argv(data))
+		return ;
+	if (data->com_len > 1)
+		ft_pipex(data);
+	else
+		ft_exec_one(data);
 }
 
 /* void	ft_parser(t_shell *data)

@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 14:02:25 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/12 14:40:43 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/18 18:38:01 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_pipex(t_shell *data)
 	if (old_stdin == -1)
 		return (perror("pipex: dup"));
 	i = 0;
-	while (i < data->com_len)
+	while (i < data->com_len - 1)
 		child_process_pipe(data, &data->com[i++]);
 	child_process(data, &data->com[i]);
 	if (signal(SIGINT, SIG_IGN) == SIG_ERR) // use kill?

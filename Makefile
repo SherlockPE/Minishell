@@ -6,7 +6,7 @@
 #    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 18:53:11 by albartol          #+#    #+#              #
-#    Updated: 2024/04/18 17:08:59 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/04/18 18:28:41 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,7 +80,8 @@ PARSER :=	parser/ft_parser.c \
 			parser/quotes.c \
 			parser/ft_trim_input.c \
 			parser/ft_split_quotes.c \
-			parser/trim_input.c
+			parser/trim_input.c \
+			parser/ft_div_argv.c
 # 			parser/ft_split_pipes.c
 # 			parser/ft_val_input.c
 

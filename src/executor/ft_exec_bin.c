@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_bin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 12:47:11 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/13 18:53:55 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/18 18:45:20 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,11 @@ void	ft_exec_bin(char **argv, t_shell *data)
 		if (!bin_path)
 		{
 			perror("malloc");
+			return ;
+		}
+		if (!*bin_path)
+		{
+			free(bin_path);
 			return ;
 		}
 	}

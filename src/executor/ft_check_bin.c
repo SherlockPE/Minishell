@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 12:54:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/12 19:51:11 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/18 18:43:28 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ char	*ft_check_bin(char *bin, char *path)
 {
 	char	*bin_path;
 
-	if (!path || !bin)
+	if (!path || !bin || !*bin)
 		return (NULL);
 	bin_path = ft_check_path(path, bin);
 	if (!bin_path)
