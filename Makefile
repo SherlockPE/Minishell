@@ -16,7 +16,7 @@ CC := gcc
 
 # CFLAGS := -Wall -Wextra -Werror -O3
 # CFLAGS := -Wall -Wextra -fsanitize=address -g3
-CFLAGS := -Wall -Wextra -ggdb
+CFLAGS := -Wall -Wextra -Werror -ggdb
 # CFLAGS := -Wall -Wextra -Werror -g3
 
 LIBS := -lreadline -Llib/libft -lft

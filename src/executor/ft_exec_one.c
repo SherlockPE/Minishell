@@ -12,7 +12,7 @@
 
 #include <minishell.h>
 
-static int	output_fd(t_pipe *com, t_shell *data)
+static int	output_fd(t_pipe *com)
 {
 	int		fd;
 	int		i;
@@ -36,7 +36,7 @@ static int	output_fd(t_pipe *com, t_shell *data)
 	return (EXIT_SUCCESS);
 }
 
-static int	change_fd(t_pipe *com, t_shell *data)
+static int	change_fd(t_pipe *com)
 {
 	int		fd;
 	int		i;
@@ -51,7 +51,7 @@ static int	change_fd(t_pipe *com, t_shell *data)
 		if (i == -1)
 			return (ft_exit_funct("input: dup2", EXIT_FAILURE));
 	}
-	return (output_fd(com, data));
+	return (output_fd(com));
 }
 
 static int	save_fd(int *fd, t_pipe *com)
@@ -98,7 +98,7 @@ void	ft_exec_one(t_shell *data)
 
 	if (save_fd(&fd[0], data->com))
 		return ;
-	if (change_fd(data->com, data))
+	if (change_fd(data->com))
 	{
 		restore_fd(&fd[0], data->com);
 		return ;
@@ -112,7 +112,7 @@ void	ft_exec_one(t_shell *data)
 	}
 	ft_exec_command(argv, data);
 	restore_fd(&fd[0], data->com);
-	// if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &data->conf) == -1)
-	// 	perror("tcsetattr");
+	if (isatty(STDIN_FILENO))
+		tcsetattr(STDIN_FILENO, TCSAFLUSH, &data->conf);
 	ft_free_array(argv);
 }

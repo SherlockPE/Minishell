@@ -12,7 +12,7 @@
 
 #include <minishell.h>
 
-static int	change_env_value(t_shell *data, t_list *env, const char *content)
+static int	change_env_value(t_list *env, const char *content)
 {
 	char	*temp;
 
@@ -41,7 +41,7 @@ static int	check_env_value(t_shell *data, const char *content)
 		temp = (char *)temp_node->content;
 		len_env = ft_strlenchr(temp, '=');
 		if (len_name == len_env && !ft_strncmp(content, temp, len_name))
-			return (change_env_value(data, temp_node, content));
+			return (change_env_value(temp_node, content));
 		temp_node = temp_node->next;
 	}
 	return (0);

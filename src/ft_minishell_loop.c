@@ -12,6 +12,13 @@
 
 #include <minishell.h>
 
+static void	exit_minishell(t_shell *data)
+{
+	free_program(data);
+	ft_putstr_fd("exit\n", STDOUT);
+	exit(data->exit_code);
+}
+
 void	ft_minishell_loop(t_shell *data)
 {
 	int	manage_exit;
@@ -25,7 +32,9 @@ void	ft_minishell_loop(t_shell *data)
 		if (manage_exit == EXIT_FAILURE)
 			continue ;
 		else if (manage_exit == EXIT_PROGRAM)
-			break ;
+			exit_minishell(data);
+		// else if (manage_exit == EXIT_PROGRAM)
+		// 	break ;
 		if (data->input && *data->input)
 		{
 			add_history(data->input);
