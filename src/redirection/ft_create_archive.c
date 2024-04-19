@@ -6,11 +6,24 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 11:13:15 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/18 18:13:50 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/19 14:25:31 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+static int	dup_fd(t_redir *red, int fd)
+{
+	if (red->type == INPUT)
+	{
+		if (dup2(fd, STDIN) == -1)
+		{
+			perror("dup2");
+			return (EXIT_FAILURE);
+		}
+	}
+	return (EXIT_SUCCESS);
+}
 
 static int	file_open(t_redir *red)
 {
@@ -22,14 +35,16 @@ static int	file_open(t_redir *red)
 	else if (red->type == TRUNC)
 		fd = open(red->file_name, O_WRONLY | O_TRUNC | O_CREAT, FILE_PERM);
 	else
-		return (0);
+		fd = open(red->file_name, O_RDONLY, FILE_PERM); // <---- faltaba esto
 	if (fd == -1)
 	{
 		perror("open");
-		return (1);
+		return (EXIT_FAILURE);
 	}
+	if (dup_fd(red, fd) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	close(fd);
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 int	ft_create_archive(t_redir *red, const char *com, t_shell *data)
