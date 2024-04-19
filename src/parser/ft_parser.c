@@ -14,8 +14,8 @@
 
 void	ft_parser(t_shell *data)
 {
-	// if (ft_validate_input(data->input))
-	// 	return ;
+	if (ft_validate_input(data->input))
+		return ;
 	data->com = ft_div_com(data->input, &data->com_len);
 	if (!data->com)
 	{
@@ -24,6 +24,7 @@ void	ft_parser(t_shell *data)
 	}
 	if (ft_check_redirection(data))
 		return ;
+	// printf("[%s]\n", data->com->com);
 	if (ft_expansor(data))
 		return ;
 	if (ft_div_argv(data))

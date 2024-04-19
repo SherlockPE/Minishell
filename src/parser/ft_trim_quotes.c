@@ -53,6 +53,8 @@ static void	fill_new_str(char *new_str, const char *str)
 			i++;
 			while (str[i] && quotes(str[i]))
 				new_str[j++] = str[i++];
+			if (!str[i])
+				break ;
 			i++;
 		}
 		else
@@ -65,10 +67,13 @@ char	*ft_trim_quotes(const char *str)
 	size_t	len;
 	char	*new_str;
 
+	// printf("old_str: [%s]\n", str);
 	len = count_len(str);
 	new_str = (char *)ft_calloc(len + 1, sizeof(char));
 	if (!new_str)
 		return (NULL);
+	// printf("old_str_len: [%ld]\n", len);
 	fill_new_str(new_str, str);
+	// printf("new_str: [%s]\n", new_str);
 	return (new_str);
 }

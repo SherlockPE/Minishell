@@ -55,6 +55,7 @@ int	create_tmp_file_name(t_redir *red)
 	if (!buff)
 		return (ft_exit_funct("malloc", EXIT_FAILURE));
 	red->file_name = ft_strjoin("/tmp/.", (const char *)buff);
+	free(buff);
 	if (!red->file_name)
 		return (ft_exit_funct("malloc", EXIT_FAILURE));
 	return (EXIT_SUCCESS);

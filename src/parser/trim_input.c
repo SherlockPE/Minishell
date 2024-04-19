@@ -67,13 +67,15 @@ static char	*rm_pipe_spaces(const char *input)
 char	*trim_input(const char *input)
 {
 	char *result;
+	char *temp;
 
-	result = ft_trim_input(input);
+	temp = ft_trim_input(input);
+	if (!temp)
+		return (NULL);
+	result = rm_pipe_spaces(temp);
+	free(temp);
 	if (!result)
 		return (NULL);
-
-	result = rm_pipe_spaces(result);
-
 	// len = get_len(input);
 	// result = (char *)calloc(len + 1, sizeof(char));
 	// if (!result)

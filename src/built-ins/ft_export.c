@@ -23,7 +23,7 @@ static void	export_val(const char *value, t_shell *data)
 		{
 			ft_putstr_fd("export: \'", STDERR);
 			ft_putstr_fd(value, STDERR);
-			ft_putstr_fd("\': is not a valid identifier\n", STDERR);
+			ft_putstr_fd("\': not a valid identifier\n", STDERR);
 			return ;
 		}
 		i++;
@@ -32,7 +32,7 @@ static void	export_val(const char *value, t_shell *data)
 	{
 		ft_putstr_fd("export: \'", STDERR);
 		ft_putstr_fd(value, STDERR);
-		ft_putstr_fd("\': is not a valid identifier\n", STDERR);
+		ft_putstr_fd("\': not a valid identifier\n", STDERR);
 		return ;
 	}
 	else if (value[i] == '=')
