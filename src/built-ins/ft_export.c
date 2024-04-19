@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 13:10:51 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/18 20:05:47 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:26:05 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,17 @@ static void	export_val(const char *value, t_shell *data)
 			ft_putstr_fd("export: \'", STDERR);
 			ft_putstr_fd(value, STDERR);
 			ft_putstr_fd("\': not a valid identifier\n", STDERR);
+			data->exit_code = EXIT_FAILURE;
 			return ;
 		}
 		i++;
 	}
-	if (i == 0 && value[i] == '=')
+	if ((i == 0 && value[i] == '=') || (value[i] != '='))
 	{
 		ft_putstr_fd("export: \'", STDERR);
 		ft_putstr_fd(value, STDERR);
 		ft_putstr_fd("\': not a valid identifier\n", STDERR);
+		data->exit_code = EXIT_FAILURE;
 		return ;
 	}
 	else if (value[i] == '=')
