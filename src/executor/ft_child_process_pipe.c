@@ -34,12 +34,13 @@ static void	child_exec(t_pipe *com, t_shell *data)
 {
 	char	**argv;
 
+	ft_change_fd(com, data);
 	argv = ft_rm_quotes((const char **)com->argv);
 	if (!argv)
 		ft_exit_program(data, "malloc");
-	ft_change_fd(com, data);
 	free_input(data);
 	ft_exec_command(argv, data);
+	ft_free_array(argv);
 	ft_lstclear(&data->env, free);
 }
 

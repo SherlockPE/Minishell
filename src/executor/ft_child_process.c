@@ -24,12 +24,13 @@ int	child_process(t_shell *data, t_pipe *com)
 		if (signal(SIGQUIT, SIG_DFL) == SIG_ERR)
 			perror("signal");
 		data->child = 1;
+		ft_change_fd(com, data);
 		argv = ft_rm_quotes((const char **)com->argv);
 		if (!argv)
 			ft_exit_program(data, "malloc");
-		ft_change_fd(com, data);
 		free_input(data);
 		ft_exec_command(argv, data);
+		ft_free_array(argv);
 		ft_lstclear(&data->env, free);
 		exit(EXIT_SUCCESS);
 	}

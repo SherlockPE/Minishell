@@ -75,6 +75,7 @@ t_pipe	*ft_div_com(const char *input, int *com_len)
 	}
 	fill_commands(commands, pipes);
 	*com_len = len;
+	// printf("len_pipes: [%d]", len);
 	free(commands);
 	return (pipes);
 }

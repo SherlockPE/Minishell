@@ -56,6 +56,7 @@ void	ft_exit(char **argv, t_shell *data)
 			data->exit_code = ft_atol(argv[1]);
 		}
 		free_program(data);
+		ft_free_array(argv);
 		exit(data->exit_code);
 	}
 }

@@ -28,7 +28,7 @@ char	**ft_rm_quotes(const char **argv)
 	// 	printf("argv %d --> [%s]\n", i, argv[i]);
 	// 	i++; 
 	// }
-	i = 0;
+	// i = 0;
 	while (argv[i])
 	{
 		if (ft_strchr(argv[i], '\"') || ft_strchr(argv[i], '\''))
@@ -42,5 +42,11 @@ char	**ft_rm_quotes(const char **argv)
 		}
 		i++;
 	}
+	// i = 0;
+	// while (argv[i])
+	// {
+	// 	printf("new_argv %d --> [%s]\n", i, argv[i]);
+	// 	i++; 
+	// }
 	return (new_argv);
 }

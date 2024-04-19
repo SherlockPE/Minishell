@@ -96,12 +96,6 @@ void	ft_exec_one(t_shell *data)
 	char	**argv;
 	int		fd[2];
 
-	argv = ft_rm_quotes((const char **)data->com->argv);
-	if (!argv)
-	{
-		perror("malloc");
-		return ;
-	}
 	if (save_fd(&fd[0], data->com))
 		return ;
 	if (change_fd(data->com, data))
@@ -109,8 +103,16 @@ void	ft_exec_one(t_shell *data)
 		restore_fd(&fd[0], data->com);
 		return ;
 	}
+	argv = ft_rm_quotes((const char **)data->com->argv);
+	if (!argv)
+	{
+		restore_fd(&fd[0], data->com);
+		perror("malloc");
+		return ;
+	}
 	ft_exec_command(argv, data);
 	restore_fd(&fd[0], data->com);
-	if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &data->conf) == -1)
-		perror("tcsetattr");
+	// if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &data->conf) == -1)
+	// 	perror("tcsetattr");
+	ft_free_array(argv);
 }

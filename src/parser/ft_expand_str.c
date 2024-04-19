@@ -95,22 +95,30 @@ static char	*expand(const char *str, int i, int name_len, t_shell *data)
 
 char	*ft_expand_str(const char *str, t_shell *data)
 {
-	int	i;
-	int	name_len;
+	int		i;
+	int		name_len;
+	char	*new_str;
+	char	*temp;
 
 	i = 0;
-	while (str[i])
+	new_str = (char *)str;
+	while (new_str[i])
 	{
-		if (!simple_quotes(str[i]) && str[i] == '$')
+		if (!simple_quotes(new_str[i]) && new_str[i] == '$')
 		{
-			name_len = find_name_len(&str[i]);
+			name_len = find_name_len(&new_str[i]);
 			if (name_len > 1)
 			{
-				return (expand(str, i, name_len, data));
+				temp = expand(new_str, i, name_len, data);
+				if (new_str != str)
+					free(new_str);
+				if (!temp)
+					return (NULL);
+				new_str = temp;
 				i = -1;
 			}
 		}
 		i++;
 	}
-	return ((char *)str);
+	return (new_str);
 }

@@ -90,5 +90,11 @@ int	ft_here_doc(t_redir *red, const char *com)
 		perror("malloc");
 		return (EXIT_FAILURE);
 	}
-	return (fill_here_doc(red, limit, fd));
+	if (fill_here_doc(red, limit, fd))
+	{
+		free(limit);
+		return (EXIT_FAILURE);
+	}
+	free(limit);
+	return (EXIT_SUCCESS);
 }

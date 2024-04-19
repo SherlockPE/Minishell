@@ -28,11 +28,15 @@ int	ft_div_argv(t_shell *data)
 	
 	// char **temp;
 	// i = 0;
-
-	// temp = data->com->argv;
-	// while (temp[i])
+	// while (i < data->com_len)
 	// {
-	// 	printf("ARGV ->> [%s]\n", temp[i]);
+	// 	int j = 0;
+	// 	temp = data->com[i].argv;
+	// 	while (temp[j])
+	// 	{
+	// 		printf("ARGV ->> [%s]\n", temp[j]);
+	// 		j++;
+	// 	}
 	// 	i++;
 	// }
 	return (EXIT_SUCCESS);

@@ -41,6 +41,7 @@ static void	child_execve(t_shell *data, char *path, char **argv, char **envp)
 	free_program(data);
 	free(envp);
 	free(path);
+	ft_free_array(argv);
 	exit(EXIT_FAILURE);
 }
 
@@ -61,6 +62,7 @@ static void	new_child_exec(t_shell *data, char *path, char **argv, char **envp)
 			free_program(data);
 			free(envp);
 			free(path);
+			ft_free_array(argv);
 			exit(EXIT_FAILURE);
 		}
 		child_execve(data, path, argv, envp);

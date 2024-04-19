@@ -17,7 +17,7 @@ static char	*reload_last_command(const char *com)
 	int		i;
 
 	i = 0;
-	while (com[i] && !quotes(com[i]) && ft_strchr("<> ", com[i]))
+	while (com[i] && ft_strchr("<> ", com[i]))
 		i++;
 	while (com[i])
 	{
@@ -36,8 +36,10 @@ static char	*reload_front_command(const char *com, int pos)
 	int		len;
 	char	*rel_com;
 
+	while (com[pos - 1] == ' ')
+		pos--;
 	i = pos;
-	while (com[i] && !quotes(com[i]) && ft_strchr("<> ", com[i]))
+	while (com[i] && ft_strchr("<> ", com[i]))
 		i++;
 	while (com[i])
 	{
@@ -65,6 +67,7 @@ int	reload_command(t_pipe *pipe)
 	{
 		if (!quotes(temp[i]) && ft_strchr("<>", temp[i]))
 		{
+			// printf("before reload: [%s]\n", temp);
 			if (i == 0)
 				temp = reload_last_command(pipe->com);
 			else
@@ -74,6 +77,7 @@ int	reload_command(t_pipe *pipe)
 				perror("malloc");
 				return (EXIT_FAILURE);
 			}
+			// printf("after reload: [%s]\n", temp);
 			free(pipe->com);
 			pipe->com = temp;
 			return (EXIT_SUCCESS);
