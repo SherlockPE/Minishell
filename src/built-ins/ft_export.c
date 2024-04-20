@@ -12,29 +12,36 @@
 
 #include <minishell.h>
 
+static void	export_fail(const char *value, t_shell *data)
+{
+	ft_putstr_fd("export: \'", STDERR);
+	ft_putstr_fd(value, STDERR);
+	ft_putstr_fd("\': not a valid identifier\n", STDERR);
+	data->exit_code = EXIT_FAILURE;
+}
+
 static void	export_val(const char *value, t_shell *data)
 {
 	int	i;
 
 	i = 0;
+	if (ft_isdigit(value[i]))
+	{
+		export_fail(value, data);
+		return ;
+	}
 	while (value[i] && value[i] != '=')
 	{
 		if (!ft_isalnum(value[i]) && value[i] != '_')
 		{
-			ft_putstr_fd("export: \'", STDERR);
-			ft_putstr_fd(value, STDERR);
-			ft_putstr_fd("\': not a valid identifier\n", STDERR);
-			data->exit_code = EXIT_FAILURE;
+			export_fail(value, data);
 			return ;
 		}
 		i++;
 	}
-	if ((i == 0 && value[i] == '=') || (value[i] != '='))
+	if ((i == 0 && value[i] == '=') || (value[i] != '=' && value[i]))
 	{
-		ft_putstr_fd("export: \'", STDERR);
-		ft_putstr_fd(value, STDERR);
-		ft_putstr_fd("\': not a valid identifier\n", STDERR);
-		data->exit_code = EXIT_FAILURE;
+		export_fail(value, data);
 		return ;
 	}
 	else if (value[i] == '=')

@@ -15,6 +15,8 @@
 
 # include "struct.h"
 
+# define EXIT_NUM 2
+
 void	ft_echo(char **argv);
 void	ft_cd(char **argv, t_shell *data);
 void	ft_pwd(void);

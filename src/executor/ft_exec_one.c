@@ -101,6 +101,7 @@ void	ft_exec_one(t_shell *data)
 	if (change_fd(data->com))
 	{
 		restore_fd(&fd[0], data->com);
+		data->exit_code = EXIT_FAILURE;
 		return ;
 	}
 	argv = ft_rm_quotes((const char **)data->com->argv);

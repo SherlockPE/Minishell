@@ -53,13 +53,19 @@ static int	change_dir(const char *new_dir, const char *old_dir, t_list *env)
 	return (i);
 }
 
+static void	too_many_argv(t_shell *data)
+{
+	ft_putstr_fd("cd: too many arguments\n", STDERR);
+	data->exit_code = EXIT_FAILURE;
+}
+
 void	ft_cd(char **argv, t_shell *data)
 {
 	char		*current_dir;
 	static char	*old_dir;
 
 	if (argv[1] && argv[2])
-		return ((void)ft_putstr_fd("cd: too many arguments\n", STDERR));
+		return (too_many_argv(data));
 	current_dir = getcwd(NULL, 0);
 	if (!current_dir)
 		return (perror("cd: getcwd"));
@@ -72,6 +78,7 @@ void	ft_cd(char **argv, t_shell *data)
 	{
 		if (old_dir != current_dir)
 			free(current_dir);
+		data->exit_code = EXIT_FAILURE;
 		return ;
 	}
 	if (old_dir && old_dir != current_dir)

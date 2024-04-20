@@ -12,23 +12,28 @@
 
 #include <minishell.h>
 
+static void	failure(t_shell *data)
+{
+	data->exit_code = EXIT_FAILURE;
+}
+
 void	ft_parser(t_shell *data)
 {
 	if (ft_validate_input(data->input))
-		return ;
+		return (failure(data));
 	data->com = ft_div_com(data->input, &data->com_len);
 	if (!data->com)
 	{
 		perror("malloc");
-		return ;
+		return (failure(data));
 	}
 	if (ft_check_redirection(data))
-		return ;
+		return (failure(data));
 	// printf("[%s]\n", data->com->com);
 	if (ft_expansor(data))
-		return ;
+		return (failure(data));
 	if (ft_div_argv(data))
-		return ;
+		return (failure(data));
 	if (data->com_len > 1)
 		ft_pipex(data);
 	else

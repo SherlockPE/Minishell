@@ -15,9 +15,12 @@
 static short	simple_quotes(const char c)
 {
 	static short	simple_q;
+	static short	double_q;
 
-	if (c == '\'')
+	if (c == '\'' && !double_q)
 		simple_q ^= 1;
+	else if (c == '\"' && !simple_q)
+		double_q ^= 1;
 	return (simple_q);
 }
 
@@ -119,6 +122,14 @@ char	*ft_expand_str(const char *str, t_shell *data)
 			}
 		}
 		i++;
+	}
+	if (new_str != str)
+	{
+		temp = ft_strtrim(new_str, " ");
+			free(new_str);
+		if (!temp)
+			return (NULL);
+		new_str = temp;
 	}
 	return (new_str);
 }
