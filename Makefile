@@ -54,7 +54,8 @@ UTILS_FREE :=	free/free_input.c \
 UTILS_ENV :=	env/ft_get_env_value.c \
 				env/ft_set_env_value.c \
 				env/ft_init_env.c \
-				env/ft_update_env_value.c
+				env/ft_update_env_value.c \
+				env/get_env.c
 
 UTILS_ARR :=	array/array_len.c \
 				array/array_char_len.c \

@@ -21,6 +21,7 @@ char	*ft_get_env_value(const char *name, t_list *env);
 int		ft_set_env_value(const char *content, t_shell *data);
 int		ft_update_env_value(const char *name, const char *value, t_shell *data);
 void	ft_init_env(t_shell *data, char **env);
+char	**get_env(t_shell *data);
 
 //array
 int		array_len(const char **array);

@@ -44,7 +44,8 @@
 # define EXIT_PROGRAM 42
 
 typedef unsigned char	t_exit;
-typedef struct termios	t_conf;
+typedef struct termios	t_term;
+typedef struct stat		t_stat;
 typedef struct s_shell	t_shell;
 typedef struct s_pipe	t_pipe;
 typedef struct s_redir	t_redir;
@@ -72,7 +73,7 @@ struct s_shell
 	t_pipe	*com;
 	int		com_len;
 	int		child;
-	t_conf	conf;
+	t_term	conf;
 	t_exit	exit_code;
 };
 

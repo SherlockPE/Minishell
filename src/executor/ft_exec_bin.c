@@ -12,37 +12,49 @@
 
 #include <minishell.h>
 
-static char	**get_env(t_shell *data)
+static int	set_error(const char *path)
 {
-	int		i;
-	char	**envp;
-	t_list	*env;
+	t_stat	path_info;
 
-	i = ft_lstsize(data->env);
-	envp = (char **)ft_calloc(i + 1, sizeof(char *));
-	if (!envp)
-		return (NULL);
-	i = 0;
-	env = data->env;
-	while (env)
+	if ((path[0] == '.' && path[1] == '/') || path[0] == '/')
 	{
-		envp[i] = (char *)env->content;
-		i++;
-		env = env->next;
+		if (stat(path, &path_info) == -1)
+		{
+			ft_putstr_fd(path, STDERR);
+			ft_putstr_fd(": No such file or directory\n", STDERR);
+			return (NOT_FILE_DIR_EXIT);
+		}
+		if (S_ISDIR(path_info.st_mode))
+		{
+			ft_putstr_fd(path, STDERR);
+			ft_putstr_fd(": Is a directory\n", STDERR);
+			return (IS_DIR_EXIT);
+		}
+		else if (!(S_IXUSR & path_info.st_mode))
+		{
+			ft_putstr_fd(path, STDERR);
+			ft_putstr_fd(": Permission denied\n", STDERR);
+			return (PERM_DENIED_EXIT);
+		}
 	}
-	envp[i] = 0;
-	return (envp);
+	ft_putstr_fd(path, STDERR);
+	ft_putstr_fd(": command not found\n", STDERR);
+	return (NOT_COMMAND_EXIT);
 }
 
 static void	child_execve(t_shell *data, char *path, char **argv, char **envp)
 {
-	if (execve(path, argv, envp) == -1)
-		perror("execve");
+	int		exit_code;
+
+	// if (execve(path, argv, envp) == -1)
+	// 	perror("execve");
+	execve(path, argv, envp);
 	free_program(data);
 	free(envp);
-	free(path);
 	ft_free_array(argv);
-	exit(EXIT_FAILURE);
+	exit_code = set_error(path);
+	free(path);
+	exit(exit_code);
 }
 
 static void	new_child_exec(t_shell *data, char *path, char **argv, char **envp)

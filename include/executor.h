@@ -15,6 +15,11 @@
 
 # include "struct.h"
 
+# define IS_DIR_EXIT 126
+# define PERM_DENIED_EXIT 126
+# define NOT_COMMAND_EXIT 127
+# define NOT_FILE_DIR_EXIT 127
+
 void	ft_pipex(t_shell *data);
 void	ft_exec_one(t_shell *data);
 int		child_process_pipe(t_shell *data, t_pipe *com);

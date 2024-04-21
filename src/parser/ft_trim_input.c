@@ -30,7 +30,7 @@ static int	ft_count_len(const char *input)
 	return (len);
 }
 
-char	*ft_trim_input(const char *input) 
+char	*ft_trim_input(const char *input)
 {
 	char	*str;
 	int		i;

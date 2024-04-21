@@ -125,8 +125,8 @@ char	*ft_expand_str(const char *str, t_shell *data)
 	}
 	if (new_str != str)
 	{
-		temp = ft_strtrim(new_str, " ");
-			free(new_str);
+		temp = ft_trim_input(new_str);
+		free(new_str);
 		if (!temp)
 			return (NULL);
 		new_str = temp;
