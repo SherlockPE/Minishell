@@ -6,7 +6,7 @@
 #    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 18:53:11 by albartol          #+#    #+#              #
-#    Updated: 2024/04/18 18:28:41 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/04/22 13:58:51 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -102,7 +102,9 @@ EXECUTOR :=	executor/ft_change_fd.c \
 			executor/ft_exec_bin.c \
 			executor/ft_exec_command.c \
 			executor/ft_exec_one.c \
-			executor/ft_pipex.c
+			executor/ft_pipex.c \
+			executor/ft_handle_exit.c
+
 
 ALL_UTILS := $(UTILITIES) $(UTILS_FREE) $(UTILS_ENV) $(UTILS_ARR)
 

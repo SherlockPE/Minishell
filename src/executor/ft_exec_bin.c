@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 12:47:11 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/18 18:45:20 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/22 13:57:43 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ static void	child_execve(t_shell *data, char *path, char **argv, char **envp)
 }
 
 static void	new_child_exec(t_shell *data, char *path, char **argv, char **envp)
-
 {
 	pid_t	id;
 	int		wstatus;
@@ -82,8 +81,7 @@ static void	new_child_exec(t_shell *data, char *path, char **argv, char **envp)
 	if (signal(SIGINT, SIG_IGN) == SIG_ERR)
 		perror("signal");
 	waitpid(id, &wstatus, 0);
-	if (WIFEXITED(wstatus))
-		data->exit_code = WEXITSTATUS(wstatus);
+	ft_handle_exit(data, wstatus);
 }
 
 static void	execute(t_shell *data, char *path, char **argv)
