@@ -54,7 +54,7 @@ int	ft_set_env_value(const char *content, t_shell *data)
 	int		result;
 
 	result = check_env_value(data, content);
-	if (result <= 1)
+	if (result == 1)
 		return (0);
 	else if (result == 2)
 		return (1);

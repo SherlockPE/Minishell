@@ -14,18 +14,19 @@
 
 static void	print_signal_name(int exit_code)
 {
-	if (exit_code == 11)
-		printf("Segmentation fault :");
-	else if (exit_code == 15)
-		printf("Terminated :");
-	printf("%d\n", exit_code);
+	if (exit_code == SIGSEGV)
+		ft_putstr_fd("Segmentation fault :", STDERR);
+	else if (exit_code == SIGTERM)
+		ft_putstr_fd("Terminated :", STDERR);
+	ft_putnbr_fd(exit_code, STDERR);
+	ft_putchar_fd('\n', STDERR);
 }
 
 void	ft_handle_exit(t_shell *data, int wstatus)
 {
 	if (WIFEXITED(wstatus))
 		data->exit_code = WEXITSTATUS(wstatus);
-	if (WIFSIGNALED(wstatus))
+	else if (WIFSIGNALED(wstatus))
 	{
 		print_signal_name(WTERMSIG(wstatus));
 		data->exit_code = WTERMSIG(wstatus) + 128;
