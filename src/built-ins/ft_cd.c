@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 12:09:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/20 18:22:09 by fabriciolop      ###   ########.fr       */
+/*   Updated: 2024/04/23 13:06:01 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	change_dir(const char *new_dir, const char *old_dir, t_list *env)
 		}
 		i = chdir(temp);
 	}
-	else if (*(new_dir) == '-')
+	else if (!ft_strncmp(new_dir, "-", 2))
 		i = chdir(old_dir);
 	else
 		i = chdir(new_dir);
