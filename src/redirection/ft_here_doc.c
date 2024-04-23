@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 17:07:56 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/23 18:49:50 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/23 19:34:26 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,12 @@ static char	*get_limit(const char *com)
 	return (limit);
 }
 
-static int	fill_here_doc(t_redir *red, const char *limit, int fd, t_shell *d)
+static int	fill_here_doc(const char *limit, int fd, t_shell *data)
 {
 	char	*aux;
 	char	*new_input;
 	char	*temp_str;
 
-	// if (signal(SIGINT, SIG_DFL) == SIG_ERR)
-	// 	ft_exit_program(d, "signal");
-	if (signal(SIGINT, SIG_DFL) == SIG_ERR)
-		ft_exit_program(d, "signal");
 	while (1)
 	{
 		new_input = readline("> ");
@@ -65,17 +61,12 @@ static int	fill_here_doc(t_redir *red, const char *limit, int fd, t_shell *d)
 		if (!temp_str)
 		{
 			close(fd);
-			unlink(red->file_name);
-			perror("malloc");
 			return (EXIT_FAILURE);
 		}
-		aux = ft_expand_str(temp_str, d);
+		aux = ft_expand_str(temp_str, data);
 		if (!aux)
 		{
 			close(fd);
-			free(new_input);
-			unlink(red->file_name);
-			perror("malloc");
 			free(temp_str);
 			return (EXIT_FAILURE);
 		}
@@ -89,29 +80,28 @@ static int	fill_here_doc(t_redir *red, const char *limit, int fd, t_shell *d)
 	return (EXIT_SUCCESS);
 }
 
-static int	child_writer(t_redir *red, const char *com, t_shell *data)
+static void	child_writer(t_redir *red, const char *com, t_shell *data)
 {
 	char	*limit;
 	int		fd;
 
 	fd = open(red->file_name, O_WRONLY | O_CREAT | O_TRUNC, FILE_PERM);
 	if (fd == -1)
-		return (ft_exit_funct("open", EXIT_FAILURE));
+		ft_exit_program(data, "open");
 	limit = get_limit(com);
 	if (!limit)
 	{
 		close(fd);
-		unlink(red->file_name);
-		perror("malloc");
-		return (EXIT_FAILURE);
+		ft_exit_program(data, "malloc");
 	}
-	if (fill_here_doc(red, limit, fd, data))
+	if (fill_here_doc(limit, fd, data))
 	{
 		free(limit);
-		return (EXIT_FAILURE);
+		// unlink(red->file_name);
+		ft_exit_program(data, "malloc");
 	}
 	free(limit);
-	return (EXIT_SUCCESS);
+	exit(EXIT_SUCCESS);
 }
 
 int	ft_here_doc(t_redir *red, const char *com, t_shell *data)
@@ -125,11 +115,17 @@ int	ft_here_doc(t_redir *red, const char *com, t_shell *data)
 	if (id == -1)
 		return (EXIT_FAILURE);
 	if (id == 0)
+	{
+		if (signal(SIGINT, SIG_DFL) == SIG_ERR)
+			ft_exit_program(data, "signal");
 		child_writer(red, com, data);
+	}
+	if (signal(SIGINT, SIG_IGN) == SIG_ERR)
+		perror("signal");
 	waitpid(id, &wstatus, 0);
 	if (WIFEXITED(wstatus))
-		data->exit_code = WEXITSTATUS(wstatus);
+		return (WEXITSTATUS(wstatus));
 	else if (WIFSIGNALED(wstatus))
-		data->exit_code = WTERMSIG(wstatus) + 128;
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
