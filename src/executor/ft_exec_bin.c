@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_bin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 12:47:11 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/22 13:57:43 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/23 14:00:36 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,13 @@ static int	set_error(const char *path)
 			return (PERM_DENIED_EXIT);
 		}
 	}
-	ft_putstr_fd(path, STDERR);
-	ft_putstr_fd(": command not found\n", STDERR);
-	return (NOT_COMMAND_EXIT);
+	else
+	{
+		ft_putstr_fd(path, STDERR);
+		ft_putstr_fd(": command not found\n", STDERR);
+		return (NOT_COMMAND_EXIT);
+	}
+	return (0);
 }
 
 static void	child_execve(t_shell *data, char *path, char **argv, char **envp)
@@ -103,21 +107,24 @@ void	ft_exec_bin(char **argv, t_shell *data)
 	char	*bin_path;
 	char	*path;
 
-	path = ft_get_env_value("PATH", data->env);
-	bin_path = ft_check_bin(argv[0], path);
+	if ((argv[0][0] == '.' && ft_strchr("./", argv[0][1])) || argv[0][0] == '/')
+		bin_path = ft_strdup(argv[0]);
+	else
+	{
+		path = ft_get_env_value("PATH", data->env);
+		bin_path = ft_check_bin(argv[0], path);
+		if (!bin_path)
+			bin_path = ft_strdup(argv[0]);
+	}
 	if (!bin_path)
 	{
-		bin_path = ft_strdup(argv[0]);
-		if (!bin_path)
-		{
-			perror("malloc");
-			return ;
-		}
-		if (!*bin_path)
-		{
-			free(bin_path);
-			return ;
-		}
+		perror("malloc");
+		return ;
+	}
+	if (!*bin_path)
+	{
+		free(bin_path);
+		return ;
 	}
 	execute(data, bin_path, argv);
 	free(bin_path);

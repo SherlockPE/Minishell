@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 11:48:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/17 20:12:00 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/23 13:44:20 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static char	*get_new_input(char *old_input)
 		if (!input)
 			return (get_new_input_fail());
 	}
-	return (EXIT_SUCCESS);
+	return (input);
 }
 
 int	ft_get_input(t_shell *data)

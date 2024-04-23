@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_tmp_file_name.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 17:07:50 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/18 18:11:13 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/23 13:29:21 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	create_tmp_file_name(t_redir *red)
 	buff = ft_itoa(i++);
 	if (!buff)
 		return (ft_exit_funct("malloc", EXIT_FAILURE));
-	red->file_name = ft_strjoin("/tmp/.", (const char *)buff);
+	red->file_name = ft_strjoin(HERE_DOC_PATH, (const char *)buff);
 	free(buff);
 	if (!red->file_name)
 		return (ft_exit_funct("malloc", EXIT_FAILURE));
