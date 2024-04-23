@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:12:50 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/18 16:55:07 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/23 14:38:04 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int	redir_input(t_shell *data, t_pipe *pipe, const char *com, int *i)
 		com = &com[*i + 2];
 		while (*com == ' ')
 			com++;
-		if (ft_here_doc(red, com))
+		if (ft_here_doc(red, com, data))
 			return (EXIT_FAILURE);
 	}
 	else

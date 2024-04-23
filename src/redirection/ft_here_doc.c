@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 17:07:56 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/18 18:16:25 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/23 14:43:47 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,9 @@ static char	*get_limit(const char *com)
 	return (limit);
 }
 
-static int	fill_here_doc(t_redir *red, const char *limit, int fd)
+static int	fill_here_doc(t_redir *red, const char *limit, int fd, t_shell *d)
 {
+	char	*aux;
 	char	*new_input;
 	char	*temp_str;
 
@@ -64,15 +65,27 @@ static int	fill_here_doc(t_redir *red, const char *limit, int fd)
 			perror("malloc");
 			return (EXIT_FAILURE);
 		}
-		ft_putstr_fd(temp_str, fd);
-		free(temp_str);
+		aux = ft_expand_str(temp_str, d);
+		if (!aux)
+		{
+			close(fd);
+			free(new_input);
+			unlink(red->file_name);
+			perror("malloc");
+			free(temp_str);
+			return (EXIT_FAILURE);
+		}
+		if (aux != temp_str)
+			free(temp_str);
+		ft_putstr_fd(aux, fd);
+		free(aux);
 	}
 	free(new_input);
 	close(fd);
 	return (EXIT_SUCCESS);
 }
 
-int	ft_here_doc(t_redir *red, const char *com)
+int	ft_here_doc(t_redir *red, const char *com, t_shell *data)
 {
 	char	*limit;
 	int		fd;
@@ -90,7 +103,7 @@ int	ft_here_doc(t_redir *red, const char *com)
 		perror("malloc");
 		return (EXIT_FAILURE);
 	}
-	if (fill_here_doc(red, limit, fd))
+	if (fill_here_doc(red, limit, fd, data))
 	{
 		free(limit);
 		return (EXIT_FAILURE);
