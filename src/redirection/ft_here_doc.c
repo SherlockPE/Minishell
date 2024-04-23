@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_here_doc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 17:07:56 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/23 18:12:46 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/23 18:49:50 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ static int	fill_here_doc(t_redir *red, const char *limit, int fd, t_shell *d)
 	char	*new_input;
 	char	*temp_str;
 
-	ft_handle_sig_dfl();
+	// if (signal(SIGINT, SIG_DFL) == SIG_ERR)
+	// 	ft_exit_program(d, "signal");
+	if (signal(SIGINT, SIG_DFL) == SIG_ERR)
+		ft_exit_program(d, "signal");
 	while (1)
 	{
 		new_input = readline("> ");
@@ -86,13 +89,11 @@ static int	fill_here_doc(t_redir *red, const char *limit, int fd, t_shell *d)
 	return (EXIT_SUCCESS);
 }
 
-int	ft_here_doc(t_redir *red, const char *com, t_shell *data)
+static int	child_writer(t_redir *red, const char *com, t_shell *data)
 {
 	char	*limit;
 	int		fd;
 
-	if (create_tmp_file_name(red))
-		return (EXIT_FAILURE);
 	fd = open(red->file_name, O_WRONLY | O_CREAT | O_TRUNC, FILE_PERM);
 	if (fd == -1)
 		return (ft_exit_funct("open", EXIT_FAILURE));
@@ -110,5 +111,25 @@ int	ft_here_doc(t_redir *red, const char *com, t_shell *data)
 		return (EXIT_FAILURE);
 	}
 	free(limit);
+	return (EXIT_SUCCESS);
+}
+
+int	ft_here_doc(t_redir *red, const char *com, t_shell *data)
+{
+	int		wstatus;
+	pid_t	id;
+
+	if (create_tmp_file_name(red))
+		return (EXIT_FAILURE);
+	id = fork();
+	if (id == -1)
+		return (EXIT_FAILURE);
+	if (id == 0)
+		child_writer(red, com, data);
+	waitpid(id, &wstatus, 0);
+	if (WIFEXITED(wstatus))
+		data->exit_code = WEXITSTATUS(wstatus);
+	else if (WIFSIGNALED(wstatus))
+		data->exit_code = WTERMSIG(wstatus) + 128;
 	return (EXIT_SUCCESS);
 }
