@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 17:07:56 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/23 14:43:47 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/23 18:12:46 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static int	fill_here_doc(t_redir *red, const char *limit, int fd, t_shell *d)
 	char	*new_input;
 	char	*temp_str;
 
+	ft_handle_sig_dfl();
 	while (1)
 	{
 		new_input = readline("> ");

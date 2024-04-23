@@ -6,7 +6,7 @@
 #    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 18:53:11 by albartol          #+#    #+#              #
-#    Updated: 2024/04/22 13:58:51 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/04/23 18:09:59 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ UTILITIES :=	ft_isnotprint.c \
 				ft_update_prompt.c \
 				check_quotes.c \
 				ft_handle_signals.c \
+				ft_handle_sig_dfl.c \
 				ft_exit_funct.c
 
 UTILS_FREE :=	free/free_input.c \

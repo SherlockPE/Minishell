@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 18:16:12 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/15 14:52:52 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/23 18:12:12 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,7 @@ char	*ft_update_prompt(void);
 int		ft_isnotprint(const char c);
 size_t	ft_strlenchr(const char *str, const char c);
 short	check_quotes(const char *input);
+void	ft_handle_signals(void);
+void	ft_handle_sig_dfl(void);
 
 #endif
