@@ -104,6 +104,14 @@ static void	child_writer(t_redir *red, const char *com, t_shell *data)
 	exit(EXIT_SUCCESS);
 }
 
+// static void test(int signal)
+// {
+// 	if (signal != SIGINT)
+// 		return ;
+// 	ft_putchar_fd('\n', STDOUT);
+// 	exit(EXIT_FAILURE);
+// }
+
 int	ft_here_doc(t_redir *red, const char *com, t_shell *data)
 {
 	int		wstatus;
@@ -116,6 +124,7 @@ int	ft_here_doc(t_redir *red, const char *com, t_shell *data)
 		return (EXIT_FAILURE);
 	if (id == 0)
 	{
+		rl_catch_signals = 1;
 		if (signal(SIGINT, SIG_DFL) == SIG_ERR)
 			ft_exit_program(data, "signal");
 		child_writer(red, com, data);
@@ -123,6 +132,7 @@ int	ft_here_doc(t_redir *red, const char *com, t_shell *data)
 	if (signal(SIGINT, SIG_IGN) == SIG_ERR)
 		perror("signal");
 	waitpid(id, &wstatus, 0);
+	ft_handle_signals();
 	if (WIFEXITED(wstatus))
 		return (WEXITSTATUS(wstatus));
 	else if (WIFSIGNALED(wstatus))
