@@ -6,7 +6,7 @@
 /*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 17:07:56 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/24 16:55:50 by fabriciolop      ###   ########.fr       */
+/*   Updated: 2024/04/24 17:09:28 by fabriciolop      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,10 +136,6 @@ int	ft_here_doc(t_redir *red, const char *com, t_shell *data)
 	if (WIFEXITED(wstatus))
 		return (WEXITSTATUS(wstatus));
 	else if (WIFSIGNALED(wstatus))
-	{
-		rl_catch_signals = 0;
-		ft_putstr_fd("\n", 1);
-		return (EXIT_FAILURE);
-	}
+		return (ft_putchar_fd('\n', STDOUT));
 	return (EXIT_SUCCESS);
 }
