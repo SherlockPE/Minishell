@@ -39,12 +39,16 @@ SOURCES :=	minishell.c \
 			ft_get_input.c
 
 # UTILS
-UTILITIES :=	ft_isnotprint.c \
-				ft_strlenchr.c \
-				ft_update_prompt.c \
+# NOT USED:
+# ft_isnotprint.c
+# ft_handle_sig_dfl.c
+# array/array_char_len.c
+# array/array_to_str.c
+# array/array_dup.c
+UTILITIES :=	ft_update_prompt.c \
 				check_quotes.c \
+				ft_strlenchr.c \
 				ft_handle_signals.c \
-				ft_handle_sig_dfl.c \
 				ft_exit_funct.c
 
 UTILS_FREE :=	free/free_input.c \
@@ -58,9 +62,7 @@ UTILS_ENV :=	env/ft_get_env_value.c \
 				env/ft_update_env_value.c \
 				env/get_env.c
 
-UTILS_ARR :=	array/array_len.c \
-				array/array_char_len.c \
-				array/array_to_str.c
+UTILS_ARR :=	array/array_len.c
 
 # BUILT-INS
 BUILTS :=	built-ins/ft_pwd.c \
@@ -84,8 +86,6 @@ PARSER :=	parser/ft_parser.c \
 			parser/ft_split_quotes.c \
 			parser/trim_input.c \
 			parser/ft_div_argv.c
-# 			parser/ft_split_pipes.c
-# 			parser/ft_val_input.c
 
 REDIRECTION :=	redirection/ft_check_redirection.c \
 				redirection/ft_create_archive.c \
