@@ -17,7 +17,6 @@ short	quotes(const char c)
 	static short	double_q;
 	static short	simple_q;
 
-	// printf("d_q: [%d] -- s_q: [%d]\n", double_q, simple_q);
 	if (c == '\"' && !simple_q)
 		double_q ^= 1;
 	else if (c == '\'' && !double_q)

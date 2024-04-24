@@ -43,15 +43,13 @@ static int	set_error(const char *path)
 		ft_putstr_fd(": command not found\n", STDERR);
 		return (NOT_COMMAND_EXIT);
 	}
-	return (0);
+	return (EXIT_FAILURE);
 }
 
 static void	child_execve(t_shell *data, char *path, char **argv, char **envp)
 {
 	int		exit_code;
 
-	// if (execve(path, argv, envp) == -1)
-	// 	perror("execve");
 	execve(path, argv, envp);
 	free_program(data);
 	free(envp);

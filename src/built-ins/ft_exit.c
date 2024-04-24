@@ -17,7 +17,6 @@ static int	invalid_argv(const char *num)
 	ft_putstr_fd("exit: [", STDERR);
 	ft_putstr_fd(num, STDERR);
 	ft_putstr_fd("]: numeric argument required\n", STDERR);
-	// printf("exit: [%s]: numeric argument required\n", num);
 	return (EXIT_FAILURE);
 }
 

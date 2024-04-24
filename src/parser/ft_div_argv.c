@@ -17,7 +17,6 @@ int	ft_div_argv(t_shell *data)
 	int	i;
 
 	i = 0;
-	// printf("#value of data.com.com [%s]\n", data->com->com);
 	while (i < data->com_len)
 	{
 		data->com[i].argv = ft_split_quotes(data->com[i].com, ' ');
@@ -25,19 +24,5 @@ int	ft_div_argv(t_shell *data)
 			return (ft_exit_funct("malloc", EXIT_FAILURE));
 		i++;
 	}
-	
-	// char **temp;
-	// i = 0;
-	// while (i < data->com_len)
-	// {
-	// 	int j = 0;
-	// 	temp = data->com[i].argv;
-	// 	while (temp[j])
-	// 	{
-	// 		printf("ARGV ->> [%s]\n", temp[j]);
-	// 		j++;
-	// 	}
-	// 	i++;
-	// }
 	return (EXIT_SUCCESS);
 }

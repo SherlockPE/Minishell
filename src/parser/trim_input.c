@@ -32,15 +32,14 @@ int	get_len(const char *input)
 	}
 	return (len);
 }
+
 static char	*rm_pipe_spaces(const char *input)
 {
 	int		i;
 	int		j;
-	int		len;
 	char	*result;
 
-	len = get_len(input);
-	result = (char *)ft_calloc(len + 1, sizeof(char));
+	result = (char *)ft_calloc(get_len(input) + 1, sizeof(char));
 	if (!result)
 		return (NULL);
 	i = 0;
@@ -66,8 +65,8 @@ static char	*rm_pipe_spaces(const char *input)
 
 char	*trim_input(const char *input)
 {
-	char *result;
-	char *temp;
+	char	*result;
+	char	*temp;
 
 	temp = ft_trim_input(input);
 	if (!temp)
@@ -76,10 +75,5 @@ char	*trim_input(const char *input)
 	free(temp);
 	if (!result)
 		return (NULL);
-	// len = get_len(input);
-	// result = (char *)calloc(len + 1, sizeof(char));
-	// if (!result)
-	// 	return (NULL);
-	// result = fill(result, input);
 	return (result);
 }

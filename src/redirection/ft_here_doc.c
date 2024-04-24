@@ -92,12 +92,13 @@ static void	child_writer(t_redir *red, const char *com, t_shell *data)
 	if (!limit)
 	{
 		close(fd);
+		unlink(red->file_name);
 		ft_exit_program(data, "malloc");
 	}
 	if (fill_here_doc(limit, fd, data))
 	{
 		free(limit);
-		// unlink(red->file_name);
+		unlink(red->file_name);
 		ft_exit_program(data, "malloc");
 	}
 	free(limit);

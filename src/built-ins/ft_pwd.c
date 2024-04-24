@@ -19,7 +19,6 @@ void	ft_pwd(void)
 	current_dir = getcwd(NULL, 0);
 	if (!current_dir)
 		return (perror("pwd"));
-	// printf("%s\n", current_dir);
 	ft_putstr_fd(current_dir, STDOUT_FILENO);
 	ft_putchar_fd('\n', STDOUT_FILENO);
 	free(current_dir);

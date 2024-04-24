@@ -33,8 +33,6 @@ void	ft_minishell_loop(t_shell *data)
 			continue ;
 		else if (manage_exit == EXIT_PROGRAM)
 			exit_minishell(data);
-		// else if (manage_exit == EXIT_PROGRAM)
-		// 	break ;
 		if (data->input && *data->input)
 		{
 			add_history(data->input);

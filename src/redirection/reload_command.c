@@ -67,7 +67,6 @@ int	reload_command(t_pipe *pipe)
 	{
 		if (!quotes(temp[i]) && ft_strchr("<>", temp[i]))
 		{
-			// printf("before reload: [%s]\n", temp);
 			if (i == 0)
 				temp = reload_last_command(pipe->com);
 			else
@@ -77,7 +76,6 @@ int	reload_command(t_pipe *pipe)
 				perror("malloc");
 				return (EXIT_FAILURE);
 			}
-			// printf("after reload: [%s]\n", temp);
 			free(pipe->com);
 			pipe->com = temp;
 			return (EXIT_SUCCESS);

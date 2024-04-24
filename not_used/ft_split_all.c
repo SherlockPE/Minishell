@@ -21,12 +21,12 @@ static int	ft_count_words(char *string, char *set)
 	cant_words = 0;
 	while (string[i])
 	{
-		while (string[i] && strchr(set, string[i]))
+		while (string[i] && ft_strchr(set, string[i]))
 			i++;
-		while (string[i] && !strchr(set, string[i]))
+		while (string[i] && !ft_strchr(set, string[i]))
 		{
 			i++;
-			if (strchr(set, string[i]) || string[i] == 0)
+			if (ft_strchr(set, string[i]) || string[i] == 0)
 				cant_words++;
 		}
 	}
@@ -44,13 +44,13 @@ static char	**ft_fill_box(char *string, char *set, char **result)
 	start = 0;
 	while (string[i])
 	{
-		while (string[i] && strchr(set, string[i]))
+		while (string[i] && ft_strchr(set, string[i]))
 			i++;
 		start = i;
-		while (string[i] && !strchr(set, string[i]))
+		while (string[i] && !ft_strchr(set, string[i]))
 		{
 			i++;
-			if (strchr(set, string[i]) || string[i] == 0)
+			if (ft_strchr(set, string[i]) || string[i] == 0)
 			{
 				result[pos] = ft_substr(string, start, i - start);
 				if (!result[pos])
@@ -67,8 +67,8 @@ static char	**ft_fill_box(char *string, char *set, char **result)
 
 char	**ft_split_all(char *string, char *set)
 {
-	char **result;
-	int c_words;
+	char	**result;
+	int		c_words;
 
 	c_words = ft_count_words(string, set);
 	result = (char **)ft_calloc(c_words, sizeof(char *));

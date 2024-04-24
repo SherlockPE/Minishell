@@ -28,13 +28,11 @@ static char	**get_commands(const char *input)
 	return (commands);
 }
 
-
 static void	init_redir(t_redir *redirection)
 {
 	redirection->file_name = 0;
-	redirection->type = 0;	
+	redirection->type = 0;
 }
-
 
 static void	fill_commands(char **commands, t_pipe *pipes)
 {
@@ -75,7 +73,6 @@ t_pipe	*ft_div_com(const char *input, int *com_len)
 	}
 	fill_commands(commands, pipes);
 	*com_len = len;
-	// printf("len_pipes: [%d]", len);
 	free(commands);
 	return (pipes);
 }

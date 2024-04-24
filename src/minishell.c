@@ -18,10 +18,11 @@ int	main(int argc, char **argv, char **env)
 
 	(void)argv;
 	if (argc > 1)
+	{
+		ft_putstr_fd("Too many arguments\n", STDERR);
 		return (EXIT_SUCCESS);
+	}
 	ft_minishell_init(&data, env);
 	ft_minishell_loop(&data);
-	free_program(&data);
-	// ft_putstr_fd("Exiting minishell\n", STDOUT);
-	return (data.exit_code);
+	return (EXIT_SUCCESS);
 }

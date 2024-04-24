@@ -17,9 +17,8 @@ static void	ft_print_node(void *node)
 	char	*env;
 
 	env = (char *)node;
-	// printf("%s\n", env);
-	ft_putstr_fd(env, STDOUT_FILENO);
-	ft_putchar_fd('\n', STDOUT_FILENO);
+	ft_putstr_fd(env, STDOUT);
+	ft_putchar_fd('\n', STDOUT);
 }
 
 void	ft_env(char **argv, t_shell *data)

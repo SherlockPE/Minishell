@@ -25,7 +25,7 @@ void	ft_pipex(t_shell *data)
 	while (i < data->com_len - 1)
 		child_process_pipe(data, &data->com[i++]);
 	child_process(data, &data->com[i]);
-	if (signal(SIGINT, SIG_IGN) == SIG_ERR) // use kill?
+	if (signal(SIGINT, SIG_IGN) == SIG_ERR)
 		perror("signal");
 	if (dup2(old_stdin, STDIN_FILENO) == -1)
 		perror("dup2");
