@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 15:02:01 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/25 14:36:53 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/25 15:39:57 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ static char	*return_str(const char *str, char *new_str)
 char	*ft_expand_str(const char *str, t_shell *data)
 {
 	int		i;
-	int		name_len;
 	char	*new_str;
 	char	*temp;
 
@@ -110,17 +109,17 @@ char	*ft_expand_str(const char *str, t_shell *data)
 	new_str = (char *)str;
 	while (new_str[++i])
 	{
-		if (!simple_quotes(new_str[i]) && new_str[i] == '$')
+		if (!simple_quotes(new_str[i], 0) && new_str[i] == '$')
 		{
-			name_len = find_name_len(&new_str[i]);
-			if (name_len > 1)
+			if (find_name_len(&new_str[i]) > 1)
 			{
-				temp = expand(new_str, i, name_len, data);
+				temp = expand(new_str, i, find_name_len(&new_str[i]), data);
 				if (new_str != str)
 					free(new_str);
 				if (!temp)
 					return (NULL);
 				new_str = temp;
+				simple_quotes(0, 1);
 				i = -1;
 			}
 		}
