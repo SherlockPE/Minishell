@@ -3,26 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expand_str.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 15:02:01 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/17 18:29:12 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/25 14:36:53 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-static short	simple_quotes(const char c)
-{
-	static short	simple_q;
-	static short	double_q;
-
-	if (c == '\'' && !double_q)
-		simple_q ^= 1;
-	else if (c == '\"' && !simple_q)
-		double_q ^= 1;
-	return (simple_q);
-}
 
 static int	find_name_len(const char *str)
 {
@@ -96,6 +84,21 @@ static char	*expand(const char *str, int i, int name_len, t_shell *data)
 	return (new_str);
 }
 
+static char	*return_str(const char *str, char *new_str)
+{
+	char	*temp;
+
+	if (new_str != str)
+	{
+		temp = ft_trim_input(new_str);
+		free(new_str);
+		if (!temp)
+			return (NULL);
+		new_str = temp;
+	}
+	return (new_str);
+}
+
 char	*ft_expand_str(const char *str, t_shell *data)
 {
 	int		i;
@@ -103,9 +106,9 @@ char	*ft_expand_str(const char *str, t_shell *data)
 	char	*new_str;
 	char	*temp;
 
-	i = 0;
+	i = -1;
 	new_str = (char *)str;
-	while (new_str[i])
+	while (new_str[++i])
 	{
 		if (!simple_quotes(new_str[i]) && new_str[i] == '$')
 		{
@@ -121,15 +124,6 @@ char	*ft_expand_str(const char *str, t_shell *data)
 				i = -1;
 			}
 		}
-		i++;
 	}
-	if (new_str != str)
-	{
-		temp = ft_trim_input(new_str);
-		free(new_str);
-		if (!temp)
-			return (NULL);
-		new_str = temp;
-	}
-	return (new_str);
+	return (return_str(str, new_str));
 }

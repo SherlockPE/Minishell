@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 18:16:12 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/23 18:12:12 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/25 13:25:38 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,6 @@ char	**get_env(t_shell *data);
 
 //array
 int		array_len(const char **array);
-size_t	array_char_len(const char **array);
-char	*array_to_str(const char **array, const char spliter);
-char	**array_dup(const char **array);
 
 //free
 void	free_input(t_shell *data);
@@ -37,10 +34,9 @@ void	ft_free_array(char **array);
 
 int		ft_exit_funct(char *message, int exit);
 char	*ft_update_prompt(void);
-int		ft_isnotprint(const char c);
 size_t	ft_strlenchr(const char *str, const char c);
 short	check_quotes(const char *input);
 void	ft_handle_signals(void);
-void	ft_handle_sig_dfl(void);
+int 	exec_fail(const char *path, const char *message, const int error_code);
 
 #endif

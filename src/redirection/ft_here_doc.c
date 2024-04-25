@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_here_doc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 17:07:56 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/24 17:09:28 by fabriciolop      ###   ########.fr       */
+/*   Updated: 2024/04/25 14:46:24 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,24 +59,16 @@ static int	fill_here_doc(const char *limit, int fd, t_shell *data)
 		temp_str = ft_charjoin(new_input, '\n');
 		free(new_input);
 		if (!temp_str)
-		{
-			close(fd);
 			return (EXIT_FAILURE);
-		}
 		aux = ft_expand_str(temp_str, data);
-		if (!aux)
-		{
-			close(fd);
-			free(temp_str);
-			return (EXIT_FAILURE);
-		}
 		if (aux != temp_str)
 			free(temp_str);
+		if (!aux)
+			return (EXIT_FAILURE);
 		ft_putstr_fd(aux, fd);
 		free(aux);
 	}
 	free(new_input);
-	close(fd);
 	return (EXIT_SUCCESS);
 }
 
@@ -98,10 +90,12 @@ static void	child_writer(t_redir *red, const char *com, t_shell *data)
 	if (fill_here_doc(limit, fd, data))
 	{
 		free(limit);
+		close(fd);
 		unlink(red->file_name);
 		ft_exit_program(data, "malloc");
 	}
 	free(limit);
+	close(fd);
 	exit(EXIT_SUCCESS);
 }
 

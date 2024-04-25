@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 18:06:22 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/22 13:58:27 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:47:31 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 # include "struct.h"
 
-# define IS_DIR_EXIT 126
-# define PERM_DENIED_EXIT 126
-# define NOT_COMMAND_EXIT 127
-# define NOT_FILE_DIR_EXIT 127
+# define IS_DIR 126
+# define PERM_DENIED 126
+# define NOT_COMMAND 127
+# define NOT_FILE 127
 
 void	ft_pipex(t_shell *data);
 void	ft_exec_one(t_shell *data);

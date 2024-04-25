@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   trim_input.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:45:54 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/18 15:35:19 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/25 14:38:46 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ static char	*rm_pipe_spaces(const char *input)
 	result = (char *)ft_calloc(get_len(input) + 1, sizeof(char));
 	if (!result)
 		return (NULL);
-	i = 0;
+	i = -1;
 	j = 0;
-	while (input[i])
+	while (input[++i])
 	{
 		result[j] = input[i];
 		if (!quotes(input[i]) && input[i] == '|')
@@ -57,7 +57,6 @@ static char	*rm_pipe_spaces(const char *input)
 			if (input[i + 1] == ' ')
 				i++;
 		}
-		i++;
 		j++;
 	}
 	return (result);

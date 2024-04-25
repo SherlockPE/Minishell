@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 12:47:11 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/23 14:00:36 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:47:38 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,30 +19,14 @@ static int	set_error(const char *path)
 	if ((path[0] == '.' && path[1] == '/') || path[0] == '/')
 	{
 		if (stat(path, &path_info) == -1)
-		{
-			ft_putstr_fd(path, STDERR);
-			ft_putstr_fd(": No such file or directory\n", STDERR);
-			return (NOT_FILE_DIR_EXIT);
-		}
+			return (exec_fail(path, ": No such file or directory\n", NOT_FILE));
 		if (S_ISDIR(path_info.st_mode))
-		{
-			ft_putstr_fd(path, STDERR);
-			ft_putstr_fd(": Is a directory\n", STDERR);
-			return (IS_DIR_EXIT);
-		}
+			return (exec_fail(path, ": Is a directory\n", IS_DIR));
 		else if (!(S_IXUSR & path_info.st_mode))
-		{
-			ft_putstr_fd(path, STDERR);
-			ft_putstr_fd(": Permission denied\n", STDERR);
-			return (PERM_DENIED_EXIT);
-		}
+			return (exec_fail(path, ": Permission denied\n", PERM_DENIED));
 	}
 	else
-	{
-		ft_putstr_fd(path, STDERR);
-		ft_putstr_fd(": command not found\n", STDERR);
-		return (NOT_COMMAND_EXIT);
-	}
+		return (exec_fail(path, ": command not found\n", NOT_COMMAND));
 	return (EXIT_FAILURE);
 }
 

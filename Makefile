@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
+#    By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 18:53:11 by albartol          #+#    #+#              #
-#    Updated: 2024/04/23 18:09:59 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/04/25 13:25:04 by albartol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,8 @@ UTILITIES :=	ft_update_prompt.c \
 				check_quotes.c \
 				ft_strlenchr.c \
 				ft_handle_signals.c \
-				ft_exit_funct.c
+				ft_exit_funct.c \
+				exec_fail.c
 
 UTILS_FREE :=	free/free_input.c \
 				free/free_program.c \
@@ -82,6 +83,7 @@ PARSER :=	parser/ft_parser.c \
 			parser/ft_trim_quotes.c \
 			parser/ft_rm_quotes.c \
 			parser/quotes.c \
+			parser/simple_quotes.c \
 			parser/ft_trim_input.c \
 			parser/ft_split_quotes.c \
 			parser/trim_input.c \

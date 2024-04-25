@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_redirection.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:12:50 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/23 14:38:04 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/25 14:43:45 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,26 +47,23 @@ static void	check_old_redir(t_redir *red)
 
 static int	redir_input(t_shell *data, t_pipe *pipe, const char *com, int *i)
 {
-	t_redir	*red;
-
-	red = &pipe->input;
-	check_old_redir(red);
+	check_old_redir(&pipe->input);
 	if (com[*i + 1] == '<')
 	{
-		red->type = HERE_DOC;
+		pipe->input.type = HERE_DOC;
 		com = &com[*i + 2];
 		while (*com == ' ')
 			com++;
-		if (ft_here_doc(red, com, data))
+		if (ft_here_doc(&pipe->input, com, data))
 			return (EXIT_FAILURE);
 	}
 	else
 	{
-		red->type = INPUT;
+		pipe->input.type = INPUT;
 		com = &com[*i + 1];
 		while (*com == ' ')
 			com++;
-		if (ft_create_archive(red, com, data))
+		if (ft_create_archive(&pipe->input, com, data))
 			return (EXIT_FAILURE);
 	}
 	if (reload_command(pipe))
