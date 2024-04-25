@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
+#    By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 18:53:11 by albartol          #+#    #+#              #
-#    Updated: 2024/04/25 15:47:10 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/04/25 17:47:58 by albartol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,8 @@ UTILITIES :=	ft_update_prompt.c \
 				ft_handle_signals.c \
 				ft_exit_funct.c \
 				exec_fail.c \
-				ft_set_exit.c
+				ft_set_exit.c \
+				get_current_dir.c
 
 UTILS_FREE :=	free/free_input.c \
 				free/free_program.c \

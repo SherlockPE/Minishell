@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 18:16:12 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/25 15:46:13 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/25 17:47:32 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ size_t	ft_strlenchr(const char *str, const char c);
 short	check_quotes(const char *input);
 void	ft_handle_signals(void);
 int 	exec_fail(const char *path, const char *message, const int error_code);
+char	*get_current_dir(void);
 
 #endif
