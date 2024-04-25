@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_child_process.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 14:01:22 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/23 18:22:23 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/25 18:47:54 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	child_process(t_shell *data, t_pipe *com)
 		ft_exec_command(argv, data);
 		ft_free_array(argv);
 		ft_lstclear(&data->env, free);
-		exit(EXIT_SUCCESS);
+		exit(data->exit_code);
 	}
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 13:59:06 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/17 18:35:47 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/25 18:47:45 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	child_process_pipe(t_shell *data, t_pipe *com)
 	{
 		child_init(com, data);
 		child_exec(com, data);
-		exit(EXIT_SUCCESS);
+		exit(data->exit_code);
 	}
 	close(com->fd[1]);
 	i = dup2(com->fd[0], STDIN_FILENO);
