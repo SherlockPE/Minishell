@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 12:09:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/23 13:06:01 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/25 15:43:48 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,10 @@ void	ft_cd(char **argv, t_shell *data)
 
 	current_dir = getcwd(NULL, 0);
 	if (!current_dir)
-		return (perror("cd: getcwd"));
+	{
+		perror("cd: getcwd");
+		return (ft_set_exit(data, EXIT_FAILURE));
+	}
 	if (!old_dir)
 	{
 		old_dir = current_dir;
@@ -78,11 +81,11 @@ void	ft_cd(char **argv, t_shell *data)
 	{
 		if (old_dir != current_dir)
 			free(current_dir);
-		data->exit_code = EXIT_FAILURE;
-		return ;
+		return (ft_set_exit(data, EXIT_FAILURE));
 	}
 	if (old_dir && old_dir != current_dir)
 		free(old_dir);
 	old_dir = current_dir;
 	update_env(data, old_dir);
+	data->exit_code = EXIT_SUCCESS;
 }

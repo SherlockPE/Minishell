@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 13:10:51 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/19 15:26:05 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/25 15:41:52 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,5 @@ void	ft_export(char **argv, t_shell *data)
 		export_val(argv[i], data);
 		i++;
 	}
+	data->exit_code = EXIT_SUCCESS;
 }

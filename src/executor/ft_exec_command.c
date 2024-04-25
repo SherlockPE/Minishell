@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 12:04:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/12 15:26:09 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/25 15:49:21 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_exec_command(char **argv, t_shell *data)
 {
 	if (!ft_strncmp(argv[0], "pwd", 4))
-		ft_pwd();
+		ft_pwd(data);
 	else if (!ft_strncmp(argv[0], "cd", 3))
 		ft_cd(argv, data);
 	else if (!ft_strncmp(argv[0], "env", 4))
@@ -23,7 +23,7 @@ void	ft_exec_command(char **argv, t_shell *data)
 	else if (!ft_strncmp(argv[0], "exit", 5))
 		ft_exit(argv, data);
 	else if (!ft_strncmp(argv[0], "echo", 5))
-		ft_echo(argv);
+		ft_echo(argv, data);
 	else if (!ft_strncmp(argv[0], "export", 7))
 		ft_export(argv, data);
 	else if (!ft_strncmp(argv[0], "unset", 6))

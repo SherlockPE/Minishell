@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+         #
+#    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 18:53:11 by albartol          #+#    #+#              #
-#    Updated: 2024/04/25 13:25:04 by albartol         ###   ########.fr        #
+#    Updated: 2024/04/25 15:47:10 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,8 @@ UTILITIES :=	ft_update_prompt.c \
 				ft_strlenchr.c \
 				ft_handle_signals.c \
 				ft_exit_funct.c \
-				exec_fail.c
+				exec_fail.c \
+				ft_set_exit.c
 
 UTILS_FREE :=	free/free_input.c \
 				free/free_program.c \

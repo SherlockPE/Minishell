@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 13:09:15 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/10 15:25:47 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/25 15:52:29 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,9 @@ void	ft_unset(char **argv, t_shell *data)
 	int		j;
 	char	*name;
 
-	i = 0;
-	while (argv[i])
+	i = -1;
+	data->exit_code = EXIT_SUCCESS;
+	while (argv[++i])
 	{
 		j = 0;
 		name = argv[i];
@@ -58,12 +59,12 @@ void	ft_unset(char **argv, t_shell *data)
 				ft_putstr_fd("unset: \'", STDERR);
 				ft_putstr_fd(name, STDERR);
 				ft_putstr_fd("\': is not a valid identifier\n", STDERR);
+				data->exit_code = EXIT_FAILURE;
 				break ;
 			}
 			j++;
 		}
 		if ((j > 0 && !name[j]) || ft_isalnum(name[j]) || name[j] == '_')
 			rm_env(name, ft_strlen(name), data->env, data);
-		i++;
 	}
 }

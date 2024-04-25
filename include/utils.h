@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 18:16:12 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/25 13:25:38 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/25 15:46:13 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	free_program(t_shell *data);
 void	ft_exit_program(t_shell *data, const char *message);
 void	ft_free_array(char **array);
 
+void	ft_set_exit(t_shell *data, int exit);
 int		ft_exit_funct(char *message, int exit);
 char	*ft_update_prompt(void);
 size_t	ft_strlenchr(const char *str, const char c);
