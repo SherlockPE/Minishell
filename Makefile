@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+         #
+#    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 18:53:11 by albartol          #+#    #+#              #
-#    Updated: 2024/04/25 17:47:58 by albartol         ###   ########.fr        #
+#    Updated: 2024/04/26 14:40:55 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,9 @@ CC := gcc
 
 # CFLAGS := -Wall -Wextra -Werror -O3
 # CFLAGS := -Wall -Wextra -fsanitize=address -g3
-CFLAGS := -Wall -Wextra -Werror -ggdb
+# CFLAGS := -Wall -Wextra -Werror -ggdb
 # CFLAGS := -Wall -Wextra -Werror -g3
+CFLAGS := -Wall -Wextra -Werror
 
 LIBS := -lreadline -Llib/libft -lft
 
@@ -40,8 +41,6 @@ SOURCES :=	minishell.c \
 
 # UTILS
 # NOT USED:
-# ft_isnotprint.c
-# ft_handle_sig_dfl.c
 # array/array_char_len.c
 # array/array_to_str.c
 # array/array_dup.c

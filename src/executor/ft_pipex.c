@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 14:02:25 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/18 18:38:01 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/26 13:26:06 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,5 @@ void	ft_pipex(t_shell *data)
 		perror("dup2");
 	close(old_stdin);
 	while (waitpid(-1, &wstatus, 0) != -1 && errno != ECHILD)
-	{
-		if (WIFEXITED(wstatus))
-			data->exit_code = WEXITSTATUS(wstatus);
-	}
+		ft_handle_exit(data, wstatus);
 }

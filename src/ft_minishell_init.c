@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 18:25:49 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/23 18:11:05 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/26 14:30:59 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ static void	print_title(void)
 	printf("██║╚██╔╝██║██║██║╚██╗██║██║╚════██║██╔══██║██╔══╝  ██║   ██║ \n");
 	printf("██║ ╚═╝ ██║██║██║ ╚████║██║███████║██║  ██║███████╗█████╗█████╗\n");
 	printf("╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚════╝╚════╝\n");
-	printf(RESET"\n");
+	printf("\nBy: "GREEN"albartol"RESET" && "GREEN"flopez-r\n"RESET);
 }
 
 static void	save_term_config(t_shell *data)
 {
-	if (isatty(STDIN_FILENO))
-		tcgetattr(STDIN_FILENO, &data->conf);
+	if (isatty(STDIN))
+		tcgetattr(STDIN, &data->conf);
 }
 
 void	ft_minishell_init(t_shell *data, char **env)

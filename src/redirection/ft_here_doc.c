@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_here_doc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 17:07:56 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/25 14:46:24 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/26 14:00:01 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static int	check_input(const char *new_input, const char *limit)
 static char	*get_limit(const char *com)
 {
 	char	*limit;
+	char	*tmp;
 	int		i;
 
 	i = 0;
@@ -42,7 +43,11 @@ static char	*get_limit(const char *com)
 		perror("malloc");
 		return (NULL);
 	}
-	return (limit);
+	tmp = ft_trim_quotes(limit);
+	free(limit);
+	if (!tmp)
+		perror("malloc");
+	return (tmp);
 }
 
 static int	fill_here_doc(const char *limit, int fd, t_shell *data)
