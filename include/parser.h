@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 18:11:06 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/27 15:49:57 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/27 17:18:21 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ char	**ft_rm_quotes(const char **argv);
 char	*ft_trim_quotes(const char *str);
 char	*trim_input(const char *input);
 short	quotes(const char c);
-short	simple_quotes(const char c, const char reset);
+short	simple_quotes(const char c);
 
 #endif
