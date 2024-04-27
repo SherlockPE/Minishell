@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pipex.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 14:02:25 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/26 13:26:06 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/27 15:26:25 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ void	ft_pipex(t_shell *data)
 	if (dup2(old_stdin, STDIN_FILENO) == -1)
 		perror("dup2");
 	close(old_stdin);
-	while (waitpid(-1, &wstatus, 0) != -1 && errno != ECHILD)
+	i = 0;
+	while (i < data->com_len)
+	{
+		waitpid(data->com[i].pid, &wstatus, 0);
 		ft_handle_exit(data, wstatus);
+		i++;
+	}
 }

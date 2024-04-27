@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_archive_name.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 22:05:36 by fabriciolop       #+#    #+#             */
-/*   Updated: 2024/04/18 16:55:28 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/27 15:43:13 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*ft_get_archive_name(const char *com, t_shell *data)
 	int		i;
 
 	i = 0;
-	if (com[i] == ' ')
+	if (ft_strchr(NOT_VAL, com[i]))
 		com++;
 	while (com[i])
 	{

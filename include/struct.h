@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 17:55:30 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/17 16:43:45 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/27 15:46:03 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # define WHITE "\033[1;97m"
 # define RESET "\033[0m"
 # define ORANGE "\033[38;5;208m"
+
+# define NOT_VAL "\t "
 
 # define PROMPT "\033[1;31mminishell\033[1;97m:\033[1;34m"
 # define DELIMITATOR "\033[1;97m$ \033[0m"

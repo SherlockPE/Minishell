@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:12:50 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/25 14:43:45 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/27 15:42:32 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	redir_output(t_shell *data, t_pipe *pipe, const char *com, int *i)
 		red->type = TRUNC;
 		com = &com[*i + 1];
 	}
-	while (*com == ' ')
+	while (ft_strchr(NOT_VAL, *com))
 		com++;
 	free(red->file_name);
 	if (ft_create_archive(red, com, data))
@@ -52,7 +52,7 @@ static int	redir_input(t_shell *data, t_pipe *pipe, const char *com, int *i)
 	{
 		pipe->input.type = HERE_DOC;
 		com = &com[*i + 2];
-		while (*com == ' ')
+		while (ft_strchr(NOT_VAL, *com))
 			com++;
 		if (ft_here_doc(&pipe->input, com, data))
 			return (EXIT_FAILURE);
@@ -61,7 +61,7 @@ static int	redir_input(t_shell *data, t_pipe *pipe, const char *com, int *i)
 	{
 		pipe->input.type = INPUT;
 		com = &com[*i + 1];
-		while (*com == ' ')
+		while (ft_strchr(NOT_VAL, *com))
 			com++;
 		if (ft_create_archive(&pipe->input, com, data))
 			return (EXIT_FAILURE);

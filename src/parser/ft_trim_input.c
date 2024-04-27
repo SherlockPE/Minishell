@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_trim_input.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 12:15:36 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/18 13:41:11 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/27 15:53:39 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static int	ft_count_len(const char *input)
 	{
 		if (quotes(input[i]))
 			len++;
-		else if (input[i] != ' ' || (i > 0 && input[i - 1] != ' '))
+		else if (!ft_strchr(NOT_VAL, input[i])
+			|| (i > 0 && !ft_strchr(NOT_VAL, input[i - 1])))
 			len++;
 		i++;
 	}
@@ -45,11 +46,12 @@ char	*ft_trim_input(const char *input)
 	{
 		if (quotes(input[i]))
 			str[j++] = input[i];
-		else if (input[i] != ' ' || (i > 0 && input[i - 1] != ' '))
+		else if (!ft_strchr(NOT_VAL, input[i])
+			|| (i > 0 && !ft_strchr(NOT_VAL, input[i - 1])))
 			str[j++] = input[i];
 		i++;
 	}
-	if (j > 0 && str[j - 1] == ' ')
+	if (j > 0 && ft_strchr(NOT_VAL, str[j - 1]))
 		str[j - 1] = 0;
 	return (str);
 }

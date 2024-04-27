@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_validate_input.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 15:43:21 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/26 13:47:31 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/27 15:38:53 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	check_last(const char *input, const char *set)
 	len = ft_strlen(input);
 	if (len > 0)
 		len--;
-	while (len > 0 && input[len] == ' ')
+	while (len > 0 && ft_strchr(NOT_VAL, input[len]))
 		len--;
 	if (ft_strchr(set, input[len]))
 		return (syntax_error("unexpected end of file\n"));
@@ -48,7 +48,7 @@ static int	check_pipes(const char *input)
 
 	i = 0;
 	pipe = 0;
-	while (input[i] == ' ')
+	while (ft_strchr(NOT_VAL, input[i]))
 		i++;
 	if (input[i] == '|')
 		return (syntax_error("unexpected token \'|\'\n"));
@@ -60,7 +60,7 @@ static int	check_pipes(const char *input)
 				return (syntax_error("unexpected token \'|\'\n"));
 			pipe = 1;
 		}
-		else if (input[i] != ' ')
+		else if (!ft_strchr(NOT_VAL, input[i]))
 			pipe = 0;
 		i++;
 	}
@@ -84,7 +84,7 @@ static int	check_redir(const char *input)
 			if (input[i] == input[i + 1])
 				i++;
 		}
-		else if (input[i] != ' ')
+		else if (!ft_strchr(NOT_VAL, input[i]))
 			redir = 0;
 		i++;
 	}

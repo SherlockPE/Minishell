@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 12:45:54 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/25 14:38:46 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/27 15:41:36 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int	get_len(const char *input)
 	{
 		if (!quotes(input[i]) && input[i] == '|')
 		{
-			if (i > 0 && input[i - 1] == ' ')
+			if (i > 0 && ft_strchr(NOT_VAL, input[i - 1]))
 				len--;
-			if (input[i + 1] == ' ')
+			if (ft_strchr(NOT_VAL, input[i + 1]))
 				len--;
 		}
 		i++;
@@ -49,12 +49,12 @@ static char	*rm_pipe_spaces(const char *input)
 		result[j] = input[i];
 		if (!quotes(input[i]) && input[i] == '|')
 		{
-			if (i > 0 && input[i - 1] == ' ')
+			if (i > 0 && ft_strchr(NOT_VAL, input[i - 1]))
 			{
 				j--;
 				result[j] = input[i];
 			}
-			if (input[i + 1] == ' ')
+			if (ft_strchr(NOT_VAL, input[i + 1]))
 				i++;
 		}
 		j++;

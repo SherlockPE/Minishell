@@ -6,7 +6,7 @@
 /*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 14:53:14 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/04/25 17:47:14 by albartol         ###   ########.fr       */
+/*   Updated: 2024/04/27 15:45:11 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ char	*ft_update_prompt(void)
 	char	*prompt;
 
 	current_dir = get_current_dir();
-	if (!current_dir)
-		return (NULL);
 	temp = ft_strjoin(PROMPT, current_dir);
 	free(current_dir);
 	if (!temp)

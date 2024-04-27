@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_div_com.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: albartol <albartol@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 15:39:05 by albartol          #+#    #+#             */
-/*   Updated: 2024/04/18 18:12:54 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/04/27 15:50:35 by albartol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static char	**get_commands(const char *input)
 	new_input = trim_input(input);
 	if (!new_input)
 		return (NULL);
-	commands = ft_split_quotes(new_input, '|');
+	commands = ft_split_quotes(new_input, "|");
 	free(new_input);
 	if (!commands)
 		return (NULL);
