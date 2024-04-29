@@ -48,7 +48,7 @@ static int	check_pipes(const char *input)
 
 	i = 0;
 	pipe = 0;
-	while (ft_strchr(NOT_VAL, input[i]))
+	while (input[i] && ft_strchr(NOT_VAL, input[i]))
 		i++;
 	if (input[i] == '|')
 		return (syntax_error("unexpected token \'|\'\n"));

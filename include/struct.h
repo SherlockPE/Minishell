@@ -51,6 +51,27 @@ typedef struct stat		t_stat;
 typedef struct s_shell	t_shell;
 typedef struct s_pipe	t_pipe;
 typedef struct s_redir	t_redir;
+typedef struct s_input	t_input;
+
+enum e_values
+{
+	BLANK = 1,
+	TEXT = 2,
+	PIPE = 2,
+	D_QUOTE = 4,
+	S_QUOTE = 5,
+	EXPAND = 6,
+	I_REDIR = 7,
+	O_REDIR = 8
+};
+
+struct s_input
+{
+	char	*input;
+	char	*value;
+	int		read_pos;
+	int		peek_pos;
+};
 
 struct s_redir
 {
