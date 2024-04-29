@@ -69,20 +69,20 @@ int	ft_get_input(t_shell *data)
 
 	temp = ft_update_prompt();
 	if (!temp)
-		data->input = readline("-> minishell $ ");
+		data->input.input = readline("-> minishell $ ");
 	else
 	{
-		data->input = readline(temp);
+		data->input.input = readline(temp);
 		free(temp);
 	}
-	if (!data->input)
+	if (!data->input.input)
 		return (EXIT_PROGRAM);
-	if (check_quotes(data->input))
+	if (check_quotes(data->input.input))
 	{
-		temp = data->input;
-		data->input = get_new_input(data->input);
+		temp = data->input.input;
+		data->input.input = get_new_input(data->input.input);
 		free(temp);
-		if (!data->input)
+		if (!data->input.input)
 			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);

@@ -12,22 +12,39 @@
 
 #include <minishell.h>
 
+static void	free_redir(int num, t_pipe *com)
+{
+	int	i;
+
+	i = 0;
+	while (i < num)
+	{
+		free(com->redir[i].file_name);
+		i++;
+	}
+	free(com->redir);
+}
+
 void	free_input(t_shell *data)
 {
 	int	i;
 
 	i = 0;
-	free(data->input);
+	free(data->input.input);
+	free(data->input.value);
 	while (i < data->com_len)
 	{
-		free(data->com[i].com);
+		free(data->com[i].com.input);
+		free(data->com[i].com.value);
 		ft_free_array(data->com[i].argv);
-		free(data->com[i].input.file_name);
-		free(data->com[i].output.file_name);
+		free_redir(data->com[i].redir_num, &data->com[i]);
 		i++;
 	}
 	free(data->com);
-	data->input = 0;
+	data->input.input = 0;
+	data->input.value = 0;
+	data->input.read_pos = 0;
+	data->input.peek_pos = 0;
 	data->com = 0;
 	data->com_len = 0;
 }

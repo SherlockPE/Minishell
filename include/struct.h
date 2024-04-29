@@ -81,10 +81,10 @@ struct s_redir
 
 struct s_pipe
 {
-	char	*com;
+	t_input	com;
 	char	**argv;
-	t_redir	input;
-	t_redir	output;
+	t_redir	*redir;
+	int		redir_num;
 	int		fd[2];
 	pid_t	pid;
 };
@@ -92,7 +92,7 @@ struct s_pipe
 struct s_shell
 {
 	t_list	*env;
-	char	*input;
+	t_input	input;
 	t_pipe	*com;
 	int		com_len;
 	int		child;

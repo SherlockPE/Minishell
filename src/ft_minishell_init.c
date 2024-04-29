@@ -33,7 +33,10 @@ static void	save_term_config(t_shell *data)
 void	ft_minishell_init(t_shell *data, char **env)
 {
 	data->env = 0;
-	data->input = 0;
+	data->input.input = 0;
+	data->input.value = 0;
+	data->input.read_pos = 0;
+	data->input.peek_pos = 0;
 	data->com = 0;
 	data->com_len = 0;
 	data->child = 0;

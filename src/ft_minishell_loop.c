@@ -33,9 +33,9 @@ void	ft_minishell_loop(t_shell *data)
 			continue ;
 		else if (manage_exit == EXIT_PROGRAM)
 			exit_minishell(data);
-		if (data->input && *data->input)
+		if (data->input.input && *data->input.input)
 		{
-			add_history(data->input);
+			add_history(data->input.input);
 			ft_parser(data);
 		}
 	}
