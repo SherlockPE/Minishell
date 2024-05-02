@@ -12,17 +12,18 @@
 
 #include <minishell.h>
 
-static void	free_redir(int num, t_pipe *com)
+static void		free_redir(t_redir *redir, int redir_num)
 {
 	int	i;
 
 	i = 0;
-	while (i < num)
+	while (i < redir_num)
 	{
-		free(com->redir[i].file_name);
-		i++;
+		if (redir[i].type == HERE_DOC)
+			unlink(redir->file_name);
+		free(redir[i].file_name);
 	}
-	free(com->redir);
+	free(redir);
 }
 
 void	free_input(t_shell *data)
@@ -30,18 +31,18 @@ void	free_input(t_shell *data)
 	int	i;
 
 	i = 0;
-	free(data->input.input);
+	free(data->input.str);
 	free(data->input.value);
 	while (i < data->com_len)
 	{
-		free(data->com[i].com.input);
+		free(data->com[i].com.str);
 		free(data->com[i].com.value);
 		ft_free_array(data->com[i].argv);
-		free_redir(data->com[i].redir_num, &data->com[i]);
+		free_redir(data->com[i].redir, data->com[i].redir_num);
 		i++;
 	}
 	free(data->com);
-	data->input.input = 0;
+	data->input.str = 0;
 	data->input.value = 0;
 	data->input.read_pos = 0;
 	data->input.peek_pos = 0;

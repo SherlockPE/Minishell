@@ -91,19 +91,15 @@ static int	check_redir(const char *input)
 	return (check_last(input, "<>"));
 }
 
-int	ft_validate_input(t_input *input)
+int	ft_validate_input(const char *input)
 {
-	if (check_quotes(input->str))
+	if (ft_strlen(input) == 0)
+		return (EXIT_FAILURE);
+	if (check_quotes(input))
 		return (syntax_error("unexpected end of file\n"));
-	if (check_pipes(input->str))
+	if (check_pipes(input))
 		return (EXIT_FAILURE);
-	if (check_redir(input->str))
+	if (check_redir(input))
 		return (EXIT_FAILURE);
-	input->value = assign_values(input->str);
-	if (!input->value)
-	{
-		perror("malloc");
-		return (EXIT_FAILURE);
-	}
 	return (EXIT_SUCCESS);
 }

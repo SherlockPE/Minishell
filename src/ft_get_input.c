@@ -40,11 +40,16 @@ static char	*get_new_input(char *old_input)
 	char	*input;
 	char	*new_input;
 
-	input = ft_charjoin(old_input, '\n');
+	input = ft_strdup(old_input);
 	if (!input)
 		return (get_new_input_fail());
 	while (check_quotes(input))
 	{
+		aux = input;
+		input = ft_charjoin(input, '\n');
+		free(aux);
+		if (!input)
+			return (get_new_input_fail());
 		new_input = get_input();
 		if (!new_input)
 			return (input);
@@ -52,11 +57,6 @@ static char	*get_new_input(char *old_input)
 		input = ft_strjoin(input, new_input);
 		free(aux);
 		free(new_input);
-		if (!input)
-			return (get_new_input_fail());
-		aux = input;
-		input = ft_charjoin(input, '\n');
-		free(aux);
 		if (!input)
 			return (get_new_input_fail());
 	}
@@ -69,20 +69,20 @@ int	ft_get_input(t_shell *data)
 
 	temp = ft_update_prompt();
 	if (!temp)
-		data->input.input = readline("-> minishell $ ");
+		data->input.str = readline("-> minishell $ ");
 	else
 	{
-		data->input.input = readline(temp);
+		data->input.str = readline(temp);
 		free(temp);
 	}
-	if (!data->input.input)
+	if (!data->input.str)
 		return (EXIT_PROGRAM);
-	if (check_quotes(data->input.input))
+	if (check_quotes(data->input.str))
 	{
-		temp = data->input.input;
-		data->input.input = get_new_input(data->input.input);
+		temp = data->input.str;
+		data->input.str = get_new_input(data->input.str);
 		free(temp);
-		if (!data->input.input)
+		if (!data->input.str)
 			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);

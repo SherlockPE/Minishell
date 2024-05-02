@@ -77,18 +77,20 @@ BUILTS :=	built-ins/ft_pwd.c \
 
 # PARSER
 PARSER :=	parser/ft_parser.c \
-			parser/ft_expansor.c \
-			parser/ft_expand_str.c \
-			parser/ft_validate_input.c \
-			parser/ft_div_com.c \
-			parser/ft_trim_quotes.c \
-			parser/ft_rm_quotes.c \
 			parser/quotes.c \
 			parser/simple_quotes.c \
-			parser/ft_trim_input.c \
-			parser/ft_split_quotes.c \
+			parser/double_quotes.c \
+			parser/ft_validate_input.c \
+			parser/assign_values.c \
 			parser/trim_input.c \
-			parser/ft_div_argv.c
+			parser/ft_split_value.c \
+			parser/ft_div_com.c
+# 			parser/ft_expansor.c \
+# 			parser/ft_expand_str.c \
+# 			parser/ft_trim_quotes.c \
+# 			parser/ft_rm_quotes.c \
+# 			parser/ft_trim_input.c \
+# 			parser/ft_div_argv.c
 
 REDIRECTION :=	redirection/ft_check_redirection.c \
 				redirection/ft_create_archive.c \
@@ -114,7 +116,8 @@ ALL_UTILS := $(UTILITIES) $(UTILS_FREE) $(UTILS_ENV) $(UTILS_ARR)
 
 UTILS := $(addprefix $(UTILS_DIR)/, $(ALL_UTILS))
 
-SRC := $(SOURCES) $(BUILTS) $(UTILS) $(PARSER) $(EXECUTOR) $(REDIRECTION) $(SIGNALS)
+# SRC := $(SOURCES) $(BUILTS) $(UTILS) $(PARSER) $(EXECUTOR) $(REDIRECTION)
+SRC := $(SOURCES) $(BUILTS) $(UTILS) $(PARSER)
 SRCS := $(addprefix $(SRC_DIR)/, $(SRC))
 
 OBJS := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

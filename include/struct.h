@@ -57,7 +57,7 @@ enum e_values
 {
 	BLANK = 1,
 	TEXT = 2,
-	PIPE = 2,
+	PIPE = 3,
 	D_QUOTE = 4,
 	S_QUOTE = 5,
 	EXPAND = 6,
@@ -67,7 +67,7 @@ enum e_values
 
 struct s_input
 {
-	char	*input;
+	char	*str;
 	char	*value;
 	int		read_pos;
 	int		peek_pos;

@@ -25,7 +25,7 @@ void	ft_minishell_loop(t_shell *data)
 
 	while (1)
 	{
-		ft_unlink_here_doc(data);
+		// ft_unlink_here_doc(data);
 		free_input(data);
 		ft_handle_signals();
 		manage_exit = ft_get_input(data);
@@ -33,9 +33,9 @@ void	ft_minishell_loop(t_shell *data)
 			continue ;
 		else if (manage_exit == EXIT_PROGRAM)
 			exit_minishell(data);
-		if (data->input.input && *data->input.input)
+		if (data->input.str && *data->input.str)
 		{
-			add_history(data->input.input);
+			add_history(data->input.str);
 			ft_parser(data);
 		}
 	}

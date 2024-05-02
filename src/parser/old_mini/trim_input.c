@@ -12,54 +12,67 @@
 
 #include <minishell.h>
 
-int	get_len(const char *value)
+int	get_len(const char *input)
 {
 	int	i;
 	int	len;
 
 	i = 0;
-	len = 0;
-	while (value[i] == BLANK)
-		i++;
-	while (value[i])
+	len = ft_strlen(input);
+	while (input[i])
 	{
-		if (value[i] != BLANK)
-			len++;
-		else if (value[i] == BLANK && value[i + 1] && value[i + 1] != BLANK)
-			len++;
+		if (!quotes(input[i]) && input[i] == '|')
+		{
+			if (i > 0 && ft_strchr(NOT_VAL, input[i - 1]))
+				len--;
+			if (ft_strchr(NOT_VAL, input[i + 1]))
+				len--;
+		}
 		i++;
 	}
 	return (len);
 }
 
-static char	*rm_blanks(const char *input, const char *value, char *result)
+static char	*rm_pipe_spaces(const char *input)
 {
 	int		i;
 	int		j;
+	char	*result;
 
-	i = 0;
+	result = (char *)ft_calloc(get_len(input) + 1, sizeof(char));
+	if (!result)
+		return (NULL);
+	i = -1;
 	j = 0;
-	while (value[i] == BLANK)
-		i++;
-	while (value[i])
+	while (input[++i])
 	{
-		if (value[i] != BLANK)
-			result[j++] = input[i];
-		else if (value[i] == BLANK && value[i + 1] && value[i + 1] != BLANK)
-			result[j++] = input[i];
-		i++;
+		result[j] = input[i];
+		if (!quotes(input[i]) && input[i] == '|')
+		{
+			if (i > 0 && ft_strchr(NOT_VAL, input[i - 1]))
+			{
+				j--;
+				result[j] = input[i];
+			}
+			if (ft_strchr(NOT_VAL, input[i + 1]))
+				i++;
+		}
+		j++;
 	}
 	return (result);
 }
 
-char	*trim_input(t_input *input)
+char	*trim_input(const char *input)
 {
 	char	*result;
+	char	*temp;
 
-	result = (char *)ft_calloc(get_len(input->value) + 1, sizeof(char));
+	temp = ft_trim_input(input);
+	if (!temp)
+		return (NULL);
+	result = rm_pipe_spaces(temp);
+	free(temp);
 	if (!result)
 		return (NULL);
-	rm_blanks(input->str, input->value, result);
-	printf("after trim: [%s]\n", result);
 	return (result);
 }

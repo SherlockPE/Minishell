@@ -19,22 +19,22 @@ static void	failure(t_shell *data)
 
 void	ft_parser(t_shell *data)
 {
-	if (ft_validate_input(&data->input))
+	if (ft_validate_input(data->input))
 		return (failure(data));
-	data->com = ft_div_com(&data->input, &data->com_len);
+	data->com = ft_div_com(data->input, &data->com_len);
 	if (!data->com)
 	{
 		perror("malloc");
 		return (failure(data));
 	}
-	// if (ft_check_redirection(data))
-	// 	return (failure(data));
-	// if (ft_expansor(data))
-	// 	return (failure(data));
-	// if (ft_div_argv(data))
-	// 	return (failure(data));
-	// if (data->com_len > 1)
-	// 	ft_pipex(data);
-	// else
-	// 	ft_exec_one(data);
+	if (ft_check_redirection(data))
+		return (failure(data));
+	if (ft_expansor(data))
+		return (failure(data));
+	if (ft_div_argv(data))
+		return (failure(data));
+	if (data->com_len > 1)
+		ft_pipex(data);
+	else
+		ft_exec_one(data);
 }
